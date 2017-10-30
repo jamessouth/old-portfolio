@@ -4,11 +4,78 @@
 	box-sizing: border-box;
 	font-family: 'Cormorant SC', serif;
 }
+
+
+
+
+
+
+
+:root {
+	--size: 220px;
+}
+
+.hold input[type="range"]{
+	margin-bottom: 4em;
+}
+
+
+
 body{
 	background-color: #555;
 	background: no-repeat url('images/sky-big.jpg');
 	background-size: 100% 100%;
+	position: relative;
+	perspective: 1000px;
 }
+
+.hamburger{
+	position: absolute;
+	height: 24px;
+	width: 30px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	left: 20px;
+	top: 40px;
+
+}
+
+.hamburger hr{
+	border: 2px black solid;
+	border-radius: 8px;
+}
+
+.top-bun{
+	transform: rotateZ(-30deg);
+	transition: transform .8s;
+}
+
+.bottom-bun{
+	transform: rotateZ(30deg);
+	transition: transform .8s;
+}
+
+.menu{
+	width: 15px;
+	height: 15px;
+	display: none;
+	background-color: crimson;
+	position: absolute;
+	top: 50px;
+	left: 50px;
+	z-index: 5;
+
+}
+
+.expand{
+	width: 150px;
+	height: 150px;
+	transition: width 2s ease-in, height 2s ease-in 2s;
+}
+
+
+
 
 
 nav{
@@ -17,10 +84,10 @@ nav{
 	line-height: 3em;
 
 }
-ul{
+/*ul{
 	display: flex;
 	justify-content: space-around;
-}
+}*/
 
 li a{
 	color: lightgreen;
@@ -56,11 +123,84 @@ main{
 	align-items: center;
 }
 
-
+button{
+	display: none;
+}
 
 /* cursor: -moz-grabbing; */
     /* cursor: -webkit-grabbing; */
     /* cursor: grabbing; */
+div.overlay{
+	display: none;
+	position: absolute;
+	min-height: 114.25vh;
+	width: 100%;
+	/*height: 100%;*/
+	opacity: .5;
+	background-color: #000;
+	z-index: 35;
+
+}
+
+button.next{
+	position: absolute;
+	top: 20px
+}
+
+button.prev{
+	position: absolute;
+	top: 50px
+}
+
+.menu-hold{
+	display: none;
+	width: 85%;
+	height: 85%;
+	transform-style: preserve-3d;
+	transform: rotateY(0deg) translateZ(280px);
+}
+
+@keyframes roundandround {
+  to {
+    transform: rotateX(360deg);
+  }
+}
+
+.menu-hold ul{
+	position: relative;
+	width: 200px;
+	height: 200px;
+	margin: 17em auto 0;
+	transform-style: preserve-3d;
+	animation: roundandround 10s infinite linear;
+}
+
+.menu-hold ul li{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	border: 10px dashed red;
+	border-radius: 50%;
+	transform-origin: 50% 50%;
+	transform: translateY(-200px);
+
+
+}
+
+.menu-hold ul li:nth-of-type(1){
+	transform: rotateX(5deg) translateY(-200px);
+}
+.menu-hold ul li:nth-of-type(2){
+	transform: rotateX(10deg) translateY(-200px);
+}
+.menu-hold ul li:nth-of-type(3){
+	transform: rotateX(15deg) translateY(-200px);
+}
+
+
+
 
 
 
@@ -74,27 +214,30 @@ main{
 
 
 
+
+
 .photo-cube{
   /* cursor: -moz-grab; */
   /* cursor: -webkit-grab; */
   /* cursor: grab; */
   transition: transform 0.001s;
-  width: 220px;
-  height: 220px;
+  width: var(--size);
+  height: var(--size);
   /* margin: auto; */
-  transform-style:preserve-3d;
+  transform-style: preserve-3d;
   transform: rotateX(0deg) rotateY(0deg);
 }
 
-/* .photo-cube:hover{ */
- /* transform: rotateX(544deg) rotateY(-272deg); */
-/* } */
+
+
+
+
 
 .front, .back, .left, .right, .top, .bottom{
   width: 100%;
   height: 100%;
   display: block;
-  position:absolute;
+  position: absolute;
 }
 
 .front{
@@ -208,6 +351,7 @@ main{
 
 	main{
 		flex-direction: row;
+		margin-bottom: 10em;
 	}
 
 	.photo-cube{
@@ -249,6 +393,10 @@ main{
 
 @media screen and (min-width: 850px){
 
+	main{
+		margin-bottom: 8em;
+	}
+
 	.photo-cube{
 		width: 330px;
 		height: 330px;
@@ -282,6 +430,10 @@ main{
 
 @media screen and (min-width: 1050px){
 
+	main{
+		margin-bottom: 5em;
+	}
+
 	.photo-cube{
 		width: 380px;
 		height: 380px;
@@ -313,6 +465,10 @@ main{
 }
 
 @media screen and (min-width: 1200px){
+
+	main{
+		margin-bottom: 2em;
+	}
 
 	h1{
 		margin-bottom: 2.8em;
