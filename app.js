@@ -83,6 +83,75 @@ const hold = document.querySelector('.hold');
 // body.addEventListener('mousedown', (e) => {e.preventDefault();});
 
 
+const menuIcon = document.querySelector('.hamburger');
+const menu = document.querySelector('.menu');
+const input = document.querySelector('.hold input[type="range"]');
+// const overlay = document.querySelector('div.overlay');
+const overlayCloseButton = document.querySelector('button.close');
+const overlayNextButton = document.querySelector('button.next');
+const overlayPrevButton = document.querySelector('button.prev');
+const menuHolder = document.querySelector('.menu-hold ul');
+const menuHold = document.querySelector('.menu-hold');
+const buttons = document.querySelector('button');
+
+
+function handleUpdate() {
+	const suffix = this.dataset.sizing;
+	// console.log(this.value);
+	document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+}
+
+// input.addEventListener('change', handleUpdate);
+// input.addEventListener('mousemove', handleUpdate);
+
+
+
+menuIcon.addEventListener('click', function(e){
+	// console.log(this);
+
+	this.children[0].classList.add('top-bun');
+	this.children[2].classList.add('bottom-bun');
+	// menu.style.display = 'block';
+	//
+	// window.setTimeout(() => {
+	// 	menu.classList.add('expand');
+	// }, 7);
+
+	// overlay.style.display = 'block';
+
+	buttons.style.display = 'inline-block';
+	menuHold.style.display = 'block';
+});
+
+overlayCloseButton.addEventListener('click', function(){
+	// overlay.style.display = 'none';
+	menuIcon.children[0].classList.remove('top-bun');
+	menuIcon.children[2].classList.remove('bottom-bun');
+	buttons.style.display = 'none';
+	menuHold.style.display = 'none';
+
+
+});
+let degs = 25;
+overlayNextButton.addEventListener('click', function(){
+	degs+=25;
+	console.log(degs);
+	menuHolder.style.transform = `rotateX(${degs}deg)`;
+
+});
+
+overlayPrevButton.addEventListener('click', function(){
+	degs-=25;
+	console.log(degs);
+	menuHolder.style.transform = `rotateX(${degs}deg)`;
+
+});
+
+
+
+
+
+
 
 let isRotating = false;
 let xStart;
