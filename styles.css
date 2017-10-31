@@ -26,7 +26,7 @@ body{
 	background: no-repeat url('images/sky-big.jpg');
 	background-size: 100% 100%;
 	position: relative;
-	perspective: 1000px;
+
 }
 
 .hamburger{
@@ -123,41 +123,52 @@ main{
 	align-items: center;
 }
 
-button{
+/*button{
 	display: none;
-}
+}*/
 
 /* cursor: -moz-grabbing; */
     /* cursor: -webkit-grabbing; */
     /* cursor: grabbing; */
 div.overlay{
 	display: none;
+	perspective: 1000px;
 	position: absolute;
 	min-height: 114.25vh;
 	width: 100%;
-	/*height: 100%;*/
-	opacity: .5;
-	background-color: #000;
+	height: 100%;
+	/*opacity: .5;*/
+	background-color: transparent;
 	z-index: 35;
+	justify-content: center;
+	align-items: center;
 
+}
+button{
+	position: absolute;
+	z-index: 444;
+}
+button.close{
+	top: 0;
 }
 
 button.next{
-	position: absolute;
-	top: 20px
+	top: 20px;
 }
 
 button.prev{
-	position: absolute;
-	top: 50px
+	top: 50px;
 }
 
 .menu-hold{
-	display: none;
-	width: 85%;
-	height: 85%;
+	/*display: none;*/
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	transform-style: preserve-3d;
-	transform: rotateY(0deg) translateZ(280px);
+	/*transform: rotateY(0deg) translateZ(280px);*/
 }
 
 @keyframes roundandround {
@@ -170,9 +181,9 @@ button.prev{
 	position: relative;
 	width: 200px;
 	height: 200px;
-	margin: 17em auto 0;
+	/*margin: 17em auto 0;*/
 	transform-style: preserve-3d;
-	animation: roundandround 10s infinite linear;
+	/*animation: roundandround 10s infinite linear;*/
 }
 
 .menu-hold ul li{
@@ -181,8 +192,11 @@ button.prev{
 	left: 0;
 	width: 100%;
 	height: 100%;
-	border: 10px dashed red;
-	border-radius: 50%;
+	border: 10px dashed green;
+	border-top-color: red;
+	border-bottom-color: blue;
+	background-color: wheat;
+	/*border-radius: 50%;*/
 	transform-origin: 50% 50%;
 	transform: translateY(-200px);
 
@@ -190,13 +204,13 @@ button.prev{
 }
 
 .menu-hold ul li:nth-of-type(1){
-	transform: rotateX(5deg) translateY(-200px);
+	transform: rotateX(5deg) translateZ(0px) translateY(-200px);
 }
 .menu-hold ul li:nth-of-type(2){
-	transform: rotateX(10deg) translateY(-200px);
+	transform: rotateX(5deg) translateZ(0px) translateY(-200px);
 }
 .menu-hold ul li:nth-of-type(3){
-	transform: rotateX(15deg) translateY(-200px);
+	transform: rotateX(5deg) translateZ(0px) translateY(-200px);
 }
 
 

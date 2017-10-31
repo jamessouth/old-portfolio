@@ -7,7 +7,7 @@ const cc = document.querySelectorAll('.cube-container');
 
 // const cubes = Array.from(cc);
 
-const hold = document.querySelector('.hold');
+// const hold = document.querySelector('.hold');
 
 // function rotateCube(e){
 	// const pi = Math.PI;
@@ -86,14 +86,15 @@ const hold = document.querySelector('.hold');
 const menuIcon = document.querySelector('.hamburger');
 const menu = document.querySelector('.menu');
 const input = document.querySelector('.hold input[type="range"]');
-// const overlay = document.querySelector('div.overlay');
-const overlayCloseButton = document.querySelector('button.close');
-const overlayNextButton = document.querySelector('button.next');
-const overlayPrevButton = document.querySelector('button.prev');
+const overlay = document.querySelector('div.overlay');
+const overlayCloseButton = overlay.querySelector('button.close');
+const overlayNextButton = overlay.querySelector('button.next');
+const overlayPrevButton = overlay.querySelector('button.prev');
 const menuHolder = document.querySelector('.menu-hold ul');
+const options = document.querySelectorAll('.menu-hold ul li');
 const menuHold = document.querySelector('.menu-hold');
 const buttons = document.querySelector('button');
-
+const hold = document.querySelector('div.hold');
 
 function handleUpdate() {
 	const suffix = this.dataset.sizing;
@@ -105,7 +106,7 @@ function handleUpdate() {
 // input.addEventListener('mousemove', handleUpdate);
 
 
-
+let depths = [0, -1000, -2000];
 menuIcon.addEventListener('click', function(e){
 	// console.log(this);
 
@@ -117,33 +118,47 @@ menuIcon.addEventListener('click', function(e){
 	// 	menu.classList.add('expand');
 	// }, 7);
 
-	// overlay.style.display = 'block';
 
-	buttons.style.display = 'inline-block';
-	menuHold.style.display = 'block';
+
+
+
+	overlay.style.display = 'flex';
+	hold.style.opacity = '0.35';
+	// buttons.style.display = 'inline-block';
+	// menuHold.style.display = 'block';
+
+
+
+	for(let i = 0; i < options.length; i++){
+		// console.log('ppp');
+		options[i].style.transform = `rotateX(5deg) translateZ(${depths[i]}px) translateY(-200px)`;
+	}
+
+
+
 });
 
 overlayCloseButton.addEventListener('click', function(){
-	// overlay.style.display = 'none';
+	overlay.style.display = 'none';
 	menuIcon.children[0].classList.remove('top-bun');
 	menuIcon.children[2].classList.remove('bottom-bun');
-	buttons.style.display = 'none';
-	menuHold.style.display = 'none';
-
+	// buttons.style.display = 'none';
+	// menuHold.style.display = 'none';
+	hold.style.opacity = '1';
 
 });
-let degs = 25;
+let degs = 5;
 overlayNextButton.addEventListener('click', function(){
-	degs+=25;
-	console.log(degs);
-	menuHolder.style.transform = `rotateX(${degs}deg)`;
+	// degs-=45;
+	// console.log(degs);
+	// menuHolder.style.transform = `rotateX(${degs}deg)`;
 
 });
 
 overlayPrevButton.addEventListener('click', function(){
-	degs-=25;
-	console.log(degs);
-	menuHolder.style.transform = `rotateX(${degs}deg)`;
+	// degs+=45;
+	// console.log(degs);
+	// menuHolder.style.transform = `rotateX(${degs}deg)`;
 
 });
 
