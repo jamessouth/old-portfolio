@@ -14,9 +14,20 @@
 			<button class="prev">P</button>
 			<div class="menu-hold">
 				<ul>
-					<li></li>
-					<li></li>
-					<li></li>
+					<li>
+						<label for="size">Size:</label>
+						<input id="size" type="range" name="size" min="220" max="440" value="220" data-sizing="px">
+						<p></p>
+					</li>
+					<li>
+						<div class="flip-switch">
+							<input id="linear" name="menu-type" type="radio" value="linear"/>
+							<label for="linear">linear</label>
+							<input checked id="curved" name="menu-type" type="radio" value="curved"/>
+							<label for="curved">curved</label>
+						</div>
+					</li>
+					<li>3</li>
 				</ul>
 			</div>
 		</div>
@@ -41,8 +52,7 @@
 			<h1>Portfolio</h1>
 
 
-			<!-- <label for="size">Size:</label>
-			<input id="size" type="range" name="size" min="200" max="440" value="220" data-sizing="px"> -->
+
 
 
 			<main>

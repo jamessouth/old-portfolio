@@ -85,7 +85,8 @@ const cc = document.querySelectorAll('.cube-container');
 
 const menuIcon = document.querySelector('.hamburger');
 const menu = document.querySelector('.menu');
-const input = document.querySelector('.hold input[type="range"]');
+const sizeInput = document.querySelector('.menu-hold input[id="size"]');
+const sizeInputP = document.querySelector('.menu-hold input[id="size"] + p');
 const overlay = document.querySelector('div.overlay');
 const overlayCloseButton = overlay.querySelector('button.close');
 const overlayNextButton = overlay.querySelector('button.next');
@@ -95,18 +96,46 @@ const options = document.querySelectorAll('.menu-hold ul li');
 const menuHold = document.querySelector('.menu-hold');
 const buttons = document.querySelector('button');
 const hold = document.querySelector('div.hold');
+const flipSwitch = document.querySelector('.menu-hold div.flip-switch');
+const radioLinear = flipSwitch.querySelector('input[id="linear"]');
+const radioCurved = flipSwitch.querySelector('input[id="curved"]');
+
+
+
+
+let switchFlag = true;
+flipSwitch.addEventListener('click', function(e){
+	if(e.target.tagName === 'LABEL'){
+		e.preventDefault();
+	}
+
+	if(switchFlag){
+
+		radioLinear.checked = true;
+		switchFlag = false;
+		console.log(radioLinear);
+	} else {
+
+		radioCurved.checked = true;
+		switchFlag = true;
+		console.log(radioCurved);
+	}
+});
+
+
 
 function handleUpdate() {
 	const suffix = this.dataset.sizing;
 	// console.log(this.value);
 	document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+	sizeInputP.textContent = this.value;
 }
 
-// input.addEventListener('change', handleUpdate);
-// input.addEventListener('mousemove', handleUpdate);
+sizeInput.addEventListener('change', handleUpdate);
+sizeInput.addEventListener('mousemove', handleUpdate);
 
 
-let depths = [0, -1000, -2000];
+let depths = [0, -2000, -2500];
 menuIcon.addEventListener('click', function(e){
 	// console.log(this);
 
@@ -131,10 +160,15 @@ menuIcon.addEventListener('click', function(e){
 
 	for(let i = 0; i < options.length; i++){
 		// console.log('ppp');
-		options[i].style.transform = `rotateX(5deg) translateZ(${depths[i]}px) translateY(-200px)`;
+		options[i].style.transform = `rotateX(5deg) translateY(-200px) translateZ(${depths[i]}px)`;
+
+		if(parseInt(options[i].style.transform.match(/(-?\d+)(?=px\)$)/)[0], 10) != 0){
+			options[i].style.opacity = '0.3';
+		}
+
 	}
 
-
+// console.log(depths);
 
 });
 
@@ -147,11 +181,28 @@ overlayCloseButton.addEventListener('click', function(){
 	hold.style.opacity = '1';
 
 });
-let degs = 5;
+// let degs = 5;
 overlayNextButton.addEventListener('click', function(){
 	// degs-=45;
 	// console.log(degs);
 	// menuHolder.style.transform = `rotateX(${degs}deg)`;
+	// let place = parseInt(options[i].style.transform.match(/(-?\d+)(?=px\)$)/)[0], 10)
+	depths.unshift(depths.pop());
+
+	// console.log(depths);
+
+	for(let i = 0; i < options.length; i++){
+		// console.log('ppp');
+		options[i].style.transform = `rotateX(5deg) translateY(-200px) translateZ(${depths[i]}px)`;
+
+		if(parseInt(options[i].style.transform.match(/(-?\d+)(?=px\)$)/)[0], 10) != 0){
+			options[i].style.opacity = '0.3';
+		} else {
+			options[i].style.opacity = '1';
+		}
+	}
+
+
 
 });
 
@@ -159,6 +210,21 @@ overlayPrevButton.addEventListener('click', function(){
 	// degs+=45;
 	// console.log(degs);
 	// menuHolder.style.transform = `rotateX(${degs}deg)`;
+
+	depths = depths.slice(1).concat(depths[0]);
+
+	// console.log(depths);
+
+	for(let i = 0; i < options.length; i++){
+		// console.log('ppp');
+		options[i].style.transform = `rotateX(5deg) translateY(-200px) translateZ(${depths[i]}px)`;
+
+		if(parseInt(options[i].style.transform.match(/(-?\d+)(?=px\)$)/)[0], 10) != 0){
+			options[i].style.opacity = '0.3';
+		} else {
+			options[i].style.opacity = '1';
+		}
+	}
 
 });
 
