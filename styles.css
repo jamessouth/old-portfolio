@@ -216,6 +216,8 @@ button.prev{
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	flex-direction: column;
+	background: no-repeat url('images/sky-sq.jpg');
 	transform: rotateX(5deg) translateY(-200px) translateZ(0px);
 }
 .menu-hold ul li:nth-of-type(3){
@@ -225,27 +227,35 @@ button.prev{
 .menu-hold div.flip-switch{
 	position: relative;
 	/*margin: auto;*/
-	border-radius: 50%;
+	/*border-radius: 50%;*/
 	background-color: black;
-	width: 125px;
-	height: 25px;
-	display: flex;
+	width: 34px;
+	height: 50px;
+	border-radius: 2px;
+	/*display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: center;
+	justify-content: center;*/
 
 }
-
-
+.menu-hold ul li:nth-of-type(2) > p{
+	position: absolute;
+	top: 0;
+	color: white;
+}
 
 .menu-hold div.flip-switch label{
 	position: absolute;
-	top: -68px;
+	top: -31px;
+	font-size: 18px;
+	color: white;
+	left: 50%;
+	transform: translateX(-50%);
 }
 
 
 .menu-hold div.flip-switch label:last-of-type{
-	top: 82px;
+	top: 55px;
 
 }
 
@@ -261,23 +271,32 @@ button.prev{
 
 .menu-hold div.flip-switch input[name="menu-type"]{
 	position: absolute;
+	width: 1px;
+	height: 1px;
 }
+
 
 .menu-hold div.flip-switch input[name="menu-type"]:after{
 	content: "";
 	position: absolute;
-	width: 20px;
-	height: 60px;
-	background-color: red;
-	top: -53px;
+	width: 26px;
+	height: 21px;
+	background-color: whitesmoke;
+	top: 18px;
+	left: 49%;
+	border-radius: 1px;
+	transform: translateX(-50%);
 }
 
 .menu-hold div.flip-switch input[name="menu-type"]:last-of-type:after{
-	top: 42px;
+	top: -18px;
 
 }
 
-
+.rect-prism-container{
+	perspective: 700px;
+	margin: 7px 0 0 -1px;
+}
 
 .cube-container {
 	perspective: 1500px;
@@ -288,7 +307,12 @@ button.prev{
 }
 
 
-
+.switch-rect{
+	transform-style: preserve-3d;
+	transform: rotateX(125deg) rotateY(-13deg) rotateZ(-19deg);
+	/*width: 100px;
+	height: 60px;*/
+}
 
 
 
@@ -304,9 +328,62 @@ button.prev{
   transform: rotateX(0deg) rotateY(0deg);
 }
 
-
-
-
+.switch-front, .switch-back, .switch-left, .switch-right, .switch-top, .switch-bottom{
+  /*width: 100%;
+  height: 100%;*/
+  display: block;
+  position: absolute;
+	background-color: whitesmoke;
+	border: 3px solid black;
+	border-radius: 1px;
+}
+.switch-front{
+	width: 30px;
+	height: 30px;
+	border-right-width: 4px;
+	border-top-width: 5px;
+	/*background-color: blue;*/
+	transform: translateZ(-5px);
+}
+.switch-back{
+	width: 30px;
+	height: 30px;
+	border-left-width: 4px;
+	/*background-color: green;*/
+	transform: translateZ(-20px) rotateY(180deg);
+}
+.switch-left{
+	width: 15px;
+	height: 30px;
+	border-top-width: 4px;
+	border-right-width: 5px;
+	/*background-color: red;*/
+	transform: rotateY(270deg) translateX(-20px);
+	transform-origin: bottom left;
+}
+.switch-right{
+	width: 15px;
+	height: 30px;
+	/*background-color: yellow;*/
+	transform: rotateY(-270deg) translateZ(15px) translateX(20px);
+	transform-origin: bottom right;
+}
+.switch-top{
+	width: 30px;
+	height: 15px;
+	/*background-color: orange;*/
+	transform: translateZ(-20px) translateY(0px) rotateX(90deg);
+	transform-origin: top;
+}
+.switch-bottom{
+	width: 30px;
+	height: 15px;
+	border-top-width: 4px;
+	border-right-width: 4px;
+	/*background-color: purple;*/
+	transform: translateZ(-20px) translateY(15px) rotateX(-90deg);
+	transform-origin: bottom;
+}
 
 
 .front, .back, .left, .right, .top, .bottom{

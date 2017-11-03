@@ -99,6 +99,11 @@ const hold = document.querySelector('div.hold');
 const flipSwitch = document.querySelector('.menu-hold div.flip-switch');
 const radioLinear = flipSwitch.querySelector('input[id="linear"]');
 const radioCurved = flipSwitch.querySelector('input[id="curved"]');
+const switchHolder = flipSwitch.querySelector('div.rect-prism-container');
+const theSwitch = flipSwitch.querySelector('div.switch-rect');
+const switchBottom = theSwitch.querySelector('div.switch-bottom');
+
+const switchLeft = theSwitch.querySelector('div.switch-left');
 
 
 
@@ -111,15 +116,35 @@ flipSwitch.addEventListener('click', function(e){
 
 	if(switchFlag){
 
-		radioLinear.checked = true;
-		switchFlag = false;
-		console.log(radioLinear);
-	} else {
 
 		radioCurved.checked = true;
+		switchHolder.style.margin = '22px 0 0 5px';
+		theSwitch.style.transform = 'rotateX(57deg) rotateY(13deg) rotateZ(-19deg)';
+		switchBottom.style.borderTopWidth = '3px';
+		switchBottom.style.borderBottomWidth = '4px';
+		switchLeft.style.borderRightWidth = '3px';
+		switchLeft.style.borderLeftWidth = '4px';
+		switchLeft.style.borderTopWidth = '3px';
+
+
+		switchFlag = false;
+
+	} else {
+		radioLinear.checked = true;
+
+		switchHolder.style.margin = '7px 0 0 -1px';
+		theSwitch.style.transform = 'rotateX(125deg) rotateY(-13deg) rotateZ(-19deg)';
+		switchBottom.style.borderTopWidth = '4px';
+		switchBottom.style.borderBottomWidth = '3px';
+		switchLeft.style.borderRightWidth = '5px';
+		switchLeft.style.borderLeftWidth = '3px';
+		switchLeft.style.borderTopWidth = '4px';
 		switchFlag = true;
-		console.log(radioCurved);
 	}
+
+	// console.log('linear:'+ radioLinear.checked, 'curved:'+ radioCurved.checked);
+
+
 });
 
 
