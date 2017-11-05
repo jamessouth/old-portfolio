@@ -85,8 +85,9 @@ const cc = document.querySelectorAll('.cube-container');
 
 const menuIcon = document.querySelector('.hamburger');
 const menu = document.querySelector('.menu');
-const sizeInput = document.querySelector('.menu-hold input[id="size"]');
-const sizeInputP = document.querySelector('.menu-hold input[id="size"] + p');
+const sizeInput = document.querySelector('.menu-hold .slider input');
+const sizeInputP = document.querySelector('.menu-hold .slider p');
+const sizeTrack = document.querySelector('.menu-hold .slider .track');
 const overlay = document.querySelector('div.overlay');
 const overlayCloseButton = overlay.querySelector('button.close');
 const overlayNextButton = overlay.querySelector('button.next');
@@ -102,7 +103,6 @@ const radioCurved = flipSwitch.querySelector('input[id="curved"]');
 const switchHolder = flipSwitch.querySelector('div.rect-prism-container');
 const theSwitch = flipSwitch.querySelector('div.switch-rect');
 const switchBottom = theSwitch.querySelector('div.switch-bottom');
-
 const switchLeft = theSwitch.querySelector('div.switch-left');
 
 
@@ -151,9 +151,15 @@ flipSwitch.addEventListener('click', function(e){
 
 function handleUpdate() {
 	const suffix = this.dataset.sizing;
-	// console.log(this.value);
+	const width = this.max - this.min;
+	const perc = Math.floor(((this.value - width) / width) * 100) / 100;
+
+	// console.log();
 	document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
 	sizeInputP.textContent = this.value;
+	sizeTrack.style.width = `${perc * 152}px`;
+	sizeTrack.style.backgroundColor = `hsl(${perc * 720}, 65%, 30%)`;
+	// this.parentNode.parentNode.style.filter = `hue-rotate(${perc * 360}deg)`;
 }
 
 sizeInput.addEventListener('change', handleUpdate);
