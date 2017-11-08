@@ -145,18 +145,30 @@ div.overlay{
 }
 button{
 	position: absolute;
+	width: 58px;
+	height: 30px;
+	font-size: 16px;
+	top: 40px;
 	z-index: 444;
+	box-shadow: 8px 5px 15px 0px #382123;
+	color: whitesmoke;
+	background: linear-gradient(to right, #505b1c, #7ac670);
+	border: 2px solid #fbe2a4;
+	outline: none;
+	border-radius: 20px;
+
 }
-button.close{
-	top: 0;
+button:hover{
+	filter: invert();
 }
 
 button.next{
-	top: 20px;
+	left: 30px;
+
 }
 
 button.prev{
-	top: 50px;
+	right: 30px;
 }
 
 .menu-hold{
@@ -171,11 +183,7 @@ button.prev{
 	/*transform: rotateY(0deg) translateZ(280px);*/
 }
 
-@keyframes roundandround {
-  to {
-    transform: rotateX(360deg);
-  }
-}
+
 
 .menu-hold ul{
 	position: relative;
@@ -183,24 +191,30 @@ button.prev{
 	height: 200px;
 	/*margin: 17em auto 0;*/
 	transform-style: preserve-3d;
-	/*animation: roundandround 10s infinite linear;*/
+
 }
 
 .menu-hold ul li{
 	position: absolute;
 	color: black;
 	text-align: center;
-	font-size: 42px;
+	font-size: 20px;
 	/*padding-top: 40px;*/
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100%;
-	border: 10px dashed green;
-	border-top-color: red;
-	border-bottom-color: blue;
+	border: 10px solid #333;
+	border-top-color: #bdbdbd;
+	border-bottom-color: #bdbdbd;
+	box-shadow: 18px 20px 51px 6px black;
 	background-color: wheat;
 	/*border-radius: 50%;*/
+	background: no-repeat url('images/sky-sq.jpg');
 	transform-origin: 50% 50%;
 	transform: translateY(-200px);
 	transition: transform .9s cubic-bezier(1,-0.06, 1, 1);
@@ -208,19 +222,18 @@ button.prev{
 }
 
 .menu-hold ul li:nth-of-type(1){
-	background: no-repeat url('images/sky-1.jpg');
-	background-size: contain;
-	filter: invert(100%);
+	/*background: no-repeat url('images/sky-1.jpg');*/
+	/*background-size: contain;*/
+	/*filter: invert(100%);*/
+	/*background: linear-gradient(45deg, blue, red);*/
+	/*background: no-repeat url('images/sky-sq.jpg');*/
 	transform: rotateX(5deg) translateY(-200px) translateZ(0px);
 }
 .menu-hold ul li:nth-of-type(2){
-	font-size: 16px;
+	/*font-size: 16px;*/
 	/*padding-top: 0;*/
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-	background: no-repeat url('images/sky-sq.jpg');
+
+	/*background: no-repeat url('images/sky-sq.jpg');*/
 	transform: rotateX(5deg) translateY(-200px) translateZ(0px);
 }
 .menu-hold ul li:nth-of-type(3){
@@ -230,12 +243,14 @@ button.prev{
 
 .menu-hold .slider{
 	position: relative;
+
 }
 
 .menu-hold .slider input{
 	-webkit-appearance: none;
 	width: 90%;
 	background: transparent;
+	cursor: ew-resize;
 }
 
 .menu-hold .slider input:focus{
@@ -246,13 +261,13 @@ button.prev{
 .menu-hold .slider .track{
 	width: 0px;
 	min-width: 0px;
-	max-width: 152px;
+	max-width: 144px;
 	height: 16px;
-	background-color: red;
+	/*background-color: red;*/
 	position: absolute;
-	left: 14px;
+	left: 11px;
 	z-index: -1;
-	top: 71px;
+	top: 26px;
 
 
 
@@ -275,17 +290,16 @@ button.prev{
 	justify-content: center;*/
 
 }
-.menu-hold ul li:nth-of-type(2) > p{
+.menu-hold ul li > p{
 	position: absolute;
 	top: 0;
-	color: white;
 }
 
 .menu-hold div.flip-switch label{
 	position: absolute;
 	top: -31px;
-	font-size: 18px;
-	color: white;
+	/*font-size: 18px;*/
+	/*color: white;*/
 	left: 50%;
 	transform: translateX(-50%);
 }
@@ -329,6 +343,55 @@ button.prev{
 	top: -18px;
 
 }
+
+
+
+
+
+
+input[type=checkbox] {
+    /*width: 9px;
+    height: 9px;
+    margin-right: 13px;*/
+    font-size: 70px;
+    -webkit-appearance: none;
+		-moz-appearance: none;
+}
+
+input[type=checkbox]:after {
+    content: "\1F5F4";
+    background-color: transparent;
+    display: inline-block;
+    margin-left: 23px;
+    color: #fff;
+    width: 70px;
+    height: 70px;
+    text-shadow: 4px 6px 13px #444;
+    /*border-radius: 18px;*/
+}
+input[type=checkbox]:checked:after {
+    content: "\2713";
+    background-color: transparent;
+    font-weight: 600;
+		font-size: 1em;
+		margin-left: 12px;
+		line-height: 1;
+		/*border: none;*/
+		padding: 6px 1px 1px 18px;
+		text-shadow: 4px 6px 13px #444;
+}
+input[type=checkbox]:focus{
+		outline: none;
+}
+
+
+
+
+
+
+
+
+
 
 .rect-prism-container{
 	perspective: 700px;

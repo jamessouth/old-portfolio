@@ -104,6 +104,32 @@ const switchHolder = flipSwitch.querySelector('div.rect-prism-container');
 const theSwitch = flipSwitch.querySelector('div.switch-rect');
 const switchBottom = theSwitch.querySelector('div.switch-bottom');
 const switchLeft = theSwitch.querySelector('div.switch-left');
+const check = document.querySelector('.menu-hold input.check');
+const checkLabel = document.querySelector('.menu-hold input.check + label');
+
+// consolidate buttons
+
+
+check.addEventListener('change', function(e){
+	if(e.target.checked){
+		checkLabel.textContent = 'GIFs!';
+		pb[0].children[2].src = 'images/p3.gif';
+
+		pb[1].children[3].src = 'images/p10.gif';
+		pb[1].children[4].src = 'images/p11.gif';
+
+
+
+	} else {
+		checkLabel.textContent = 'no GIFs';
+		pb[0].children[2].src = 'images/project3.jpg';
+
+		pb[1].children[3].src = 'images/project10.jpg';
+		pb[1].children[4].src = 'images/project11.jpg';
+
+	}
+});
+
 
 
 
@@ -149,6 +175,7 @@ flipSwitch.addEventListener('click', function(e){
 
 
 
+
 function handleUpdate() {
 	const suffix = this.dataset.sizing;
 	const width = this.max - this.min;
@@ -156,8 +183,8 @@ function handleUpdate() {
 
 	// console.log();
 	document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
-	sizeInputP.textContent = this.value;
-	sizeTrack.style.width = `${perc * 152}px`;
+	sizeInputP.textContent = `${this.value}px`;
+	sizeTrack.style.width = `${perc * 142}px`;
 	sizeTrack.style.backgroundColor = `hsl(${perc * 720}, 65%, 30%)`;
 	// this.parentNode.parentNode.style.filter = `hue-rotate(${perc * 360}deg)`;
 }
@@ -177,6 +204,8 @@ menuIcon.addEventListener('click', function(e){
 	// window.setTimeout(() => {
 	// 	menu.classList.add('expand');
 	// }, 7);
+
+
 
 
 
