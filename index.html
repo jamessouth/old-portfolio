@@ -9,17 +9,18 @@
 	</head>
 	<body ondragstart="return false;">
 		<div class="overlay">
-			<button class="close">X</button>
-			<button class="next">N</button>
-			<button class="prev">P</button>
+			<button class="close">close</button>
+			<button class="next">&#9650;</button>
+			<button class="prev">&#9660;</button>
 			<div class="menu-hold">
 				<ul>
 					<li>
+						<p>Cube Size</p>
 						<div class="slider">
 							<div class="track"></div>
-							<label for="size">Size:</label>
+							<label for="size">side:</label>
 							<input id="size" type="range" name="size" min="220" max="440" value="220" data-sizing="px">
-							<p></p>
+							<p>220px</p>
 						</div>
 					</li>
 					<li>
@@ -43,7 +44,11 @@
 							<label for="curved">curved</label>
 						</div>
 					</li>
-					<li>3</li>
+					<li>
+						<p>GIFs on/off</p>
+						<input class="check" type="checkbox" id="gifs" name="gifs" value="gif"/>
+						<label for="gifs">no GIFs</label>
+					</li>
 				</ul>
 			</div>
 		</div>
