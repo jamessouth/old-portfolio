@@ -106,8 +106,35 @@ const switchBottom = theSwitch.querySelector('div.switch-bottom');
 const switchLeft = theSwitch.querySelector('div.switch-left');
 const check = document.querySelector('.menu-hold input.check');
 const checkLabel = document.querySelector('.menu-hold input.check + label');
+const siteLink = document.querySelector('.link a');
 
 // consolidate buttons
+
+
+pb.forEach(x => {
+
+	x.addEventListener('mouseover', function(e){
+		let projNum = e.target.src.match(/\d+(?=\.)/)[0];
+		// console.log(projNum);
+
+		siteLink.textContent = 'Project ' + projNum;
+		siteLink.href = 'https://jamessouth.github.io/Project-' + projNum + '/';
+
+
+
+
+	});
+
+});
+
+
+
+
+
+
+
+
+
 
 
 check.addEventListener('change', function(e){

@@ -103,7 +103,7 @@ li:nth-of-type(1){
 	color: white;
 }
 h1{
-	padding: 1em 0 2em;
+	padding: 1em 0 3em;
 	text-align: center;
 	/*background-color: red;*/
 	cursor: default;
@@ -114,6 +114,23 @@ h1{
 
 
 }
+
+.link{
+	top: 73px;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+}
+.link a{
+	color: #1e0f0e;
+	font-size: 30px;
+	text-shadow: 0px 0px 7px white;
+}
+
+
+
+
+
 
 main{
 	display: flex;
@@ -227,6 +244,7 @@ button.prev{
 	/*filter: invert(100%);*/
 	/*background: linear-gradient(45deg, blue, red);*/
 	/*background: no-repeat url('images/sky-sq.jpg');*/
+	/*transform: rotateX(5deg) translateY(-200px) translateZ(0px);*/
 	transform: rotateX(5deg) translateY(-200px) translateZ(0px);
 }
 .menu-hold ul li:nth-of-type(2){
@@ -234,10 +252,12 @@ button.prev{
 	/*padding-top: 0;*/
 
 	/*background: no-repeat url('images/sky-sq.jpg');*/
-	transform: rotateX(5deg) translateY(-200px) translateZ(0px);
+	/*transform: rotateX(5deg) translateY(-200px) translateZ(0px);*/
+	transform: rotateX(10deg) translateY(-200px) translateZ(0px);
 }
 .menu-hold ul li:nth-of-type(3){
-	transform: rotateX(5deg) translateY(-200px) translateZ(0px);
+	/*transform: rotateX(5deg) translateY(-200px) translateZ(0px);*/
+	transform: rotateX(15deg) translateY(-200px) translateZ(0px);
 }
 
 
