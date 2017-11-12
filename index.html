@@ -10,11 +10,11 @@
 	<body ondragstart="return false;">
 		<div class="overlay">
 			<button class="close">close</button>
-			<button class="next">&#9650;</button>
-			<button class="prev">&#9660;</button>
+			<button class="next">&#9660;</button>
+			<button class="prev">&#9650;</button>
 			<div class="menu-hold">
 				<ul>
-					<li>
+					<li data-pos="0">
 						<p>Cube Size</p>
 						<div class="slider">
 							<div class="track"></div>
@@ -23,8 +23,8 @@
 							<p>220px</p>
 						</div>
 					</li>
-					<li>
-						<p>Menu Effect</p>
+					<li data-pos="1">
+						<p>Menu Nav</p>
 						<div class="flip-switch">
 
 							<div class="rect-prism-container">
@@ -44,7 +44,7 @@
 							<label for="curved">curved</label>
 						</div>
 					</li>
-					<li>
+					<li data-pos="2">
 						<p>GIFs on/off</p>
 						<input class="check" type="checkbox" id="gifs" name="gifs" value="gif"/>
 						<label for="gifs">no GIFs</label>
