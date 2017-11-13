@@ -235,7 +235,7 @@ button.prev{
 	transform-origin: 50% 50%;
 	transform: translateY(-200px);
 	transition: all .9s cubic-bezier(1,-0.06, 1, 1);
-
+	cursor: default;
 }
 
 @keyframes frontToBack {
@@ -282,6 +282,17 @@ button.prev{
 }
 .applyAnimFTM{
 	animation: 1.1s 1 ease-in forwards frontToMiddle;
+}
+
+.li-overlay{
+	display: none;
+	position: absolute;
+	background-color: transparent;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	z-index: 999;
 }
 
 
