@@ -107,6 +107,8 @@ const switchLeft = theSwitch.querySelector('div.switch-left');
 const check = document.querySelector('.menu-hold input.check');
 const checkLabel = document.querySelector('.menu-hold input.check + label');
 const siteLink = document.querySelector('.link a');
+const liOverlay = menuHolder.querySelectorAll('.li-overlay');
+
 
 // consolidate buttons
 let depths = [0, -2000, -4500];
@@ -150,7 +152,19 @@ check.addEventListener('change', function(e){
 });
 
 
+function styleMgr(i){
 
+	if(parseInt(options[i].style.transform.match(/(-?\d+)(?=px\)$)/)[0], 10) === -4500){
+		options[i].style.opacity = '0.3';
+		liOverlay[i].style.display = 'block';
+	} else if(parseInt(options[i].style.transform.match(/(-?\d+)(?=px\)$)/)[0], 10) === -2000){
+		options[i].style.opacity = '0.65';
+		liOverlay[i].style.display = 'block';
+	} else {
+		options[i].style.opacity = '1';
+		liOverlay[i].style.display = 'none';
+	}
+}
 
 
 let switchFlag = true;
@@ -172,9 +186,11 @@ flipSwitch.addEventListener('click', function(e){
 		options[1].style.transform = 'rotateX(0deg) translateY(-200px) translateZ(0px)';
 		options[2].style.transform = 'rotateX(30deg) translateY(-200px) translateZ(0px)';
 		options[0].style.transform = 'rotateX(40deg) translateY(-200px) translateZ(0px)';
+		rotations = [1, 2, 0];
 
 		for(let i = 0; i < options.length; i++){
 				options[i].style.opacity = '1';
+				options[i].dataset.pos = rotations[i];
 		}
 
 
@@ -194,13 +210,7 @@ flipSwitch.addEventListener('click', function(e){
 			options[i].className = '';
 			options[i].style.transform = `rotateX(5deg) translateY(-200px) translateZ(${depths[i]}px)`;
 
-			if(parseInt(options[i].style.transform.match(/(-?\d+)(?=px\)$)/)[0], 10) === -4500){
-				options[i].style.opacity = '0.3';
-			} else if(parseInt(options[i].style.transform.match(/(-?\d+)(?=px\)$)/)[0], 10) === -2000){
-				options[i].style.opacity = '0.65';
-			} else {
-				options[i].style.opacity = '1';
-			}
+			styleMgr(i);
 
 		}
 
@@ -252,18 +262,12 @@ menuIcon.addEventListener('click', function(e){
 			// console.log('ppp');
 			options[i].style.transform = `rotateX(5deg) translateY(-200px) translateZ(${depths[i]}px)`;
 
-			if(parseInt(options[i].style.transform.match(/(-?\d+)(?=px\)$)/)[0], 10) === -4500){
-				options[i].style.opacity = '0.3';
-			} else if(parseInt(options[i].style.transform.match(/(-?\d+)(?=px\)$)/)[0], 10) === -2000){
-				options[i].style.opacity = '0.65';
-			} else {
-				options[i].style.opacity = '1';
-			}
+			styleMgr(i);
 
 		}
 
 	} else {
-		rotations = [0, 1, 2];
+		// rotations = [0, 1, 2];
 		for(let i = 0; i < options.length; i++){
 			options[i].dataset.pos = rotations[i];
 		}
@@ -292,13 +296,7 @@ overlayNextButton.addEventListener('click', function(){
 		for(let i = 0; i < options.length; i++){
 			options[i].style.transform = `rotateX(5deg) translateY(-200px) translateZ(${depths[i]}px)`;
 
-			if(parseInt(options[i].style.transform.match(/(-?\d+)(?=px\)$)/)[0], 10) === -4500){
-				options[i].style.opacity = '0.3';
-			} else if(parseInt(options[i].style.transform.match(/(-?\d+)(?=px\)$)/)[0], 10) === -2000){
-				options[i].style.opacity = '0.65';
-			} else {
-				options[i].style.opacity = '1';
-			}
+			styleMgr(i);
 		}
 
 	} else {
@@ -320,26 +318,13 @@ overlayNextButton.addEventListener('click', function(){
 overlayPrevButton.addEventListener('click', function(){
 
 
-	// degs+=45;
-	// console.log(degs);
-	// menuHolder.style.transform = `rotateX(${degs}deg)`;
-
-
-
-	// console.log(depths);
 
 	if(switchFlag){
 		depths = depths.slice(1).concat(depths[0]);
 		for(let i = 0; i < options.length; i++){
 			options[i].style.transform = `rotateX(5deg) translateY(-200px) translateZ(${depths[i]}px)`;
 
-			if(parseInt(options[i].style.transform.match(/(-?\d+)(?=px\)$)/)[0], 10) === -4500){
-				options[i].style.opacity = '0.3';
-			} else if(parseInt(options[i].style.transform.match(/(-?\d+)(?=px\)$)/)[0], 10) === -2000){
-				options[i].style.opacity = '0.65';
-			} else {
-				options[i].style.opacity = '1';
-			}
+			styleMgr(i);
 		}
 
 	} else {
