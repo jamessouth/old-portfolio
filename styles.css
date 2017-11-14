@@ -120,12 +120,15 @@ h1{
 	position: absolute;
 	left: 50%;
 	transform: translateX(-50%);
-}
-.link a{
 	color: #1e0f0e;
 	font-size: 30px;
 	text-shadow: 0px 0px 7px white;
 }
+/*.link a{
+	color: #1e0f0e;
+	font-size: 30px;
+	text-shadow: 0px 0px 7px white;
+}*/
 
 
 

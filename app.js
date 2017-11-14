@@ -106,7 +106,7 @@ const switchBottom = theSwitch.querySelector('div.switch-bottom');
 const switchLeft = theSwitch.querySelector('div.switch-left');
 const check = document.querySelector('.menu-hold input.check');
 const checkLabel = document.querySelector('.menu-hold input.check + label');
-const siteLink = document.querySelector('.link a');
+const siteLink = document.querySelector('.link');
 const liOverlay = menuHolder.querySelectorAll('.li-overlay');
 
 
@@ -121,10 +121,7 @@ pb.forEach(x => {
 		// console.log(projNum);
 
 		siteLink.textContent = 'Project ' + projNum;
-		siteLink.href = 'https://jamessouth.github.io/Project-' + projNum + '/';
-
-
-
+		// siteLink.href = 'https://jamessouth.github.io/Project-' + projNum + '/';
 
 	});
 
@@ -183,15 +180,31 @@ flipSwitch.addEventListener('click', function(e){
 		switchLeft.style.borderLeftWidth = '4px';
 		switchLeft.style.borderTopWidth = '3px';
 
-		options[1].style.transform = 'rotateX(0deg) translateY(-200px) translateZ(0px)';
-		options[2].style.transform = 'rotateX(30deg) translateY(-200px) translateZ(0px)';
-		options[0].style.transform = 'rotateX(40deg) translateY(-200px) translateZ(0px)';
-		rotations = [1, 2, 0];
+		// options[1].style.transform = 'rotateX(0deg) translateY(-200px) translateZ(0px)';
+		// options[2].style.transform = 'rotateX(30deg) translateY(-200px) translateZ(0px)';
+		// options[0].style.transform = 'rotateX(40deg) translateY(-200px) translateZ(0px)';
+		// rotations = [2, 0, 1];
+
+		// for(let i = 0; i < options.length; i++){
+		// 		options[i].style.opacity = '1';
+		// 		options[i].dataset.pos = rotations[i];
+		// }
+
 
 		for(let i = 0; i < options.length; i++){
-				options[i].style.opacity = '1';
-				options[i].dataset.pos = rotations[i];
+			liOverlay[i].style.display = 'none';
+			options[i].style.opacity = '1';
+			if(options[i].dataset.pos === '0'){
+				options[i].style.transform = 'rotateX(0deg) translateY(-200px) translateZ(0px)';
+			} else if(options[i].dataset.pos === '1'){
+				options[i].style.transform = 'rotateX(30deg) translateY(-200px) translateZ(0px)';
+			} else {
+				options[i].style.transform = 'rotateX(40deg) translateY(-200px) translateZ(0px)';
+			}
 		}
+
+
+
 
 
 		switchFlag = false;
@@ -268,8 +281,20 @@ menuIcon.addEventListener('click', function(e){
 
 	} else {
 		// rotations = [0, 1, 2];
+		// for(let i = 0; i < options.length; i++){
+		// 	options[i].dataset.pos = rotations[i];
+		// }
+
 		for(let i = 0; i < options.length; i++){
-			options[i].dataset.pos = rotations[i];
+			// liOverlay[i].style.display = 'none';
+			// options[i].style.opacity = '1';
+			if(options[i].dataset.pos === '0'){
+				options[i].style.transform = 'rotateX(0deg) translateY(-200px) translateZ(0px)';
+			} else if(options[i].dataset.pos === '1'){
+				options[i].style.transform = 'rotateX(30deg) translateY(-200px) translateZ(0px)';
+			} else {
+				options[i].style.transform = 'rotateX(40deg) translateY(-200px) translateZ(0px)';
+			}
 		}
 
 	}
@@ -286,12 +311,14 @@ overlayCloseButton.addEventListener('click', function(){
 	hold.style.opacity = '1';
 	for(let i = 0; i < options.length; i++){
 		options[i].className = '';
+		options[i].style.transform = '';
 	}
 });
 // let degs = 5;
 overlayNextButton.addEventListener('click', function(){
 
 	if(switchFlag){
+
 		depths.unshift(depths.pop());
 		for(let i = 0; i < options.length; i++){
 			options[i].style.transform = `rotateX(5deg) translateY(-200px) translateZ(${depths[i]}px)`;
@@ -302,16 +329,28 @@ overlayNextButton.addEventListener('click', function(){
 	} else {
 
 
-		options[parseInt(options[0].dataset.pos, 10)].className = 'applyAnimFTB';
-		options[parseInt(options[2].dataset.pos, 10)].className = 'applyAnimBTM';
-		options[parseInt(options[1].dataset.pos, 10)].className = 'applyAnimMTF';
-		rotations = rotations.slice(1).concat(rotations[0]);
+		// options[parseInt(options[2].dataset.pos, 10)].className = '';
+		// options[parseInt(options[1].dataset.pos, 10)].className = '';
+		// options[parseInt(options[0].dataset.pos, 10)].className = '';
+
+
 		for(let i = 0; i < options.length; i++){
-			options[i].dataset.pos = rotations[i];
+			if(options[i].dataset.pos === '0'){
+				options[i].className = 'applyAnimFTB';
+			} else if(options[i].dataset.pos === '1'){
+				options[i].className = 'applyAnimMTF';
+			} else {
+				options[i].className = 'applyAnimBTM';
+			}
 		}
 
-	}
 
+	}
+	rotations.unshift(rotations.pop());
+
+	for(let i = 0; i < options.length; i++){
+		options[i].dataset.pos = rotations[i];
+	}
 
 });
 
@@ -329,14 +368,28 @@ overlayPrevButton.addEventListener('click', function(){
 
 	} else {
 
-		options[parseInt(options[0].dataset.pos, 10)].className = 'applyAnimFTM';
-		options[parseInt(options[2].dataset.pos, 10)].className = 'applyAnimBTF';
-		options[parseInt(options[1].dataset.pos, 10)].className = 'applyAnimMTB';
-		rotations.unshift(rotations.pop());
+		// options[parseInt(options[2].dataset.pos, 10)].
+		// options[parseInt(options[1].dataset.pos, 10)].className = '';
+		// options[parseInt(options[0].dataset.pos, 10)].className = '';
+
 		for(let i = 0; i < options.length; i++){
-			options[i].dataset.pos = rotations[i];
+			if(options[i].dataset.pos === '0'){
+				options[i].className = 'applyAnimFTM';
+			} else if(options[i].dataset.pos === '1'){
+				options[i].className = 'applyAnimMTB';
+			} else {
+				options[i].className = 'applyAnimBTF';
+			}
 		}
 
+
+
+
+
+	}
+	rotations = rotations.slice(1).concat(rotations[0]);
+	for(let i = 0; i < options.length; i++){
+		options[i].dataset.pos = rotations[i];
 	}
 
 });
