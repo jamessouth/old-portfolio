@@ -106,23 +106,39 @@ const switchBottom = theSwitch.querySelector('div.switch-bottom');
 const switchLeft = theSwitch.querySelector('div.switch-left');
 const check = document.querySelector('.menu-hold input.check');
 const checkLabel = document.querySelector('.menu-hold input.check + label');
-const siteLink = document.querySelector('.link');
+const subhead = document.querySelector('.subhead');
+const desc = document.querySelector('.desc');
 const liOverlay = menuHolder.querySelectorAll('.li-overlay');
-
+// const link = document.querySelector('div.cube-container div.goto');
 
 // consolidate buttons
 let depths = [0, -2000, -4500];
 let rotations = [0, 1, 2];
+let descs = ['personal profile page',
+						 'responsive layout',
+						 'registration form',
+						 'photo gallery',
+						 'sass refactor of project 2',
+						 'svg site update',
+						 'interactive video player',
+						 'accessibility refactor',
+						 'web app dashboard',
+						 'employee directory',
+						 'react flickr gallery',
+						 'portfolio'];
 
 pb.forEach(x => {
 
 	x.addEventListener('mouseover', function(e){
-		let projNum = e.target.src.match(/\d+(?=\.)/)[0];
-		// console.log(projNum);
+		// console.log(this);
+		if(e.target.tagName == 'IMG'){
+			let projNum = e.target.src.match(/\d+(?=\.)/)[0];
 
-		siteLink.textContent = 'Project ' + projNum;
-		// siteLink.href = 'https://jamessouth.github.io/Project-' + projNum + '/';
 
+			subhead.textContent = 'Project ' + projNum;
+			desc.textContent = descs[projNum - 1];
+
+		}
 	});
 
 });

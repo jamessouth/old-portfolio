@@ -6,11 +6,6 @@
 }
 
 
-
-
-
-
-
 :root {
 	--size: 220px;
 }
@@ -115,14 +110,23 @@ h1{
 
 }
 
-.link{
+.subhead{
 	top: 73px;
+	top: calc(var(--size) + 200px);
 	position: absolute;
 	left: 50%;
 	transform: translateX(-50%);
 	color: #1e0f0e;
 	font-size: 30px;
 	text-shadow: 0px 0px 7px white;
+}
+
+.desc{
+	top: 105px;
+	top: calc(var(--size) + 232px);
+	font-size: 20px;
+	width: 100%;
+	text-align: center;
 }
 /*.link a{
 	color: #1e0f0e;
@@ -487,6 +491,10 @@ input[type=checkbox]:focus{
 	/* background-color:red; */
 }
 
+.cube-container:nth-of-type(1){
+	margin-bottom: calc(var(--size) / 1.8);
+}
+
 
 .switch-rect{
 	transform-style: preserve-3d;
@@ -566,8 +574,7 @@ input[type=checkbox]:focus{
 	transform-origin: bottom;
 }
 
-
-.front, .back, .left, .right, .top, .bottom{
+.common-cube{
   width: 100%;
   height: 100%;
   display: block;
@@ -575,31 +582,31 @@ input[type=checkbox]:focus{
 }
 
 .front{
- transform:translateZ(110px);
+ transform: translateZ(calc(var(--size) / 2));
 }
 
 .left{
- transform:rotateY(270deg) translateX(-110px);
-  transform-origin:bottom left;
+ transform: rotateY(270deg) translateX(calc(var(--size) / -2));
+  transform-origin: bottom left;
 }
 
 .right{
- transform: rotateY(-270deg) translateX(110px);
-  transform-origin:bottom right;
+ transform: rotateY(-270deg) translateX(calc(var(--size) / 2));
+  transform-origin: bottom right;
 }
 
 .back{
-  transform:translateZ(-110px) rotateY(180deg);
+  transform: translateZ(calc(var(--size) / -2)) rotateY(180deg);
 }
 
 .top{
-	transform: translateZ(-110px) rotateX(90deg);
-	transform-origin:top;
+	transform: translateZ(calc(var(--size) / -2)) rotateX(90deg);
+	transform-origin: top;
 }
 
 .bottom{
-	transform: translateZ(-110px) rotateX(-90deg);
-	transform-origin:bottom;
+	transform: translateZ(calc(var(--size) / -2)) rotateX(-90deg);
+	transform-origin: bottom;
 }
 
 @media screen and (min-width: 460px){
@@ -615,16 +622,14 @@ input[type=checkbox]:focus{
 	}
 
 	.photo-cube{
-		width: 330px;
-		height: 330px;
+		/*width: calc(var(--size) * 1.5);
+		height: calc(var(--size) * 1.5);*/
+		/*transform-origin: calc(var(--size) / 2) calc(var(--size) / 2);*/
 	}
 
-	.cube-container:nth-of-type(1){
-		margin-bottom: 9em;
-	}
 
 	.front{
-		transform:translateZ(165px);
+		transform:translateZ(calc(var(--size) - 165px));
 	}
 
 	.left{
