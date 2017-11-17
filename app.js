@@ -106,8 +106,8 @@ const switchBottom = theSwitch.querySelector('div.switch-bottom');
 const switchLeft = theSwitch.querySelector('div.switch-left');
 const check = document.querySelector('.menu-hold input.check');
 const checkLabel = document.querySelector('.menu-hold input.check + label');
-const subhead = document.querySelector('.subhead');
-const desc = document.querySelector('.desc');
+const subhead = document.querySelectorAll('.subhead:nth-of-type(odd)');
+const desc = document.querySelectorAll('.subhead:nth-of-type(even)');
 const liOverlay = menuHolder.querySelectorAll('.li-overlay');
 // const link = document.querySelector('div.cube-container div.goto');
 
@@ -127,18 +127,34 @@ let descs = ['personal profile page',
 						 'react flickr gallery',
 						 'portfolio'];
 
-pb.forEach(x => {
+pb.forEach((x,i) => {
 
 	x.addEventListener('mouseover', function(e){
-		// console.log(this);
+		// console.log(i);
 		if(e.target.tagName == 'IMG'){
 			let projNum = e.target.src.match(/\d+(?=\.)/)[0];
+			subhead[i].textContent = 'Project ' + projNum;
+			desc[i].textContent = descs[projNum - 1];
 
 
-			subhead.textContent = 'Project ' + projNum;
-			desc.textContent = descs[projNum - 1];
 
 		}
+		// if(window.innerWidth < 768){
+		// 	if(i === 0){
+		// 		subhead.style.top = '73px';
+		// 		desc.style.top = '105px';
+		// 	} else {
+		// 		subhead.style.top = 'calc((var(--size) * 1.2) + 160px)';
+		// 		desc.style.top = 'calc((var(--size) * 1.2) + 192px)';
+		// 	}
+		// } else {
+		// 	subhead.style.top = '73px';
+		// 	desc.style.top = '105px';
+		// }
+
+
+
+
 	});
 
 });
