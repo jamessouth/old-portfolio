@@ -19,7 +19,9 @@
 body{
 	background-color: #555;
 	background: no-repeat url('images/sky-mob.jpg');
-	background-size: 100% 100%;
+	background-position: center center;
+	background-attachment: fixed;
+	background-size: cover;
 	position: relative;
 }
 
@@ -106,13 +108,9 @@ h1{
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
-
-
 }
 
 .subhead{
-	top: 73px;
-	top: calc(var(--size) + 200px);
 	position: absolute;
 	left: 50%;
 	transform: translateX(-50%);
@@ -121,18 +119,27 @@ h1{
 	text-shadow: 0px 0px 7px white;
 }
 
-.desc{
+.subhead:nth-of-type(1){
+	top: 73px;
+}
+
+.subhead:nth-of-type(2){
 	top: 105px;
-	top: calc(var(--size) + 232px);
+	/*top: calc(var(--size) + 232px);*/
 	font-size: 20px;
-	width: 100%;
+	width: 235px;
 	text-align: center;
 }
-/*.link a{
-	color: #1e0f0e;
-	font-size: 30px;
-	text-shadow: 0px 0px 7px white;
-}*/
+.subhead:nth-of-type(3){
+	top: calc((var(--size) * 1.2) + 160px);
+}
+
+.subhead:nth-of-type(4){
+	top: calc((var(--size) * 1.2) + 192px);
+	font-size: 20px;
+	width: 235px;
+	text-align: center;
+}
 
 
 
@@ -612,13 +619,20 @@ input[type=checkbox]:focus{
 @media screen and (min-width: 460px){
 
 	body{
+		/*background-color: #555;*/
+
+		/*background-size: 100% 100%;*/
+
+
 		background-color: #555;
 		background: no-repeat url('images/sky-mob2.jpg');
-		background-size: 100% 100%;
+		background-position: center center;
+		background-attachment: fixed;
+		background-size: cover;
 	}
 
 	h1{
-		margin-bottom: 3em;
+		/*margin-bottom: 3em;*/
 	}
 
 	.photo-cube{
@@ -629,30 +643,30 @@ input[type=checkbox]:focus{
 
 
 	.front{
-		transform:translateZ(calc(var(--size) - 165px));
+		/*transform:translateZ(calc(var(--size) - 165px));*/
 	}
 
 	.left{
-		transform:rotateY(270deg) translateX(-165px);
+		/*transform:rotateY(270deg) translateX(-165px);*/
 		/*transform-origin:bottom left;*/
 	}
 
 	.right{
-		transform: rotateY(-270deg) translateX(165px);
+		/*transform: rotateY(-270deg) translateX(165px);*/
 		/*transform-origin:bottom right;*/
 	}
 
 	.back{
-		transform:translateZ(-165px) rotateY(180deg);
+		/*transform:translateZ(-165px) rotateY(180deg);*/
 	}
 
 	.top{
-		transform: translateZ(-165px) rotateX(90deg);
+		/*transform: translateZ(-165px) rotateX(90deg);*/
 		/*transform-origin:top;*/
 	}
 
 	.bottom{
-		transform: translateZ(-165px) rotateX(-90deg);
+		/*transform: translateZ(-165px) rotateX(-90deg);*/
 		/*transform-origin:bottom;*/
 	}
 
@@ -662,33 +676,33 @@ input[type=checkbox]:focus{
 
 
 	.photo-cube{
-		width: 440px;
-		height: 440px;
+		/*width: 440px;
+		height: 440px;*/
 	}
 	.front{
-		transform:translateZ(220px);
+		/*transform:translateZ(220px);*/
 	}
 
 	.left{
-		transform:rotateY(270deg) translateX(-220px);
+		/*transform:rotateY(270deg) translateX(-220px);*/
 		/*transform-origin:bottom left;*/
 	}
 
 	.right{
-		transform: rotateY(-270deg) translateX(220px);
+		/*transform: rotateY(-270deg) translateX(220px);*/
 		/*transform-origin:bottom right;*/
 	}
 	.back{
-		transform:translateZ(-220px) rotateY(180deg);
+		/*transform:translateZ(-220px) rotateY(180deg);*/
 	}
 
 	.top{
-		transform: translateZ(-220px) rotateX(90deg);
+		/*transform: translateZ(-220px) rotateX(90deg);*/
 		/*transform-origin:top;*/
 	}
 
 	.bottom{
-		transform: translateZ(-220px) rotateX(-90deg);
+		/*transform: translateZ(-220px) rotateX(-90deg);*/
 		/*transform-origin:bottom;*/
 	}
 }
@@ -696,20 +710,64 @@ input[type=checkbox]:focus{
 @media screen and (min-width: 768px){
 
 	body{
+		/*background-color: #555;*/
+
+		/*background-size: cover;*/
+
+
 		background-color: #555;
 		background: no-repeat url('images/sky-tab.jpg');
+		background-position: center center;
+		background-attachment: fixed;
 		background-size: cover;
+
+	}
+
+	h1{
+-webkit-mask-image: url('images/sky-med-m.png');
+
 	}
 
 
 	main{
 		flex-direction: row;
-		margin-bottom: 10em;
+		/*margin-bottom: 10em;*/
 	}
 
+
+	.subhead{
+		/*position: absolute;*/
+		left: 25%;
+		/*transform: translateX(-50%);
+		color: #1e0f0e;*/
+		font-size: 32px;
+		/*text-shadow: 0px 0px 7px white;*/
+	}
+
+	.subhead:nth-of-type(odd){
+		top: 73px;
+	}
+
+	.subhead:nth-of-type(even){
+		top: 105px;
+		/*top: calc(var(--size) + 232px);*/
+		font-size: 22px;
+		width: 260px;
+		/*text-align: center;*/
+	}
+	.subhead:nth-of-type(3){
+		left: 75%;
+	}
+
+	.subhead:nth-of-type(4){
+		left: 75%;
+	}
+
+
+
 	.photo-cube{
-		width: 300px;
-		height: 300px;
+		/*width: 300px;
+		height: 300px;*/
 	}
 
 	.cube-container:nth-of-type(1){
@@ -717,28 +775,28 @@ input[type=checkbox]:focus{
 	}
 
 	.front{
-		transform:translateZ(150px);
+		/*transform:translateZ(150px);*/
 	}
 
 	.left{
-		transform:rotateY(270deg) translateX(-150px);
+		/*transform:rotateY(270deg) translateX(-150px);*/
 		/*transform-origin:bottom left;*/
 	}
 
 	.right{
-		transform: rotateY(-270deg) translateX(150px);
+		/*transform: rotateY(-270deg) translateX(150px);*/
 		/*transform-origin:bottom right;*/
 	}
 	.back{
-		transform:translateZ(-150px) rotateY(180deg);
+		/*transform:translateZ(-150px) rotateY(180deg);*/
 	}
 	.top{
-		transform: translateZ(-150px) rotateX(90deg);
+		/*transform: translateZ(-150px) rotateX(90deg);*/
 		/*transform-origin:top;*/
 	}
 
 	.bottom{
-		transform: translateZ(-150px) rotateX(-90deg);
+		/*transform: translateZ(-150px) rotateX(-90deg);*/
 		/*transform-origin:bottom;*/
 	}
 
@@ -747,36 +805,36 @@ input[type=checkbox]:focus{
 @media screen and (min-width: 850px){
 
 	main{
-		margin-bottom: 8em;
+		/*margin-bottom: 8em;*/
 	}
 
 	.photo-cube{
-		width: 330px;
-		height: 330px;
+		/*width: 330px;
+		height: 330px;*/
 	}
 	.front{
-		transform:translateZ(165px);
+		/*transform:translateZ(165px);*/
 	}
 
 	.left{
-		transform:rotateY(270deg) translateX(-165px);
+		/*transform:rotateY(270deg) translateX(-165px);*/
 		/*transform-origin:bottom left;*/
 	}
 
 	.right{
-		transform: rotateY(-270deg) translateX(165px);
+		/*transform: rotateY(-270deg) translateX(165px);*/
 		/*transform-origin:bottom right;*/
 	}
 	.back{
-		transform:translateZ(-165px) rotateY(180deg);
+		/*transform:translateZ(-165px) rotateY(180deg);*/
 	}
 	.top{
-		transform: translateZ(-165px) rotateX(90deg);
+		/*transform: translateZ(-165px) rotateX(90deg);*/
 		/*transform-origin:top;*/
 	}
 
 	.bottom{
-		transform: translateZ(-165px) rotateX(-90deg);
+		/*transform: translateZ(-165px) rotateX(-90deg);*/
 		/*transform-origin:bottom;*/
 	}
 }
@@ -784,9 +842,18 @@ input[type=checkbox]:focus{
 @media screen and (min-width: 1050px){
 
 	body{
+		/*background-color: #555;*/
+
+		/*background-size: cover;*/
+
 		background-color: #555;
 		background: no-repeat url('images/sky-med.jpg');
+		background-position: center center;
+		background-attachment: fixed;
 		background-size: cover;
+
+
+
 	}
 
 	main{
@@ -794,31 +861,31 @@ input[type=checkbox]:focus{
 	}
 
 	.photo-cube{
-		width: 380px;
-		height: 380px;
+		/*width: 380px;
+		height: 380px;*/
 	}
 	.front{
-		transform:translateZ(190px);
+		/*transform:translateZ(190px);*/
 	}
 	.left{
-		transform:rotateY(270deg) translateX(-190px);
+		/*transform:rotateY(270deg) translateX(-190px);*/
 		/*transform-origin:bottom left;*/
 	}
 
 	.right{
-		transform: rotateY(-270deg) translateX(190px);
+		/*transform: rotateY(-270deg) translateX(190px);*/
 		/*transform-origin:bottom right;*/
 	}
 	.back{
-		transform:translateZ(-190px) rotateY(180deg);
+		/*transform:translateZ(-190px) rotateY(180deg);*/
 	}
 	.top{
-		transform: translateZ(-190px) rotateX(90deg);
+		/*transform: translateZ(-190px) rotateX(90deg);*/
 		/*transform-origin:top;*/
 	}
 
 	.bottom{
-		transform: translateZ(-190px) rotateX(-90deg);
+		/*transform: translateZ(-190px) rotateX(-90deg);*/
 		/*transform-origin:bottom;*/
 	}
 }
@@ -833,38 +900,46 @@ input[type=checkbox]:focus{
 		margin-bottom: 2.8em;
 	}
 	.photo-cube{
-		width: 418px;
-		height: 418px;
+		/*width: 418px;
+		height: 418px;*/
 	}
 	.front{
-		transform:translateZ(209px);
+		/*transform:translateZ(209px);*/
 	}
 	.left{
-		transform:rotateY(270deg) translateX(-209px);
+		/*transform:rotateY(270deg) translateX(-209px);*/
 		/*transform-origin:bottom left;*/
 	}
 	.right{
-		transform: rotateY(-270deg) translateX(209px);
+		/*transform: rotateY(-270deg) translateX(209px);*/
 		/*transform-origin:bottom right;*/
 	}
 	.back{
-		transform:translateZ(-209px) rotateY(180deg);
+		/*transform:translateZ(-209px) rotateY(180deg);*/
 	}
 	.top{
-		transform: translateZ(-209px) rotateX(90deg);
+		/*transform: translateZ(-209px) rotateX(90deg);*/
 		/*transform-origin:top;*/
 	}
 
 	.bottom{
-		transform: translateZ(-209px) rotateX(-90deg);
+		/*transform: translateZ(-209px) rotateX(-90deg);*/
 		/*transform-origin:bottom;*/
 	}
 }
 
 @media screen and (min-width: 1900px){
 	body{
+		/*background-color: #555;*/
+
+		/*background-size: cover;*/
+
+
 		background-color: #555;
 		background: no-repeat url('images/sky-big.jpg');
+		background-position: center center;
+		background-attachment: fixed;
 		background-size: cover;
+
 	}
 }
