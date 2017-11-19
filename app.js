@@ -104,16 +104,21 @@ const switchHolder = flipSwitch.querySelector('div.rect-prism-container');
 const theSwitch = flipSwitch.querySelector('div.switch-rect');
 const switchBottom = theSwitch.querySelector('div.switch-bottom');
 const switchLeft = theSwitch.querySelector('div.switch-left');
-const check = document.querySelector('.menu-hold input.check');
-const checkLabel = document.querySelector('.menu-hold input.check + label');
+const check = document.querySelectorAll('.menu-hold input.check');
+const checkLabel = document.querySelectorAll('.menu-hold input.check + label');
 const subhead = document.querySelectorAll('.subhead:nth-of-type(odd)');
 const desc = document.querySelectorAll('.subhead:nth-of-type(even)');
 const liOverlay = menuHolder.querySelectorAll('.li-overlay');
 // const link = document.querySelector('div.cube-container div.goto');
 
+
+
+
+
+
 // consolidate buttons
-let depths = [0, -2000, -4500];
-let rotations = [0, 1, 2];
+let depths = [0, -2000, -3250, -4500];
+let rotations = [0, 1, 2, 3];
 let descs = ['personal profile page',
 						 'responsive layout',
 						 'registration form',
@@ -160,9 +165,9 @@ pb.forEach((x,i) => {
 });
 
 
-check.addEventListener('change', function(e){
+check[0].addEventListener('change', function(e){
 	if(e.target.checked){
-		checkLabel.textContent = 'GIFs!';
+		checkLabel[0].textContent = 'GIFs!';
 		pb[0].children[2].src = 'images/p3.gif';
 
 		pb[1].children[3].src = 'images/p10.gif';
@@ -171,7 +176,7 @@ check.addEventListener('change', function(e){
 
 
 	} else {
-		checkLabel.textContent = 'no GIFs';
+		checkLabel[0].textContent = 'no GIFs';
 		pb[0].children[2].src = 'images/project3.jpg';
 
 		pb[1].children[3].src = 'images/project10.jpg';
@@ -181,10 +186,29 @@ check.addEventListener('change', function(e){
 });
 
 
+check[1].addEventListener('change', function(e){
+	if(e.target.checked){
+		checkLabel[1].textContent = 'DESTROY!';
+
+
+
+
+	} else {
+		checkLabel[1].textContent = 'do not destroy';
+
+
+	}
+});
+
+
+
 function styleMgr(i){
 
 	if(parseInt(options[i].style.transform.match(/(-?\d+)(?=px\)$)/)[0], 10) === -4500){
 		options[i].style.opacity = '0.3';
+		liOverlay[i].style.display = 'block';
+	} else if(parseInt(options[i].style.transform.match(/(-?\d+)(?=px\)$)/)[0], 10) === -3250){
+		options[i].style.opacity = '0.45';
 		liOverlay[i].style.display = 'block';
 	} else if(parseInt(options[i].style.transform.match(/(-?\d+)(?=px\)$)/)[0], 10) === -2000){
 		options[i].style.opacity = '0.65';
@@ -230,8 +254,10 @@ flipSwitch.addEventListener('click', function(e){
 				options[i].style.transform = 'rotateX(0deg) translateY(-200px) translateZ(0px)';
 			} else if(options[i].dataset.pos === '1'){
 				options[i].style.transform = 'rotateX(30deg) translateY(-200px) translateZ(0px)';
-			} else {
+			} else if(options[i].dataset.pos === '2'){
 				options[i].style.transform = 'rotateX(40deg) translateY(-200px) translateZ(0px)';
+			} else {
+				options[i].style.transform = 'rotateX(50deg) translateY(-200px) translateZ(0px)';
 			}
 		}
 
@@ -324,8 +350,10 @@ menuIcon.addEventListener('click', function(e){
 				options[i].style.transform = 'rotateX(0deg) translateY(-200px) translateZ(0px)';
 			} else if(options[i].dataset.pos === '1'){
 				options[i].style.transform = 'rotateX(30deg) translateY(-200px) translateZ(0px)';
-			} else {
+			} else if(options[i].dataset.pos === '2'){
 				options[i].style.transform = 'rotateX(40deg) translateY(-200px) translateZ(0px)';
+			} else {
+				options[i].style.transform = 'rotateX(50deg) translateY(-200px) translateZ(0px)';
 			}
 		}
 
@@ -370,9 +398,11 @@ overlayNextButton.addEventListener('click', function(){
 			if(options[i].dataset.pos === '0'){
 				options[i].className = 'applyAnimFTB';
 			} else if(options[i].dataset.pos === '1'){
-				options[i].className = 'applyAnimMTF';
+				options[i].className = 'applyAnimMFTF';
+			} else if(options[i].dataset.pos === '2'){
+				options[i].className = 'applyAnimMBTMF';
 			} else {
-				options[i].className = 'applyAnimBTM';
+				options[i].className = 'applyAnimBTMB';
 			}
 		}
 
@@ -406,9 +436,11 @@ overlayPrevButton.addEventListener('click', function(){
 
 		for(let i = 0; i < options.length; i++){
 			if(options[i].dataset.pos === '0'){
-				options[i].className = 'applyAnimFTM';
+				options[i].className = 'applyAnimFTMF';
 			} else if(options[i].dataset.pos === '1'){
-				options[i].className = 'applyAnimMTB';
+				options[i].className = 'applyAnimMFTMB';
+			} else if(options[i].dataset.pos === '2'){
+				options[i].className = 'applyAnimMBTB';
 			} else {
 				options[i].className = 'applyAnimBTF';
 			}
