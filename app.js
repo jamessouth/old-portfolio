@@ -1,7 +1,7 @@
 
 const pb = document.querySelectorAll('.photo-cube');
 const cc = document.querySelectorAll('.cube-container');
-// const body = document.querySelector('body');
+const body = document.querySelector('body');
 // const main = document.querySelector('main');
 
 
@@ -110,10 +110,12 @@ const subhead = document.querySelectorAll('.subhead:nth-of-type(odd)');
 const desc = document.querySelectorAll('.subhead:nth-of-type(even)');
 const liOverlay = menuHolder.querySelectorAll('.li-overlay');
 // const link = document.querySelector('div.cube-container div.goto');
-
-
-
-
+let destroyFlag = false;
+const explode = document.querySelectorAll('.explode');
+const headline = document.querySelector('.hold h1');
+const seconds = document.querySelector('.menu-hold input.seconds');
+const secondsLabel = document.querySelector('.menu-hold input.seconds + label');
+const secondsP = document.querySelector('.menu-hold ul li p.seconds');
 
 
 // consolidate buttons
@@ -189,14 +191,18 @@ check[0].addEventListener('change', function(e){
 check[1].addEventListener('change', function(e){
 	if(e.target.checked){
 		checkLabel[1].textContent = 'DESTROY!';
-
-
+		destroyFlag = true;
+		seconds.style.display = 'inline-block';
+		secondsLabel.style.display = 'block';
+		secondsP.style.display = 'block';
 
 
 	} else {
 		checkLabel[1].textContent = 'do not destroy';
-
-
+		destroyFlag = false;
+		seconds.style.display = 'none';
+		secondsLabel.style.display = 'none';
+		secondsP.style.display = 'none';
 	}
 });
 
@@ -362,6 +368,49 @@ menuIcon.addEventListener('click', function(e){
 
 });
 
+// function flyAway(i){
+// 	imgs[i].style.transform += ' translateZ(200px)';
+// }
+
+function destroyCube(cube){
+	cube.addEventListener('animationend', () => {
+		headline.style.marginBottom = '0';
+		cube.style.display = 'none';
+		cube.parentNode.style.display = 'none';
+		// body.classList.add('finish');
+		for(let i = 0; i < 2; i++){
+			explode[i].style.display = 'block';
+			subhead[i].style.display = 'none';
+			desc[i].style.display = 'none';
+		}
+		explode[0].style.marginTop = '26px';
+	});
+	// let imgs = cube.querySelectorAll('img');
+	// console.log(imgs);
+	// imgs[0].style.transform = 'translateZ(calc(var(--size) / 2))';
+	// imgs[1].style.transform = 'rotateY(270deg) translateX(calc(var(--size) / -2))';
+	// imgs[2].style.transform = 'rotateY(-270deg) translateX(calc(var(--size) / 2))';
+	// imgs[3].style.transform = 'translateZ(calc(var(--size) / -2)) rotateY(180deg)';
+	// imgs[4].style.transform = 'translateZ(calc(var(--size) / -2)) rotateX(90deg)';
+	// imgs[5].style.transform = 'translateZ(calc(var(--size) / -2)) rotateX(-90deg)';
+	cube.classList.add('blowup');
+	// for(let i = 0; i < imgs.length; i++){
+	// 	imgs[i].style.transform += ' translateZ(100px)';
+	// 	imgs[i].classList.add('blowup');
+	// }
+
+
+	window.setTimeout(() => {
+		explode[0].style.display = 'none';
+		explode[1].style.display = 'none';
+	}, 8500);
+
+
+
+
+
+}
+
 overlayCloseButton.addEventListener('click', function(){
 	overlay.style.display = 'none';
 	menuIcon.children[0].classList.remove('top-bun');
@@ -373,6 +422,12 @@ overlayCloseButton.addEventListener('click', function(){
 		options[i].className = '';
 		options[i].style.transform = '';
 	}
+	console.log(destroyFlag);
+
+	destroyCube(pb[0]);
+	destroyCube(pb[1]);
+
+
 });
 // let degs = 5;
 overlayNextButton.addEventListener('click', function(){
