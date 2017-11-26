@@ -8,6 +8,7 @@
 
 :root {
 	--size: 220px;
+	--delay: 0s;
 }
 
 .hold input[type="range"]{
@@ -25,6 +26,7 @@ body{
 	background-attachment: fixed;
 	background-size: cover;
 	position: relative;
+	min-height: 100vh;
 }
 
 .hamburger{
@@ -54,7 +56,7 @@ body{
 	transition: transform .8s;
 }
 
-.menu{
+/*.menu{
 	width: 15px;
 	height: 15px;
 	display: none;
@@ -64,7 +66,7 @@ body{
 	left: 50px;
 	z-index: 5;
 
-}
+}*/
 
 .expand{
 	width: 150px;
@@ -98,6 +100,7 @@ h1{
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
+	animation: 1.4s 1.8s 1 cubic-bezier(0.4, 0, 1, 1) bob2;
 }
 
 .subhead{
@@ -122,6 +125,7 @@ h1{
 }
 .subhead:nth-of-type(3){
 	top: calc((var(--size) * 1.2) + 160px);
+	text-shadow: 1px 1px 0 white;
 }
 
 .subhead:nth-of-type(4){
@@ -129,6 +133,7 @@ h1{
 	font-size: 20px;
 	width: 235px;
 	text-align: center;
+	text-shadow: 1px 1px 0 white;
 }
 
 
@@ -154,10 +159,10 @@ div.overlay{
 	display: none;
 	perspective: 1000px;
 	position: absolute;
-	min-height: 114.25vh;
+	/*min-height: 114.25vh;*/
 	width: 100%;
 	height: 100%;
-	/*opacity: .5;*/
+	overflow: hidden;
 	background-color: transparent;
 	z-index: 35;
 	justify-content: center;
@@ -184,12 +189,12 @@ button:hover{
 }
 
 button.next{
-	left: 30px;
 
+	right: 70%;
 }
 
 button.prev{
-	right: 30px;
+	left: 70%;
 }
 
 .menu-hold{
@@ -390,7 +395,7 @@ button.prev{
 	justify-content: center;*/
 
 }
-.menu-hold ul li > p{
+.menu-hold ul li > p:not(.seconds){
 	position: absolute;
 	top: 0;
 }
@@ -448,7 +453,6 @@ button.prev{
 
 
 
-
 input[type=checkbox] {
     /*width: 9px;
     height: 9px;
@@ -484,28 +488,40 @@ input[type=checkbox]:focus{
 		outline: none;
 }
 
+input[id=destroy] {
+    /*width: 9px;
+    height: 9px;
+    margin-right: 13px;*/
+    font-size: 50px;
+    -webkit-appearance: none;
+		-moz-appearance: none;
+}
+input[id=destroy]:after{
+	margin-left: 36px;
+	height: 50px;
+}
+
+input[id=destroy]:checked:after{
+	padding: 16px 1px 1px 18px;
+
+}
 
 
-input[name=seconds]{
-	display: none;
+
+select{
+	/*display: none;*/
 	font-size: 20px;
-	margin-left: 10px;
+	/*margin-left: 10px;*/
 	width: 60px;
 	padding: 2px 0 4px 5px;
 	border: none;
 }
-input[name=seconds] + label,
+label[for="sec"],
+select,
 p.seconds{
-	display: none;
+	filter: blur(30px);
+	transition: filter 1.1s cubic-bezier(0.72, 0.45, 0.2, 0.63);
 }
-
-
-
-
-input[name=seconds]{
-
-}
-
 
 
 
@@ -541,6 +557,12 @@ input[name=seconds]{
 	0% { margin-bottom: 2.8em; }
 	50% { margin-bottom: 3em; }
 	100% { margin-bottom: 2.8em; }
+}
+
+@keyframes bob2 {
+	0% { margin-bottom: 0; }
+	50% { margin-bottom: 0.2em; }
+	100% { margin-bottom: 0; }
 }
 
 @keyframes moveAround {
@@ -638,7 +660,7 @@ input[name=seconds]{
 }
 
 img{
-	transition: transform .2s cubic-bezier(0.21, -1.26, 0.4, 2.32);
+	/*transition: transform .2s cubic-bezier(0.21, -1.26, 0.4, 2.32);*/
 
 }
 
@@ -682,7 +704,7 @@ img{
 }
 
 .blowup{
-	animation: 3s cubic-bezier(0, 0.53, 0, 0.96) forwards flyAway;
+	animation: 3s var(--delay) cubic-bezier(0, 0.53, 0, 0.96) forwards flyAway;
 }
 
 /*main{
@@ -827,7 +849,7 @@ img{
 
 	h1{
 		margin-bottom: 2.8em;
-		animation: 1.4s 2s 1 cubic-bezier(0.4, 0, 1, 1) bob;
+		animation: 1.4s 1.8s 1 cubic-bezier(0.4, 0, 1, 1) bob;
 	}
 
 	.photo-cube{
@@ -850,6 +872,7 @@ img{
 		color: #1e0f0e;*/
 		font-size: 32px;
 		/*text-shadow: 0px 0px 7px white;*/
+
 	}
 
 	.subhead:nth-of-type(odd){
@@ -865,10 +888,12 @@ img{
 	}
 	.subhead:nth-of-type(3){
 		left: 75%;
+		text-shadow: 0px 0px 7px white;
 	}
 
 	.subhead:nth-of-type(4){
 		left: 75%;
+		text-shadow: 0px 0px 7px white;
 	}
 
 
@@ -965,7 +990,7 @@ img{
 	}
 
 	main{
-		margin-bottom: 5em;
+		/*margin-bottom: 5em;*/
 	}
 
 	.photo-cube{
@@ -1001,7 +1026,7 @@ img{
 @media screen and (min-width: 1200px){
 
 	main{
-		margin-bottom: 2em;
+		/*margin-bottom: 2em;*/
 	}
 
 	h1{

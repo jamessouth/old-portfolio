@@ -84,7 +84,7 @@ const body = document.querySelector('body');
 
 
 const menuIcon = document.querySelector('.hamburger');
-const menu = document.querySelector('.menu');
+// const menu = document.querySelector('.menu');
 const sizeInput = document.querySelector('.menu-hold .slider input');
 const sizeInputP = document.querySelector('.menu-hold .slider p');
 const sizeTrack = document.querySelector('.menu-hold .slider .track');
@@ -113,8 +113,8 @@ const liOverlay = menuHolder.querySelectorAll('.li-overlay');
 let destroyFlag = false;
 const explode = document.querySelectorAll('.explode');
 const headline = document.querySelector('.hold h1');
-const seconds = document.querySelector('.menu-hold input.seconds');
-const secondsLabel = document.querySelector('.menu-hold input.seconds + label');
+const seconds = document.querySelector('.menu-hold select');
+const secondsLabel = document.querySelector('.menu-hold label[for="sec"]');
 const secondsP = document.querySelector('.menu-hold ul li p.seconds');
 
 
@@ -192,18 +192,20 @@ check[1].addEventListener('change', function(e){
 	if(e.target.checked){
 		checkLabel[1].textContent = 'DESTROY!';
 		destroyFlag = true;
-		seconds.style.display = 'inline-block';
-		secondsLabel.style.display = 'block';
-		secondsP.style.display = 'block';
+		seconds.style.filter = 'blur(0px)';
+		secondsLabel.style.filter = 'blur(0px)';
+		secondsP.style.filter = 'blur(0px)';
 
 
 	} else {
 		checkLabel[1].textContent = 'do not destroy';
 		destroyFlag = false;
-		seconds.style.display = 'none';
-		secondsLabel.style.display = 'none';
-		secondsP.style.display = 'none';
+		seconds.style.filter = 'blur(30px)';
+		secondsLabel.style.filter = 'blur(30px)';
+		secondsP.style.filter = 'blur(30px)';
 	}
+
+	// console.log(seconds.value);
 });
 
 
@@ -300,10 +302,28 @@ flipSwitch.addEventListener('click', function(e){
 
 });
 
+function handleSelectUpdate() {
+	const suffix = this.dataset.sizing;
+	// const width = this.max - this.min;
+	// const perc = Math.floor(((this.value - width) / width) * 100) / 100;
+
+	// console.log();
+	document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+	// sizeInputP.textContent = `${this.value}px`;
+	// sizeTrack.style.width = `${perc * 142}px`;
+	// sizeTrack.style.backgroundColor = `hsl(${perc * 720}, 65%, 30%)`;
+	// this.parentNode.parentNode.style.filter = `hue-rotate(${perc * 360}deg)`;
 
 
 
-function handleUpdate() {
+
+}
+
+seconds.addEventListener('change', handleSelectUpdate);
+
+
+
+function handleRangeUpdate() {
 	const suffix = this.dataset.sizing;
 	const width = this.max - this.min;
 	const perc = Math.floor(((this.value - width) / width) * 100) / 100;
@@ -316,8 +336,8 @@ function handleUpdate() {
 	// this.parentNode.parentNode.style.filter = `hue-rotate(${perc * 360}deg)`;
 }
 
-sizeInput.addEventListener('change', handleUpdate);
-sizeInput.addEventListener('mousemove', handleUpdate);
+sizeInput.addEventListener('change', handleRangeUpdate);
+sizeInput.addEventListener('mousemove', handleRangeUpdate);
 
 
 
@@ -329,6 +349,13 @@ menuIcon.addEventListener('click', function(e){
 
 	overlay.style.display = 'flex';
 	hold.style.opacity = '0.35';
+	this.style.opacity = '0.35';
+	for(let i = 0; i < subhead.length; i++){
+		subhead[i].style.opacity = '0.35';
+		desc[i].style.opacity = '0.35';
+	}
+
+
 	// buttons.style.display = 'inline-block';
 	// menuHold.style.display = 'block';
 
@@ -385,25 +412,17 @@ function destroyCube(cube){
 		}
 		explode[0].style.marginTop = '26px';
 	});
-	// let imgs = cube.querySelectorAll('img');
-	// console.log(imgs);
-	// imgs[0].style.transform = 'translateZ(calc(var(--size) / 2))';
-	// imgs[1].style.transform = 'rotateY(270deg) translateX(calc(var(--size) / -2))';
-	// imgs[2].style.transform = 'rotateY(-270deg) translateX(calc(var(--size) / 2))';
-	// imgs[3].style.transform = 'translateZ(calc(var(--size) / -2)) rotateY(180deg)';
-	// imgs[4].style.transform = 'translateZ(calc(var(--size) / -2)) rotateX(90deg)';
-	// imgs[5].style.transform = 'translateZ(calc(var(--size) / -2)) rotateX(-90deg)';
+
+
 	cube.classList.add('blowup');
-	// for(let i = 0; i < imgs.length; i++){
-	// 	imgs[i].style.transform += ' translateZ(100px)';
-	// 	imgs[i].classList.add('blowup');
-	// }
+
+
 
 
 	window.setTimeout(() => {
 		explode[0].style.display = 'none';
 		explode[1].style.display = 'none';
-	}, 8500);
+	}, (seconds.value * 1000) + 5500);
 
 
 
@@ -415,18 +434,23 @@ overlayCloseButton.addEventListener('click', function(){
 	overlay.style.display = 'none';
 	menuIcon.children[0].classList.remove('top-bun');
 	menuIcon.children[2].classList.remove('bottom-bun');
+	menuIcon.style.opacity = '1';
 	// buttons.style.display = 'none';
 	// menuHold.style.display = 'none';
 	hold.style.opacity = '1';
+	for(let i = 0; i < subhead.length; i++){
+		subhead[i].style.opacity = '1';
+		desc[i].style.opacity = '1';
+	}
 	for(let i = 0; i < options.length; i++){
 		options[i].className = '';
 		options[i].style.transform = '';
 	}
-	console.log(destroyFlag);
+	if(destroyFlag){
 
-	destroyCube(pb[0]);
-	destroyCube(pb[1]);
-
+		destroyCube(pb[0]);
+		destroyCube(pb[1]);
+	}
 
 });
 // let degs = 5;
