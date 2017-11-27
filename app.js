@@ -143,23 +143,7 @@ pb.forEach((x,i) => {
 			subhead[i].textContent = 'Project ' + projNum;
 			desc[i].textContent = descs[projNum - 1];
 
-
-
 		}
-		// if(window.innerWidth < 768){
-		// 	if(i === 0){
-		// 		subhead.style.top = '73px';
-		// 		desc.style.top = '105px';
-		// 	} else {
-		// 		subhead.style.top = 'calc((var(--size) * 1.2) + 160px)';
-		// 		desc.style.top = 'calc((var(--size) * 1.2) + 192px)';
-		// 	}
-		// } else {
-		// 	subhead.style.top = '73px';
-		// 	desc.style.top = '105px';
-		// }
-
-
 
 
 	});
@@ -195,7 +179,7 @@ check[1].addEventListener('change', function(e){
 		seconds.style.filter = 'blur(0px)';
 		secondsLabel.style.filter = 'blur(0px)';
 		secondsP.style.filter = 'blur(0px)';
-
+		seconds.removeAttribute('disabled');
 
 	} else {
 		checkLabel[1].textContent = 'do not destroy';
@@ -203,6 +187,7 @@ check[1].addEventListener('change', function(e){
 		seconds.style.filter = 'blur(30px)';
 		secondsLabel.style.filter = 'blur(30px)';
 		secondsP.style.filter = 'blur(30px)';
+		seconds.setAttribute('disabled', '');
 	}
 
 	// console.log(seconds.value);
@@ -404,28 +389,37 @@ function destroyCube(cube){
 		headline.style.marginBottom = '0';
 		cube.style.display = 'none';
 		cube.parentNode.style.display = 'none';
-		// body.classList.add('finish');
 		for(let i = 0; i < 2; i++){
-			explode[i].style.display = 'block';
+
 			subhead[i].style.display = 'none';
 			desc[i].style.display = 'none';
 		}
-		explode[0].style.marginTop = '26px';
+
+
+		if(window.innerWidth < 768){
+			explode[0].style.display = 'block';
+			explode[0].style.width = '170%';
+			explode[0].style.height = '150%';
+			// explode[0].style.marginTop = `${((sizeInput.value - 220) / 3) + 26}px`;
+
+		} else {
+			explode[0].style.display = 'block';
+			explode[1].style.display = 'block';
+			explode[0].style.marginTop = `${((sizeInput.value - 220) / 3) + 26}px`;
+			explode[1].style.marginTop = `${((sizeInput.value - 220) / 3) + 0}px`;
+
+		}
+
+
 	});
 
-
+	menuIcon.style.display = 'none';
 	cube.classList.add('blowup');
-
-
-
 
 	window.setTimeout(() => {
 		explode[0].style.display = 'none';
 		explode[1].style.display = 'none';
-	}, (seconds.value * 1000) + 5500);
-
-
-
+	}, (seconds.value * 1000) + 5490);
 
 
 }
