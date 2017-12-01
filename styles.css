@@ -29,6 +29,10 @@ body{
 	min-height: 100vh;
 }
 
+html, body{
+	overflow-x: hidden;
+}
+
 .hamburger{
 	position: absolute;
 	height: 24px;
@@ -176,7 +180,7 @@ button{
 	width: 58px;
 	height: 30px;
 	font-size: 16px;
-	top: 40px;
+	top: 35px;
 	z-index: 444;
 	box-shadow: 8px 5px 15px 0px #382123;
 	color: whitesmoke;
@@ -198,6 +202,11 @@ button.next{
 
 button.prev{
 	left: 70%;
+}
+
+button.contact{
+	top: 90px;
+	width: 76px;
 }
 
 .menu-hold{
@@ -439,8 +448,8 @@ button.prev{
 
 .menu-hold div.flip-switch input[name="menu-type"]{
 	position: absolute;
-	width: 1px;
-	height: 1px;
+	width: 0px;
+	height: 0px;
 }
 
 
@@ -476,7 +485,8 @@ input[type=checkbox] {
 }
 
 input[type=checkbox]:after {
-    content: "\1F5F4";
+    /*content: "\1F5F4";*/
+		content: 'x';
     background-color: transparent;
     display: inline-block;
     margin-left: 23px;

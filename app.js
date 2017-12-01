@@ -82,7 +82,7 @@ const body = document.querySelector('body');
 // main.addEventListener('mousedown', (e) => {e.preventDefault();});
 // body.addEventListener('mousedown', (e) => {e.preventDefault();});
 
-
+const cubeImages = document.querySelectorAll('.photo-cube img');
 const menuIcon = document.querySelector('.hamburger');
 // const menu = document.querySelector('.menu');
 const sizeInput = document.querySelector('.menu-hold .slider input');
@@ -92,6 +92,7 @@ const overlay = document.querySelector('div.overlay');
 const overlayCloseButton = overlay.querySelector('button.close');
 const overlayNextButton = overlay.querySelector('button.next');
 const overlayPrevButton = overlay.querySelector('button.prev');
+const overlayContactButton = overlay.querySelector('button.contact');
 const menuHolder = document.querySelector('.menu-hold ul');
 const options = document.querySelectorAll('.menu-hold ul li');
 const menuHold = document.querySelector('.menu-hold');
@@ -117,7 +118,7 @@ const seconds = document.querySelector('.menu-hold select');
 const secondsLabel = document.querySelector('.menu-hold label[for="sec"]');
 const secondsP = document.querySelector('.menu-hold ul li p.seconds');
 
-
+// console.log(cubeImages);
 // consolidate buttons
 let depths = [0, -2000, -3250, -4500];
 let rotations = [0, 1, 2, 3];
@@ -384,6 +385,14 @@ menuIcon.addEventListener('click', function(e){
 // 	imgs[i].style.transform += ' translateZ(200px)';
 // }
 
+headline.addEventListener('animationend', function(){
+
+	for(let i = 0; i < cubeImages.length; i++){
+		cubeImages[i].style.backfaceVisibility = 'hidden';
+	}
+
+});
+
 function destroyCube(cube){
 	cube.addEventListener('animationend', () => {
 		headline.style.marginBottom = '0';
@@ -398,8 +407,9 @@ function destroyCube(cube){
 
 		if(window.innerWidth < 768){
 			explode[0].style.display = 'block';
-			explode[0].style.width = '170%';
-			explode[0].style.height = '150%';
+			explode[0].style.width = '560px';
+			explode[0].style.height = '420px';
+			explode[0].style.marginTop = `${-167 + (document.documentElement.clientHeight / 2) - 210}px`;
 			// explode[0].style.marginTop = `${((sizeInput.value - 220) / 3) + 26}px`;
 
 		} else {
@@ -531,7 +541,7 @@ overlayPrevButton.addEventListener('click', function(){
 
 });
 
-
+overlayContactButton.addEventListener('click', (e) => console.log(e));
 
 
 
@@ -566,7 +576,8 @@ let rotObj = {
 };
 
 function rotate(e){
-	// console.log(e);
+
+
 	if(!isRotating) return;
 
 	// let touchX;
@@ -635,6 +646,17 @@ hold.addEventListener('touchstart', getCube, {passive: true});
 
 hold.addEventListener('mousemove', rotate);
 hold.addEventListener('touchmove', rotate, {passive: true});
+
+document.addEventListener('touchmove', e => {
+
+	if(e.target.tagName === 'IMG'){
+			// console.log(e);
+			e.preventDefault();
+	}
+
+}, {passive: false});
+
+
 
 function releaseCube(e){
 
