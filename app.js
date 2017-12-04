@@ -84,7 +84,8 @@ const body = document.querySelector('body');
 
 const cubeImages = document.querySelectorAll('.photo-cube img');
 const menuIcon = document.querySelector('.hamburger');
-// const menu = document.querySelector('.menu');
+const canvas = document.querySelector('canvas');
+const canvasholder = document.querySelector('.canvasholder');
 const sizeInput = document.querySelector('.menu-hold .slider input');
 const sizeInputP = document.querySelector('.menu-hold .slider p');
 const sizeTrack = document.querySelector('.menu-hold .slider .track');
@@ -501,8 +502,6 @@ overlayNextButton.addEventListener('click', function(){
 
 overlayPrevButton.addEventListener('click', function(){
 
-
-
 	if(switchFlag){
 		depths = depths.slice(1).concat(depths[0]);
 		for(let i = 0; i < options.length; i++){
@@ -529,10 +528,6 @@ overlayPrevButton.addEventListener('click', function(){
 			}
 		}
 
-
-
-
-
 	}
 	rotations = rotations.slice(1).concat(rotations[0]);
 	for(let i = 0; i < options.length; i++){
@@ -541,9 +536,155 @@ overlayPrevButton.addEventListener('click', function(){
 
 });
 
-overlayContactButton.addEventListener('click', (e) => console.log(e));
 
 
+
+var vertices=[];
+vertices.push({x:10,y:10});
+vertices.push({x:290,y:100});
+vertices.push({x:80,y:200});
+vertices.push({x:10,y:120});
+vertices.push({x:10,y:10});
+
+let numFrames = 15;
+
+function calcWaypoints(vertices){
+		var waypoints=[];
+    for(var i=1;i<vertices.length;i++){
+        var pt0=vertices[i-1];
+        var pt1=vertices[i];
+        var dx=pt1.x-pt0.x;
+        var dy=pt1.y-pt0.y;
+        for(var j=0;j<numFrames;j++){
+            var x=Math.round(pt0.x+dx*j/numFrames);
+            var y=Math.round(pt0.y+dy*j/numFrames);
+            waypoints.push({x:x,y:y});
+        }
+    }
+		// console.log(waypoints);
+    return waypoints;
+}
+var points=calcWaypoints(vertices);
+var t=1;
+let ctx = canvas.getContext('2d');
+function animate(){
+    if(t<points.length-1){ requestAnimationFrame(animate); }
+    ctx.beginPath();
+    ctx.moveTo(points[t-1].x,points[t-1].y);
+    ctx.lineTo(points[t].x,points[t].y);
+    ctx.stroke();
+    t++;
+		// if(t === points.length){
+		// 	// console.log(t, points[points.length - 1], points.length - 1);
+		// 	let dist = Math.round(Math.sqrt(Math.pow(Math.abs(points[points.length - 1].x - points[0].x), 2) + Math.pow(Math.abs(points[points.length - 1].y - points[0].y), 2)));
+    //
+		// 	console.log(dist);
+    //
+		// 	if(dist > 0){
+		// 		ctx.moveTo(points[t-1].x,points[t-1].y);
+		// 		console.log(dist);
+		// 		ctx.lineTo(points[0].x,points[0].y);
+		// 		ctx.strokeStyle = 'red';
+		// 		ctx.stroke();
+		// 	}
+    //
+		// }
+}
+
+// x lo, x hi, y lo, y hi
+let canvArray = [];
+for(let i = 0; i < 4; i++){
+	for(let j = 0; j < 4; j++){
+			canvArray.push([j * 75, (j * 75) + 75, i * 75, (i * 75) + 75]);
+	}
+}
+
+
+
+let image0 = new Image();
+let image1 = new Image();
+let image2 = new Image();
+let image3 = new Image();
+let image4 = new Image();
+let image5 = new Image();
+let image6 = new Image();
+let image7 = new Image();
+let image8 = new Image();
+let image9 = new Image();
+let image10 = new Image();
+let image11 = new Image();
+let image12 = new Image();
+let image13 = new Image();
+let image14 = new Image();
+
+image0.src = 'images/project1.jpg';
+canvArray[0].unshift(image0);
+image1.src = 'images/project2.jpg';
+canvArray[1].unshift(image1);
+image2.src = 'images/project3.jpg';
+canvArray[2].unshift(image2);
+image3.src = 'images/project4.jpg';
+canvArray[3].unshift(image3);
+image4.src = 'images/project5.jpg';
+canvArray[4].unshift(image4);
+image5.src = 'images/project6.jpg';
+canvArray[5].unshift(image5);
+image6.src = 'images/project7.jpg';
+canvArray[6].unshift(image6);
+image7.src = 'images/project8.jpg';
+canvArray[7].unshift(image7);
+image8.src = 'images/project9.jpg';
+canvArray[8].unshift(image8);
+image9.src = 'images/project10.jpg';
+canvArray[9].unshift(image9);
+image10.src = 'images/project11.jpg';
+canvArray[10].unshift(image10);
+image11.src = 'images/project12.jpg';
+canvArray[11].unshift(image11);
+image12.src = 'images/project1.jpg';
+canvArray[12].unshift(image12);
+image13.src = 'images/project2.jpg';
+canvArray[13].unshift(image13);
+image14.src = 'images/project3.jpg';
+canvArray[14].unshift(image14);
+canvArray[15].unshift('blank');
+
+
+console.log(canvArray);
+
+overlayContactButton.addEventListener('click', function(e){
+	canvasholder.style.display = 'flex';
+
+	for(let i = 0; i < canvArray.length - 1; i++){
+		ctx.drawImage(canvArray[i][0], canvArray[i][1], canvArray[i][3], 75, 75);
+	}
+
+});
+
+function swapTiles(x, y){
+	let tileClicked = [Math.floor(y / 75), Math.floor(x / 75)];
+	for(let i = 0; i < canvArray.length - 1; i++){
+		if(canvArray[i][0] === 'blank'){
+			
+		}
+
+		ctx.drawImage(canvArray[i][0], canvArray[i][1], canvArray[i][3], 75, 75);
+	}
+
+
+}
+
+
+
+
+canvas.addEventListener('click', function(e){
+	let x = e.offsetX;
+	let y = e.offsetY;
+	console.log(x, y);
+	console.log(Math.floor(y / 75), Math.floor(x / 75));
+
+
+});
 
 
 
