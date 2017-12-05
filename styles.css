@@ -245,6 +245,20 @@ button.contact{
 	/*transform: rotateY(0deg) translateZ(280px);*/
 }
 
+.canvasbuttons{
+	display: flex;
+	flex-direction: column;
+	margin-left: 1em;
+	justify-content: space-around;
+	height: 300px;
+
+}
+
+.canvasbuttons button{
+	position: static;
+}
+
+
 
 
 .menu-hold ul{
