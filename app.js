@@ -118,6 +118,8 @@ const headline = document.querySelector('.hold h1');
 const seconds = document.querySelector('.menu-hold select');
 const secondsLabel = document.querySelector('.menu-hold label[for="sec"]');
 const secondsP = document.querySelector('.menu-hold ul li p.seconds');
+const canvasbuttons = document.querySelectorAll('.canvasbuttons button');
+
 
 // console.log(cubeImages);
 // consolidate buttons
@@ -595,8 +597,18 @@ function animate(){
 let canvArray = [];
 for(let i = 0; i < 4; i++){
 	for(let j = 0; j < 4; j++){
-			canvArray.push([j * 75, (j * 75) + 75, i * 75, (i * 75) + 75]);
+			canvArray.push([j * 75, (j * 75) + 75, i * 75, (i * 75) + 75, `${i}${j}`]);
 	}
+}
+
+
+function getRands(amt){
+	let nums = new Set();
+	while(nums.size < amt){
+		let n = Math.floor(Math.random() * amt);
+		nums.add(n);
+	}
+	return [...nums];
 }
 
 
@@ -617,43 +629,60 @@ let image12 = new Image();
 let image13 = new Image();
 let image14 = new Image();
 
-image0.src = 'images/project1.jpg';
-canvArray[0].unshift(image0);
-image1.src = 'images/project2.jpg';
-canvArray[1].unshift(image1);
-image2.src = 'images/project3.jpg';
-canvArray[2].unshift(image2);
-image3.src = 'images/project4.jpg';
-canvArray[3].unshift(image3);
-image4.src = 'images/project5.jpg';
-canvArray[4].unshift(image4);
-image5.src = 'images/project6.jpg';
-canvArray[5].unshift(image5);
-image6.src = 'images/project7.jpg';
-canvArray[6].unshift(image6);
-image7.src = 'images/project8.jpg';
-canvArray[7].unshift(image7);
-image8.src = 'images/project9.jpg';
-canvArray[8].unshift(image8);
-image9.src = 'images/project10.jpg';
-canvArray[9].unshift(image9);
-image10.src = 'images/project11.jpg';
-canvArray[10].unshift(image10);
-image11.src = 'images/project12.jpg';
-canvArray[11].unshift(image11);
-image12.src = 'images/project1.jpg';
-canvArray[12].unshift(image12);
-image13.src = 'images/project2.jpg';
-canvArray[13].unshift(image13);
-image14.src = 'images/project3.jpg';
-canvArray[14].unshift(image14);
+image0.src = 'images/00.jpg';
+image1.src = 'images/01.jpg';
+image2.src = 'images/02.jpg';
+image3.src = 'images/03.jpg';
+image4.src = 'images/10.jpg';
+image5.src = 'images/11.jpg';
+image6.src = 'images/12.jpg';
+image7.src = 'images/13.jpg';
+image8.src = 'images/20.jpg';
+image9.src = 'images/21.jpg';
+image10.src = 'images/22.jpg';
+image11.src = 'images/23.jpg';
+image12.src = 'images/30.jpg';
+image13.src = 'images/31.jpg';
+image14.src = 'images/32.jpg';
+
+let randos = getRands(canvArray.length - 1);
+
+console.log(randos);
+
+canvArray[randos[0]].unshift(image0);
+canvArray[randos[1]].unshift(image1);
+canvArray[randos[2]].unshift(image2);
+canvArray[randos[3]].unshift(image3);
+canvArray[randos[4]].unshift(image4);
+canvArray[randos[5]].unshift(image5);
+canvArray[randos[6]].unshift(image6);
+canvArray[randos[7]].unshift(image7);
+canvArray[randos[8]].unshift(image8);
+canvArray[randos[9]].unshift(image9);
+canvArray[randos[10]].unshift(image10);
+canvArray[randos[11]].unshift(image11);
+canvArray[randos[12]].unshift(image12);
+canvArray[randos[13]].unshift(image13);
+canvArray[randos[14]].unshift(image14);
 canvArray[15].unshift('blank');
+
 
 
 console.log(canvArray);
 
 overlayContactButton.addEventListener('click', function(e){
 	canvasholder.style.display = 'flex';
+	overlay.style.filter = 'blur(30px)';
+	menuIcon.style.filter = 'blur(20px)';
+	hold.style.filter = 'blur(30px)';
+	subhead[0].style.filter = 'blur(10px)';
+	desc[0].style.filter = 'blur(10px)';
+	subhead[1].style.filter = 'blur(10px)';
+	desc[1].style.filter = 'blur(10px)';
+
+
+
+
 
 	for(let i = 0; i < canvArray.length - 1; i++){
 		ctx.drawImage(canvArray[i][0], canvArray[i][1], canvArray[i][3], 75, 75);
@@ -662,13 +691,92 @@ overlayContactButton.addEventListener('click', function(e){
 });
 
 function swapTiles(x, y){
-	let tileClicked = [Math.floor(y / 75), Math.floor(x / 75)];
-	for(let i = 0; i < canvArray.length - 1; i++){
-		if(canvArray[i][0] === 'blank'){
-			
+	let tileClicked = `${Math.floor(y / 75)}${Math.floor(x / 75)}`;
+	let blank;
+	let blankIndex;
+	let swapTile;
+	let swapTileIndex;
+	let temp;
+	let thisClose = 0;
+	let finalCheck = true;
+	for(let i = 0; i < canvArray.length; i++){
+
+		if(canvArray[i][0] !== 'blank'){
+
+			if(canvArray[i][5] !== canvArray[i][0].src.match(/\d{2}(?=\.jpg)/)[0]){
+				thisClose++;
+				console.log(thisClose);
+			}
+
+		} else {
+
+			if(canvArray[i][5] !== '33'){
+				thisClose++;
+				console.log(thisClose);
+			}
+
+
 		}
 
-		ctx.drawImage(canvArray[i][0], canvArray[i][1], canvArray[i][3], 75, 75);
+
+		if(canvArray[i][0] === 'blank'){
+			if(![1, 10].includes(Math.abs(parseInt(canvArray[i][5], 10) - parseInt(tileClicked, 10)))){
+				return;
+			}
+			blank = canvArray[i];
+			blankIndex = i;
+			// console.log(tileClicked);
+			// console.log(blank);
+		}
+
+		if(tileClicked === canvArray[i][5]){
+			swapTile = canvArray[i];
+			swapTileIndex = i;
+		}
+
+	}
+	// console.log(swapTile, swapTileIndex, blankIndex);
+
+	console.log(thisClose);
+
+	ctx.drawImage(swapTile[0], blank[1], blank[3], 75, 75);
+	ctx.clearRect(swapTile[1], swapTile[3], 75, 75);
+	temp = swapTile[0];
+	canvArray[swapTileIndex][0] = 'blank';
+	canvArray[blankIndex][0] = temp;
+	// console.log(canvArray);
+
+
+	if(thisClose < 3){
+		console.log('again');
+
+		for(let i = 0; i < canvArray.length; i++){
+
+			if(canvArray[i][0] !== 'blank'){
+
+				if(canvArray[i][5] !== canvArray[i][0].src.match(/\d{2}(?=\.jpg)/)[0]){
+					finalCheck = false;
+					break;
+				}
+
+			} else {
+
+				if(canvArray[i][5] !== '33'){
+					finalCheck = false;
+					break;
+				}
+
+
+			}
+
+		}
+
+	} else {
+		finalCheck = false;
+	}
+
+	if(finalCheck){
+		alert('you did it');
 	}
 
 
@@ -680,11 +788,14 @@ function swapTiles(x, y){
 canvas.addEventListener('click', function(e){
 	let x = e.offsetX;
 	let y = e.offsetY;
-	console.log(x, y);
-	console.log(Math.floor(y / 75), Math.floor(x / 75));
-
+	// console.log(x, y);
+	// console.log(Math.floor(y / 75), Math.floor(x / 75));
+	swapTiles(x,y);
 
 });
+
+canvasbuttons[0].addEventListener('click', e => console.log(e));
+canvasbuttons[1].addEventListener('click', e => console.log(e));
 
 
 
