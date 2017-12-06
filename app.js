@@ -666,9 +666,44 @@ canvArray[randos[13]].unshift(image13);
 canvArray[randos[14]].unshift(image14);
 canvArray[15].unshift('blank');
 
+let solArray = [];
 
+randos.forEach((x,i) => {
+	solArray[x] = i;
+});
 
 console.log(canvArray);
+console.log(solArray);
+
+function getInversions(arr){
+	let inversions = 0;
+	// let puzzArr = [];
+
+	for(let i = 0; i < arr.length; i++){
+		if(arr[i] == null){continue;}
+		// let am = arr[i];
+		// puzzArr.push(arr[i]);
+		for(let j = 0; j < arr.length; j++){
+			// if(puzzArr[j] < arr[i]){
+			// 	am--;
+			// }
+			if(arr[i] > arr[j + i]){
+				inversions++;
+			}
+
+
+
+
+		}
+		// inversions += am - 1;
+
+	}
+	// inversions += arr[0];
+	return inversions;
+}
+
+console.log('even',getInversions(solArray));
+
 
 overlayContactButton.addEventListener('click', function(e){
 	canvasholder.style.display = 'flex';
