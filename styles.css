@@ -251,14 +251,20 @@ button.contact{
 	margin-left: 1em;
 	justify-content: space-around;
 	height: 300px;
-
+	position: relative;
 }
 
 .canvasbuttons button{
 	position: static;
 }
 
-
+#fader{
+	display: none;
+	background-color: red;
+	position: absolute;
+	top: 225px;
+	left: -91px;
+}
 
 
 .menu-hold ul{

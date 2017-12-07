@@ -119,7 +119,7 @@ const seconds = document.querySelector('.menu-hold select');
 const secondsLabel = document.querySelector('.menu-hold label[for="sec"]');
 const secondsP = document.querySelector('.menu-hold ul li p.seconds');
 const canvasbuttons = document.querySelectorAll('.canvasbuttons button');
-
+const faderCanv = document.querySelector('.canvasbuttons #fader');
 
 // console.log(cubeImages);
 // consolidate buttons
@@ -537,45 +537,59 @@ overlayPrevButton.addEventListener('click', function(){
 	}
 
 });
-
-
-
-
-var vertices=[];
-vertices.push({x:10,y:10});
-vertices.push({x:290,y:100});
-vertices.push({x:80,y:200});
-vertices.push({x:10,y:120});
-vertices.push({x:10,y:10});
-
-let numFrames = 15;
-
-function calcWaypoints(vertices){
-		var waypoints=[];
-    for(var i=1;i<vertices.length;i++){
-        var pt0=vertices[i-1];
-        var pt1=vertices[i];
-        var dx=pt1.x-pt0.x;
-        var dy=pt1.y-pt0.y;
-        for(var j=0;j<numFrames;j++){
-            var x=Math.round(pt0.x+dx*j/numFrames);
-            var y=Math.round(pt0.y+dy*j/numFrames);
-            waypoints.push({x:x,y:y});
-        }
-    }
-		// console.log(waypoints);
-    return waypoints;
+let shades = [];
+for(let i = 50; i >= 0; i--){
+	// console.log(i);
+	shades.push(i/50);
 }
-var points=calcWaypoints(vertices);
-var t=1;
+// console.log(shades);
+
+
+// var shades = [1, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1, 0];
+// vertices.push({x:10,y:10});
+// vertices.push({x:290,y:100});
+// vertices.push({x:80,y:200});
+// vertices.push({x:10,y:120});
+// vertices.push({x:10,y:10});
+
+// let numFrames = 15;
+
+// function calcWaypoints(vertices){
+// 		var waypoints=[];
+//     for(var i=1;i<vertices.length;i++){
+//         var pt0=vertices[i-1];
+//         var pt1=vertices[i];
+//         var dx=pt1.x-pt0.x;
+//         var dy=pt1.y-pt0.y;
+//         for(var j=0;j<numFrames;j++){
+//             var x=Math.round(pt0.x+dx*j/numFrames);
+//             var y=Math.round(pt0.y+dy*j/numFrames);
+//             waypoints.push({x:x,y:y});
+//         }
+//     }
+// 		// console.log(waypoints);
+//     return waypoints;
+// }
+// var points=calcWaypoints(vertices);
+var t=0;
 let ctx = canvas.getContext('2d');
+let ctxFader = faderCanv.getContext('2d');
 function animate(){
-    if(t<points.length-1){ requestAnimationFrame(animate); }
-    ctx.beginPath();
-    ctx.moveTo(points[t-1].x,points[t-1].y);
-    ctx.lineTo(points[t].x,points[t].y);
-    ctx.stroke();
+    if(t<shades.length - 1){ requestAnimationFrame(animate); }
+
+
+    // ctx.beginPath();
+    // ctx.moveTo(points[t-1].x,points[t-1].y);
+    // ctx.lineTo(points[t].x,points[t].y);
+    // ctx.stroke();
+
+		ctxFader.fillStyle = `rgba(173, 216, 230, ${shades[t]})`;
+		// console.log(`rgba(173, 216, 230, ${shades[t]})`);
+		ctxFader.clearRect(225, 225, 75, 75);
+		ctxFader.fillRect(225, 225, 75, 75);
+
     t++;
+		// console.log(t);
 		// if(t === points.length){
 		// 	// console.log(t, points[points.length - 1], points.length - 1);
 		// 	let dist = Math.round(Math.sqrt(Math.pow(Math.abs(points[points.length - 1].x - points[0].x), 2) + Math.pow(Math.abs(points[points.length - 1].y - points[0].y), 2)));
@@ -628,6 +642,7 @@ let image11 = new Image();
 let image12 = new Image();
 let image13 = new Image();
 let image14 = new Image();
+let image15 = new Image();
 
 image0.src = 'images/00.jpg';
 image1.src = 'images/01.jpg';
@@ -644,65 +659,74 @@ image11.src = 'images/23.jpg';
 image12.src = 'images/30.jpg';
 image13.src = 'images/31.jpg';
 image14.src = 'images/32.jpg';
+image15.src = 'images/33.jpg';
 
-let randos = getRands(canvArray.length - 1);
 
-console.log(randos);
+function checkBoard(){
 
-canvArray[randos[0]].unshift(image0);
-canvArray[randos[1]].unshift(image1);
-canvArray[randos[2]].unshift(image2);
-canvArray[randos[3]].unshift(image3);
-canvArray[randos[4]].unshift(image4);
-canvArray[randos[5]].unshift(image5);
-canvArray[randos[6]].unshift(image6);
-canvArray[randos[7]].unshift(image7);
-canvArray[randos[8]].unshift(image8);
-canvArray[randos[9]].unshift(image9);
-canvArray[randos[10]].unshift(image10);
-canvArray[randos[11]].unshift(image11);
-canvArray[randos[12]].unshift(image12);
-canvArray[randos[13]].unshift(image13);
-canvArray[randos[14]].unshift(image14);
-canvArray[15].unshift('blank');
+	let randos = getRands(canvArray.length - 1);
 
-let solArray = [];
+	let solArray = [];
 
-randos.forEach((x,i) => {
-	solArray[x] = i;
-});
+	randos.forEach((x,i) => {
+		solArray[x] = i;
+	});
 
-console.log(canvArray);
-console.log(solArray);
+	return [solArray, randos];
+
+}
+
 
 function getInversions(arr){
 	let inversions = 0;
-	// let puzzArr = [];
-
 	for(let i = 0; i < arr.length; i++){
 		if(arr[i] == null){continue;}
-		// let am = arr[i];
-		// puzzArr.push(arr[i]);
 		for(let j = 0; j < arr.length; j++){
-			// if(puzzArr[j] < arr[i]){
-			// 	am--;
-			// }
 			if(arr[i] > arr[j + i]){
 				inversions++;
 			}
-
-
-
-
 		}
-		// inversions += am - 1;
-
 	}
-	// inversions += arr[0];
 	return inversions;
 }
 
-console.log('even',getInversions(solArray));
+let doable = checkBoard();
+console.log(getInversions(doable[0]));
+// let n = 5;
+
+while(getInversions(doable[0]) % 2 !== 0){
+	console.log(getInversions(doable[0]));
+	doable = checkBoard();
+	console.log(getInversions(doable[0]));
+	// n--;
+	// console.log(n);
+}
+
+
+
+canvArray[doable[1][0]].unshift(image0);
+canvArray[doable[1][1]].unshift(image1);
+canvArray[doable[1][2]].unshift(image2);
+canvArray[doable[1][3]].unshift(image3);
+canvArray[doable[1][4]].unshift(image4);
+canvArray[doable[1][5]].unshift(image5);
+canvArray[doable[1][6]].unshift(image6);
+canvArray[doable[1][7]].unshift(image7);
+canvArray[doable[1][8]].unshift(image8);
+canvArray[doable[1][9]].unshift(image9);
+canvArray[doable[1][10]].unshift(image10);
+canvArray[doable[1][11]].unshift(image11);
+canvArray[doable[1][12]].unshift(image12);
+canvArray[doable[1][13]].unshift(image13);
+canvArray[doable[1][14]].unshift(image14);
+canvArray[15].unshift('blank');
+
+
+
+console.log(canvArray);
+console.log(doable[0]);
+console.log(doable[1]);
+
 
 
 overlayContactButton.addEventListener('click', function(e){
@@ -725,6 +749,9 @@ overlayContactButton.addEventListener('click', function(e){
 
 });
 
+// ctx.fillStyle = "rgba(173, 216, 230, 1)";
+
+
 function swapTiles(x, y){
 	let tileClicked = `${Math.floor(y / 75)}${Math.floor(x / 75)}`;
 	let blank;
@@ -740,14 +767,14 @@ function swapTiles(x, y){
 
 			if(canvArray[i][5] !== canvArray[i][0].src.match(/\d{2}(?=\.jpg)/)[0]){
 				thisClose++;
-				console.log(thisClose);
+				// console.log(thisClose);
 			}
 
 		} else {
 
 			if(canvArray[i][5] !== '33'){
 				thisClose++;
-				console.log(thisClose);
+				// console.log(thisClose);
 			}
 
 
@@ -772,7 +799,7 @@ function swapTiles(x, y){
 	}
 	// console.log(swapTile, swapTileIndex, blankIndex);
 
-	console.log(thisClose);
+	// console.log(thisClose);
 
 	ctx.drawImage(swapTile[0], blank[1], blank[3], 75, 75);
 	ctx.clearRect(swapTile[1], swapTile[3], 75, 75);
@@ -811,7 +838,10 @@ function swapTiles(x, y){
 	}
 
 	if(finalCheck){
-		alert('you did it');
+		faderCanv.style.display = 'block';
+		// ctx.fillRect(40, 40, 50, 50);
+		animate();
+		ctx.drawImage(image15, 225, 225, 75, 75);
 	}
 
 
@@ -831,6 +861,15 @@ canvas.addEventListener('click', function(e){
 
 canvasbuttons[0].addEventListener('click', e => console.log(e));
 canvasbuttons[1].addEventListener('click', e => console.log(e));
+
+
+
+
+
+
+
+
+
 
 
 
