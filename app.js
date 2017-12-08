@@ -84,7 +84,7 @@ const body = document.querySelector('body');
 
 const cubeImages = document.querySelectorAll('.photo-cube img');
 const menuIcon = document.querySelector('.hamburger');
-const canvas = document.querySelector('canvas');
+const canvas = document.querySelector('canvas#board');
 const canvasholder = document.querySelector('.canvasholder');
 const sizeInput = document.querySelector('.menu-hold .slider input');
 const sizeInputP = document.querySelector('.menu-hold .slider p');
@@ -120,6 +120,10 @@ const secondsLabel = document.querySelector('.menu-hold label[for="sec"]');
 const secondsP = document.querySelector('.menu-hold ul li p.seconds');
 const canvasbuttons = document.querySelectorAll('.canvasbuttons button');
 const faderCanv = document.querySelector('.canvasbuttons #fader');
+let ctx = canvas.getContext('2d');
+let ctxFader = faderCanv.getContext('2d');
+
+
 
 // console.log(cubeImages);
 // consolidate buttons
@@ -537,10 +541,68 @@ overlayPrevButton.addEventListener('click', function(){
 	}
 
 });
+
+
+
+
+let boxes = [];
+for(let q = 0; q < 15; q++){
+	for(let z = 0; z < 15; z++){
+		boxes.push([q * 20, z * 20]);
+	}
+}
+
+
+
+function randomizeBoxes(){
+
+	let randos = getRands(boxes.length);
+
+	let randArray = [];
+
+	randos.forEach((x,i) => {
+		randArray[x] = boxes[i];
+	});
+
+	return randArray;
+
+}
+
+// console.log(boxes);
+// console.log();
+let randBoxes = randomizeBoxes();
+console.log(randBoxes.length);
+let t2 = 0;
+
+function animate2(){
+    if(t2 < randBoxes.length - 1){ requestAnimationFrame(animate2); }
+
+		// ctx.fillStyle = `rgba(173, 216, 230, ${randBoxes[t2]})`;
+
+		ctx.clearRect(randBoxes[t2][0], randBoxes[t2][1], 20, 20);
+		// ctx.fillRect(0, 0, 75, 75);
+
+    t2++;
+		// console.log(t2);
+		// if(t2 === randBoxes.length){
+    //
+    //
+		// 	faderCanv.style.display = 'none';
+		// }
+}
+
+
+
+
+
+
+
+
+
 let shades = [];
-for(let i = 50; i >= 0; i--){
+for(let i = 100; i >= 0; i--){
 	// console.log(i);
-	shades.push(i/50);
+	shades.push(i/100);
 }
 // console.log(shades);
 
@@ -571,11 +633,10 @@ for(let i = 50; i >= 0; i--){
 //     return waypoints;
 // }
 // var points=calcWaypoints(vertices);
-var t=0;
-let ctx = canvas.getContext('2d');
-let ctxFader = faderCanv.getContext('2d');
+let t = 0;
+
 function animate(){
-    if(t<shades.length - 1){ requestAnimationFrame(animate); }
+    if(t < shades.length){ requestAnimationFrame(animate); }
 
 
     // ctx.beginPath();
@@ -585,26 +646,31 @@ function animate(){
 
 		ctxFader.fillStyle = `rgba(173, 216, 230, ${shades[t]})`;
 		// console.log(`rgba(173, 216, 230, ${shades[t]})`);
-		ctxFader.clearRect(225, 225, 75, 75);
-		ctxFader.fillRect(225, 225, 75, 75);
+		ctxFader.clearRect(0, 0, 75, 75);
+		ctxFader.fillRect(0, 0, 75, 75);
 
     t++;
 		// console.log(t);
-		// if(t === points.length){
-		// 	// console.log(t, points[points.length - 1], points.length - 1);
-		// 	let dist = Math.round(Math.sqrt(Math.pow(Math.abs(points[points.length - 1].x - points[0].x), 2) + Math.pow(Math.abs(points[points.length - 1].y - points[0].y), 2)));
-    //
-		// 	console.log(dist);
-    //
-		// 	if(dist > 0){
-		// 		ctx.moveTo(points[t-1].x,points[t-1].y);
-		// 		console.log(dist);
-		// 		ctx.lineTo(points[0].x,points[0].y);
-		// 		ctx.strokeStyle = 'red';
-		// 		ctx.stroke();
-		// 	}
-    //
-		// }
+		if(t === shades.length){
+			// console.log(t, points[points.length - 1], points.length - 1);
+			// let dist = Math.round(Math.sqrt(Math.pow(Math.abs(points[points.length - 1].x - points[0].x), 2) + Math.pow(Math.abs(points[points.length - 1].y - points[0].y), 2)));
+      //
+			// console.log(dist);
+      //
+			// if(dist > 0){
+			// 	ctx.moveTo(points[t-1].x,points[t-1].y);
+			// 	console.log(dist);
+			// 	ctx.lineTo(points[0].x,points[0].y);
+			// 	ctx.strokeStyle = 'red';
+			// 	ctx.stroke();
+			// }
+    	// console.log('done');
+			faderCanv.style.display = 'none';
+			canvas.style.backgroundColor = 'transparent';
+			window.setTimeout(animate2, 2000);
+
+
+		}
 }
 
 // x lo, x hi, y lo, y hi
@@ -643,6 +709,7 @@ let image12 = new Image();
 let image13 = new Image();
 let image14 = new Image();
 let image15 = new Image();
+let contact = new Image();
 
 image0.src = 'images/00.jpg';
 image1.src = 'images/01.jpg';
@@ -660,7 +727,7 @@ image12.src = 'images/30.jpg';
 image13.src = 'images/31.jpg';
 image14.src = 'images/32.jpg';
 image15.src = 'images/33.jpg';
-
+contact.src = 'images/contact.jpg';
 
 function checkBoard(){
 
@@ -753,6 +820,7 @@ overlayContactButton.addEventListener('click', function(e){
 
 
 function swapTiles(x, y){
+	if(canvArray.length === 0){return;}
 	let tileClicked = `${Math.floor(y / 75)}${Math.floor(x / 75)}`;
 	let blank;
 	let blankIndex;
@@ -842,6 +910,7 @@ function swapTiles(x, y){
 		// ctx.fillRect(40, 40, 50, 50);
 		animate();
 		ctx.drawImage(image15, 225, 225, 75, 75);
+		canvArray = [];
 	}
 
 
@@ -860,7 +929,12 @@ canvas.addEventListener('click', function(e){
 });
 
 canvasbuttons[0].addEventListener('click', e => console.log(e));
-canvasbuttons[1].addEventListener('click', e => console.log(e));
+canvasbuttons[1].addEventListener('click', e => {
+	console.log(e);
+	ctx.clearRect(0, 0, 300, 300);
+	ctx.drawImage(contact, 0, 0, 300, 300);
+	canvArray = [];
+});
 
 
 

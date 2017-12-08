@@ -191,7 +191,7 @@ div.overlay{
 	z-index: 987654321;
 }
 
-canvas{
+canvas#board{
 	background-color: lightblue;
 }
 
@@ -258,12 +258,21 @@ button.contact{
 	position: static;
 }
 
-#fader{
+.canvasbuttons #fader{
 	display: none;
-	background-color: red;
+	background-color: transparent;
 	position: absolute;
 	top: 225px;
 	left: -91px;
+}
+
+.canvasbuttons #contactinfolinks{
+	background-color: red;
+	position: absolute;
+	left: -316px;
+	width: 300px;
+	height: 300px;
+	z-index: -5;
 }
 
 
