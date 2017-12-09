@@ -258,6 +258,13 @@ button.contact{
 	position: static;
 }
 
+.canvasbuttons p{
+	text-align: center;
+	font-weight: bold;
+	font-size: 18px;
+	color: #071821;
+}
+
 .canvasbuttons #fader{
 	display: none;
 	background-color: transparent;
@@ -267,12 +274,29 @@ button.contact{
 }
 
 .canvasbuttons #contactinfolinks{
-	background-color: red;
+	background-image: url('images/winterscape2.jpg');
 	position: absolute;
 	left: -316px;
 	width: 300px;
 	height: 300px;
 	z-index: -5;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.canvasbuttons #contactinfolinks a{
+	font-family: 'Luckiest Guy', monospace;
+	color: #2f2f2f;
+	font-size: 32px;
+	margin-top: 0.35em;
+}
+
+.canvasbuttons #contactinfolinks a:last-of-type{
+	font-size: 19px;
+	margin-bottom: 1.35em;
+	margin-top: 0;
 }
 
 

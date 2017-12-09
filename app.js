@@ -120,6 +120,8 @@ const secondsLabel = document.querySelector('.menu-hold label[for="sec"]');
 const secondsP = document.querySelector('.menu-hold ul li p.seconds');
 const canvasbuttons = document.querySelectorAll('.canvasbuttons button');
 const faderCanv = document.querySelector('.canvasbuttons #fader');
+const linksDiv = document.querySelector('.canvasbuttons #contactinfolinks');
+const clickCounter = document.querySelector('.canvasbuttons .clickCounter p:last-of-type');
 let ctx = canvas.getContext('2d');
 let ctxFader = faderCanv.getContext('2d');
 
@@ -571,7 +573,7 @@ function randomizeBoxes(){
 // console.log(boxes);
 // console.log();
 let randBoxes = randomizeBoxes();
-console.log(randBoxes.length);
+// console.log(randBoxes.length);
 let t2 = 0;
 
 function animate2(){
@@ -584,11 +586,11 @@ function animate2(){
 
     t2++;
 		// console.log(t2);
-		// if(t2 === randBoxes.length){
-    //
-    //
-		// 	faderCanv.style.display = 'none';
-		// }
+		if(t2 === randBoxes.length){
+
+			linksDiv.style.zIndex = 5;
+
+		}
 }
 
 
@@ -758,13 +760,13 @@ function getInversions(arr){
 }
 
 let doable = checkBoard();
-console.log(getInversions(doable[0]));
+// console.log(getInversions(doable[0]));
 // let n = 5;
 
 while(getInversions(doable[0]) % 2 !== 0){
-	console.log(getInversions(doable[0]));
+	// console.log(getInversions(doable[0]));
 	doable = checkBoard();
-	console.log(getInversions(doable[0]));
+	// console.log(getInversions(doable[0]));
 	// n--;
 	// console.log(n);
 }
@@ -790,9 +792,9 @@ canvArray[15].unshift('blank');
 
 
 
-console.log(canvArray);
-console.log(doable[0]);
-console.log(doable[1]);
+// console.log(canvArray);
+// console.log(doable[0]);
+// console.log(doable[1]);
 
 
 
@@ -908,6 +910,7 @@ function swapTiles(x, y){
 	if(finalCheck){
 		faderCanv.style.display = 'block';
 		// ctx.fillRect(40, 40, 50, 50);
+		canvasbuttons[1].style.display = 'none';
 		animate();
 		ctx.drawImage(image15, 225, 225, 75, 75);
 		canvArray = [];
@@ -917,7 +920,7 @@ function swapTiles(x, y){
 }
 
 
-
+let clicks = 0;
 
 canvas.addEventListener('click', function(e){
 	let x = e.offsetX;
@@ -925,15 +928,33 @@ canvas.addEventListener('click', function(e){
 	// console.log(x, y);
 	// console.log(Math.floor(y / 75), Math.floor(x / 75));
 	swapTiles(x,y);
+	clicks++;
+	clickCounter.textContent = clicks;
+});
+// close button
+canvasbuttons[0].addEventListener('click', e => {
+	// console.log(e);
+	canvasholder.style.display = 'none';
+	overlay.style.filter = 'blur(0px)';
+	menuIcon.style.filter = 'blur(0px)';
+	menuIcon.style.zIndex = '5';
+	hold.style.filter = 'blur(0px)';
+	subhead[0].style.filter = 'blur(0px)';
+	desc[0].style.filter = 'blur(0px)';
+	subhead[1].style.filter = 'blur(0px)';
+	desc[1].style.filter = 'blur(0px)';
 
 });
 
-canvasbuttons[0].addEventListener('click', e => console.log(e));
+// reveal button
 canvasbuttons[1].addEventListener('click', e => {
-	console.log(e);
+	// console.log(e);
 	ctx.clearRect(0, 0, 300, 300);
 	ctx.drawImage(contact, 0, 0, 300, 300);
 	canvArray = [];
+	canvas.style.backgroundColor = 'transparent';
+	window.setTimeout(animate2, 2000);
+	canvasbuttons[1].style.display = 'none';
 });
 
 
