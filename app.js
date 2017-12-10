@@ -122,6 +122,7 @@ const canvasbuttons = document.querySelectorAll('.canvasbuttons button');
 const faderCanv = document.querySelector('.canvasbuttons #fader');
 const linksDiv = document.querySelector('.canvasbuttons #contactinfolinks');
 const clickCounter = document.querySelector('.canvasbuttons .clickCounter p:last-of-type');
+const helpText = document.querySelector('.canvasbuttons .help');
 let ctx = canvas.getContext('2d');
 let ctxFader = faderCanv.getContext('2d');
 
@@ -164,17 +165,24 @@ pb.forEach((x,i) => {
 check[0].addEventListener('change', function(e){
 	if(e.target.checked){
 		checkLabel[0].textContent = 'GIFs!';
-		pb[0].children[2].src = 'images/p3.gif';
 
+		pb[0].children[2].src = 'images/p3.gif';
+		pb[0].children[3].src = 'images/p4.gif';
+
+		pb[1].children[0].src = 'images/p7.gif';
+		pb[1].children[2].src = 'images/p9.gif';
 		pb[1].children[3].src = 'images/p10.gif';
 		pb[1].children[4].src = 'images/p11.gif';
 
 
-
 	} else {
 		checkLabel[0].textContent = 'no GIFs';
-		pb[0].children[2].src = 'images/project3.jpg';
 
+		pb[0].children[2].src = 'images/project3.jpg';
+		pb[0].children[3].src = 'images/project4.jpg';
+
+		pb[1].children[0].src = 'images/project7.jpg';
+		pb[1].children[2].src = 'images/project9.jpg';
 		pb[1].children[3].src = 'images/project10.jpg';
 		pb[1].children[4].src = 'images/project11.jpg';
 
@@ -925,10 +933,13 @@ let clicks = 0;
 canvas.addEventListener('click', function(e){
 	let x = e.offsetX;
 	let y = e.offsetY;
-	// console.log(x, y);
+	console.log(x, y);
 	// console.log(Math.floor(y / 75), Math.floor(x / 75));
 	swapTiles(x,y);
 	clicks++;
+	if(clicks === 1){
+		helpText.style.display = 'none';
+	}
 	clickCounter.textContent = clicks;
 });
 // close button
@@ -949,6 +960,7 @@ canvasbuttons[0].addEventListener('click', e => {
 // reveal button
 canvasbuttons[1].addEventListener('click', e => {
 	// console.log(e);
+	helpText.style.display = 'none';
 	ctx.clearRect(0, 0, 300, 300);
 	ctx.drawImage(contact, 0, 0, 300, 300);
 	canvArray = [];
