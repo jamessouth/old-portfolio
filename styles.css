@@ -588,6 +588,7 @@ input[type=checkbox] {
     -webkit-appearance: none;
 		-moz-appearance: none;
 		appearance: none;
+		border: none;
 }
 
 input[type=checkbox]:after {
@@ -595,7 +596,7 @@ input[type=checkbox]:after {
 		content: 'x';
     background-color: transparent;
     display: inline-block;
-    margin-left: 23px;
+    margin-left: 34px;
     color: #fff;
     width: 70px;
     height: 70px;
@@ -607,7 +608,7 @@ input[type=checkbox]:checked:after {
     background-color: transparent;
     font-weight: 600;
 		font-size: 1em;
-		margin-left: 12px;
+		margin-left: 5px;
 		line-height: 1;
 		/*border: none;*/
 		padding: 6px 1px 1px 18px;
@@ -627,12 +628,12 @@ input[id=destroy] {
 		appearance: none;
 }
 input[id=destroy]:after{
-	margin-left: 36px;
+	margin-left: 44px;
 	height: 50px;
 }
 
 input[id=destroy]:checked:after{
-	padding: 16px 1px 1px 18px;
+	padding: 16px 1px 1px 30px;
 
 }
 
