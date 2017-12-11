@@ -82,7 +82,7 @@ const body = document.querySelector('body');
 // main.addEventListener('mousedown', (e) => {e.preventDefault();});
 // body.addEventListener('mousedown', (e) => {e.preventDefault();});
 
-const cubeImages = document.querySelectorAll('.photo-cube img');
+const cubeImages = document.querySelectorAll('.photo-cube a img');
 const menuIcon = document.querySelector('.hamburger');
 const canvas = document.querySelector('canvas#board');
 const canvasholder = document.querySelector('.canvasholder');
@@ -166,25 +166,25 @@ check[0].addEventListener('change', function(e){
 	if(e.target.checked){
 		checkLabel[0].textContent = 'GIFs!';
 
-		pb[0].children[2].src = 'images/p3.gif';
-		pb[0].children[3].src = 'images/p4.gif';
+		pb[0].children[2].firstElementChild.src = 'images/p3.gif';
+		pb[0].children[3].firstElementChild.src = 'images/p4.gif';
 
-		pb[1].children[0].src = 'images/p7.gif';
-		pb[1].children[2].src = 'images/p9.gif';
-		pb[1].children[3].src = 'images/p10.gif';
-		pb[1].children[4].src = 'images/p11.gif';
+		pb[1].children[0].firstElementChild.src = 'images/p7.gif';
+		pb[1].children[2].firstElementChild.src = 'images/p9.gif';
+		pb[1].children[3].firstElementChild.src = 'images/p10.gif';
+		pb[1].children[4].firstElementChild.src = 'images/p11.gif';
 
 
 	} else {
 		checkLabel[0].textContent = 'no GIFs';
 
-		pb[0].children[2].src = 'images/project3.jpg';
-		pb[0].children[3].src = 'images/project4.jpg';
+		pb[0].children[2].firstElementChild.src = 'images/project3.jpg';
+		pb[0].children[3].firstElementChild.src = 'images/project4.jpg';
 
-		pb[1].children[0].src = 'images/project7.jpg';
-		pb[1].children[2].src = 'images/project9.jpg';
-		pb[1].children[3].src = 'images/project10.jpg';
-		pb[1].children[4].src = 'images/project11.jpg';
+		pb[1].children[0].firstElementChild.src = 'images/project7.jpg';
+		pb[1].children[2].firstElementChild.src = 'images/project9.jpg';
+		pb[1].children[3].firstElementChild.src = 'images/project10.jpg';
+		pb[1].children[4].firstElementChild.src = 'images/project11.jpg';
 
 	}
 });
@@ -333,7 +333,7 @@ function handleRangeUpdate() {
 
 	// console.log();
 	document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
-	sizeInputP.textContent = `${this.value}px`;
+	sizeInputP.textContent = `<\u00A0\u00A0\u00A0${this.value}px\u00A0\u00A0\u00A0>`;
 	sizeTrack.style.width = `${perc * 142}px`;
 	sizeTrack.style.backgroundColor = `hsl(${perc * 720}, 65%, 30%)`;
 	// this.parentNode.parentNode.style.filter = `hue-rotate(${perc * 360}deg)`;
@@ -933,7 +933,7 @@ let clicks = 0;
 canvas.addEventListener('click', function(e){
 	let x = e.offsetX;
 	let y = e.offsetY;
-	console.log(x, y);
+	// console.log(x, y);
 	// console.log(Math.floor(y / 75), Math.floor(x / 75));
 	swapTiles(x,y);
 	clicks++;
