@@ -197,8 +197,6 @@ canvas#board{
 	top: 10px;
 }
 
-
-
 button{
 	position: absolute;
 	width: 58px;
@@ -215,8 +213,8 @@ button{
 
 }
 button:hover{
-	-webkit-filter: invert();
-	filter: invert();
+	-webkit-filter: invert(100%);
+	filter: invert(100%);
 }
 
 button.next{
@@ -228,9 +226,16 @@ button.prev{
 	left: 70%;
 }
 
+button.close{
+	left: 50%;
+	transform: translateX(-50%);
+}
+
 button.contact{
 	top: 90px;
 	width: 76px;
+	left: 50%;
+	transform: translateX(-50%);
 }
 
 .menu-hold{
@@ -367,26 +372,26 @@ button.contact{
 	-moz-transform-origin: 50% 50%;
 	-o-transform-origin: 50% 50%;
 	transform-origin: 50% 50%;
-	transform: translateY(-200px);
+	transform: translateY(-180px);
 	transition: all .9s cubic-bezier(1,-0.06, 1, 1);
 	cursor: default;
 }
 
 @keyframes frontToBack {
-	0% { transform: rotateX(0deg) translateY(-200px) translateZ(0px); }
-	100% { transform: rotateX(-310deg) translateY(-200px) translateZ(0px); }
+	0% { transform: rotateX(0deg) translateY(-180px) translateZ(0px); }
+	100% { transform: rotateX(-310deg) translateY(-180px) translateZ(0px); }
 }
 @keyframes backToMiddleBack {
-	0% { transform: rotateX(50deg) translateY(-200px) translateZ(0px); }
-	100% { transform: rotateX(40deg) translateY(-200px) translateZ(0px); }
+	0% { transform: rotateX(50deg) translateY(-180px) translateZ(0px); }
+	100% { transform: rotateX(40deg) translateY(-180px) translateZ(0px); }
 }
 @keyframes middleBackToMiddleFront {
-	0% { transform: rotateX(40deg) translateY(-200px) translateZ(0px); }
-	100% { transform: rotateX(30deg) translateY(-200px) translateZ(0px); }
+	0% { transform: rotateX(40deg) translateY(-180px) translateZ(0px); }
+	100% { transform: rotateX(30deg) translateY(-180px) translateZ(0px); }
 }
 @keyframes middleFrontToFront {
-	0% { transform: rotateX(30deg) translateY(-200px) translateZ(0px); }
-	100% { transform: rotateX(0deg) translateY(-200px) translateZ(0px); }
+	0% { transform: rotateX(30deg) translateY(-180px) translateZ(0px); }
+	100% { transform: rotateX(0deg) translateY(-180px) translateZ(0px); }
 }
 
 .applyAnimFTB{
@@ -403,20 +408,20 @@ button.contact{
 }
 
 @keyframes backToFront {
-	0% { transform: rotateX(-310deg) translateY(-200px) translateZ(0px); }
-	100% { transform: rotateX(0deg) translateY(-200px) translateZ(0px); }
+	0% { transform: rotateX(-310deg) translateY(-180px) translateZ(0px); }
+	100% { transform: rotateX(0deg) translateY(-180px) translateZ(0px); }
 }
 @keyframes frontToMiddleFront {
-	0% { transform: rotateX(0deg) translateY(-200px) translateZ(0px); }
-	100% { transform: rotateX(30deg) translateY(-200px) translateZ(0px); }
+	0% { transform: rotateX(0deg) translateY(-180px) translateZ(0px); }
+	100% { transform: rotateX(30deg) translateY(-180px) translateZ(0px); }
 }
 @keyframes middleFrontToMiddleBack {
-	0% { transform: rotateX(30deg) translateY(-200px) translateZ(0px); }
-	100% { transform: rotateX(40deg) translateY(-200px) translateZ(0px); }
+	0% { transform: rotateX(30deg) translateY(-180px) translateZ(0px); }
+	100% { transform: rotateX(40deg) translateY(-180px) translateZ(0px); }
 }
 @keyframes middleBackToBack {
-	0% { transform: rotateX(40deg) translateY(-200px) translateZ(0px); }
-	100% { transform: rotateX(50deg) translateY(-200px) translateZ(0px); }
+	0% { transform: rotateX(40deg) translateY(-180px) translateZ(0px); }
+	100% { transform: rotateX(50deg) translateY(-180px) translateZ(0px); }
 }
 
 .applyAnimBTF{
@@ -450,7 +455,7 @@ button.contact{
 	/*filter: invert(100%);*/
 	/*background: linear-gradient(45deg, blue, red);*/
 	/*background: no-repeat url('images/sky-sq.jpg');*/
-	transform: rotateX(5deg) translateY(-200px) translateZ(0px);
+	transform: rotateX(5deg) translateY(-180px) translateZ(0px);
 
 }
 .menu-hold ul li:nth-of-type(2){
@@ -458,15 +463,15 @@ button.contact{
 	/*padding-top: 0;*/
 
 	/*background: no-repeat url('images/sky-sq.jpg');*/
-	transform: rotateX(5deg) translateY(-200px) translateZ(0px);
+	transform: rotateX(5deg) translateY(-180px) translateZ(0px);
 
 }
 .menu-hold ul li:nth-of-type(3){
-	transform: rotateX(5deg) translateY(-200px) translateZ(0px);
+	transform: rotateX(5deg) translateY(-180px) translateZ(0px);
 
 }
 .menu-hold ul li:nth-of-type(4){
-	transform: rotateX(5deg) translateY(-200px) translateZ(0px);
+	transform: rotateX(5deg) translateY(-180px) translateZ(0px);
 
 }
 
@@ -735,6 +740,17 @@ p.seconds{
 	animation: 1.8s 1 cubic-bezier(0.4, 0, 1, 1) moveAround;
 }
 
+
+/*@-moz-document url-prefix(){
+
+	.photo-cube a{
+		display: none;
+	}
+
+}*/
+
+
+
 .switch-front, .switch-back, .switch-left, .switch-right, .switch-top, .switch-bottom{
   /*width: 100%;
   height: 100%;*/
@@ -807,12 +823,16 @@ p.seconds{
 .common-cube{
   width: 100%;
   height: 100%;
-  display: block;
+  /*display: block;*/
   position: absolute;
+	/*background-size: 100%;*/
+	background-size: contain;
 }
 
-img{
-	/*transition: transform .2s cubic-bezier(0.21, -1.26, 0.4, 2.32);*/
+.photo-cube div a{
+	width: 100%;
+	height: 100%;
+	display: inline-block;
 
 }
 
@@ -859,7 +879,15 @@ img{
 }*/
 
 .front{
- transform: translateZ(calc(var(--size) / 2));
+  transform: translateZ(calc(var(--size) / 2));
+}
+
+.first:nth-of-type(1){
+	background-image: url("images/project1.jpg");
+}
+
+.second:nth-of-type(1){
+	background-image: url("images/project7.jpg");
 }
 
 .left{
@@ -870,6 +898,14 @@ img{
   transform-origin: bottom left;
 }
 
+.first:nth-of-type(2){
+	background-image: url("images/project2.jpg");
+}
+
+.second:nth-of-type(2){
+	background-image: url("images/project8.jpg");
+}
+
 .right{
  	transform: rotateY(-270deg) translateX(calc(var(--size) / 2));
 	-webkit-transform-origin: bottom right;
@@ -878,8 +914,24 @@ img{
   transform-origin: bottom right;
 }
 
+.first:nth-of-type(3){
+	background-image: url("images/project3.jpg");
+}
+
+.second:nth-of-type(3){
+	background-image: url("images/project9.jpg");
+}
+
 .back{
   transform: translateZ(calc(var(--size) / -2)) rotateY(180deg);
+}
+
+.first:nth-of-type(4){
+	background-image: url("images/project4.jpg");
+}
+
+.second:nth-of-type(4){
+	background-image: url("images/project10.jpg");
 }
 
 .top{
@@ -890,13 +942,31 @@ img{
 	transform-origin: top;
 }
 
+.first:nth-of-type(5){
+	background-image: url("images/project5.jpg");
+}
+
+.second:nth-of-type(5){
+	background-image: url("images/project11.jpg");
+}
+
 .bottom{
 	transform: translateZ(calc(var(--size) / -2)) rotateX(-90deg);
 	-webkit-transform-origin: bottom;
 	-moz-transform-origin: bottom;
 	-o-transform-origin: bottom;
 	transform-origin: bottom;
+
 }
+
+.first:nth-of-type(6){
+	background-image: url("images/project6.jpg");
+}
+
+.second:nth-of-type(6){
+	background-image: url("images/project12.jpg");
+}
+
 
 @media screen and (min-width: 460px){
 
