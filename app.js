@@ -1,4 +1,5 @@
 
+
 const pb = document.querySelectorAll('.photo-cube');
 const cc = document.querySelectorAll('.cube-container');
 const body = document.querySelector('body');
@@ -111,7 +112,7 @@ const checkLabel = document.querySelectorAll('.menu-hold input.check + label');
 const subhead = document.querySelectorAll('.subhead:nth-of-type(odd)');
 const desc = document.querySelectorAll('.subhead:nth-of-type(even)');
 const liOverlay = menuHolder.querySelectorAll('.li-overlay');
-// const link = document.querySelector('div.cube-container div.goto');
+const cubeLinks = document.querySelectorAll('div.cube-container div.photo-cube div a');
 let destroyFlag = false;
 const explode = document.querySelectorAll('.explode');
 const headline = document.querySelector('.hold h1');
@@ -134,10 +135,13 @@ const proj11 = document.querySelector('.second:nth-of-type(5)');
 
 let ctx = canvas.getContext('2d');
 let ctxFader = faderCanv.getContext('2d');
-
-
+check[0].checked = false;
+check[1].checked = false;
+seconds.value = 0;
+sizeInput.value = 220;
 
 // body.addEventListener('click', e => console.log(e));
+
 
 
 // console.log(cubeImages);
@@ -157,18 +161,21 @@ let descs = ['personal profile page',
 						 'react flickr gallery',
 						 'portfolio'];
 
-pb.forEach((x,i) => {
-	x.addEventListener('mouseover', function(e){
-		// console.log(e);
-		if(e.target.tagName === 'A'){
-			let projNum = e.target.id;
-			subhead[i].textContent = 'Project ' + projNum;
-			desc[i].textContent = descs[projNum - 1];
-		}
+
+
+
+['mouseover', 'focus'].forEach(evt => {
+	pb.forEach((x,i) => {
+		x.addEventListener(evt, e => {
+			// console.log(e);
+			if(e.target.tagName === 'A'){
+				let projNum = e.target.id;
+				subhead[i].textContent = 'Project ' + projNum;
+				desc[i].textContent = descs[projNum - 1];
+			}
+		}, true);
 	});
 });
-
-
 
 
 
@@ -306,20 +313,24 @@ flipSwitch.addEventListener('click', function(e){
 		switchLeft.style.borderTopWidth = '4px';
 
 
-
-
-
-
-// here
-
-
-
-
-
-
 		for(let i = 0; i < options.length; i++){
 			options[i].className = '';
-			options[i].style.transform = `rotateX(5deg) translateY(-180px) translateZ(${depths[i]}px)`;
+			// options[i].style.transform = `rotateX(5deg) translateY(-180px) translateZ(${depths[i]}px)`;
+
+			if(options[i].dataset.pos === '0'){
+				options[i].style.transform = `rotateX(0deg) translateY(-180px) translateZ(${depths[i]}px)`;
+			} else if(options[i].dataset.pos === '1'){
+				options[i].style.transform = `rotateX(5deg) translateY(-180px) translateZ(${depths[i]}px)`;
+			} else if(options[i].dataset.pos === '2'){
+				options[i].style.transform = `rotateX(5deg) translateY(-180px) translateZ(${depths[i]}px)`;
+			} else {
+				options[i].style.transform = `rotateX(5deg) translateY(-180px) translateZ(${depths[i]}px)`;
+			}
+
+
+
+
+
 
 			styleMgr(i);
 
@@ -373,7 +384,29 @@ sizeInput.addEventListener('mousemove', handleRangeUpdate);
 
 
 
-menuIcon.addEventListener('click', function(e){
+function handleMenu(e){
+	// console.log(e);
+
+	if(e.type === 'keydown'){
+
+		if(e.key.toLowerCase() === 'tab' || e.keyCode === 9){
+			// console.log('tab');
+			// e.preventDefault();
+			return;
+		} else if(e.key.toLowerCase() === 'enter' || e.keyCode === 13 || e.key.toLowerCase() === ' ' || e.keyCode === 32){
+			// console.log('enter');
+		} else {
+			// console.log('other');
+			e.preventDefault();
+			return;
+		}
+
+	}
+
+
+	cubeLinks.forEach(x => x.tabIndex = "-1");
+
+
 
 	this.children[0].classList.add('top-bun');
 	this.children[2].classList.add('bottom-bun');
@@ -437,11 +470,13 @@ menuIcon.addEventListener('click', function(e){
 	}
 
 
+}
+
+['click', 'keydown'].forEach(evt => {
+
+	menuIcon.addEventListener(evt, handleMenu);
 });
 
-// function flyAway(i){
-// 	imgs[i].style.transform += ' translateZ(200px)';
-// }
 
 // headline.addEventListener('animationend', function(){
 //
@@ -489,16 +524,12 @@ function destroyCube(cube){
 	window.setTimeout(() => {
 		explode[0].style.display = 'none';
 		explode[1].style.display = 'none';
-		check[0].checked = false;
-		check[1].checked = false;
-		seconds.value = 0;
-
-		console.log(check[0].checked, seconds.value);
+		// console.log(check[0].checked, seconds.value);
 	}, (seconds.value * 1000) + 5490);
 
 }
 
-console.log(check[0].checked, seconds.value);
+// console.log(check[0].checked, seconds.value);
 
 overlayCloseButton.addEventListener('click', function(){
 	overlay.style.display = 'none';
@@ -902,10 +933,6 @@ overlayContactButton.addEventListener('click', function(e){
 	subhead[1].style.filter = 'blur(10px)';
 	desc[1].style.filter = 'blur(10px)';
 
-
-
-
-
 	for(let i = 0; i < canvArray.length - 1; i++){
 		ctx.drawImage(canvArray[i][0], canvArray[i][1], canvArray[i][3], 75, 75);
 	}
@@ -1032,14 +1059,14 @@ canvas.addEventListener('click', function(e){
 canvasbuttons[0].addEventListener('click', e => {
 	// console.log(e);
 	canvasholder.style.display = 'none';
-	overlay.style.filter = 'blur(0px)';
-	menuIcon.style.filter = 'blur(0px)';
+	overlay.style.filter = 'none';
+	menuIcon.style.filter = 'none';
 	menuIcon.style.zIndex = '5';
-	hold.style.filter = 'blur(0px)';
-	subhead[0].style.filter = 'blur(0px)';
-	desc[0].style.filter = 'blur(0px)';
-	subhead[1].style.filter = 'blur(0px)';
-	desc[1].style.filter = 'blur(0px)';
+	hold.style.filter = 'none';
+	subhead[0].style.filter = 'none';
+	desc[0].style.filter = 'none';
+	subhead[1].style.filter = 'none';
+	desc[1].style.filter = 'none';
 
 });
 
