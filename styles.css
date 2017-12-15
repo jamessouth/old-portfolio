@@ -29,7 +29,7 @@ body{
 	min-height: 100vh;
 }
 
-html, body{
+html{
 	overflow-x: hidden;
 }
 
@@ -42,7 +42,13 @@ html, body{
 	justify-content: space-between;
 	left: 20px;
 	top: 40px;
+}
 
+.hamburger:focus{
+	outline: none;
+	border: 3px #f81b14 outset;
+	border-radius: 2px;
+	transform: scale(1.2);
 }
 
 .hamburger hr{
@@ -212,7 +218,7 @@ button{
 	border-radius: 20px;
 
 }
-button:hover{
+button:hover, button:focus{
 	-webkit-filter: invert(100%);
 	filter: invert(100%);
 }
@@ -285,6 +291,7 @@ button.contact{
 	background-image: url('images/winterscape2.jpg');
 	position: absolute;
 	left: -316px;
+	top: 0;
 	width: 300px;
 	height: 300px;
 	z-index: -5;
@@ -561,7 +568,23 @@ button.contact{
 	position: absolute;
 	width: 0px;
 	height: 0px;
+
 }
+
+
+
+@-moz-document url-prefix(){
+
+	.menu-hold div.flip-switch input[name="menu-type"]:checked{
+		z-index: -1;
+	}
+
+}
+
+
+
+
+
 
 
 .menu-hold div.flip-switch input[name="menu-type"]:after{
@@ -741,13 +764,7 @@ p.seconds{
 }
 
 
-/*@-moz-document url-prefix(){
 
-	.photo-cube a{
-		display: none;
-	}
-
-}*/
 
 
 
