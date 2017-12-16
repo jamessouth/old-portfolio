@@ -36,8 +36,8 @@
 		</div>
 
 		<div class="overlay">
-			<button tabindex="1" class="close">close</button>
 			<button tabindex="1" class="next">&#9660;</button>
+			<button tabindex="1" class="close">close</button>
 			<button tabindex="1" class="prev">&#9650;</button>
 			<button tabindex="1" class="contact">contact</button>
 			<div class="menu-hold">
@@ -48,7 +48,7 @@
 						<div class="slider">
 							<div class="track"></div>
 							<label for="size">side:</label>
-							<input id="size" type="range" name="size" min="220" max="440" value="220" data-sizing="px">
+							<input tabindex="-1" id="size" type="range" name="size" min="220" max="440" value="220" data-sizing="px">
 							<p>&lt;&nbsp;&nbsp;&nbsp;220px&nbsp;&nbsp;&nbsp;&gt;</p>
 						</div>
 					</li>
@@ -68,22 +68,22 @@
 								</div>
 							</div>
 
-							<input checked id="linear" name="menu-type" type="radio" value="linear"/>
+							<input tabindex="-1" checked id="linear" name="menu-type" type="radio" value="linear"/>
 							<label for="linear">linear</label>
-							<input id="curved" name="menu-type" type="radio" value="curved"/>
+							<input tabindex="-1" id="curved" name="menu-type" type="radio" value="curved"/>
 							<label for="curved">curved</label>
 						</div>
 					</li>
 					<li data-pos="2">
 						<div class="li-overlay"></div>
 						<p>GIFs on/off</p>
-						<input class="check" type="checkbox" id="gifs" name="gifs" value="gif"/>
+						<input tabindex="-1" class="check" type="checkbox" id="gifs" name="gifs" value="gif"/>
 						<label for="gifs">no GIFs</label>
 					</li>
 					<li data-pos="3">
 						<div class="li-overlay"></div>
 						<p>Destroy Cubes</p>
-						<input class="check" type="checkbox" id="destroy" name="destroy" value="destroy"/>
+						<input tabindex="-1" class="check" type="checkbox" id="destroy" name="destroy" value="destroy"/>
 						<label for="destroy">do not destroy</label>
 
 						<label for="sec">wait</label>
