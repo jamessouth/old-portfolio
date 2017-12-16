@@ -214,13 +214,22 @@ button{
 	color: whitesmoke;
 	background: linear-gradient(to right, #505b1c, #7ac670);
 	border: 2px solid #fbe2a4;
-	outline: none;
 	border-radius: 20px;
 
 }
+
+button::-moz-focus-inner,
+input[type="range"]::-moz-focus-outer{
+	border: 0;
+}
+
+
 button:hover, button:focus{
 	-webkit-filter: invert(100%);
 	filter: invert(100%);
+	border: 3px #000 solid;
+	color: #000;
+
 }
 
 button.next{
@@ -382,7 +391,14 @@ button.contact{
 	transform: translateY(-180px);
 	transition: all .9s cubic-bezier(1,-0.06, 1, 1);
 	cursor: default;
+	outline: none;
 }
+
+.menu-hold ul li:focus{
+	border: 10px outset #fbe2a4;
+
+}
+
 
 @keyframes frontToBack {
 	0% { transform: rotateX(0deg) translateY(-180px) translateZ(0px); }
@@ -485,14 +501,14 @@ button.contact{
 
 .menu-hold .slider{
 	position: relative;
-
+	border-radius: 12px;
 }
 
 .menu-hold .slider input{
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
-	width: 90%;
+	width: 85%;
 	background: transparent;
 	cursor: ew-resize;
 }
@@ -505,11 +521,11 @@ button.contact{
 .menu-hold .slider .track{
 	width: 0px;
 	min-width: 0px;
-	max-width: 144px;
+	max-width: 138px;
 	height: 16px;
 	/*background-color: red;*/
 	position: absolute;
-	left: 11px;
+	left: 15px;
 	z-index: -1;
 	top: 26px;
 
