@@ -243,34 +243,46 @@ function styleMgr(i){
 	if(parseInt(options[i].style.transform.match(/(-?\d+)(?=px\)$)/)[0], 10) === -4500){
 		options[i].style.opacity = '0.3';
 		liOverlay[i].style.display = 'block';
+		options[i].tabIndex = "-1";
+		let thisInput = options[i].querySelector('input');
+
+		thisInput.tabIndex = "-1";
+		console.log(options[i], thisInput);
+
 	} else if(parseInt(options[i].style.transform.match(/(-?\d+)(?=px\)$)/)[0], 10) === -3250){
 		options[i].style.opacity = '0.45';
 		liOverlay[i].style.display = 'block';
+		options[i].tabIndex = "-1";
+
 	} else if(parseInt(options[i].style.transform.match(/(-?\d+)(?=px\)$)/)[0], 10) === -2000){
 		options[i].style.opacity = '0.65';
 		liOverlay[i].style.display = 'block';
+		options[i].tabIndex = "-1";
+		let thisInput = options[i].querySelector('input');
+
+		thisInput.tabIndex = "-1";
+		console.log(options[i], thisInput);
+
 	} else {
 		options[i].style.opacity = '1';
 		liOverlay[i].style.display = 'none';
+		options[i].tabIndex = "1";
+		let thisInput = options[i].querySelector('input');
+
+		thisInput.tabIndex = "1";
+		console.log(options[i], thisInput);
+
+
 	}
 }
 
 
-
-
-
-
-
 function handleLinearTransInit(){
  for(let i = 0; i < options.length; i++){
-	 let menuCard = options[i];
-	 menuCard.className = '';
-	 if(menuCard.dataset.pos === '0'){
-		 menuCard.style.transform = `rotateX(0deg) translateY(-180px) translateZ(${depths[i]}px)`;
-		 menuCard.tabIndex = "1";
-		 let thisInput = menuCard.querySelector('input');
-		 console.log(menuCard, thisInput);
-		 thisInput.tabIndex = "1";
+	 options[i].className = '';
+	 if(options[i].dataset.pos === '0'){
+		 options[i].style.transform = `rotateX(0deg) translateY(-180px) translateZ(${depths[i]}px)`;
+
 	 // } else if(menuCard.dataset.pos === '1'){
 		//  menuCard.style.transform = `rotateX(5deg) translateY(-180px) translateZ(${depths[i]}px)`;
 		//  menuCard.tabIndex = "-1";
@@ -278,8 +290,8 @@ function handleLinearTransInit(){
 		//  menuCard.style.transform = `rotateX(5deg) translateY(-180px) translateZ(${depths[i]}px)`;
 		//  menuCard.tabIndex = "-1";
 	 } else {
-		 menuCard.style.transform = `rotateX(5deg) translateY(-180px) translateZ(${depths[i]}px)`;
-		 menuCard.tabIndex = "-1";
+		 options[i].style.transform = `rotateX(5deg) translateY(-180px) translateZ(${depths[i]}px)`;
+
 	 }
 	 styleMgr(i);
  }
@@ -386,6 +398,15 @@ sizeInput.addEventListener('blur', function(e){
 	this.parentNode.style.border = "none";
 });
 
+radioLinear.addEventListener('focus', function(e){
+	this.parentNode.style.boxSizing = "content-box";
+	this.parentNode.style.border = "3px white solid";
+});
+radioLinear.addEventListener('blur', function(e){
+	this.parentNode.style.border = "none";
+	this.parentNode.style.boxSizing = "border-box";
+});
+
 
 function handleRangeUpdate() {
 	const suffix = this.dataset.sizing;
@@ -403,7 +424,7 @@ function handleRangeUpdate() {
 sizeInput.addEventListener('change', handleRangeUpdate);
 sizeInput.addEventListener('mousemove', handleRangeUpdate);
 
-
+// console.log(radioLinear.checked, radioCurved.checked);
 
 function handleMenu(e){
 	// console.log(e);
@@ -446,6 +467,7 @@ function handleMenu(e){
 
 
  if(switchFlag){
+	 // console.log(radioLinear.checked, radioCurved.checked);
 	 handleLinearTransInit();
 
 
@@ -467,13 +489,13 @@ function flipCards(anims){
 
 	for(let i = 0; i < options.length; i++){
 		if(options[i].dataset.pos === '0'){
-			options[i].className = anims[i];
+			options[i].className = anims[0];
 		} else if(options[i].dataset.pos === '1'){
-			options[i].className = anims[i];
+			options[i].className = anims[1];
 		} else if(options[i].dataset.pos === '2'){
-			options[i].className = anims[i];
+			options[i].className = anims[2];
 		} else {
-			options[i].className = anims[i];
+			options[i].className = anims[3];
 		}
 	}
 
