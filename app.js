@@ -141,8 +141,8 @@ seconds.value = 0;
 sizeInput.value = 220;
 
 // body.addEventListener('click', e => console.log(e));
-
-
+radioLinear.checked = true;
+// console.log(radioLinear.checked, radioCurved.checked);
 
 // console.log(cubeImages);
 // consolidate buttons
@@ -223,6 +223,7 @@ check[1].addEventListener('change', function(e){
 		secondsLabel.style.filter = 'blur(0px)';
 		secondsP.style.filter = 'blur(0px)';
 		seconds.removeAttribute('disabled');
+		seconds.tabIndex = "1";
 
 	} else {
 		checkLabel[1].textContent = 'do not destroy';
@@ -231,10 +232,45 @@ check[1].addEventListener('change', function(e){
 		secondsLabel.style.filter = 'blur(30px)';
 		secondsP.style.filter = 'blur(30px)';
 		seconds.setAttribute('disabled', '');
+		seconds.tabIndex = "-1";
 	}
 
 	// console.log(seconds.value);
 });
+
+function tabIndMgr(i){
+	options[i].tabIndex = "-1";
+	seconds.tabIndex = "-1";
+	let thisInput = options[i].querySelectorAll('input');
+	if(thisInput[1]){
+		thisInput[1].tabIndex = "-1";
+	}
+	thisInput[0].tabIndex = "-1";
+}
+
+function tabIndMgrCurrentItem(i){
+
+	options[i].tabIndex = "1";
+	let thisInput = options[i].querySelectorAll('input');
+	if(thisInput[1] && thisInput[0].checked){
+		console.log('lin');
+		thisInput[0].tabIndex = "1";
+		thisInput[1].tabIndex = "-1";
+	} else if(thisInput[1] && thisInput[1].checked){
+		console.log('cur');
+		thisInput[0].tabIndex = "-1";
+		thisInput[1].tabIndex = "1";
+	} else {
+		thisInput[0].tabIndex = "1";
+	}
+
+
+	if(thisInput[0].id === 'destroy' && destroyFlag){
+		seconds.tabIndex = "1";
+	}
+
+}
+
 
 
 
@@ -243,11 +279,8 @@ function styleMgr(i){
 	if(parseInt(options[i].style.transform.match(/(-?\d+)(?=px\)$)/)[0], 10) === -4500){
 		options[i].style.opacity = '0.3';
 		liOverlay[i].style.display = 'block';
-		options[i].tabIndex = "-1";
-		let thisInput = options[i].querySelector('input');
-
-		thisInput.tabIndex = "-1";
-		console.log(options[i], thisInput);
+		tabIndMgr(i);
+		// console.log(options[i], thisInput);
 
 	} else if(parseInt(options[i].style.transform.match(/(-?\d+)(?=px\)$)/)[0], 10) === -3250){
 		options[i].style.opacity = '0.45';
@@ -257,21 +290,13 @@ function styleMgr(i){
 	} else if(parseInt(options[i].style.transform.match(/(-?\d+)(?=px\)$)/)[0], 10) === -2000){
 		options[i].style.opacity = '0.65';
 		liOverlay[i].style.display = 'block';
-		options[i].tabIndex = "-1";
-		let thisInput = options[i].querySelector('input');
-
-		thisInput.tabIndex = "-1";
-		console.log(options[i], thisInput);
+		tabIndMgr(i);
+		// console.log(options[i], thisInput);
 
 	} else {
 		options[i].style.opacity = '1';
 		liOverlay[i].style.display = 'none';
-		options[i].tabIndex = "1";
-		let thisInput = options[i].querySelector('input');
-
-		thisInput.tabIndex = "1";
-		console.log(options[i], thisInput);
-
+		tabIndMgrCurrentItem(i);
 
 	}
 }
@@ -308,16 +333,34 @@ function handleCurvedTransInit(){
 		menuCard.style.opacity = '1';
 		if(menuCard.dataset.pos === '0'){
 			menuCard.style.transform = 'rotateX(0deg) translateY(-180px) translateZ(0px)';
+			tabIndMgrCurrentItem(i);
 		} else if(menuCard.dataset.pos === '1'){
 			menuCard.style.transform = 'rotateX(30deg) translateY(-180px) translateZ(0px)';
+			tabIndMgr(i);
 		} else if(menuCard.dataset.pos === '2'){
 			menuCard.style.transform = 'rotateX(40deg) translateY(-180px) translateZ(0px)';
+			menuCard.tabIndex = "-1";
 		} else {
 			menuCard.style.transform = 'rotateX(50deg) translateY(-180px) translateZ(0px)';
+			tabIndMgr(i);
 		}
 	}
 }
 
+function handleCurvedTransNextPrev(){
+	for(let i = 0; i < options.length; i++){
+		let menuCard = options[i];
+		if(menuCard.dataset.pos === '0'){
+			tabIndMgrCurrentItem(i);
+		} else if(menuCard.dataset.pos === '1'){
+			tabIndMgr(i);
+		} else if(menuCard.dataset.pos === '2'){
+			menuCard.tabIndex = "-1";
+		} else {
+			tabIndMgr(i);
+		}
+	}
+}
 
 
 
@@ -337,8 +380,8 @@ flipSwitch.addEventListener('click', function(e){
 		switchLeft.style.borderLeftWidth = '4px';
 		switchLeft.style.borderTopWidth = '3px';
 
-
-
+		radioLinear.blur();
+		radioCurved.focus();
 		handleCurvedTransInit();
 
 
@@ -358,7 +401,8 @@ flipSwitch.addEventListener('click', function(e){
 		switchLeft.style.borderLeftWidth = '3px';
 		switchLeft.style.borderTopWidth = '4px';
 
-
+		radioCurved.blur();
+		radioLinear.focus();
 		handleLinearTransInit();
 
 
@@ -398,14 +442,15 @@ sizeInput.addEventListener('blur', function(e){
 	this.parentNode.style.border = "none";
 });
 
-radioLinear.addEventListener('focus', function(e){
+[radioLinear, radioCurved].forEach(x => x.addEventListener('focus', function(e){
 	this.parentNode.style.boxSizing = "content-box";
 	this.parentNode.style.border = "3px white solid";
-});
-radioLinear.addEventListener('blur', function(e){
+}));
+
+[radioLinear, radioCurved].forEach(x => x.addEventListener('blur', function(e){
 	this.parentNode.style.border = "none";
 	this.parentNode.style.boxSizing = "border-box";
-});
+}));
 
 
 function handleRangeUpdate() {
@@ -566,6 +611,12 @@ overlayCloseButton.addEventListener('click', function(){
 	menuIcon.children[0].classList.remove('top-bun');
 	menuIcon.children[2].classList.remove('bottom-bun');
 	menuIcon.style.opacity = '1';
+
+	cubeLinks.forEach(x => x.tabIndex = "0");
+	menuIcon.tabIndex = "0";
+	// menuIcon.blur();
+
+
 	// buttons.style.display = 'none';
 	// menuHold.style.display = 'none';
 	hold.style.opacity = '1';
@@ -612,6 +663,7 @@ overlayNextButton.addEventListener('click', function(){
 		for(let i = 0; i < options.length; i++){
 			options[i].dataset.pos = rotations[i];
 		}
+		handleCurvedTransNextPrev();
 
 	}
 
@@ -643,6 +695,7 @@ overlayPrevButton.addEventListener('click', function(){
 		for(let i = 0; i < options.length; i++){
 			options[i].dataset.pos = rotations[i];
 		}
+		handleCurvedTransNextPrev();
 
 	}
 
