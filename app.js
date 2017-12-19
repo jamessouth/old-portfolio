@@ -122,6 +122,7 @@ const secondsP = document.querySelector('.menu-hold ul li p.seconds');
 const canvasbuttons = document.querySelectorAll('.canvasbuttons button');
 const faderCanv = document.querySelector('.canvasbuttons #fader');
 const linksDiv = document.querySelector('.canvasbuttons #contactinfolinks');
+const linksDivLinks = document.querySelectorAll('.canvasbuttons #contactinfolinks a');
 const clickCounter = document.querySelector('.canvasbuttons .clickCounter p:last-of-type');
 const helpText = document.querySelector('.canvasbuttons .help');
 
@@ -747,6 +748,8 @@ function animate2(){
 		if(t2 === randBoxes.length){
 
 			linksDiv.style.zIndex = 5;
+			linksDivLinks[0].tabIndex = "1";
+			linksDivLinks[1].tabIndex = "1";
 
 		}
 }
@@ -966,6 +969,29 @@ overlayContactButton.addEventListener('click', function(e){
 	subhead[1].style.filter = 'blur(10px)';
 	desc[1].style.filter = 'blur(10px)';
 
+	overlayNextButton.tabIndex = "-1";
+	overlayPrevButton.tabIndex = "-1";
+	overlayCloseButton.tabIndex = "-1";
+	overlayContactButton.tabIndex = "-1";
+
+	for(let i = 0; i < options.length; i++){
+		options[i].tabIndex = "-1";
+
+		let thisInput = options[i].querySelectorAll('input');
+		if(thisInput[1]){
+			thisInput[1].tabIndex = "-1";
+		}
+		thisInput[0].tabIndex = "-1";
+
+
+
+	}
+
+	if(canvArray.length == 0){
+		linksDivLinks[0].tabIndex = "1";
+		linksDivLinks[1].tabIndex = "1";
+	}
+
 	for(let i = 0; i < canvArray.length - 1; i++){
 		ctx.drawImage(canvArray[i][0], canvArray[i][1], canvArray[i][3], 75, 75);
 	}
@@ -1088,6 +1114,8 @@ canvas.addEventListener('click', function(e){
 	}
 	clickCounter.textContent = clicks;
 });
+
+
 // close button
 canvasbuttons[0].addEventListener('click', e => {
 	// console.log(e);
@@ -1101,7 +1129,19 @@ canvasbuttons[0].addEventListener('click', e => {
 	subhead[1].style.filter = 'none';
 	desc[1].style.filter = 'none';
 
+	overlayNextButton.tabIndex = "1";
+	overlayPrevButton.tabIndex = "1";
+	overlayCloseButton.tabIndex = "1";
+	overlayContactButton.tabIndex = "1";
+	linksDivLinks[0].tabIndex = "-1";
+	linksDivLinks[1].tabIndex = "-1";
+	for(let i = 0; i < options.length; i++){
+		if(options[i].dataset.pos === '0'){
+			tabIndMgrCurrentItem(i);
+		}
+	}
 });
+
 
 // reveal button
 canvasbuttons[1].addEventListener('click', e => {

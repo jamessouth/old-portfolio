@@ -231,7 +231,7 @@ button:hover, button:focus{
 	filter: invert(100%);
 	border: 3px #000 solid;
 	color: #000;
-
+	outline: none;
 }
 
 button.next{
@@ -316,7 +316,15 @@ button.contact{
 	font-family: 'Luckiest Guy', monospace;
 	color: #2f2f2f;
 	font-size: 32px;
-	margin-top: 15px;
+	margin-top: 12px;
+	border: 3px solid transparent;
+}
+
+
+.canvasbuttons #contactinfolinks a:focus{
+	outline: none;
+	border-color: #2f2f2f;
+
 }
 
 .canvasbuttons #contactinfolinks a:last-of-type{
@@ -797,7 +805,10 @@ select:focus{
 	animation: 1.8s 1 cubic-bezier(0.4, 0, 1, 1) moveAround;
 }
 
-
+.photo-cube div:focus,
+.photo-cube div a:focus{
+	outline: none;
+}
 
 
 
