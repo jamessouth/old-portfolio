@@ -120,6 +120,11 @@ h1{
 	color: #1e0f0e;
 	font-size: 30px;
 	text-shadow: 0px 0px 7px white;
+	cursor: default;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 .subhead:nth-of-type(1){
@@ -354,6 +359,11 @@ button.contact{
 .canvasbuttons .help p{
 	transform: scale(0.1, 0.1);
 	color: #001b40;
+	cursor: default;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 	animation: 0.6s 1 0.3s cubic-bezier(0.26, -0.17, 0.55, 1.57) forwards helptext;
 }
 

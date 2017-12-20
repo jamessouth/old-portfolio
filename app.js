@@ -145,6 +145,18 @@ sizeInput.value = 220;
 radioLinear.checked = true;
 // console.log(radioLinear.checked, radioCurved.checked);
 
+
+
+window.addEventListener('blur', e => {
+	// console.log(e);
+	menuIcon.focus();
+
+});
+
+
+
+
+
 // console.log(cubeImages);
 // consolidate buttons
 let depths = [0, -2000, -3250, -4500];
@@ -173,6 +185,96 @@ let descs = ['personal profile page',
 				let projNum = e.target.id;
 				subhead[i].textContent = 'Project ' + projNum;
 				desc[i].textContent = descs[projNum - 1];
+
+				if(!x.classList.contains('pressed') && (evt === 'focus')){
+
+					// console.log(evt);
+					// console.log(e);
+					// console.log();
+					// x.style.transition = 'transform .9s, cubic-bezier(1,-0.06, 1, 1)';
+
+					let pN = parseInt(projNum, 10);
+					let cubeSide = pN > 6 ? pN - 6 : pN;
+
+					// console.log(typeof cubeSide, cubeSide, pN);
+
+					switch (cubeSide){
+						case 1:
+							x.style.transform = 'rotateX(0deg) rotateY(0deg)';
+							// console.log(i);
+							rotObj[i] = {
+								x : 0,
+								y : 0,
+								xs : 0,
+								ys : 0
+							};
+							break;
+
+						case 2:
+							x.style.transform = 'rotateX(0deg) rotateY(90deg)';
+							// console.log(i);
+							rotObj[i] = {
+								x : 90,
+								y : 0,
+								xs : 0,
+								ys : 0
+							};
+							break;
+
+						case 3:
+							x.style.transform = 'rotateX(0deg) rotateY(-90deg)';
+							// console.log(i);
+							rotObj[i] = {
+								x : -90,
+								y : 0,
+								xs : 0,
+								ys : 0
+							};
+							break;
+
+						case 4:
+							x.style.transform = 'rotateX(0deg) rotateY(-180deg)';
+							// console.log(i);
+							rotObj[i] = {
+								x : -180,
+								y : 0,
+								xs : 0,
+								ys : 0
+							};
+							break;
+
+						case 5:
+							x.style.transform = 'rotateX(-90deg) rotateY(0deg)';
+							// console.log(i);
+							rotObj[i] = {
+								x : 0,
+								y : 90,
+								xs : 0,
+								ys : 0
+							};
+							break;
+
+						case 6:
+							x.style.transform = 'rotateX(90deg) rotateY(0deg)';
+							// console.log(i);
+							rotObj[i] = {
+								x : 0,
+								y : -90,
+								xs : 0,
+								ys : 0
+							};
+							break;
+
+
+					}
+
+
+
+
+
+				}
+
+
 			}
 		}, true);
 	});
@@ -254,11 +356,11 @@ function tabIndMgrCurrentItem(i){
 	options[i].tabIndex = "1";
 	let thisInput = options[i].querySelectorAll('input');
 	if(thisInput[1] && thisInput[0].checked){
-		console.log('lin');
+		// console.log('lin');
 		thisInput[0].tabIndex = "1";
 		thisInput[1].tabIndex = "-1";
 	} else if(thisInput[1] && thisInput[1].checked){
-		console.log('cur');
+		// console.log('cur');
 		thisInput[0].tabIndex = "-1";
 		thisInput[1].tabIndex = "1";
 	} else {
@@ -553,16 +655,13 @@ function flipCards(anims){
 	menuIcon.addEventListener(evt, handleMenu);
 });
 
-
-// headline.addEventListener('animationend', function(){
 //
-// 	for(let i = 0; i < cubeImages.length; i++){
-// 		cubeImages[i].style.backfaceVisibility = 'hidden';
-// 		// cubeImages[i].style.MozBackfaceVisibility = 'hidden';
-// 		// cubeImages[i].style.WebkitBackfaceVisibility = 'hidden';
-// 	}
+// cubeLinks.forEach(x => {
+//
+// 	x.addEventListener('focus', e => console.log(e.target.id));
 //
 // });
+
 
 function destroyCube(cube){
 	cube.addEventListener('animationend', () => {
@@ -1257,6 +1356,9 @@ function getCube(e){
 	}
 	isRotating = true;
 		// console.log(xStart, yStart, whichPB, 'start, which pb');
+	pb[whichPB].classList.add('pressed');
+	// console.log(pb[whichPB]);
+
 };
 
 
@@ -1267,9 +1369,9 @@ hold.addEventListener('mousemove', rotate);
 hold.addEventListener('touchmove', rotate, {passive: true});
 
 document.addEventListener('touchmove', e => {
+// console.log(e);
+	if(e.target.tagName === 'A'){
 
-	if(e.target.tagName === 'IMG'){
-			// console.log(e);
 			e.preventDefault();
 	}
 
@@ -1278,7 +1380,7 @@ document.addEventListener('touchmove', e => {
 
 
 function releaseCube(e){
-
+	pb[whichPB].classList.remove('pressed');
 
 	isRotating = false;
 
@@ -1304,7 +1406,7 @@ hold.addEventListener('mouseup', releaseCube);
 hold.addEventListener('touchend', releaseCube);
 
 hold.addEventListener('mouseleave', (e) => {
-
+	pb[whichPB].classList.remove('pressed');
 	isRotating = false;
 	xEnd = e.x + window.scrollX;
 	yEnd = e.y - 0 + window.scrollY;
