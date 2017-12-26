@@ -604,7 +604,7 @@ button.contact{
 	position: absolute;
 	width: 0px;
 	height: 0px;
-
+	background-color: transparent;
 }
 
 
@@ -687,14 +687,16 @@ input[id=gifs] {
     font-size: 70px;
 }
 input[id=gifs]:after{
-	/*margin-left: 57px;*/
-
+	position: relative;
+	transform: translateX(-50%);
+	left: 50%;
 	width: 70px;
+	margin-top: -29px;
 }
 
 input[id=gifs]:checked:after{
 	padding: 6px 1px 1px 18px;
-	
+	left: 46%;
 }
 
 
@@ -705,13 +707,14 @@ input[id=destroy] {
     font-size: 50px;
 }
 input[id=destroy]:after{
-	/*margin-left: 57px;*/
-
+	position: relative;
+	transform: translateX(-50%);
+	left: 50%;
 	width: 136px;
 }
 
 input[id=destroy]:checked:after{
-	padding: 19px 0px 0px 3px;
+	padding: 9px 0px 0px 3px;
 	height: 50px;
 }
 
