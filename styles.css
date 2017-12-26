@@ -645,10 +645,7 @@ button.contact{
 
 
 input[type=checkbox] {
-    /*width: 9px;
-    height: 9px;
-    margin-right: 13px;*/
-    font-size: 70px;
+	background-color: transparent;
     -webkit-appearance: none;
 		-moz-appearance: none;
 		appearance: none;
@@ -656,13 +653,12 @@ input[type=checkbox] {
 }
 
 input[type=checkbox]:after {
-    /*content: "\1F5F4";*/
 		content: 'x';
     background-color: transparent;
     display: inline-block;
     /*margin-left: 34px;*/
     color: #fff;
-    width: 70px;
+    
     height: 70px;
     text-shadow: 4px 6px 13px #444;
     /*border-radius: 18px;*/
@@ -677,7 +673,7 @@ input[type=checkbox]:checked:after {
 		/*margin-left: 5px;*/
 		line-height: 1;
 		/*border: none;*/
-		padding: 6px 1px 1px 18px;
+		
 		text-shadow: 4px 6px 13px #444;
 }
 input[type=checkbox]:focus{
@@ -685,14 +681,28 @@ input[type=checkbox]:focus{
 		border: 3px solid white;
 }
 
+
+
+input[id=gifs] {
+    font-size: 70px;
+}
+input[id=gifs]:after{
+	/*margin-left: 57px;*/
+
+	width: 70px;
+}
+
+input[id=gifs]:checked:after{
+	padding: 6px 1px 1px 18px;
+	
+}
+
+
+
+
+
 input[id=destroy] {
-    /*width: 9px;
-    height: 9px;
-    margin-right: 13px;*/
     font-size: 50px;
-    -webkit-appearance: none;
-		-moz-appearance: none;
-		appearance: none;
 }
 input[id=destroy]:after{
 	/*margin-left: 57px;*/
