@@ -649,7 +649,7 @@ input[type=checkbox] {
     -webkit-appearance: none;
 		-moz-appearance: none;
 		appearance: none;
-		border: none;
+		border: 3px solid transparent;
 }
 
 input[type=checkbox]:after {
@@ -685,6 +685,7 @@ input[type=checkbox]:focus{
 
 input[id=gifs] {
     font-size: 70px;
+	height: 85px;
 }
 input[id=gifs]:after{
 	position: relative;
@@ -695,7 +696,7 @@ input[id=gifs]:after{
 }
 
 input[id=gifs]:checked:after{
-	padding: 6px 1px 1px 18px;
+	padding: 6px 1px 1px 10px;
 	left: 46%;
 }
 
@@ -705,12 +706,14 @@ input[id=gifs]:checked:after{
 
 input[id=destroy] {
     font-size: 50px;
+	height: 82px;
 }
 input[id=destroy]:after{
 	position: relative;
 	transform: translateX(-50%);
 	left: 50%;
 	width: 136px;
+	margin-top: 10px;
 }
 
 input[id=destroy]:checked:after{
