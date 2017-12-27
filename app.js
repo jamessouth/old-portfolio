@@ -165,7 +165,7 @@ let descs = ['personal profile page',
 
 
 
-['mouseover', 'focus'].forEach(evt => {
+['mouseover', 'focus', 'touchstart'].forEach(evt => {
 	pb.forEach((x,i) => {
 		x.addEventListener(evt, e => {
 			// console.log(e);
