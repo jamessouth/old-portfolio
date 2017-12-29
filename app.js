@@ -2,6 +2,7 @@ const pb = document.querySelectorAll('.photo-cube');
 const cc = document.querySelectorAll('.cube-container');
 const body = document.querySelector('body');
 const menuIcon = document.querySelector('.hamburger');
+const projectNotesIcon = document.querySelector('.star');
 const canvas = document.querySelector('canvas#board');
 const canvasholder = document.querySelector('.canvasholder');
 const sizeInput = document.querySelector('.menu-hold .slider input');
@@ -326,11 +327,11 @@ function handleMenu(e){
 		subhead[i].style.opacity = '0.35';
 		desc[i].style.opacity = '0.35';
 	}
- if(switchFlag){
-	 handleLinearTransInit();
- } else {
-	 handleCurvedTransInit();
- }
+	if(switchFlag){
+		handleLinearTransInit();
+	} else {
+		handleCurvedTransInit();
+	}
 }
 function flipCards(anims){
 	for(let i = 0; i < options.length; i++){
@@ -347,6 +348,7 @@ function flipCards(anims){
 }
 ['click', 'keydown'].forEach(evt => {
 	menuIcon.addEventListener(evt, handleMenu);
+	projectNotesIcon.addEventListener(evt, handleProjectNotes);
 });
 function destroyCube(cube){
 	cube.addEventListener('animationend', () => {
