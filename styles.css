@@ -45,9 +45,9 @@ html{
 	border-radius: 8px;
 }
 @keyframes star{
-	0%{transform: scale(0.9); opacity: 1;}
+	0%{transform: scale(1); opacity: 1;}
 	50%{transform: scale(0.6); opacity: 0.7;}
-	100%{transform: scale(0.9); opacity: 1;}
+	100%{transform: scale(1); opacity: 1;}
 }
 
 
@@ -63,8 +63,8 @@ html{
 	animation: 1s 3 ease-out star;
 }
 .star hr{
-	
-	
+
+
 }
 
 .star hr:nth-of-type(1){
@@ -77,9 +77,89 @@ html{
 }
 .star hr:nth-of-type(3){
 	border: 2px #fecb7f solid;
-	transform: translateY(-4px) rotateZ(-30deg)
+	transform: translateY(-4px) rotateZ(-30deg);
 }
 
+button{
+	position: absolute;
+	width: 58px;
+	height: 30px;
+	font-size: 16px;
+	top: 35px;
+	z-index: 444;
+	box-shadow: 8px 5px 15px 0px #382123;
+	color: whitesmoke;
+	background: linear-gradient(to right, #505b1c, #7ac670);
+	border: 2px solid #fbe2a4;
+	border-radius: 20px;
+}
+button::-moz-focus-inner,
+input[type="range"]::-moz-focus-outer{
+	border: 0;
+}
+button:hover, button:focus{
+	-webkit-filter: invert(100%);
+	filter: invert(100%);
+	border: 3px #000 solid;
+	color: #000;
+	outline: none;
+}
+
+
+
+
+.table{
+	display: none;
+	position: absolute;
+	width: 300px;
+	height: 420px;
+	background-color: transparent;
+	z-index: 35;
+	transform: translateX(-50%);
+	left: 50%;
+	top: 15px;
+}
+.table button{
+	width: 20px;
+	height: 23px;
+	top: 15px;
+	left: 15px;
+}
+
+.table table{
+	table-layout: fixed;
+	width: 100%;
+	border-collapse: collapse;
+	border: 2px solid red;
+
+}
+.table table thead{
+	/*border-bottom: 1px green solid;*/
+
+}
+
+.table table th[scope="col"]{
+	transform: rotateZ(-90deg);
+	height: 44px;
+
+}
+.table table th[scope="row"]{
+	/*border-right: 1px green solid;*/
+
+}
+.table table td{
+	/*border-bottom: 1px green solid;
+	border-right: 1px green solid;*/
+}
+.table table td[headers*="js"]{
+
+
+
+}
+.table table td,
+.table table th{
+	border: 1px green solid;
+}
 
 .top-bun{
 	transform: rotateZ(-30deg);
@@ -89,7 +169,7 @@ html{
 	transform: rotateZ(30deg);
 	transition: transform .8s;
 }
-h1{
+.hold > h1{
 	padding: 1em 0 3em;
 	text-align: center;
 	cursor: default;
@@ -166,30 +246,7 @@ canvas#board{
 	top: 10px;
 	min-width: 300px;
 }
-button{
-	position: absolute;
-	width: 58px;
-	height: 30px;
-	font-size: 16px;
-	top: 35px;
-	z-index: 444;
-	box-shadow: 8px 5px 15px 0px #382123;
-	color: whitesmoke;
-	background: linear-gradient(to right, #505b1c, #7ac670);
-	border: 2px solid #fbe2a4;
-	border-radius: 20px;
-}
-button::-moz-focus-inner,
-input[type="range"]::-moz-focus-outer{
-	border: 0;
-}
-button:hover, button:focus{
-	-webkit-filter: invert(100%);
-	filter: invert(100%);
-	border: 3px #000 solid;
-	color: #000;
-	outline: none;
-}
+
 button.next{
 	right: 70%;
 }
@@ -787,6 +844,15 @@ select:focus{
 		background-attachment: fixed;
 		background-size: cover;
 	}
+	.star hr:nth-of-type(1){
+		border-color: #2c320d;
+	}
+	.star hr:nth-of-type(2){
+		border-color: #5c620c;
+	}
+	.star hr:nth-of-type(3){
+		border-color: #7c9124;
+	}
 }
 @media screen and (min-width: 768px){
 	body{
@@ -796,7 +862,16 @@ select:focus{
 		background-attachment: fixed;
 		background-size: cover;
 	}
-	h1{
+	.star hr:nth-of-type(1){
+		border-color: #e2ba7d;
+	}
+	.star hr:nth-of-type(2){
+		border-color: #fac26f;
+	}
+	.star hr:nth-of-type(3){
+		border-color: #fecb7f;
+	}
+	.hold > h1{
 		margin-bottom: 2.8em;
 		animation: 1.4s 1.8s 7 cubic-bezier(0.4, 0, 1, 1) bob;
 	}
