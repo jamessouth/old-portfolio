@@ -3,6 +3,8 @@ const cc = document.querySelectorAll('.cube-container');
 const body = document.querySelector('body');
 const menuIcon = document.querySelector('.hamburger');
 const projectNotesIcon = document.querySelector('.star');
+const table = document.querySelector('.table');
+const tableCloseButton = document.querySelector('.table button');
 const canvas = document.querySelector('canvas#board');
 const canvasholder = document.querySelector('.canvasholder');
 const sizeInput = document.querySelector('.menu-hold .slider input');
@@ -49,6 +51,13 @@ const proj7 = document.querySelector('.second:nth-of-type(1)');
 const proj9 = document.querySelector('.second:nth-of-type(3)');
 const proj10 = document.querySelector('.second:nth-of-type(4)');
 const proj11 = document.querySelector('.second:nth-of-type(5)');
+
+
+menuIcon.hamb = true;
+projectNotesIcon.hamb = false;
+overlayCloseButton.over = true;
+tableCloseButton.over = false;
+
 let ctx = canvas.getContext('2d');
 let ctxFader = faderCanv.getContext('2d');
 let depths = [0, -2000, -3250, -4500];
@@ -315,24 +324,47 @@ function handleMenu(e){
 			return;
 		}
 	}
+	
+	
 	cubeLinks.forEach(x => x.tabIndex = "-1");
-	this.tabIndex = "-1";
+	menuIcon.tabIndex = "-1";
+	projectNotesIcon.tabIndex = "-1";
 	this.blur();
-	this.children[0].classList.add('top-bun');
-	this.children[2].classList.add('bottom-bun');
-	overlay.style.display = 'flex';
 	hold.style.opacity = '0.35';
-	this.style.opacity = '0.35';
+	menuIcon.style.opacity = '0.35';
+	projectNotesIcon.style.opacity = '0.35';
 	for(let i = 0; i < subhead.length; i++){
 		subhead[i].style.opacity = '0.35';
 		desc[i].style.opacity = '0.35';
 	}
-	if(switchFlag){
-		handleLinearTransInit();
+	
+	
+	
+	console.log(this, this.hamb);
+	
+	if(this.hamb){
+		this.children[0].classList.add('top-bun');
+		this.children[2].classList.add('bottom-bun');
+		overlay.style.display = 'flex';
+		if(switchFlag){
+			handleLinearTransInit();
+		} else {
+			handleCurvedTransInit();
+		}
 	} else {
-		handleCurvedTransInit();
+		table.style.display = 'block';
+		
+		
+		
 	}
+	
 }
+['click', 'keydown'].forEach(evt => {
+	menuIcon.addEventListener(evt, handleMenu);
+	projectNotesIcon.addEventListener(evt, handleMenu);
+});
+
+
 function flipCards(anims){
 	for(let i = 0; i < options.length; i++){
 		if(options[i].dataset.pos === '0'){
@@ -346,10 +378,6 @@ function flipCards(anims){
 		}
 	}
 }
-['click', 'keydown'].forEach(evt => {
-	menuIcon.addEventListener(evt, handleMenu);
-	projectNotesIcon.addEventListener(evt, handleProjectNotes);
-});
 function destroyCube(cube){
 	cube.addEventListener('animationend', () => {
 		headline.style.marginBottom = '0';
@@ -378,27 +406,54 @@ function destroyCube(cube){
 		explode[1].style.display = 'none';
 	}, (seconds.value * 1000) + 5490);
 }
-overlayCloseButton.addEventListener('click', function(){
-	overlay.style.display = 'none';
-	menuIcon.children[0].classList.remove('top-bun');
-	menuIcon.children[2].classList.remove('bottom-bun');
-	menuIcon.style.opacity = '1';
+
+
+function handleClose(e){
+	console.log(this, this.over);
+	
 	cubeLinks.forEach(x => x.tabIndex = "0");
 	menuIcon.tabIndex = "0";
+	projectNotesIcon.tabIndex = "0";
 	hold.style.opacity = '1';
+	menuIcon.style.opacity = '1';
+	projectNotesIcon.style.opacity = '1';
 	for(let i = 0; i < subhead.length; i++){
 		subhead[i].style.opacity = '1';
 		desc[i].style.opacity = '1';
 	}
-	for(let i = 0; i < options.length; i++){
-		options[i].className = '';
-		options[i].style.transform = '';
+	
+	
+	if(this.over){
+		overlay.style.display = 'none';
+		menuIcon.children[0].classList.remove('top-bun');
+		menuIcon.children[2].classList.remove('bottom-bun');
+		
+		
+		for(let i = 0; i < options.length; i++){
+			options[i].className = '';
+			options[i].style.transform = '';
+		}
+		if(destroyFlag){
+			destroyCube(pb[0]);
+			destroyCube(pb[1]);
+		}
+	
+	
+	
+	} else {
+		table.style.display = 'none';
 	}
-	if(destroyFlag){
-		destroyCube(pb[0]);
-		destroyCube(pb[1]);
-	}
-});
+	
+	
+}
+
+overlayCloseButton.addEventListener('click', handleClose);
+tableCloseButton.addEventListener('click', handleClose);
+
+
+
+
+
 overlayNextButton.addEventListener('click', function(){
 	if(switchFlag){
 		rotations.unshift(rotations.pop());
