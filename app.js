@@ -4,6 +4,7 @@ const body = document.querySelector('body');
 const menuIcon = document.querySelector('.hamburger');
 const projectNotesIcon = document.querySelector('.star');
 const table = document.querySelector('.table');
+const featureTable = table.querySelector('table');
 const tableCloseButton = document.querySelector('.table button');
 const canvas = document.querySelector('canvas#board');
 const canvasholder = document.querySelector('.canvasholder');
@@ -114,6 +115,39 @@ check[1].checked = false;
 seconds.value = 0;
 sizeInput.value = 220;
 radioLinear.checked = true;
+
+
+featureTable.addEventListener('mouseover', function(e){
+	// console.log(e.target.tagName);
+	let featureColumn;
+	// let featureRow;
+	if(e.target.tagName === 'TD' || e.target.tagName === 'IMG'){
+		if(e.target.headers){
+			// featureRow = e.target.headers.split(' ')[0];
+			featureColumn = e.target.headers.split(' ')[1];
+			console.log(featureColumn);
+			// return;
+		} else {
+			// featureRow = e.target.parentNode.headers.split(' ')[0];
+			featureColumn = e.target.parentNode.headers.split(' ')[1];
+			console.log(featureColumn);
+			// return;
+
+		}
+		// console.log(this);
+		let highlightedCol = this.querySelectorAll(`td[headers*=${featureColumn}]`);
+		console.log(highlightedCol);
+		highlightedCol.forEach(x => x.style.backgroundColor = 'lightyellow');
+	}
+
+});
+
+
+
+
+
+
+
 ['mouseover', 'focus', 'touchstart'].forEach(evt => {
 	pb.forEach((x,i) => {
 		x.addEventListener(evt, e => {
@@ -324,8 +358,8 @@ function handleMenu(e){
 			return;
 		}
 	}
-	
-	
+
+
 	cubeLinks.forEach(x => x.tabIndex = "-1");
 	menuIcon.tabIndex = "-1";
 	projectNotesIcon.tabIndex = "-1";
@@ -337,11 +371,11 @@ function handleMenu(e){
 		subhead[i].style.opacity = '0.35';
 		desc[i].style.opacity = '0.35';
 	}
-	
-	
-	
+
+
+
 	console.log(this, this.hamb);
-	
+
 	if(this.hamb){
 		this.children[0].classList.add('top-bun');
 		this.children[2].classList.add('bottom-bun');
@@ -353,11 +387,11 @@ function handleMenu(e){
 		}
 	} else {
 		table.style.display = 'block';
-		
-		
-		
+
+
+
 	}
-	
+
 }
 ['click', 'keydown'].forEach(evt => {
 	menuIcon.addEventListener(evt, handleMenu);
@@ -410,7 +444,7 @@ function destroyCube(cube){
 
 function handleClose(e){
 	console.log(this, this.over);
-	
+
 	cubeLinks.forEach(x => x.tabIndex = "0");
 	menuIcon.tabIndex = "0";
 	projectNotesIcon.tabIndex = "0";
@@ -421,14 +455,14 @@ function handleClose(e){
 		subhead[i].style.opacity = '1';
 		desc[i].style.opacity = '1';
 	}
-	
-	
+
+
 	if(this.over){
 		overlay.style.display = 'none';
 		menuIcon.children[0].classList.remove('top-bun');
 		menuIcon.children[2].classList.remove('bottom-bun');
-		
-		
+
+
 		for(let i = 0; i < options.length; i++){
 			options[i].className = '';
 			options[i].style.transform = '';
@@ -437,14 +471,14 @@ function handleClose(e){
 			destroyCube(pb[0]);
 			destroyCube(pb[1]);
 		}
-	
-	
-	
+
+
+
 	} else {
 		table.style.display = 'none';
 	}
-	
-	
+
+
 }
 
 overlayCloseButton.addEventListener('click', handleClose);
