@@ -170,22 +170,34 @@ button:hover, button:focus{
 	/*height: 25px;*/
 }
 .table table td:hover{
-	background-color: yellow;
+	background-color: #ffee58;
 
 
 }
 
-.table table tr:hover{
+.table table tbody tr:hover{
 	background-color: lightyellow;
 }
 
-.table table td img:hover{
-	filter: hue-rotate(160deg) invert(100%);
+
+
+.highlight{
+	background-color: lightyellow;
 
 }
+.highlight img,
+.table table tr:hover img{
+	filter: hue-rotate(160deg) invert(100%);
+}
 
+.highlightText{
+	color: lightyellow;
+}
 
+.table table td img:hover{
+	filter: hue-rotate(290deg) saturate(590%);
 
+}
 
 
 .table table td,
@@ -259,7 +271,12 @@ button:hover, button:focus{
 }
 
 
+.table canvas#scroll{
+	position: absolute;
+	background-color: red;
+	z-index: -1;
 
+}
 
 
 

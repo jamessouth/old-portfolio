@@ -5,6 +5,8 @@ const menuIcon = document.querySelector('.hamburger');
 const projectNotesIcon = document.querySelector('.star');
 const table = document.querySelector('.table');
 const featureTable = table.querySelector('table');
+const tableTDs = featureTable.querySelectorAll('td');
+const tableTHSpans = featureTable.querySelectorAll('thead th span');
 const tableCloseButton = document.querySelector('.table button');
 const canvas = document.querySelector('canvas#board');
 const canvasholder = document.querySelector('.canvasholder');
@@ -117,33 +119,162 @@ sizeInput.value = 220;
 radioLinear.checked = true;
 
 
-featureTable.addEventListener('mouseover', function(e){
-	// console.log(e.target.tagName);
+
+
+
+
+
+
+
+
+// 'modified from https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Basic_animations'
+let tableImg = new Image();
+
+
+
+tableImg.src = 'images/pano.jpg';
+let CanvasXSize = 310;
+let CanvasYSize = 423;
+let speed = 30; // lower is faster
+let scale = 1.00;
+let tableImageY = 0; // vertical offset
+
+// Main program
+
+let dy = 1.75;
+let imgW;
+let imgH;
+let tableImageX = 0;
+let clearX;
+let clearY;
+let tableCtx;
+
+tableImg.onload = function() {
+    imgW = tableImg.width * scale;
+    imgH = tableImg.height * scale;
+
+    if (imgH > CanvasYSize) {
+        // image larger than canvas
+        tableImageY = CanvasYSize - imgH;
+				console.log(tableImageY);
+    }
+
+    if (imgW > CanvasXSize) {
+        // image width larger than canvas
+        clearX = imgW;
+    } else {
+        clearX = CanvasXSize;
+    }
+
+    if (imgH > CanvasYSize) {
+        // image height larger than canvas
+        clearY = imgH;
+    } else {
+        clearY = CanvasYSize;
+    }
+		console.log(clearX, clearY);
+    // get canvas context
+    tableCtx = table.querySelector('canvas#scroll').getContext('2d');
+
+    // set refresh rate
+    // return setInterval(draw, speed);
+}
+
+function draw() {
+    tableCtx.clearRect(0, 0, clearX, clearY); // clear the canvas
+		// console.log('here');
+    // if image is <= Canvas Size
+    // if (imgH <= CanvasYSize) {
+		// 	console.log('here');
+    //     // reset, start from beginning
+    //     if (tableImageY > CanvasYSize) {
+    //         tableImageY = -imgH + tableImageY;
+    //     }
+    //     // draw additional image1
+    //     if (tableImageY > 0) {
+    //         tableCtx.drawImage(tableImg, -imgW + tableImageX, tableImageY, imgW, imgH);
+    //     }
+    //     // draw additional image2
+    //     if (tableImageY - imgH > 0) {
+    //         tableCtx.drawImage(tableImg, -imgW * 2 + tableImageX, tableImageY, imgW, imgH);
+    //     }
+    // }
+
+    // image is > Canvas Size
+    // else {
+        // reset, start from beginning
+        if (tableImageY > (CanvasYSize)) {
+            tableImageY = CanvasYSize - imgH;
+        }
+        // draw aditional image
+        if (tableImageY > (CanvasYSize-imgH)) {
+            tableCtx.drawImage(tableImg, tableImageX, tableImageY - imgH + 1, imgW, imgH);
+        }
+    // }
+    // draw image
+    tableCtx.drawImage(tableImg, tableImageX, tableImageY,imgW, imgH);
+    // amount to move
+    tableImageY += dy;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function clearTable(){
+	tableTDs.forEach(c => c.classList.remove('highlight'));
+	tableTHSpans.forEach(h => h.classList.remove('highlightText'));
+}
+
+
+function handleTableHighlight(e){
+	clearTable();
 	let featureColumn;
-	// let featureRow;
 	if(e.target.tagName === 'TD' || e.target.tagName === 'IMG'){
 		if(e.target.headers){
-			// featureRow = e.target.headers.split(' ')[0];
 			featureColumn = e.target.headers.split(' ')[1];
-			console.log(featureColumn);
-			// return;
+			// console.log(featureColumn);
 		} else {
-			// featureRow = e.target.parentNode.headers.split(' ')[0];
 			featureColumn = e.target.parentNode.headers.split(' ')[1];
-			console.log(featureColumn);
-			// return;
+			// console.log(featureColumn);
 
 		}
-		// console.log(this);
 		let highlightedCol = this.querySelectorAll(`td[headers*=${featureColumn}]`);
-		console.log(highlightedCol);
-		highlightedCol.forEach(x => x.style.backgroundColor = 'lightyellow');
+		// console.log(highlightedCol);
+		let highlightedHeader = this.querySelector(`th[id=${featureColumn}] span`)
+		highlightedCol.forEach(x => x.classList.add('highlight'));
+		highlightedHeader.classList.add('highlightText');
 	}
 
-});
+};
 
-
-
+featureTable.addEventListener('mouseover', handleTableHighlight);
+featureTable.addEventListener('mouseout', clearTable);
 
 
 
