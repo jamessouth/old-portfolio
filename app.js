@@ -129,119 +129,63 @@ radioLinear.checked = true;
 
 // 'modified from https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Basic_animations'
 let tableImg = new Image();
-
-
-
-tableImg.src = 'images/pano.jpg';
+// tableImg.src = 'images/pano.jpg';
+tableImg.src = 'images/cloudvert.jpg';
 let CanvasXSize = 310;
 let CanvasYSize = 423;
-let speed = 30; // lower is faster
-let scale = 1.00;
-let tableImageY = 0; // vertical offset
-
-// Main program
-
-let dy = 1.75;
+let speed = 30; // lower repaints faster
+let tableImageY = 0;
+let dy = 4.5; //higher scrolls faster
 let imgW;
 let imgH;
 let tableImageX = 0;
 let clearX;
 let clearY;
 let tableCtx;
+let intrvl;
+let myImageData;
 
-tableImg.onload = function() {
-    imgW = tableImg.width * scale;
-    imgH = tableImg.height * scale;
-
+function animTableCanvas(){
+    imgW = tableImg.width;
+    imgH = tableImg.height;
     if (imgH > CanvasYSize) {
-        // image larger than canvas
         tableImageY = CanvasYSize - imgH;
 				console.log(tableImageY);
     }
-
     if (imgW > CanvasXSize) {
-        // image width larger than canvas
         clearX = imgW;
     } else {
         clearX = CanvasXSize;
     }
-
     if (imgH > CanvasYSize) {
-        // image height larger than canvas
         clearY = imgH;
     } else {
         clearY = CanvasYSize;
     }
 		console.log(clearX, clearY);
-    // get canvas context
     tableCtx = table.querySelector('canvas#scroll').getContext('2d');
 
-    // set refresh rate
-    // return setInterval(draw, speed);
-}
+
+    intrvl = setInterval(draw, speed);
+};
 
 function draw() {
-    tableCtx.clearRect(0, 0, clearX, clearY); // clear the canvas
-		// console.log('here');
-    // if image is <= Canvas Size
-    // if (imgH <= CanvasYSize) {
-		// 	console.log('here');
-    //     // reset, start from beginning
-    //     if (tableImageY > CanvasYSize) {
-    //         tableImageY = -imgH + tableImageY;
-    //     }
-    //     // draw additional image1
-    //     if (tableImageY > 0) {
-    //         tableCtx.drawImage(tableImg, -imgW + tableImageX, tableImageY, imgW, imgH);
-    //     }
-    //     // draw additional image2
-    //     if (tableImageY - imgH > 0) {
-    //         tableCtx.drawImage(tableImg, -imgW * 2 + tableImageX, tableImageY, imgW, imgH);
-    //     }
-    // }
-
-    // image is > Canvas Size
-    // else {
-        // reset, start from beginning
-        if (tableImageY > (CanvasYSize)) {
-            tableImageY = CanvasYSize - imgH;
-        }
-        // draw aditional image
-        if (tableImageY > (CanvasYSize-imgH)) {
-            tableCtx.drawImage(tableImg, tableImageX, tableImageY - imgH + 1, imgW, imgH);
-        }
-    // }
-    // draw image
+		console.log('drawing');
+    tableCtx.clearRect(0, 0, clearX, clearY);
+    if (tableImageY > (CanvasYSize)) {
+        tableImageY = CanvasYSize - imgH;
+    }
+    if (tableImageY > (CanvasYSize-imgH)) {
+        tableCtx.drawImage(tableImg, tableImageX, tableImageY - imgH + 1, imgW, imgH);
+    }
     tableCtx.drawImage(tableImg, tableImageX, tableImageY,imgW, imgH);
-    // amount to move
     tableImageY += dy;
+
+		myImageData = tableCtx.getImageData(0, 0, 1, 1);
+		console.log(myImageData.data);
+
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -518,7 +462,7 @@ function handleMenu(e){
 		}
 	} else {
 		table.style.display = 'block';
-
+		animTableCanvas();
 
 
 	}
@@ -607,6 +551,7 @@ function handleClose(e){
 
 	} else {
 		table.style.display = 'none';
+		clearInterval(intrvl);
 	}
 
 
