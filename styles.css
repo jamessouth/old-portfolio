@@ -129,6 +129,18 @@ button:hover, button:focus{
 	left: 15px;
 }
 
+.table button.play_pause{
+	width: 20px;
+	height: 23px;
+	top: 15px;
+	left: auto;
+	right: 15px;
+	background: none;
+	border: none;
+	border-radius: 0;
+	box-shadow: none;
+}
+
 .table table{
 	table-layout: fixed;
 	width: 100%;
@@ -179,6 +191,9 @@ button:hover, button:focus{
 	background-color: lightyellow;
 }
 
+.table table thead:hover{
+	color: lightyellow;
+}
 
 
 .highlight{
