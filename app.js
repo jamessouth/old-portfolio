@@ -8,6 +8,7 @@ const featureTable = table.querySelector('table');
 const tableTDs = featureTable.querySelectorAll('td');
 const tableTHSpans = featureTable.querySelectorAll('thead th span');
 const tableCloseButton = document.querySelector('.table button');
+const tablePlayPauseButton = document.querySelector('.table button.play_pause');
 const canvas = document.querySelector('canvas#board');
 const canvasholder = document.querySelector('.canvasholder');
 const sizeInput = document.querySelector('.menu-hold .slider input');
@@ -129,8 +130,13 @@ radioLinear.checked = true;
 
 // 'modified from https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Basic_animations'
 let tableImg = new Image();
-// tableImg.src = 'images/pano.jpg';
-tableImg.src = 'images/cloudvert.jpg';
+let sources = ['bluecloud', 'cloudvert', 'greyclouds', 'jupiter', 'mars', 'moon', 'pano', 'rapid', 'shallow', 'skyfire'];
+
+
+
+
+tableImg.src = `images/${sources[Math.floor(Math.random() * sources.length)]}.jpg`;
+
 let CanvasXSize = 310;
 let CanvasYSize = 423;
 let speed = 30; // lower repaints faster
@@ -146,6 +152,7 @@ let intrvl;
 let myImageData;
 
 function animTableCanvas(){
+	console.log(tableImg.src);
     imgW = tableImg.width;
     imgH = tableImg.height;
     if (imgH > CanvasYSize) {
@@ -168,9 +175,18 @@ function animTableCanvas(){
 
     intrvl = setInterval(draw, speed);
 };
+// let cntr = 0;
+
+
+// window.setInterval(() => {console.log('3 second');}, 3000);
+
 
 function draw() {
 		console.log('drawing');
+		// cntr++;
+		// if(cntr % 333 === 0){
+		// 	console.log(cntr);
+		// }
     tableCtx.clearRect(0, 0, clearX, clearY);
     if (tableImageY > (CanvasYSize)) {
         tableImageY = CanvasYSize - imgH;
@@ -181,11 +197,19 @@ function draw() {
     tableCtx.drawImage(tableImg, tableImageX, tableImageY,imgW, imgH);
     tableImageY += dy;
 
-		myImageData = tableCtx.getImageData(0, 0, 1, 1);
-		console.log(myImageData.data);
+		myImageData = tableCtx.getImageData(155, 34, 1, 1);
+		if(myImageData.data[3] !== 255){
+			console.log(myImageData.data);
+		}
 
+		featureTable.style.borderColor = `rgba(${myImageData.data[0]}, ${myImageData.data[1]}, ${myImageData.data[2]}, 255)`;
 
 }
+
+
+// featureTable.addEventListener('click', e => console.log(e.layerX,e.layerY));
+
+
 
 
 
@@ -462,8 +486,9 @@ function handleMenu(e){
 		}
 	} else {
 		table.style.display = 'block';
-		animTableCanvas();
-
+		if(tablePlayPauseButton.firstElementChild.alt === 'pause'){
+			animTableCanvas();
+		}
 
 	}
 
@@ -561,7 +586,25 @@ overlayCloseButton.addEventListener('click', handleClose);
 tableCloseButton.addEventListener('click', handleClose);
 
 
+tablePlayPauseButton.addEventListener('click', function(e){
+	// console.log(e.target);
+	if(this.firstElementChild.alt === 'pause'){
 
+		this.firstElementChild.src = 'images/play.png';
+		this.firstElementChild.alt = 'play';
+		dy = 0;
+		clearInterval(intrvl);
+
+	} else {
+		this.firstElementChild.src = 'images/pause.png';
+		this.firstElementChild.alt = 'pause';
+		dy = 4.5;
+		intrvl = setInterval(draw, speed);
+		tableImg.src = `images/${sources[Math.floor(Math.random() * sources.length)]}.jpg`;
+		console.log(tableImg.src);
+	}
+
+});
 
 
 overlayNextButton.addEventListener('click', function(){
