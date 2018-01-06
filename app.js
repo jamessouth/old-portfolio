@@ -1,20 +1,22 @@
+const main = document.querySelector('main');
 const pb = document.querySelectorAll('.photo-cube');
 const cc = document.querySelectorAll('.cube-container');
 const body = document.querySelector('body');
 const menuIcon = document.querySelector('.hamburger');
 const projectNotesIcon = document.querySelector('.star');
-const table = document.querySelector('.table');
+const table = document.querySelector('.overlay2 .table');
 const featureTable = table.querySelector('table');
 const tableTDs = featureTable.querySelectorAll('td');
 const tableTHSpans = featureTable.querySelectorAll('thead th span');
-const tableCloseButton = document.querySelector('.table button');
-const tablePlayPauseButton = document.querySelector('.table button.play_pause');
+const tableCloseButton = document.querySelector('.overlay2 .table button');
+const tablePlayPauseButton = document.querySelector('.overlay2 .table button.play_pause');
 const canvas = document.querySelector('canvas#board');
 const canvasholder = document.querySelector('.canvasholder');
 const sizeInput = document.querySelector('.menu-hold .slider input');
 const sizeInputP = document.querySelector('.menu-hold .slider p');
 const sizeTrack = document.querySelector('.menu-hold .slider .track');
 const overlay = document.querySelector('div.overlay');
+const overlay2 = document.querySelector('div.overlay2');
 const overlayCloseButton = overlay.querySelector('button.close');
 const overlayNextButton = overlay.querySelector('button.next');
 const overlayPrevButton = overlay.querySelector('button.prev');
@@ -23,7 +25,7 @@ const menuHolder = document.querySelector('.menu-hold ul');
 const options = document.querySelectorAll('.menu-hold ul li');
 const menuHold = document.querySelector('.menu-hold');
 const buttons = document.querySelector('button');
-const hold = document.querySelector('div.hold');
+const hold = main.querySelector('div.hold');
 const flipSwitch = document.querySelector('.menu-hold div.flip-switch');
 const radioLinear = flipSwitch.querySelector('input[id="linear"]');
 const radioCurved = flipSwitch.querySelector('input[id="curved"]');
@@ -33,13 +35,13 @@ const switchBottom = theSwitch.querySelector('div.switch-bottom');
 const switchLeft = theSwitch.querySelector('div.switch-left');
 const check = document.querySelectorAll('.menu-hold input.check');
 const checkLabel = document.querySelectorAll('.menu-hold input.check + label');
-const subhead = document.querySelectorAll('.subhead:nth-of-type(odd)');
-const desc = document.querySelectorAll('.subhead:nth-of-type(even)');
+const subhead = hold.querySelectorAll('.subhead:nth-of-type(odd)');
+const desc = hold.querySelectorAll('.subhead:nth-of-type(even)');
 const liOverlay = menuHolder.querySelectorAll('.li-overlay');
 const cubeLinks = document.querySelectorAll('div.cube-container div.photo-cube div a');
 let destroyFlag = false;
 const explode = document.querySelectorAll('.explode');
-const headline = document.querySelector('.hold h1');
+const headline = main.querySelector('h1');
 const seconds = document.querySelector('.menu-hold select');
 const secondsLabel = document.querySelector('.menu-hold label[for="sec"]');
 const secondsP = document.querySelector('.menu-hold ul li p.seconds');
@@ -130,7 +132,7 @@ radioLinear.checked = true;
 
 // 'modified from https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Basic_animations'
 let tableImg = new Image();
-let sources = ['bluecloud', 'cloudvert', 'greyclouds', 'jupiter', 'mars', 'moon', 'pano', 'rapid', 'shallow', 'skyfire'];
+let sources = ['bluecloud', 'cloudvert', 'fire', 'greyclouds', 'jupiter', 'mars', 'moon', 'pano', 'rapid', 'shallow'];
 
 
 
@@ -451,7 +453,11 @@ function handleMenu(e){
 	if(e.type === 'keydown'){
 		if(e.key.toLowerCase() === 'tab' || e.keyCode === 9){
 			return;
-		} else if(e.key.toLowerCase() === 'enter' || e.keyCode === 13 || e.key.toLowerCase() === ' ' || e.keyCode === 32){
+		} else if(e.key.toLowerCase() === 'enter' || e.keyCode === 13){
+
+		} else if(e.key.toLowerCase() === ' ' || e.keyCode === 32){
+			e.preventDefault();
+
 		} else {
 			e.preventDefault();
 			return;
@@ -463,7 +469,7 @@ function handleMenu(e){
 	menuIcon.tabIndex = "-1";
 	projectNotesIcon.tabIndex = "-1";
 	this.blur();
-	hold.style.opacity = '0.35';
+	main.style.opacity = '0.35';
 	menuIcon.style.opacity = '0.35';
 	projectNotesIcon.style.opacity = '0.35';
 	for(let i = 0; i < subhead.length; i++){
@@ -485,7 +491,7 @@ function handleMenu(e){
 			handleCurvedTransInit();
 		}
 	} else {
-		table.style.display = 'block';
+		overlay2.style.display = 'block';
 		if(tablePlayPauseButton.firstElementChild.alt === 'pause'){
 			animTableCanvas();
 		}
@@ -534,6 +540,7 @@ function destroyCube(cube){
 		}
 	});
 	menuIcon.style.display = 'none';
+	projectNotesIcon.style.display = 'none';
 	cube.classList.add('blowup');
 	window.setTimeout(() => {
 		explode[0].style.display = 'none';
@@ -548,7 +555,7 @@ function handleClose(e){
 	cubeLinks.forEach(x => x.tabIndex = "0");
 	menuIcon.tabIndex = "0";
 	projectNotesIcon.tabIndex = "0";
-	hold.style.opacity = '1';
+	main.style.opacity = '1';
 	menuIcon.style.opacity = '1';
 	projectNotesIcon.style.opacity = '1';
 	for(let i = 0; i < subhead.length; i++){
@@ -575,7 +582,7 @@ function handleClose(e){
 
 
 	} else {
-		table.style.display = 'none';
+		overlay2.style.display = 'none';
 		clearInterval(intrvl);
 	}
 
@@ -752,13 +759,19 @@ canvArray[doable[1][14]].unshift(image14);
 canvArray[15].unshift('blank');
 overlayContactButton.addEventListener('click', function(e){
 	canvasholder.style.display = 'flex';
-	overlay.style.filter = 'blur(30px)';
-	menuIcon.style.filter = 'blur(20px)';
-	hold.style.filter = 'blur(30px)';
-	subhead[0].style.filter = 'blur(10px)';
-	desc[0].style.filter = 'blur(10px)';
-	subhead[1].style.filter = 'blur(10px)';
-	desc[1].style.filter = 'blur(10px)';
+	// overlay.style.filter = 'blur(30px)';
+	// menuIcon.style.display = 'none';
+	// projectNotesIcon.style.display = 'none';
+	// main.style.display = 'none';
+	menuHold.style.opacity = '0';
+	subhead[0].style.opacity = '0';
+	desc[0].style.opacity = '0';
+	subhead[1].style.opacity = '0';
+	desc[1].style.opacity = '0';
+	overlayNextButton.style.opacity = "0";
+	overlayPrevButton.style.opacity = "0";
+	overlayCloseButton.style.opacity = "0";
+	overlayContactButton.style.opacity = "0";
 	overlayNextButton.tabIndex = "-1";
 	overlayPrevButton.tabIndex = "-1";
 	overlayCloseButton.tabIndex = "-1";
@@ -853,14 +866,20 @@ canvas.addEventListener('click', function(e){
 });
 canvasbuttons[0].addEventListener('click', e => {
 	canvasholder.style.display = 'none';
-	overlay.style.filter = 'none';
-	menuIcon.style.filter = 'none';
+	// overlay.style.filter = 'none';
+	// menuIcon.style.display = 'flex';
+	// projectNotesIcon.style.display = 'flex';
 	menuIcon.style.zIndex = '5';
-	hold.style.filter = 'none';
-	subhead[0].style.filter = 'none';
-	desc[0].style.filter = 'none';
-	subhead[1].style.filter = 'none';
-	desc[1].style.filter = 'none';
+	// main.style.display = 'block';
+	menuHold.style.opacity = '1';
+	subhead[0].style.opacity = '.35';
+	desc[0].style.opacity = '.35';
+	subhead[1].style.opacity = '.35';
+	desc[1].style.opacity = '.35';
+	overlayNextButton.style.opacity = "1";
+	overlayPrevButton.style.opacity = "1";
+	overlayCloseButton.style.opacity = "1";
+	overlayContactButton.style.opacity = "1";
 	overlayNextButton.tabIndex = "1";
 	overlayPrevButton.tabIndex = "1";
 	overlayCloseButton.tabIndex = "1";
@@ -908,10 +927,10 @@ function getCube(e){
 	}
 	isRotating = true;
 };
-hold.addEventListener('mousedown', getCube);
-hold.addEventListener('touchstart', getCube, {passive: true});
-hold.addEventListener('mousemove', rotate);
-hold.addEventListener('touchmove', rotate, {passive: true});
+main.addEventListener('mousedown', getCube);
+main.addEventListener('touchstart', getCube, {passive: true});
+main.addEventListener('mousemove', rotate);
+main.addEventListener('touchmove', rotate, {passive: true});
 document.addEventListener('touchmove', e => {
 	if(e.target.tagName === 'A'){
 		e.preventDefault();
@@ -926,9 +945,9 @@ function releaseCube(e){
 	rotObj[whichPB].x = rotObj[whichPB].xs || 0;
 	rotObj[whichPB].y = rotObj[whichPB].ys || 0;
 };
-hold.addEventListener('mouseup', releaseCube);
-hold.addEventListener('touchend', releaseCube);
-hold.addEventListener('mouseleave', (e) => {
+main.addEventListener('mouseup', releaseCube);
+main.addEventListener('touchend', releaseCube);
+main.addEventListener('mouseleave', (e) => {
 	isRotating = false;
 	xEnd = e.x + window.scrollX;
 	yEnd = e.y - 0 + window.scrollY;
