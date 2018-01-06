@@ -8,9 +8,7 @@
 	--size: 220px;
 	--delay: 0s;
 }
-.hold input[type="range"]{
-	margin-bottom: 4em;
-}
+
 body{
 	background-color: #555;
 	background: no-repeat url('images/sky-mob.jpg');
@@ -109,7 +107,7 @@ button:hover, button:focus{
 
 
 .table{
-	display: none;
+	/*display: none;*/
 	position: absolute;
 	width: 310px;
 	height: 423px;
@@ -288,14 +286,20 @@ button:hover, button:focus{
 
 .table canvas#scroll{
 	position: absolute;
-	background-color: red;
+	background-color: transparent;
 	z-index: -1;
 
 }
 
+caption p:first-of-type{
+	font-size: 32px;
+	font-weight: 700;
+}
 
-
-
+caption p:last-of-type{
+	font-size: 16px;
+	font-weight: 700;
+}
 
 
 
@@ -307,7 +311,7 @@ button:hover, button:focus{
 	transform: rotateZ(30deg);
 	transition: transform .8s;
 }
-.hold > h1{
+main > h1{
 	padding: 1em 0 3em;
 	text-align: center;
 	cursor: default;
@@ -316,7 +320,7 @@ button:hover, button:focus{
 	-ms-user-select: none;
 	animation: 1.4s 1.8s 7 cubic-bezier(0.4, 0, 1, 1) bob2;
 }
-.subhead{
+main .hold .subhead{
 	position: absolute;
 	left: 50%;
 	transform: translateX(-50%);
@@ -328,27 +332,27 @@ button:hover, button:focus{
 	-moz-user-select: none;
 	-ms-user-select: none;
 }
-.subhead:nth-of-type(1){
+main .hold .subhead:nth-of-type(1){
 	top: 73px;
 }
-.subhead:nth-of-type(2){
+main .hold .subhead:nth-of-type(2){
 	top: 105px;
 	font-size: 20px;
 	width: 235px;
 	text-align: center;
 }
-.subhead:nth-of-type(3){
+main .hold .subhead:nth-of-type(3){
 	top: calc((var(--size) * 1.2) + 160px);
 	text-shadow: 1px 1px 0 white;
 }
-.subhead:nth-of-type(4){
+main .hold .subhead:nth-of-type(4){
 	top: calc((var(--size) * 1.2) + 192px);
 	font-size: 20px;
 	width: 235px;
 	text-align: center;
 	text-shadow: 1px 1px 0 white;
 }
-main{
+.hold{
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
@@ -367,6 +371,15 @@ div.overlay{
 	z-index: 35;
 	justify-content: center;
 	align-items: center;
+}
+div.overlay2{
+	display: none;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	background-color: transparent;
+	z-index: 35;
 }
 .canvasholder{
 	display: none;
@@ -450,14 +463,15 @@ button.contact{
 	justify-content: space-around;
 }
 .canvasbuttons #contactinfolinks svg{
-	height: 80px;
+	height: 85px;
 	width: 80px;
 	fill: #2f2f2f;
 }
 .canvasbuttons #contactinfolinks a{
 	border: 3px solid transparent;
 }
-.canvasbuttons #contactinfolinks a:focus{
+.canvasbuttons #contactinfolinks a:focus,
+.canvasbuttons #contactinfolinks a:hover{
 	outline: none;
 	border-color: #2f2f2f;
 }
@@ -1009,30 +1023,30 @@ select:focus{
 	.star hr:nth-of-type(3){
 		border-color: #fecb7f;
 	}
-	.hold > h1{
+	main > h1{
 		margin-bottom: 2.8em;
 		animation: 1.4s 1.8s 7 cubic-bezier(0.4, 0, 1, 1) bob;
 	}
-	main{
+	.hold{
 		flex-direction: row;
 	}
-	.subhead{
+	main .hold .subhead{
 		left: 25%;
 		font-size: 32px;
 	}
-	.subhead:nth-of-type(odd){
+	main .hold .subhead:nth-of-type(odd){
 		top: 73px;
 	}
-	.subhead:nth-of-type(even){
+	main .hold .subhead:nth-of-type(even){
 		top: 105px;
 		font-size: 22px;
 		width: 260px;
 	}
-	.subhead:nth-of-type(3){
+	main .hold .subhead:nth-of-type(3){
 		left: 75%;
 		text-shadow: 0px 0px 7px white;
 	}
-	.subhead:nth-of-type(4){
+	main .hold .subhead:nth-of-type(4){
 		left: 75%;
 		text-shadow: 0px 0px 7px white;
 	}
