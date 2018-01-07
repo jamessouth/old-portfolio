@@ -117,10 +117,12 @@ let rotObj = {
 };
 check[0].checked = false;
 check[1].checked = false;
+check[0].setAttribute('aria-checked', false);
+check[1].setAttribute('aria-checked', false);
 seconds.value = 0;
 sizeInput.value = 220;
 radioLinear.checked = true;
-
+radioLinear.setAttribute('aria-checked', true);
 
 
 
@@ -263,6 +265,7 @@ featureTable.addEventListener('mouseout', clearTable);
 check[0].addEventListener('change', function(e){
 	if(e.target.checked){
 		checkLabel[0].textContent = 'GIFs!';
+		this.setAttribute('aria-checked', true);
 		proj3.style.backgroundImage = 'url("images/p3.gif")';
 		proj4.style.backgroundImage = 'url("images/p4.gif")';
 		proj7.style.backgroundImage = 'url("images/p7.gif")';
@@ -271,6 +274,7 @@ check[0].addEventListener('change', function(e){
 		proj11.style.backgroundImage = 'url("images/p11.gif")';
 	} else {
 		checkLabel[0].textContent = 'no GIFs';
+		this.setAttribute('aria-checked', false);
 		proj3.style.backgroundImage = 'url("images/project3.jpg")';
 		proj4.style.backgroundImage = 'url("images/project4.jpg")';
 		proj7.style.backgroundImage = 'url("images/project7.jpg")';
@@ -393,6 +397,8 @@ flipSwitch.addEventListener('click', function(e){
 	}
 	if(switchFlag){
 		radioCurved.checked = true;
+		radioLinear.setAttribute('aria-checked', false);
+		radioCurved.setAttribute('aria-checked', true);
 		switchHolder.style.margin = '22px 0 0 5px';
 		theSwitch.style.transform = 'rotateX(57deg) rotateY(13deg) rotateZ(-19deg)';
 		switchBottom.style.borderTopWidth = '3px';
@@ -406,6 +412,8 @@ flipSwitch.addEventListener('click', function(e){
 		switchFlag = false;
 	} else {
 		radioLinear.checked = true;
+		radioCurved.setAttribute('aria-checked', false);
+		radioLinear.setAttribute('aria-checked', true);
 		switchHolder.style.margin = '7px 0 0 -1px';
 		theSwitch.style.transform = 'rotateX(125deg) rotateY(-13deg) rotateZ(-19deg)';
 		switchBottom.style.borderTopWidth = '4px';
@@ -443,6 +451,7 @@ function handleRangeUpdate() {
 	const width = this.max - this.min;
 	const perc = Math.floor(((this.value - width) / width) * 100) / 100;
 	document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+	this.setAttribute('aria-valuenow', this.value);
 	sizeInputP.textContent = `<\u00A0\u00A0\u00A0${this.value}px\u00A0\u00A0\u00A0>`;
 	sizeTrack.style.width = `${perc * 142}px`;
 	sizeTrack.style.backgroundColor = `hsl(${perc * 720}, 65%, 30%)`;
