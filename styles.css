@@ -31,6 +31,10 @@ html{
 	left: 20px;
 	top: 40px;
 }
+.hamburger p{
+	display: none;
+}
+
 .hamburger:focus,
 .star:focus{
 	outline: none;

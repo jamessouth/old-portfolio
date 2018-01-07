@@ -11,35 +11,36 @@
 	</head>
 	<body ondragstart="return false;">
 
-		<div class="hamburger" tabindex="0">
+		<div aria-describedby="menuexplain" aria-label="website viewing options and contact" role="button" class="hamburger" tabindex="0">
 			<hr>
 			<hr>
 			<hr>
+			<p id="menuexplain">the options herein are presentational only. click this menu button to access my contact info inside.</p>
 		</div>
 
 
 
 		<div class="overlay">
-			<button tabindex="1" class="next">&#9660;</button>
-			<button tabindex="1" class="close">close</button>
-			<button tabindex="1" class="prev">&#9650;</button>
-			<button tabindex="1" class="contact">contact</button>
-			<nav class="menu-hold">
-				<ul>
-					<li data-pos="0">
+			<button aria-label="next menu option" tabindex="1" class="next">&#9660;</button>
+			<button aria-labelledby="close menu" tabindex="1" class="close">close</button>
+			<button aria-label="previous menu option" tabindex="1" class="prev">&#9650;</button>
+			<button aria-labelledby="contact information" tabindex="1" class="contact">contact</button>
+			<div role="menu" class="menu-hold">
+				<ul role="list">
+					<li role="listitem" data-pos="0">
 						<div class="li-overlay"></div>
 						<p>Cube Size</p>
 						<div class="slider">
 							<div class="track"></div>
 							<label for="size">side:</label>
-							<input tabindex="-1" id="size" type="range" name="size" min="220" max="440" value="220" data-sizing="px">
+							<input role="slider" tabindex="-1" id="size" type="range" name="size" aria-valuemin="220" min="220" aria-valuemax="440" max="440" aria-valuenow="220" value="220" data-sizing="px">
 							<p>&lt;&nbsp;&nbsp;&nbsp;220px&nbsp;&nbsp;&nbsp;&gt;</p>
 						</div>
 					</li>
-					<li data-pos="1">
+					<li role="listitem" data-pos="1">
 						<div class="li-overlay"></div>
 						<p>Menu Nav</p>
-						<div class="flip-switch">
+						<div role="radiogroup" class="flip-switch">
 							<div class="rect-prism-container">
 								<div class="switch-rect">
 									<div class="switch-front"></div>
@@ -50,19 +51,19 @@
 									<div class="switch-bottom"></div>
 								</div>
 							</div>
-							<input tabindex="-1" id="linear" name="menu-type" type="radio" value="linear"/>
+							<input role="radio" tabindex="-1" id="linear" name="menu-type" type="radio" value="linear"/>
 							<label for="linear">linear</label>
-							<input tabindex="-1" id="curved" name="menu-type" type="radio" value="curved"/>
+							<input role="radio" tabindex="-1" id="curved" name="menu-type" type="radio" value="curved"/>
 							<label for="curved">curved</label>
 						</div>
 					</li>
-					<li data-pos="2">
+					<li role="listitem" data-pos="2">
 						<div class="li-overlay"></div>
 						<p>GIFs on/off</p>
-						<input tabindex="-1" class="check" type="checkbox" id="gifs" name="gifs" value="gif"/>
+						<input aria-checked="false" role="checkbox" tabindex="-1" class="check" type="checkbox" id="gifs" name="gifs" value="gif"/>
 						<label for="gifs">no GIFs</label>
 					</li>
-					<li data-pos="3">
+					<li role="listitem" data-pos="3">
 						<div class="li-overlay"></div>
 						<p>Destroy Cubes</p>
 						<input tabindex="-1" class="check" type="checkbox" id="destroy" name="destroy" value="destroy"/>
@@ -83,7 +84,7 @@
 						<p class="seconds"> seconds after close</p>
 					</li>
 				</ul>
-			</nav>
+			</div>
 			<div class="canvasholder">
 				<canvas id="board" width="300" height="300">Your browser does not support canvas.</canvas>
 				<div class="canvasbuttons">
