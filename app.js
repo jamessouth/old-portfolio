@@ -120,7 +120,10 @@ check[1].checked = false;
 check[0].setAttribute('aria-checked', false);
 check[1].setAttribute('aria-checked', false);
 seconds.value = 0;
+[...seconds.children].forEach(x => x.setAttribute('aria-selected', false));
+seconds.children[0].setAttribute('aria-selected', true);
 sizeInput.value = 220;
+sizeInput.setAttribute('aria-valuenow', 220);
 radioLinear.checked = true;
 radioLinear.setAttribute('aria-checked', true);
 
@@ -286,19 +289,23 @@ check[0].addEventListener('change', function(e){
 check[1].addEventListener('change', function(e){
 	if(e.target.checked){
 		checkLabel[1].textContent = 'DESTROY!';
+		this.setAttribute('aria-checked', true);
 		destroyFlag = true;
 		seconds.style.filter = 'blur(0px)';
 		secondsLabel.style.filter = 'blur(0px)';
 		secondsP.style.filter = 'blur(0px)';
 		seconds.removeAttribute('disabled');
+		seconds.setAttribute('aria-disabled', false);
 		seconds.tabIndex = "1";
 	} else {
 		checkLabel[1].textContent = 'do not destroy';
+		this.setAttribute('aria-checked', false);
 		destroyFlag = false;
 		seconds.style.filter = 'blur(30px)';
 		secondsLabel.style.filter = 'blur(30px)';
 		secondsP.style.filter = 'blur(30px)';
 		seconds.setAttribute('disabled', '');
+		seconds.setAttribute('aria-disabled', true);
 		seconds.tabIndex = "-1";
 	}
 });
@@ -428,6 +435,8 @@ flipSwitch.addEventListener('click', function(e){
 	}
 });
 function handleSelectUpdate() {
+	[...this.children].forEach(x => x.setAttribute('aria-selected', false));
+	this.children[this.value].setAttribute('aria-selected', true);
 	const suffix = this.dataset.sizing;
 	document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
 }
@@ -488,7 +497,7 @@ function handleMenu(e){
 
 
 
-	console.log(this, this.hamb);
+	// console.log(this, this.hamb);
 
 	if(this.hamb){
 		this.children[0].classList.add('top-bun');
@@ -499,6 +508,11 @@ function handleMenu(e){
 		} else {
 			handleCurvedTransInit();
 		}
+		setTimeout(() => {
+			overlayContactButton.focus();
+		}, 400);
+
+
 	} else {
 		overlay2.style.display = 'block';
 		if(tablePlayPauseButton.firstElementChild.alt === 'pause'){
@@ -559,7 +573,7 @@ function destroyCube(cube){
 
 
 function handleClose(e){
-	console.log(this, this.over);
+	// console.log(this, this.over);
 
 	cubeLinks.forEach(x => x.tabIndex = "0");
 	menuIcon.tabIndex = "0";
@@ -587,7 +601,7 @@ function handleClose(e){
 			destroyCube(pb[0]);
 			destroyCube(pb[1]);
 		}
-
+		menuIcon.focus();
 
 
 	} else {
@@ -679,6 +693,7 @@ function animate2(){
 		linksDiv.style.zIndex = 5;
 		linksDivLinks[0].tabIndex = "1";
 		linksDivLinks[1].tabIndex = "1";
+		linksDivLinks[0].focus();
 	}
 }
 for(let i = 100; i >= 0; i--){
@@ -768,10 +783,6 @@ canvArray[doable[1][14]].unshift(image14);
 canvArray[15].unshift('blank');
 overlayContactButton.addEventListener('click', function(e){
 	canvasholder.style.display = 'flex';
-	// overlay.style.filter = 'blur(30px)';
-	// menuIcon.style.display = 'none';
-	// projectNotesIcon.style.display = 'none';
-	// main.style.display = 'none';
 	menuHold.style.opacity = '0';
 	subhead[0].style.opacity = '0';
 	desc[0].style.opacity = '0';
@@ -785,9 +796,13 @@ overlayContactButton.addEventListener('click', function(e){
 	overlayPrevButton.tabIndex = "-1";
 	overlayCloseButton.tabIndex = "-1";
 	overlayContactButton.tabIndex = "-1";
+
+	seconds.tabIndex = "-1";
+
 	for(let i = 0; i < options.length; i++){
 		options[i].tabIndex = "-1";
 		let thisInput = options[i].querySelectorAll('input');
+
 		if(thisInput[1]){
 			thisInput[1].tabIndex = "-1";
 		}
@@ -796,6 +811,9 @@ overlayContactButton.addEventListener('click', function(e){
 	if(canvArray.length == 0){
 		linksDivLinks[0].tabIndex = "1";
 		linksDivLinks[1].tabIndex = "1";
+		linksDivLinks[0].focus();
+	} else {
+		canvasbuttons[1].focus();
 	}
 	for(let i = 0; i < canvArray.length - 1; i++){
 		ctx.drawImage(canvArray[i][0], canvArray[i][1], canvArray[i][3], 75, 75);
@@ -895,11 +913,13 @@ canvasbuttons[0].addEventListener('click', e => {
 	overlayContactButton.tabIndex = "1";
 	linksDivLinks[0].tabIndex = "-1";
 	linksDivLinks[1].tabIndex = "-1";
+	seconds.tabIndex = seconds.hasAttribute('disabled') ? "-1" : "1";
 	for(let i = 0; i < options.length; i++){
 		if(options[i].dataset.pos === '0'){
 			tabIndMgrCurrentItem(i);
 		}
 	}
+	overlayCloseButton.focus();
 });
 canvasbuttons[1].addEventListener('click', e => {
 	helpText.style.display = 'none';
