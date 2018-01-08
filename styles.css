@@ -31,7 +31,11 @@ html{
 	left: 20px;
 	top: 40px;
 }
-.hamburger p{
+#menuexplain,
+#contactexplain,
+#twitterexplain,
+#emailexplain,
+#starexplain{
 	display: none;
 }
 
