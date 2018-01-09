@@ -11,22 +11,22 @@
 	</head>
 	<body ondragstart="return false;">
 
-		<div aria-describedby="menuexplain" aria-label="website viewing options and contact information" role="button" class="hamburger" tabindex="0">
+		<div aria-describedby="menuexplain" aria-label="contact information" role="button" class="hamburger" tabindex="0">
 			<hr>
 			<hr>
 			<hr>
-			<p id="menuexplain">the options herein are presentational only. click this menu button to access my contact info inside.</p>
+			<p id="menuexplain">click this menu button to access my contact info inside.</p>
 		</div>
 
 
 
 		<div class="overlay">
-			<button aria-label="next menu option" tabindex="1" class="next">&#9660;</button>
-			<button aria-labelledby="close" tabindex="1" class="close">close</button>
-			<button aria-label="previous menu option" tabindex="1" class="prev">&#9650;</button>
-			<button aria-labelledby="contact information" tabindex="1" class="contact">contact</button>
+			<button aria-hidden="true" aria-label="next menu option" tabindex="1" class="next">&#9660;</button>
+			<button tabindex="1" class="close">close</button>
+			<button aria-hidden="true" aria-label="previous menu option" tabindex="1" class="prev">&#9650;</button>
+			<button tabindex="1" class="contact">contact</button>
 			<div role="menu" class="menu-hold">
-				<ul role="list">
+				<ul aria-hidden="true" role="list">
 					<li role="listitem" data-pos="0">
 						<div class="li-overlay"></div>
 						<p>Cube Size</p>
@@ -88,12 +88,12 @@
 			<div class="canvasholder">
 				<canvas id="board" width="300" height="300">Your browser does not support canvas.</canvas>
 				<div class="canvasbuttons">
-					<button aria-labelledby="close contact information">close</button>
+					<button>close</button>
 					<div class="clickCounter">
 						<p>Clicks:</p>
 						<p>0</p>
 					</div>
-					<button aria-labelledby="reveal contact information" aria-describedby="contactexplain">reveal</button>
+					<button aria-describedby="contactexplain">reveal</button>
 					<canvas id="fader" width="75" height="75">Your browser does not support canvas.</canvas>
 					<div class="help">
 						<p>^</p>
@@ -121,197 +121,199 @@
 			<hr>
 			<hr>
 			<hr>
-			<p id="starexplain">this is a tabular feature chart showing each project in my portfolio and the technologies and skills they use.</p>
+			<p id="starexplain">this is a tabular feature chart showing each project in my portfolio and the technologies and skills used.</p>
 		</div>
 
 		<div class="overlay2">
-			<aside class="table">
+			<div class="table">
 				<button aria-label="close" tabindex="1">X</button>
-				<button aria-labelledby="pause" class="play_pause" tabindex="1"><img alt="pause" src="images/pause.png"></button>
+				<button aria-pressed="false" aria-labelledby="pauseexplain" class="play_pause" tabindex="1"><img alt="pause" src="images/pause.png"></button>
+				<p id="pauseexplain">pause/play toggle button. this table has an animation as its background. pause it for better performance. currently playing.</p>
+				<p id="tableexplain">the rows in this table are the projects by number. the columns are various skills or technologies. if a project features a skill or technology, there is a check image at the cell where they intersect and i will say check.</p>
 				<canvas id="scroll" width="310" height="423">Your browser does not support canvas.</canvas>
-				<table>
+				<table aria-describedby="tableexplain">
 					<caption>
 
 						<p class="heading">Project Notes</p>
 						<p>All projects use HTML and CSS</p>
 					</caption>
-					<thead>
-						<tr>
-							<th id="project" scope="col"><span>Project</span></th>
-							<th id="js" scope="col"><span>JavaScript</span></th>
-							<th id="libraries" scope="col"><span>Libraries</span></th>
-							<th id="sass" scope="col"><span>Sass</span></th>
-							<th id="svgs" scope="col"><span>SVGs</span></th>
-							<th id="video" scope="col"><span>Video</span></th>
-							<th id="wai-aria" scope="col"><span>WAI-ARIA</span></th>
-							<th id="apis" scope="col"><span>APIs</span></th>
-							<th id="react" scope="col"><span>React</span></th>
-							<th id="canvas" scope="col"><span>Canvas</span></th>
-							<th id="threeD" scope="col"><span>3-D</span></th>
+					<thead role="rowgroup">
+						<tr role="row">
+							<th role="columnheader" id="project" scope="col"><span>Project</span></th>
+							<th role="columnheader" id="js" scope="col"><span>JavaScript</span></th>
+							<th role="columnheader" id="libraries" scope="col"><span>Libraries</span></th>
+							<th role="columnheader" id="sass" scope="col"><span>Sass</span></th>
+							<th role="columnheader" id="svgs" scope="col"><span>SVGs</span></th>
+							<th role="columnheader" id="video" scope="col"><span>Video</span></th>
+							<th role="columnheader" id="wai-aria" scope="col"><span>WAI-ARIA</span></th>
+							<th role="columnheader" id="apis" scope="col"><span>APIs</span></th>
+							<th role="columnheader" id="react" scope="col"><span>React</span></th>
+							<th role="columnheader" id="canvas" scope="col"><span>Canvas</span></th>
+							<th role="columnheader" id="threeD" scope="col"><span>3-D</span></th>
 						</tr>
 					</thead>
-					<tbody>
-						<tr>
+					<tbody role="rowgroup">
+						<tr role="row">
 							<th id="one" scope="row">1</th>
-							<td headers="one js"></td>
-							<td headers="one libraries"></td>
-							<td headers="one sass"></td>
-							<td headers="one svgs"></td>
-							<td headers="one video"></td>
-							<td headers="one wai-aria"></td>
-							<td headers="one apis"></td>
-							<td headers="one react"></td>
-							<td headers="one canvas"></td>
-							<td headers="one threeD"></td>
+							<td role="cell" headers="one js"></td>
+							<td role="cell" headers="one libraries"></td>
+							<td role="cell" headers="one sass"></td>
+							<td role="cell" headers="one svgs"></td>
+							<td role="cell" headers="one video"></td>
+							<td role="cell" headers="one wai-aria"></td>
+							<td role="cell" headers="one apis"></td>
+							<td role="cell" headers="one react"></td>
+							<td role="cell" headers="one canvas"></td>
+							<td role="cell" headers="one threeD"></td>
 						</tr>
-						<tr>
+						<tr role="row">
 							<th id="two" scope="row">2</th>
-							<td headers="two js"></td>
-							<td headers="two libraries"></td>
-							<td headers="two sass"></td>
-							<td headers="two svgs"></td>
-							<td headers="two video"></td>
-							<td headers="two wai-aria"></td>
-							<td headers="two apis"></td>
-							<td headers="two react"></td>
-							<td headers="two canvas"></td>
-							<td headers="two threeD"></td>
+							<td role="cell" headers="two js"></td>
+							<td role="cell" headers="two libraries"></td>
+							<td role="cell" headers="two sass"></td>
+							<td role="cell" headers="two svgs"></td>
+							<td role="cell" headers="two video"></td>
+							<td role="cell" headers="two wai-aria"></td>
+							<td role="cell" headers="two apis"></td>
+							<td role="cell" headers="two react"></td>
+							<td role="cell" headers="two canvas"></td>
+							<td role="cell" headers="two threeD"></td>
 						</tr>
-						<tr>
+						<tr role="row">
 							<th id="three" scope="row">3</th>
-							<td headers="three js"></td>
-							<td headers="three libraries"></td>
-							<td headers="three sass"></td>
-							<td headers="three svgs"></td>
-							<td headers="three video"></td>
-							<td headers="three wai-aria"></td>
-							<td headers="three apis"></td>
-							<td headers="three react"></td>
-							<td headers="three canvas"></td>
-							<td headers="three threeD"></td>
+							<td role="cell" headers="three js"></td>
+							<td role="cell" headers="three libraries"></td>
+							<td role="cell" headers="three sass"></td>
+							<td role="cell" headers="three svgs"></td>
+							<td role="cell" headers="three video"></td>
+							<td role="cell" headers="three wai-aria"></td>
+							<td role="cell" headers="three apis"></td>
+							<td role="cell" headers="three react"></td>
+							<td role="cell" headers="three canvas"></td>
+							<td role="cell" headers="three threeD"></td>
 						</tr>
-						<tr>
+						<tr role="row">
 							<th id="four" scope="row">4</th>
-							<td headers="four js"><img alt="check" src="images/check.png"></td>
-							<td headers="four libraries"><img alt="check" src="images/check.png"></td>
-							<td headers="four sass"></td>
-							<td headers="four svgs"></td>
-							<td headers="four video"></td>
-							<td headers="four wai-aria"></td>
-							<td headers="four apis"></td>
-							<td headers="four react"></td>
-							<td headers="four canvas"></td>
-							<td headers="four threeD"></td>
+							<td role="cell" headers="four js"><img alt="check" src="images/check.png"></td>
+							<td role="cell" headers="four libraries"><img alt="check" src="images/check.png"></td>
+							<td role="cell" headers="four sass"></td>
+							<td role="cell" headers="four svgs"></td>
+							<td role="cell" headers="four video"></td>
+							<td role="cell" headers="four wai-aria"></td>
+							<td role="cell" headers="four apis"></td>
+							<td role="cell" headers="four react"></td>
+							<td role="cell" headers="four canvas"></td>
+							<td role="cell" headers="four threeD"></td>
 						</tr>
-						<tr>
+						<tr role="row">
 							<th id="five" scope="row">5</th>
-							<td headers="five js"></td>
-							<td headers="five libraries"></td>
-							<td headers="five sass"><img alt="check" src="images/check.png"></td>
-							<td headers="five svgs"></td>
-							<td headers="five video"></td>
-							<td headers="five wai-aria"></td>
-							<td headers="five apis"></td>
-							<td headers="five react"></td>
-							<td headers="five canvas"></td>
-							<td headers="five threeD"></td>
+							<td role="cell" headers="five js"></td>
+							<td role="cell" headers="five libraries"></td>
+							<td role="cell" headers="five sass"><img alt="check" src="images/check.png"></td>
+							<td role="cell" headers="five svgs"></td>
+							<td role="cell" headers="five video"></td>
+							<td role="cell" headers="five wai-aria"></td>
+							<td role="cell" headers="five apis"></td>
+							<td role="cell" headers="five react"></td>
+							<td role="cell" headers="five canvas"></td>
+							<td role="cell" headers="five threeD"></td>
 						</tr>
-						<tr>
+						<tr role="row">
 							<th id="six" scope="row">6</th>
-							<td headers="six js"></td>
-							<td headers="six libraries"></td>
-							<td headers="six sass"></td>
-							<td headers="six svgs"><img alt="check" src="images/check.png"></td>
-							<td headers="six video"></td>
-							<td headers="six wai-aria"></td>
-							<td headers="six apis"></td>
-							<td headers="six react"></td>
-							<td headers="six canvas"></td>
-							<td headers="six threeD"></td>
+							<td role="cell" headers="six js"></td>
+							<td role="cell" headers="six libraries"></td>
+							<td role="cell" headers="six sass"></td>
+							<td role="cell" headers="six svgs"><img alt="check" src="images/check.png"></td>
+							<td role="cell" headers="six video"></td>
+							<td role="cell" headers="six wai-aria"></td>
+							<td role="cell" headers="six apis"></td>
+							<td role="cell" headers="six react"></td>
+							<td role="cell" headers="six canvas"></td>
+							<td role="cell" headers="six threeD"></td>
 						</tr>
-						<tr>
+						<tr role="row">
 							<th id="seven" scope="row">7</th>
-							<td headers="seven js"><img alt="check" src="images/check.png"></td>
-							<td headers="seven libraries"><img alt="check" src="images/check.png"></td>
-							<td headers="seven sass"></td>
-							<td headers="seven svgs"></td>
-							<td headers="seven video"><img alt="check" src="images/check.png"></td>
-							<td headers="seven wai-aria"></td>
-							<td headers="seven apis"></td>
-							<td headers="seven react"></td>
-							<td headers="seven canvas"></td>
-							<td headers="seven threeD"></td>
+							<td role="cell" headers="seven js"><img alt="check" src="images/check.png"></td>
+							<td role="cell" headers="seven libraries"><img alt="check" src="images/check.png"></td>
+							<td role="cell" headers="seven sass"></td>
+							<td role="cell" headers="seven svgs"></td>
+							<td role="cell" headers="seven video"><img alt="check" src="images/check.png"></td>
+							<td role="cell" headers="seven wai-aria"></td>
+							<td role="cell" headers="seven apis"></td>
+							<td role="cell" headers="seven react"></td>
+							<td role="cell" headers="seven canvas"></td>
+							<td role="cell" headers="seven threeD"></td>
 						</tr>
-						<tr>
+						<tr role="row">
 							<th id="eight" scope="row">8</th>
-							<td headers="eight js"></td>
-							<td headers="eight libraries"></td>
-							<td headers="eight sass"></td>
-							<td headers="eight svgs"></td>
-							<td headers="eight video"></td>
-							<td headers="eight wai-aria"><img alt="check" src="images/check.png"></td>
-							<td headers="eight apis"></td>
-							<td headers="eight react"></td>
-							<td headers="eight canvas"></td>
-							<td headers="eight threeD"></td>
+							<td role="cell" headers="eight js"></td>
+							<td role="cell" headers="eight libraries"></td>
+							<td role="cell" headers="eight sass"></td>
+							<td role="cell" headers="eight svgs"></td>
+							<td role="cell" headers="eight video"></td>
+							<td role="cell" headers="eight wai-aria"><img alt="check" src="images/check.png"></td>
+							<td role="cell" headers="eight apis"></td>
+							<td role="cell" headers="eight react"></td>
+							<td role="cell" headers="eight canvas"></td>
+							<td role="cell" headers="eight threeD"></td>
 						</tr>
-						<tr>
+						<tr role="row">
 							<th id="nine" scope="row">9</th>
-							<td headers="nine js"><img alt="check" src="images/check.png"></td>
-							<td headers="nine libraries"><img alt="check" src="images/check.png"></td>
-							<td headers="nine sass"></td>
-							<td headers="nine svgs"><img alt="check" src="images/check.png"></td>
-							<td headers="nine video"></td>
-							<td headers="nine wai-aria"></td>
-							<td headers="nine apis"><img alt="check" src="images/check.png"></td>
-							<td headers="nine react"></td>
-							<td headers="nine canvas"><img alt="check" src="images/check.png"></td>
-							<td headers="nine threeD"></td>
+							<td role="cell" headers="nine js"><img alt="check" src="images/check.png"></td>
+							<td role="cell" headers="nine libraries"><img alt="check" src="images/check.png"></td>
+							<td role="cell" headers="nine sass"></td>
+							<td role="cell" headers="nine svgs"><img alt="check" src="images/check.png"></td>
+							<td role="cell" headers="nine video"></td>
+							<td role="cell" headers="nine wai-aria"></td>
+							<td role="cell" headers="nine apis"><img alt="check" src="images/check.png"></td>
+							<td role="cell" headers="nine react"></td>
+							<td role="cell" headers="nine canvas"><img alt="check" src="images/check.png"></td>
+							<td role="cell" headers="nine threeD"></td>
 						</tr>
-						<tr>
+						<tr role="row">
 							<th id="ten" scope="row">10</th>
-							<td headers="ten js"><img alt="check" src="images/check.png"></td>
-							<td headers="ten libraries"><img alt="check" src="images/check.png"></td>
-							<td headers="ten sass"></td>
-							<td headers="ten svgs"></td>
-							<td headers="ten video"></td>
-							<td headers="ten wai-aria"></td>
-							<td headers="ten apis"><img alt="check" src="images/check.png"></td>
-							<td headers="ten react"></td>
-							<td headers="ten canvas"></td>
-							<td headers="ten threeD"></td>
+							<td role="cell" headers="ten js"><img alt="check" src="images/check.png"></td>
+							<td role="cell" headers="ten libraries"><img alt="check" src="images/check.png"></td>
+							<td role="cell" headers="ten sass"></td>
+							<td role="cell" headers="ten svgs"></td>
+							<td role="cell" headers="ten video"></td>
+							<td role="cell" headers="ten wai-aria"></td>
+							<td role="cell" headers="ten apis"><img alt="check" src="images/check.png"></td>
+							<td role="cell" headers="ten react"></td>
+							<td role="cell" headers="ten canvas"></td>
+							<td role="cell" headers="ten threeD"></td>
 						</tr>
-						<tr>
+						<tr role="row">
 							<th id="eleven" scope="row">11</th>
-							<td headers="eleven js"><img alt="check" src="images/check.png"></td>
-							<td headers="eleven libraries"><img alt="check" src="images/check.png"></td>
-							<td headers="eleven sass"></td>
-							<td headers="eleven svgs"></td>
-							<td headers="eleven video"></td>
-							<td headers="eleven wai-aria"></td>
-							<td headers="eleven apis"><img alt="check" src="images/check.png"></td>
-							<td headers="eleven react"><img alt="check" src="images/check.png"></td>
-							<td headers="eleven canvas"></td>
-							<td headers="eleven threeD"></td>
+							<td role="cell" headers="eleven js"><img alt="check" src="images/check.png"></td>
+							<td role="cell" headers="eleven libraries"><img alt="check" src="images/check.png"></td>
+							<td role="cell" headers="eleven sass"></td>
+							<td role="cell" headers="eleven svgs"></td>
+							<td role="cell" headers="eleven video"></td>
+							<td role="cell" headers="eleven wai-aria"></td>
+							<td role="cell" headers="eleven apis"><img alt="check" src="images/check.png"></td>
+							<td role="cell" headers="eleven react"><img alt="check" src="images/check.png"></td>
+							<td role="cell" headers="eleven canvas"></td>
+							<td role="cell" headers="eleven threeD"></td>
 						</tr>
-						<tr>
+						<tr role="row">
 							<th id="twelve" scope="row">12</th>
-							<td headers="twelve js"><img alt="check" src="images/check.png"></td>
-							<td headers="twelve libraries"></td>
-							<td headers="twelve sass"></td>
-							<td headers="twelve svgs"><img alt="check" src="images/check.png"></td>
-							<td headers="twelve video"></td>
-							<td headers="twelve wai-aria"></td>
-							<td headers="twelve apis"></td>
-							<td headers="twelve react"></td>
-							<td headers="twelve canvas"><img alt="check" src="images/check.png"></td>
-							<td headers="twelve threeD"><img alt="check" src="images/check.png"></td>
+							<td role="cell" headers="twelve js"><img alt="check" src="images/check.png"></td>
+							<td role="cell" headers="twelve libraries"></td>
+							<td role="cell" headers="twelve sass"></td>
+							<td role="cell" headers="twelve svgs"><img alt="check" src="images/check.png"></td>
+							<td role="cell" headers="twelve video"></td>
+							<td role="cell" headers="twelve wai-aria"><img alt="check" src="images/check.png"></td>
+							<td role="cell" headers="twelve apis"></td>
+							<td role="cell" headers="twelve react"></td>
+							<td role="cell" headers="twelve canvas"><img alt="check" src="images/check.png"></td>
+							<td role="cell" headers="twelve threeD"><img alt="check" src="images/check.png"></td>
 						</tr>
 					</tbody>
-			    </table>
+			 </table>
 
 
-			</aside>
+			</div>
 		</div>
 
 		<main role="main">
