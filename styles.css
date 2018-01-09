@@ -35,7 +35,9 @@ html{
 #contactexplain,
 #twitterexplain,
 #emailexplain,
-#starexplain{
+#starexplain,
+#pauseexplain,
+#tableexplain{
 	display: none;
 }
 
@@ -152,13 +154,15 @@ button:hover, button:focus{
 	width: 100%;
 	border-collapse: collapse;
 	border: 2px solid red;
-
+	outline: none;
 }
 .table table thead tr th{
 	border-bottom: 1px green solid;
 
 	white-space: nowrap;
 }
+
+
 
 .table table thead tr th span{
 	font-family: 'Saira Condensed', sans-serif;

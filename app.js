@@ -10,6 +10,7 @@ const tableTDs = featureTable.querySelectorAll('td');
 const tableTHSpans = featureTable.querySelectorAll('thead th span');
 const tableCloseButton = document.querySelector('.overlay2 .table button');
 const tablePlayPauseButton = document.querySelector('.overlay2 .table button.play_pause');
+const pauseExplain = document.querySelector('#pauseexplain');
 const canvas = document.querySelector('canvas#board');
 const canvasholder = document.querySelector('.canvasholder');
 const sizeInput = document.querySelector('.menu-hold .slider input');
@@ -214,9 +215,13 @@ function draw() {
 }
 
 
-// featureTable.addEventListener('click', e => console.log(e.layerX,e.layerY));
-
-
+// featureTable.addEventListener('focus', function(e){
+// 	this.firstElementChild.style.color = 'white';
+// });
+//
+// featureTable.addEventListener('blur', function(e){
+// 	this.firstElementChild.style.color = 'black';
+// });
 
 
 
@@ -483,9 +488,14 @@ function handleMenu(e){
 	}
 
 
-	cubeLinks.forEach(x => x.tabIndex = "-1");
+	cubeLinks.forEach(x => {
+		x.tabIndex = "-1";
+		x.setAttribute('aria-hidden', true);
+	});
 	menuIcon.tabIndex = "-1";
+	menuIcon.setAttribute('aria-hidden', true);
 	projectNotesIcon.tabIndex = "-1";
+	projectNotesIcon.setAttribute('aria-hidden', true);
 	this.blur();
 	main.style.opacity = '0.35';
 	menuIcon.style.opacity = '0.35';
@@ -575,9 +585,15 @@ function destroyCube(cube){
 function handleClose(e){
 	// console.log(this, this.over);
 
-	cubeLinks.forEach(x => x.tabIndex = "0");
+	cubeLinks.forEach(x => {
+		x.tabIndex = "0";
+		x.removeAttribute('aria-hidden');
+	});
 	menuIcon.tabIndex = "0";
 	projectNotesIcon.tabIndex = "0";
+
+// make loop here for icons
+
 	main.style.opacity = '1';
 	menuIcon.style.opacity = '1';
 	projectNotesIcon.style.opacity = '1';
@@ -622,12 +638,16 @@ tablePlayPauseButton.addEventListener('click', function(e){
 
 		this.firstElementChild.src = 'images/play.png';
 		this.firstElementChild.alt = 'play';
+		this.setAttribute('aria-pressed', true);
+		pauseExplain.textContent = 'pause/play toggle button. this table has an animation as its background. pause it for better performance. currently paused.';
 		dy = 0;
 		clearInterval(intrvl);
 
 	} else {
 		this.firstElementChild.src = 'images/pause.png';
 		this.firstElementChild.alt = 'pause';
+		this.setAttribute('aria-pressed', false);
+		pauseExplain.textContent = 'pause/play toggle button. this table has an animation as its background. pause it for better performance. currently playing.';
 		dy = 4.5;
 		intrvl = setInterval(draw, speed);
 		tableImg.src = `images/${sources[Math.floor(Math.random() * sources.length)]}.jpg`;
