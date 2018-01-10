@@ -25,7 +25,7 @@ const overlayContactButton = overlay.querySelector('button.contact');
 const menuHolder = document.querySelector('.menu-hold ul');
 const options = document.querySelectorAll('.menu-hold ul li');
 const menuHold = document.querySelector('.menu-hold');
-const buttons = document.querySelector('button');
+const overlayButtons = document.querySelectorAll('.overlay > button');
 const hold = main.querySelector('div.hold');
 const flipSwitch = document.querySelector('.menu-hold div.flip-switch');
 const radioLinear = flipSwitch.querySelector('input[id="linear"]');
@@ -488,22 +488,25 @@ function handleMenu(e){
 	}
 
 
-	cubeLinks.forEach(x => {
+	[...cubeLinks, menuIcon, projectNotesIcon].forEach(x => {
 		x.tabIndex = "-1";
 		x.setAttribute('aria-hidden', true);
 	});
-	menuIcon.tabIndex = "-1";
-	menuIcon.setAttribute('aria-hidden', true);
-	projectNotesIcon.tabIndex = "-1";
-	projectNotesIcon.setAttribute('aria-hidden', true);
+	// menuIcon.tabIndex = "-1";
+	// menuIcon.setAttribute('aria-hidden', true);
+	// projectNotesIcon.tabIndex = "-1";
+	// projectNotesIcon.setAttribute('aria-hidden', true);
 	this.blur();
-	main.style.opacity = '0.35';
-	menuIcon.style.opacity = '0.35';
-	projectNotesIcon.style.opacity = '0.35';
-	for(let i = 0; i < subhead.length; i++){
-		subhead[i].style.opacity = '0.35';
-		desc[i].style.opacity = '0.35';
-	}
+	headline.setAttribute('aria-hidden', true);
+	[main, menuIcon, projectNotesIcon, subhead[0], subhead[1], desc[0], desc[1]].forEach(w => w.style.opacity = '0.35');
+
+	// main.style.opacity = '0.35';
+	// menuIcon.style.opacity = '0.35';
+	// projectNotesIcon.style.opacity = '0.35';
+	// for(let i = 0; i < subhead.length; i++){
+	// 	subhead[i].style.opacity = '0.35';
+	// 	desc[i].style.opacity = '0.35';
+	// }
 
 
 
@@ -585,22 +588,21 @@ function destroyCube(cube){
 function handleClose(e){
 	// console.log(this, this.over);
 
-	cubeLinks.forEach(x => {
+	[...cubeLinks, menuIcon, projectNotesIcon].forEach(x => {
 		x.tabIndex = "0";
 		x.removeAttribute('aria-hidden');
 	});
-	menuIcon.tabIndex = "0";
-	projectNotesIcon.tabIndex = "0";
+	headline.removeAttribute('aria-hidden');
+	[main, menuIcon, projectNotesIcon, subhead[0], subhead[1], desc[0], desc[1]].forEach(w => w.style.opacity = '1');
 
-// make loop here for icons
+	// main.style.opacity = '1';
+	// menuIcon.style.opacity = '1';
+	// projectNotesIcon.style.opacity = '1';
 
-	main.style.opacity = '1';
-	menuIcon.style.opacity = '1';
-	projectNotesIcon.style.opacity = '1';
-	for(let i = 0; i < subhead.length; i++){
-		subhead[i].style.opacity = '1';
-		desc[i].style.opacity = '1';
-	}
+	// for(let i = 0; i < subhead.length; i++){
+	// 	subhead[i].style.opacity = '1';
+	// 	desc[i].style.opacity = '1';
+	// }
 
 
 	if(this.over){
@@ -711,8 +713,15 @@ function animate2(){
     t2++;
 	if(t2 === randBoxes.length){
 		linksDiv.style.zIndex = 5;
-		linksDivLinks[0].tabIndex = "1";
-		linksDivLinks[1].tabIndex = "1";
+		// linksDivLinks[0].tabIndex = "1";
+		// linksDivLinks[1].tabIndex = "1";
+
+		linksDivLinks.forEach(s => {
+			s.tabIndex = "1";
+			s.removeAttribute('aria-hidden');
+		});
+
+
 		linksDivLinks[0].focus();
 	}
 }
@@ -803,21 +812,24 @@ canvArray[doable[1][14]].unshift(image14);
 canvArray[15].unshift('blank');
 overlayContactButton.addEventListener('click', function(e){
 	canvasholder.style.display = 'flex';
-	menuHold.style.opacity = '0';
-	subhead[0].style.opacity = '0';
-	desc[0].style.opacity = '0';
-	subhead[1].style.opacity = '0';
-	desc[1].style.opacity = '0';
-	overlayNextButton.style.opacity = "0";
-	overlayPrevButton.style.opacity = "0";
-	overlayCloseButton.style.opacity = "0";
-	overlayContactButton.style.opacity = "0";
-	overlayNextButton.tabIndex = "-1";
-	overlayPrevButton.tabIndex = "-1";
-	overlayCloseButton.tabIndex = "-1";
-	overlayContactButton.tabIndex = "-1";
+	[...overlayButtons, menuHold, subhead[0], subhead[1], desc[0], desc[1]].forEach(f => f.style.opacity = '0');
 
-	seconds.tabIndex = "-1";
+	[...overlayButtons].forEach(g => g.setAttribute('aria-hidden', true));
+	// menuHold.style.opacity = '0';
+	// subhead[0].style.opacity = '0';
+	// desc[0].style.opacity = '0';
+	// subhead[1].style.opacity = '0';
+	// desc[1].style.opacity = '0';
+	// overlayNextButton.style.opacity = "0";
+	// overlayPrevButton.style.opacity = "0";
+	// overlayCloseButton.style.opacity = "0";
+	// overlayContactButton.style.opacity = "0";
+	[...overlayButtons, seconds].forEach(z => z.tabIndex = "-1");
+	// overlayNextButton.tabIndex = "-1";
+	// overlayPrevButton.tabIndex = "-1";
+	// overlayCloseButton.tabIndex = "-1";
+	// overlayContactButton.tabIndex = "-1";
+	// seconds.tabIndex = "-1";
 
 	for(let i = 0; i < options.length; i++){
 		options[i].tabIndex = "-1";
@@ -829,8 +841,14 @@ overlayContactButton.addEventListener('click', function(e){
 		thisInput[0].tabIndex = "-1";
 	}
 	if(canvArray.length == 0){
-		linksDivLinks[0].tabIndex = "1";
-		linksDivLinks[1].tabIndex = "1";
+		// linksDivLinks[0].tabIndex = "1";
+		// linksDivLinks[1].tabIndex = "1";
+
+		linksDivLinks.forEach(s => {
+			s.tabIndex = "1";
+			s.removeAttribute('aria-hidden');
+		});
+
 		linksDivLinks[0].focus();
 	} else {
 		canvasbuttons[1].focus();
@@ -911,7 +929,7 @@ canvas.addEventListener('click', function(e){
 	}
 	clickCounter.textContent = clicks;
 });
-canvasbuttons[0].addEventListener('click', e => {
+canvasbuttons[0].addEventListener('click', e => { //contact info close button
 	canvasholder.style.display = 'none';
 	// overlay.style.filter = 'none';
 	// menuIcon.style.display = 'flex';
@@ -919,20 +937,35 @@ canvasbuttons[0].addEventListener('click', e => {
 	menuIcon.style.zIndex = '5';
 	// main.style.display = 'block';
 	menuHold.style.opacity = '1';
-	subhead[0].style.opacity = '.35';
-	desc[0].style.opacity = '.35';
-	subhead[1].style.opacity = '.35';
-	desc[1].style.opacity = '.35';
-	overlayNextButton.style.opacity = "1";
-	overlayPrevButton.style.opacity = "1";
-	overlayCloseButton.style.opacity = "1";
-	overlayContactButton.style.opacity = "1";
-	overlayNextButton.tabIndex = "1";
-	overlayPrevButton.tabIndex = "1";
-	overlayCloseButton.tabIndex = "1";
-	overlayContactButton.tabIndex = "1";
-	linksDivLinks[0].tabIndex = "-1";
-	linksDivLinks[1].tabIndex = "-1";
+
+	[subhead[0], subhead[1], desc[0], desc[1]].forEach(q => q.style.opacity = '.35');
+	[...overlayButtons].forEach(o => {
+		o.style.opacity = "1";
+		o.tabIndex = "1";
+	});
+
+	// subhead[0].style.opacity = '.35';
+	// desc[0].style.opacity = '.35';
+	// subhead[1].style.opacity = '.35';
+	// desc[1].style.opacity = '.35';
+	// overlayNextButton.style.opacity = "1";
+	// overlayPrevButton.style.opacity = "1";
+	overlayCloseButton.removeAttribute('aria-hidden');
+	overlayContactButton.removeAttribute('aria-hidden');
+	// overlayNextButton.tabIndex = "1";
+	// overlayPrevButton.tabIndex = "1";
+	// overlayCloseButton.tabIndex = "1";
+	// overlayContactButton.tabIndex = "1";
+	// linksDivLinks[0].tabIndex = "-1";
+	// linksDivLinks[1].tabIndex = "-1";
+
+	linksDivLinks.forEach(s => {
+		s.tabIndex = "-1";
+		s.setAttribute('aria-hidden', true);
+	});
+
+
+
 	seconds.tabIndex = seconds.hasAttribute('disabled') ? "-1" : "1";
 	for(let i = 0; i < options.length; i++){
 		if(options[i].dataset.pos === '0'){
