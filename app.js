@@ -53,12 +53,12 @@ const linksDivLinks = document.querySelectorAll('.canvasbuttons #contactinfolink
 const clickCounter = document.querySelector('.canvasbuttons .clickCounter p:last-of-type');
 const helpText = document.querySelector('.canvasbuttons .help');
 const proj3 = document.querySelector('.first:nth-of-type(3)');
-const proj4 = document.querySelector('.first:nth-of-type(4)');
+const proj4 = pb[0].querySelector('.back');
 const proj7 = document.querySelector('.second:nth-of-type(1)');
 const proj9 = document.querySelector('.second:nth-of-type(3)');
-const proj10 = document.querySelector('.second:nth-of-type(4)');
+const proj10 = pb[1].querySelector('.back');
 const proj11 = document.querySelector('.second:nth-of-type(5)');
-
+let classToAdd = '';
 
 menuIcon.hamb = true;
 projectNotesIcon.hamb = false;
@@ -143,7 +143,7 @@ let sources = ['bluecloud', 'cloudvert', 'fire', 'greyclouds', 'jupiter', 'mars'
 
 
 
-tableImg.src = `images/${sources[Math.floor(Math.random() * sources.length)]}.jpg`;
+
 
 let CanvasXSize = 310;
 let CanvasYSize = 423;
@@ -293,6 +293,25 @@ check[0].addEventListener('change', function(e){
 });
 check[1].addEventListener('change', function(e){
 	if(e.target.checked){
+
+
+		fetch('images/explosion.gif')
+		.then(res => {
+			// console.log(res.type, res.status, res.statusText, res.url);
+			return res.status !== 200 ? console.log('there was a problem fetching the resource. Status Code and Text: ' + res.status, res.statusText) : res.blob();
+		})
+		.then(res => {
+			// console.log(res, typeof res);
+			var objectURL = URL.createObjectURL(res);
+			explode[0].src = objectURL;
+			explode[1].src = objectURL;
+		})
+		.catch(err => console.log('Fetch error: ', err));
+
+
+
+
+
 		checkLabel[1].textContent = 'DESTROY!';
 		this.setAttribute('aria-checked', true);
 		destroyFlag = true;
@@ -513,6 +532,30 @@ function handleMenu(e){
 	// console.log(this, this.hamb);
 
 	if(this.hamb){
+
+
+
+		image0.src = 'images/00.jpg';
+		image1.src = 'images/01.jpg';
+		image2.src = 'images/02.jpg';
+		image3.src = 'images/03.jpg';
+		image4.src = 'images/10.jpg';
+		image5.src = 'images/11.jpg';
+		image6.src = 'images/12.jpg';
+		image7.src = 'images/13.jpg';
+		image8.src = 'images/20.jpg';
+		image9.src = 'images/21.jpg';
+		image10.src = 'images/22.jpg';
+		image11.src = 'images/23.jpg';
+		image12.src = 'images/30.jpg';
+		image13.src = 'images/31.jpg';
+		image14.src = 'images/32.jpg';
+		image15.src = 'images/33.jpg';
+		contact.src = 'images/contact.jpg';
+
+
+
+
 		this.children[0].classList.add('top-bun');
 		this.children[2].classList.add('bottom-bun');
 		overlay.style.display = 'flex';
@@ -527,9 +570,16 @@ function handleMenu(e){
 
 
 	} else {
+		tableImg.src = `images/${sources[Math.floor(Math.random() * sources.length)]}.jpg`;
 		overlay2.style.display = 'block';
 		if(tablePlayPauseButton.firstElementChild.alt === 'pause'){
+			tablePlayPauseButton.firstElementChild.src = 'images/pause.png';
+
+
 			animTableCanvas();
+
+
+			
 		}
 
 	}
@@ -753,23 +803,23 @@ function getRands(amt){
 	}
 	return [...nums];
 }
-image0.src = 'images/00.jpg';
-image1.src = 'images/01.jpg';
-image2.src = 'images/02.jpg';
-image3.src = 'images/03.jpg';
-image4.src = 'images/10.jpg';
-image5.src = 'images/11.jpg';
-image6.src = 'images/12.jpg';
-image7.src = 'images/13.jpg';
-image8.src = 'images/20.jpg';
-image9.src = 'images/21.jpg';
-image10.src = 'images/22.jpg';
-image11.src = 'images/23.jpg';
-image12.src = 'images/30.jpg';
-image13.src = 'images/31.jpg';
-image14.src = 'images/32.jpg';
-image15.src = 'images/33.jpg';
-contact.src = 'images/contact.jpg';
+image0.src = 'images/loading.png';
+image1.src = 'images/loading.png';
+image2.src = 'images/loading.png';
+image3.src = 'images/loading.png';
+image4.src = 'images/loading.png';
+image5.src = 'images/loading.png';
+image6.src = 'images/loading.png';
+image7.src = 'images/loading.png';
+image8.src = 'images/loading.png';
+image9.src = 'images/loading.png';
+image10.src = 'images/loading.png';
+image11.src = 'images/loading.png';
+image12.src = 'images/loading.png';
+image13.src = 'images/loading.png';
+image14.src = 'images/loading.png';
+image15.src = 'images/loading.png';
+contact.src = 'images/loading.png';
 function checkBoard(){
 	let randos = getRands(canvArray.length - 1);
 	let solArray = [];
@@ -811,6 +861,10 @@ canvArray[doable[1][13]].unshift(image13);
 canvArray[doable[1][14]].unshift(image14);
 canvArray[15].unshift('blank');
 overlayContactButton.addEventListener('click', function(e){
+
+
+
+
 	canvasholder.style.display = 'flex';
 	[...overlayButtons, menuHold, subhead[0], subhead[1], desc[0], desc[1]].forEach(f => f.style.opacity = '0');
 
@@ -853,8 +907,10 @@ overlayContactButton.addEventListener('click', function(e){
 	} else {
 		canvasbuttons[1].focus();
 	}
-	for(let i = 0; i < canvArray.length - 1; i++){
-		ctx.drawImage(canvArray[i][0], canvArray[i][1], canvArray[i][3], 75, 75);
+	for(let i = 0; i < canvArray.length; i++){
+		if(canvArray[i][0] != 'blank'){
+			ctx.drawImage(canvArray[i][0], canvArray[i][1], canvArray[i][3], 75, 75);
+		} else {}
 	}
 });
 function swapTiles(x, y){
@@ -992,6 +1048,7 @@ function rotate(e){
 	pb[whichPB].style.transform = `rotateX(${-rotObj[whichPB].ys}deg) rotateY(${rotObj[whichPB].xs}deg)`;
 };
 function getCube(e){
+
 	const cubeZeroCtr = { x : (cc[0].offsetLeft + cc[0].offsetWidth/2),
 				  y : (cc[0].offsetTop - 0 + cc[0].offsetHeight/2)
 				}
@@ -1004,9 +1061,13 @@ function getCube(e){
 	const distFromCubeOne = Math.round(Math.sqrt(Math.pow(Math.abs(cubeOneCtr.x - xStart),2) + Math.pow(Math.abs(cubeOneCtr.y - yStart),2)));
 	if(distFromCubeZero <= distFromCubeOne){
 		whichPB = 0;
+		classToAdd = 'first';
 	} else {
 		whichPB = 1;
+		classToAdd = 'second';
 	}
+
+	pb[whichPB].children[3].classList.add(classToAdd);
 	isRotating = true;
 };
 main.addEventListener('mousedown', getCube);
