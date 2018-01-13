@@ -330,7 +330,7 @@ main > h1{
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
-	animation: 1.4s 1.8s 7 cubic-bezier(0.4, 0, 1, 1) bob2;
+	/*animation: 1.4s 1.8s 7 cubic-bezier(0.4, 0, 1, 1) bob2;*/
 }
 main .hold .subhead{
 	position: absolute;
@@ -841,7 +841,7 @@ select:focus{
   -moz-transform-style: preserve-3d;
   transform-style: preserve-3d;
   transform: rotateX(0deg) rotateY(0deg);
-  animation: 1.8s 1 cubic-bezier(0.4, 0, 1, 1) moveAround;
+  /*animation: 1.8s 1 cubic-bezier(0.4, 0, 1, 1) moveAround;*/
 }
 .photo-cube div:focus,
 .photo-cube div a:focus{
@@ -1037,7 +1037,7 @@ select:focus{
 	}
 	main > h1{
 		margin-bottom: 2.8em;
-		animation: 1.4s 1.8s 7 cubic-bezier(0.4, 0, 1, 1) bob;
+		/*animation: 1.4s 1.8s 7 cubic-bezier(0.4, 0, 1, 1) bob;*/
 	}
 	.hold{
 		flex-direction: row;
