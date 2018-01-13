@@ -52,13 +52,13 @@ const linksDiv = document.querySelector('.canvasbuttons #contactinfolinks');
 const linksDivLinks = document.querySelectorAll('.canvasbuttons #contactinfolinks a');
 const clickCounter = document.querySelector('.canvasbuttons .clickCounter p:last-of-type');
 const helpText = document.querySelector('.canvasbuttons .help');
-const proj3 = document.querySelector('.first:nth-of-type(3)');
+const proj3 = pb[0].querySelector('.right');
 const proj4 = pb[0].querySelector('.back');
-const proj7 = document.querySelector('.second:nth-of-type(1)');
-const proj9 = document.querySelector('.second:nth-of-type(3)');
+const proj7 = pb[1].querySelector('.front');
+const proj9 = pb[1].querySelector('.right');
 const proj10 = pb[1].querySelector('.back');
-const proj11 = document.querySelector('.second:nth-of-type(5)');
-let classToAdd = '';
+const proj11 = pb[1].querySelector('.top');
+// let classToAdd = '';
 
 menuIcon.hamb = true;
 projectNotesIcon.hamb = false;
@@ -76,6 +76,7 @@ let prevAnims = ['applyAnimFTMF', 'applyAnimMFTMB', 'applyAnimMBTB', 'applyAnimB
 let boxes = [];
 let t = 0;
 let t2 = 0;
+let t3 = 0;
 let shades = [];
 let canvArray = [];
 let image0 = new Image();
@@ -128,6 +129,23 @@ sizeInput.setAttribute('aria-valuenow', 220);
 radioLinear.checked = true;
 radioLinear.setAttribute('aria-checked', true);
 
+let sideOrder = [3, 1, 2, 5, 4, 0];
+
+function formCubes(timeStamp){
+
+ooo = requestAnimationFrame(formCubes);
+console.log('drawing');
+  if(t3 < sideOrder.length && timeStamp > ((t3 + 1) * 1000)){
+		pb[0].children[sideOrder[t3]].classList.add('first');
+		pb[1].children[sideOrder[t3]].classList.add('second');
+		console.log(timeStamp, t3);
+    t3++;
+		t3 === sideOrder.length && cancelAnimationFrame(ooo);
+	}
+
+};
+
+let ooo = requestAnimationFrame(formCubes);
 
 
 
@@ -579,7 +597,7 @@ function handleMenu(e){
 			animTableCanvas();
 
 
-			
+
 		}
 
 	}
@@ -1061,13 +1079,13 @@ function getCube(e){
 	const distFromCubeOne = Math.round(Math.sqrt(Math.pow(Math.abs(cubeOneCtr.x - xStart),2) + Math.pow(Math.abs(cubeOneCtr.y - yStart),2)));
 	if(distFromCubeZero <= distFromCubeOne){
 		whichPB = 0;
-		classToAdd = 'first';
+		// classToAdd = 'first';
 	} else {
 		whichPB = 1;
-		classToAdd = 'second';
+		// classToAdd = 'second';
 	}
 
-	pb[whichPB].children[3].classList.add(classToAdd);
+	// pb[whichPB].children[3].classList.add(classToAdd);
 	isRotating = true;
 };
 main.addEventListener('mousedown', getCube);
