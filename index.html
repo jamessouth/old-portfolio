@@ -10,16 +10,20 @@
 		<link href="https://fonts.googleapis.com/css?family=Saira+Condensed:700" rel="stylesheet">
 
 		<script>
+
       function measureCRP() {
-        var t = window.performance.timing,
-          interactive = t.domInteractive - t.domLoading,
-          dcl = t.domContentLoadedEventStart - t.domLoading,
-          complete = t.domComplete - t.domLoading;
+				let bbb = document.querySelector('body');
+        var tio = window.performance.timing,
+          interactive = tio.domInteractive - tio.domLoading,
+          dcl = tio.domContentLoadedEventStart - tio.domLoading,
+          complete = tio.domComplete - tio.domLoading;
         var stats = document.createElement('p');
         stats.textContent = 'interactive: ' + interactive + 'ms, ' +
             'dcl: ' + dcl + 'ms, complete: ' + complete + 'ms';
-        document.body.appendChild(stats);
-      }
+						stats.style.color = 'white';
+        bbb.appendChild(stats);
+      };
+			window.onload = measureCRP;
 	   </script>
 
 
@@ -35,13 +39,13 @@
 			<p id="menuexplain">click this menu button to access my contact info inside.</p>
 		</div>
 <!-- 40 reqs -->
-<!-- 55,67,66,64,66,55,68 -->
+<!-- 55,67,66,64,66,55,68,83,79,78 -->
 <!-- fin 1.02, dcl 501, load 1.04 -->
 <!-- 1.85, 1.41, 1.85 -->
 <!-- 807, 443, 808 -->
 <!-- 1.42, 695, 1.27 -->
-
-
+<!-- xxx, 282, 407 -->
+<!-- xxx, 172, 391 -->
 
 
 		<div class="overlay">
@@ -151,7 +155,9 @@
 		<div class="overlay2">
 			<div class="table">
 				<button aria-label="close" tabindex="1">X</button>
-				<button aria-pressed="false" aria-labelledby="pauseexplain" class="play_pause" tabindex="1"><img alt="pause" src="images/loading.png"></button>
+				<button aria-pressed="false" aria-labelledby="pauseexplain" class="play_pause" tabindex="1">
+					<!-- <img alt="pause" src="images/loading.png"> -->
+				</button>
 				<p id="pauseexplain">pause/play toggle button. this table has an animation as its background. pause it for better performance. currently playing.</p>
 				<p id="tableexplain">projects are on rows, skills/technologies are the columns. cells have checkmarks or are empty.</p>
 				<canvas aria-hidden="true" id="scroll" width="310" height="423">Your browser does not support canvas.</canvas>

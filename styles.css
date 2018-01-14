@@ -137,17 +137,29 @@ button:hover, button:focus{
 	left: 15px;
 }
 
-.table button.play_pause{
-	width: 20px;
-	height: 23px;
+button.play_pause{
+	width: 17px;
+	height: 28px;
 	top: 15px;
 	left: auto;
 	right: 15px;
-	background: none;
+	/*background: none;*/
 	border: none;
 	border-radius: 0;
 	box-shadow: none;
+	background-repeat: no-repeat;
+	background-image: url('images/loading.png');
 }
+
+button.play{
+	background-image: url('images/play.png');
+}
+
+button.pause{
+	background-image: url('images/pause.png');
+}
+
+
 
 .table table{
 	table-layout: fixed;
