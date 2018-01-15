@@ -152,13 +152,55 @@ console.log('drawing');
 
 
 
+function panorama(timeStamp){
+
+	mmm = requestAnimationFrame(panorama);
+	// console.log('drawing');
+
+  // if(t3 < sideOrder.length && timeStamp > ((t3 + 1) * 1000)){
+	// 	pb[0].children[sideOrder[t3]].classList.add('first');
+	// 	pb[1].children[sideOrder[t3]].classList.add('second');
+	// 	console.log(timeStamp, t3);
+  //   t3++;
+	// 	t3 === sideOrder.length && cancelAnimationFrame(mmm);
+	// }
+
+	tableCtx.clearRect(0, 0, clearX, clearY);
+
+	if (tableImageY < 0) {
+			tableImageY = imgH - CanvasYSize;
+			console.log(tableImageY, imgH, CanvasYSize);
+	}
+
+
+	tableCtx.drawImage(tableImg, 0, tableImageY, imgW, CanvasYSize,
+	0, 0, CanvasXSize, CanvasYSize);
+
+// console.log(tableImg, 0, tableImageY, imgW, CanvasYSize,0, 0, CanvasXSize, CanvasYSize);
+
+console.log(tableImageY);
+	tableImageY -= dy;
+
+
+
+
+};
+
+
+
+
+
+
+
+
+
 
 
 // 'modified from https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Basic_animations'
 let tableImg = new Image();
 // let imgHolder = [];
 
-let sources = ['bluecloud', 'cloudvert', 'fire', 'greyclouds', 'jupiter', 'mars', 'moon', 'pano', 'rapid', 'shallow'];
+let sources = {'bluecloud': null, 'cloudvert': null, 'fire': null, 'greyclouds': null, 'jupiter': null, 'mars': null, 'moon': null, 'pano': null, 'rapid': null, 'shallow': null};
 
 
 // let sourcesSet = new Set();
@@ -167,72 +209,64 @@ let tableSource;
 
 let CanvasXSize = 310;
 let CanvasYSize = 423;
-let speed = 30; // lower repaints faster
+let speed = 1;
 let tableImageY = 0;
-let dy = 4.5; //higher scrolls faster
+let dy = speed; //higher scrolls faster
 let imgW;
 let imgH;
 let tableImageX = 0;
-let clearX;
-let clearY;
-let tableCtx;
-let intrvl;
+let clearX = CanvasXSize;
+let clearY = CanvasYSize;
+let tableCtx = table.querySelector('canvas#scroll').getContext('2d');
+// let intrvl;
 let myImageData;
 
-function animTableCanvas(){
-	console.log(tableImg.src);
-    imgW = tableImg.width;
-    imgH = tableImg.height;
-    if (imgH > CanvasYSize) {
-        tableImageY = CanvasYSize - imgH;
-				console.log(tableImageY);
-    }
-    if (imgW > CanvasXSize) {
-        clearX = imgW;
-    } else {
-        clearX = CanvasXSize;
-    }
-    if (imgH > CanvasYSize) {
-        clearY = imgH;
-    } else {
-        clearY = CanvasYSize;
-    }
-		console.log(clearX, clearY);
-    tableCtx = table.querySelector('canvas#scroll').getContext('2d');
-
-
-    intrvl = setInterval(draw, speed);
-};
+// function animTableCanvas(){
+//
+//
+//
+//
+//     // if (imgH > CanvasYSize) {
+//     //     clearY = imgH;
+// 		// 		// console.log(clearY);
+//     // } else {
+//     //
+// 		// 		// console.log(clearY);
+//     // }
+// 		// console.log(clearX, clearY);
+//     // tableCtx
+//
+//
+//     // intrvl = setInterval(draw, speed);
+// };
 // let cntr = 0;
 
 
 // window.setInterval(() => {console.log('3 second');}, 3000);
 
 
-function draw() {
-		// console.log('drawing');
-		// cntr++;
-		// if(cntr % 333 === 0){
-		// 	console.log(cntr);
-		// }
-    tableCtx.clearRect(0, 0, clearX, clearY);
-    if (tableImageY > (CanvasYSize)) {
-        tableImageY = CanvasYSize - imgH;
-    }
-    if (tableImageY > (CanvasYSize-imgH)) {
-        tableCtx.drawImage(tableImg, tableImageX, tableImageY - imgH + 1, imgW, imgH);
-    }
-    tableCtx.drawImage(tableImg, tableImageX, tableImageY,imgW, imgH);
-    tableImageY += dy;
-
-		// myImageData = tableCtx.getImageData(155, 34, 1, 1);
-		// if(myImageData.data[3] !== 255){
-		// 	console.log(myImageData.data);
-		// }
-
-		// featureTable.style.borderColor = `rgba(${myImageData.data[0]}, ${myImageData.data[1]}, ${myImageData.data[2]}, 255)`;
-
-}
+// function draw() {
+// 		// console.log('drawing');
+// 		// cntr++;
+// 		// if(cntr % 333 === 0){
+// 		// 	console.log(cntr);
+// 		// }
+//
+//
+//     if (tableImageY > (CanvasYSize-imgH)) {
+//         tableCtx.drawImage(tableImg, tableImageX, tableImageY - imgH, imgW, imgH);
+// 				// console.log(tableImageY, tableImageY - imgH);
+//     }
+//
+// 		// console.log(tableImageY);
+// 		// myImageData = tableCtx.getImageData(155, 34, 1, 1);
+// 		// if(myImageData.data[3] !== 255){
+// 		// 	console.log(myImageData.data);
+// 		// }
+//
+// 		// featureTable.style.borderColor = `rgba(${myImageData.data[0]}, ${myImageData.data[1]}, ${myImageData.data[2]}, 255)`;
+//
+// }
 
 
 // featureTable.addEventListener('focus', function(e){
@@ -590,32 +624,48 @@ function handleMenu(e){
 
 
 	} else {
-		tableSource = sources[Math.floor(Math.random() * sources.length)];
-		let newImg;
 
-		if(!sourcesSet.has(tableSource)){
-			sourcesSet.add(tableSource);
-			newImg = new Image();
+		// console.log(Object.keys(sources));
+
+		tableSource = Object.keys(sources)[Math.floor(Math.random() * Object.keys(sources).length)];
+
+
+		if(!sources[tableSource]){
+			let newImg = new Image();
+
+			newImg.onload = function(){
+				imgW = this.width;
+				imgH = this.height;
+				tableImageY = imgH - CanvasYSize;
+			}
+
+
 			newImg.src = `images/${tableSource}.jpg`;
-			imgHolder.push(newImg);
+			sources[tableSource] = newImg;
+
+			tableImg = sources[tableSource];
+
 		} else {
+
 
 		}
 
 
 
 
-		console.log(sourcesSet);
-		console.log(imgHolder);
-		tableImg = newImg;
+
 
 		overlay2.style.display = 'block';
 		if(tablePlayPauseButton.getAttribute('aria-pressed') === 'false'){
 			// tablePlayPauseButton.classList.add('pause');
 			// tablePlayPauseButton.classList.remove('play');
 			tablePlayPauseButton.className = 'play_pause pause';
-			setTimeout(animTableCanvas, 1000);
+			// setTimeout(animTableCanvas, 1000);
 			// animTableCanvas();
+
+
+			let mmm = requestAnimationFrame(panorama);
+
 
 		}
 
@@ -711,7 +761,7 @@ function handleClose(e){
 
 	} else {
 		overlay2.style.display = 'none';
-		clearInterval(intrvl);
+		// clearInterval(intrvl);
 	}
 
 
@@ -731,30 +781,36 @@ tablePlayPauseButton.addEventListener('click', function(e){
 		this.setAttribute('aria-pressed', true);
 		pauseExplain.textContent = 'pause/play toggle button. this table has an animation as its background. pause it for better performance. currently paused.';
 		dy = 0;
-		clearInterval(intrvl);
+		// clearInterval(intrvl);
+		cancelAnimationFrame(mmm);
 
 	} else {
 		this.className = 'play_pause pause';
 		// this.firstElementChild.alt = 'pause';
 		this.setAttribute('aria-pressed', false);
 		pauseExplain.textContent = 'pause/play toggle button. this table has an animation as its background. pause it for better performance. currently playing.';
-		dy = 4.5;
-		intrvl = setInterval(draw, speed);
+		dy = speed;
+		// intrvl = setInterval(draw, speed);
+		mmm = requestAnimationFrame(panorama);
 
-		tableSource = sources[Math.floor(Math.random() * sources.length)];
-
-
-		sourcesSet.add(tableSource);
-		console.log(sourcesSet);
-
-		tableImg.src = `images/${tableSource}.jpg`;
-
-		sourcesSet.forEach(x => console.log(x));
+		tableSource = Object.keys(sources)[Math.floor(Math.random() * Object.keys(sources).length)];
 
 
+		if(!sources[tableSource]){
+			let newImg = new Image();
+			newImg.src = `images/${tableSource}.jpg`;
+			sources[tableSource] = newImg;
 
-		// tableImg.src = `images/${sources[Math.floor(Math.random() * sources.length)]}.jpg`;
-		console.log(tableImg.src);
+
+			// imgHolder.push(newImg);
+		}
+
+		console.log(tableSource);
+
+
+		// console.log(sourcesSet);
+		// console.log(imgHolder);
+		tableImg = sources[tableSource];
 	}
 
 });
