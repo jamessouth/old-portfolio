@@ -10,6 +10,7 @@ const tableTDs = featureTable.querySelectorAll('td');
 const tableTHSpans = featureTable.querySelectorAll('thead th span');
 const tableCloseButton = document.querySelector('.overlay2 .table button');
 const tablePlayPauseButton = document.querySelector('.overlay2 .table button.play_pause');
+const tableChecks = featureTable.querySelectorAll('img[alt="check"]');
 const pauseExplain = document.querySelector('#pauseexplain');
 const canvas = document.querySelector('canvas#board');
 const canvasholder = document.querySelector('.canvasholder');
@@ -167,9 +168,20 @@ function panorama(timeStamp){
 
 	tableCtx.clearRect(0, 0, clearX, clearY);
 
-	if (tableImageY < 0) {
+	if(CanvasYSize + tableImageY < dy) {
 			tableImageY = imgH - CanvasYSize;
-			console.log(tableImageY, imgH, CanvasYSize);
+			// console.log(tableImageY, imgH, CanvasYSize);
+			// tableCtx.drawImage(tableImg, 0, (imgH + tableImageY), imgW, CanvasYSize,
+			// 0, 0, CanvasXSize, CanvasYSize);
+
+	}
+
+	if(tableImageY < 0) {
+			// tableImageY = imgH - CanvasYSize;
+			// console.log(tableImageY, imgH, CanvasYSize);
+			tableCtx.drawImage(tableImg, 0, (imgH + tableImageY), imgW, CanvasYSize,
+			0, 0, CanvasXSize, CanvasYSize);
+
 	}
 
 
@@ -178,7 +190,7 @@ function panorama(timeStamp){
 
 // console.log(tableImg, 0, tableImageY, imgW, CanvasYSize,0, 0, CanvasXSize, CanvasYSize);
 
-console.log(tableImageY);
+// console.log(tableImageY);
 	tableImageY -= dy;
 
 
@@ -200,7 +212,9 @@ console.log(tableImageY);
 let tableImg = new Image();
 // let imgHolder = [];
 
-let sources = {'bluecloud': null, 'cloudvert': null, 'fire': null, 'greyclouds': null, 'jupiter': null, 'mars': null, 'moon': null, 'pano': null, 'rapid': null, 'shallow': null};
+let sources = {
+	'bluecloud': null, 'cloudvert': null, 'fire': null, 'greyclouds': null, 'jupiter': null, 'mars': null, 'moon': null, 'pano': null, 'rapid': null, 'shallow': null
+};
 
 
 // let sourcesSet = new Set();
@@ -209,9 +223,9 @@ let tableSource;
 
 let CanvasXSize = 310;
 let CanvasYSize = 423;
-let speed = 1;
+let speed = 2; //higher scrolls faster
 let tableImageY = 0;
-let dy = speed; //higher scrolls faster
+let dy = speed;
 let imgW;
 let imgH;
 let tableImageX = 0;
@@ -625,33 +639,6 @@ function handleMenu(e){
 
 	} else {
 
-		// console.log(Object.keys(sources));
-
-		tableSource = Object.keys(sources)[Math.floor(Math.random() * Object.keys(sources).length)];
-
-
-		if(!sources[tableSource]){
-			let newImg = new Image();
-
-			newImg.onload = function(){
-				imgW = this.width;
-				imgH = this.height;
-				tableImageY = imgH - CanvasYSize;
-			}
-
-
-			newImg.src = `images/${tableSource}.jpg`;
-			sources[tableSource] = newImg;
-
-			tableImg = sources[tableSource];
-
-		} else {
-
-
-		}
-
-
-
 
 
 
@@ -662,6 +649,36 @@ function handleMenu(e){
 			tablePlayPauseButton.className = 'play_pause pause';
 			// setTimeout(animTableCanvas, 1000);
 			// animTableCanvas();
+
+			tableChecks.forEach(c => c.src = 'images/check.png');
+			// console.log(Object.keys(sources));
+
+			tableSource = Object.keys(sources)[Math.floor(Math.random() * Object.keys(sources).length)];
+
+
+			if(!sources[tableSource]){
+				let newImg = new Image();
+
+				newImg.onload = function(){
+					imgW = this.width;
+					imgH = this.height;
+					tableImageY = imgH - CanvasYSize;
+				}
+
+
+				newImg.src = `images/${tableSource}.jpg`;
+				sources[tableSource] = newImg;
+
+				tableImg = sources[tableSource];
+
+			} else {
+				tableImg = sources[tableSource];
+				imgW = tableImg.width;
+				imgH = tableImg.height;
+				tableImageY = imgH - CanvasYSize;
+			}
+
+
 
 
 			let mmm = requestAnimationFrame(panorama);
@@ -762,6 +779,7 @@ function handleClose(e){
 	} else {
 		overlay2.style.display = 'none';
 		// clearInterval(intrvl);
+		cancelAnimationFrame(mmm);
 	}
 
 
@@ -791,26 +809,33 @@ tablePlayPauseButton.addEventListener('click', function(e){
 		pauseExplain.textContent = 'pause/play toggle button. this table has an animation as its background. pause it for better performance. currently playing.';
 		dy = speed;
 		// intrvl = setInterval(draw, speed);
-		mmm = requestAnimationFrame(panorama);
+
 
 		tableSource = Object.keys(sources)[Math.floor(Math.random() * Object.keys(sources).length)];
 
 
 		if(!sources[tableSource]){
 			let newImg = new Image();
+
+			newImg.onload = function(){
+				imgW = this.width;
+				imgH = this.height;
+				tableImageY = imgH - CanvasYSize;
+			}
+
 			newImg.src = `images/${tableSource}.jpg`;
 			sources[tableSource] = newImg;
+			tableImg = sources[tableSource];
 
-
-			// imgHolder.push(newImg);
+		} else {
+			tableImg = sources[tableSource];
+			imgW = tableImg.width;
+			imgH = tableImg.height;
+			tableImageY = imgH - CanvasYSize;
 		}
 
-		console.log(tableSource);
+		mmm = requestAnimationFrame(panorama);
 
-
-		// console.log(sourcesSet);
-		// console.log(imgHolder);
-		tableImg = sources[tableSource];
 	}
 
 });
