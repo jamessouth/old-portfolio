@@ -80,22 +80,22 @@ let t2 = 0;
 let t3 = 0;
 let shades = [];
 let canvArray = [];
-let image0 = new Image();
-let image1 = new Image();
-let image2 = new Image();
-let image3 = new Image();
-let image4 = new Image();
-let image5 = new Image();
-let image6 = new Image();
-let image7 = new Image();
-let image8 = new Image();
-let image9 = new Image();
-let image10 = new Image();
-let image11 = new Image();
-let image12 = new Image();
-let image13 = new Image();
-let image14 = new Image();
-let image15 = new Image();
+// let image0 = new Image();
+// let image1 = new Image();
+// let image2 = new Image();
+// let image3 = new Image();
+// let image4 = new Image();
+// let image5 = new Image();
+// let image6 = new Image();
+// let image7 = new Image();
+// let image8 = new Image();
+// let image9 = new Image();
+// let image10 = new Image();
+// let image11 = new Image();
+// let image12 = new Image();
+// let image13 = new Image();
+// let image14 = new Image();
+// let image15 = new Image();
 let contact = new Image();
 let clicks = 0;
 let isRotating = false;
@@ -603,22 +603,22 @@ function handleMenu(e){
 
 
 
-		image0.src = 'images/00.jpg';
-		image1.src = 'images/01.jpg';
-		image2.src = 'images/02.jpg';
-		image3.src = 'images/03.jpg';
-		image4.src = 'images/10.jpg';
-		image5.src = 'images/11.jpg';
-		image6.src = 'images/12.jpg';
-		image7.src = 'images/13.jpg';
-		image8.src = 'images/20.jpg';
-		image9.src = 'images/21.jpg';
-		image10.src = 'images/22.jpg';
-		image11.src = 'images/23.jpg';
-		image12.src = 'images/30.jpg';
-		image13.src = 'images/31.jpg';
-		image14.src = 'images/32.jpg';
-		image15.src = 'images/33.jpg';
+		// image0.src = 'images/00.jpg';
+		// image1.src = 'images/01.jpg';
+		// image2.src = 'images/02.jpg';
+		// image3.src = 'images/03.jpg';
+		// image4.src = 'images/10.jpg';
+		// image5.src = 'images/11.jpg';
+		// image6.src = 'images/12.jpg';
+		// image7.src = 'images/13.jpg';
+		// image8.src = 'images/20.jpg';
+		// image9.src = 'images/21.jpg';
+		// image10.src = 'images/22.jpg';
+		// image11.src = 'images/23.jpg';
+		// image12.src = 'images/30.jpg';
+		// image13.src = 'images/31.jpg';
+		// image14.src = 'images/32.jpg';
+		// image15.src = 'images/33.jpg';
 		contact.src = 'images/contact.jpg';
 
 
@@ -924,7 +924,7 @@ function animate(){
 }
 for(let i = 0; i < 4; i++){
 	for(let j = 0; j < 4; j++){
-		canvArray.push([j * 75, (j * 75) + 75, i * 75, (i * 75) + 75, `${i}${j}`]);
+		canvArray.push([j * 75, i * 75]);
 	}
 }
 function getRands(amt){
@@ -935,30 +935,30 @@ function getRands(amt){
 	}
 	return [...nums];
 }
-image0.src = 'images/loading.png';
-image1.src = 'images/loading.png';
-image2.src = 'images/loading.png';
-image3.src = 'images/loading.png';
-image4.src = 'images/loading.png';
-image5.src = 'images/loading.png';
-image6.src = 'images/loading.png';
-image7.src = 'images/loading.png';
-image8.src = 'images/loading.png';
-image9.src = 'images/loading.png';
-image10.src = 'images/loading.png';
-image11.src = 'images/loading.png';
-image12.src = 'images/loading.png';
-image13.src = 'images/loading.png';
-image14.src = 'images/loading.png';
-image15.src = 'images/loading.png';
-contact.src = 'images/loading.png';
+// image0.src = 'images/loading.png';
+// image1.src = 'images/loading.png';
+// image2.src = 'images/loading.png';
+// image3.src = 'images/loading.png';
+// image4.src = 'images/loading.png';
+// image5.src = 'images/loading.png';
+// image6.src = 'images/loading.png';
+// image7.src = 'images/loading.png';
+// image8.src = 'images/loading.png';
+// image9.src = 'images/loading.png';
+// image10.src = 'images/loading.png';
+// image11.src = 'images/loading.png';
+// image12.src = 'images/loading.png';
+// image13.src = 'images/loading.png';
+// image14.src = 'images/loading.png';
+// image15.src = 'images/loading.png';
+// contact.src = 'images/loading.png';
 function checkBoard(){
 	let randos = getRands(canvArray.length - 1);
 	let solArray = [];
 	randos.forEach((x,i) => {
 		solArray[x] = i;
 	});
-	return [solArray, randos];
+	return [solArray.concat([15]), randos.concat([15])];
 }
 function getInversions(arr){
 	let inversions = 0;
@@ -976,22 +976,25 @@ let doable = checkBoard();
 while(getInversions(doable[0]) % 2 !== 0){
 	doable = checkBoard();
 }
-canvArray[doable[1][0]].unshift(image0);
-canvArray[doable[1][1]].unshift(image1);
-canvArray[doable[1][2]].unshift(image2);
-canvArray[doable[1][3]].unshift(image3);
-canvArray[doable[1][4]].unshift(image4);
-canvArray[doable[1][5]].unshift(image5);
-canvArray[doable[1][6]].unshift(image6);
-canvArray[doable[1][7]].unshift(image7);
-canvArray[doable[1][8]].unshift(image8);
-canvArray[doable[1][9]].unshift(image9);
-canvArray[doable[1][10]].unshift(image10);
-canvArray[doable[1][11]].unshift(image11);
-canvArray[doable[1][12]].unshift(image12);
-canvArray[doable[1][13]].unshift(image13);
-canvArray[doable[1][14]].unshift(image14);
-canvArray[15].unshift('blank');
+// canvArray[doable[1][0]].unshift(image0);
+// canvArray[doable[1][1]].unshift(image1);
+// canvArray[doable[1][2]].unshift(image2);
+// canvArray[doable[1][3]].unshift(image3);
+// canvArray[doable[1][4]].unshift(image4);
+// canvArray[doable[1][5]].unshift(image5);
+// canvArray[doable[1][6]].unshift(image6);
+// canvArray[doable[1][7]].unshift(image7);
+// canvArray[doable[1][8]].unshift(image8);
+// canvArray[doable[1][9]].unshift(image9);
+// canvArray[doable[1][10]].unshift(image10);
+// canvArray[doable[1][11]].unshift(image11);
+// canvArray[doable[1][12]].unshift(image12);
+// canvArray[doable[1][13]].unshift(image13);
+// canvArray[doable[1][14]].unshift(image14);
+// canvArray[15].unshift('blank');
+// let boardArray = doable[1].slice();
+let boardOrder = doable[0].slice();
+// let orderedArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 overlayContactButton.addEventListener('click', function(e){
 
 
@@ -1039,71 +1042,178 @@ overlayContactButton.addEventListener('click', function(e){
 	} else {
 		canvasbuttons[1].focus();
 	}
-	for(let i = 0; i < canvArray.length; i++){
-		if(canvArray[i][0] != 'blank'){
-			ctx.drawImage(canvArray[i][0], canvArray[i][1], canvArray[i][3], 75, 75);
-		} else {}
+	// for(let i = 0; i < canvArray.length; i++){
+	// 	if(canvArray[i][0] != 'blank'){
+	// 		ctx.drawImage(canvArray[i][0], canvArray[i][1], canvArray[i][3], 75, 75);
+	// 	} else {}
+	// }
+
+// console.log(doable[1]);
+	for(let i = 0; i < canvArray.length-1; i++){
+		// if(canvArray[i][0] != 'blank'){
+			ctx.drawImage(contact, canvArray[i][0], canvArray[i][1], 75, 75,
+				canvArray[doable[1][i]][0], canvArray[doable[1][i]][1], 75, 75);
+		// } else {}
+		// console.log(canvArray[doable[1][i]]);
 	}
+	console.log(canvArray);
+	// console.log(boardArray);
+	console.log(boardOrder);
+
+
+
 });
 function swapTiles(x, y){
 	if(canvArray.length === 0){return;}
-	let tileClicked = `${Math.floor(y / 75)}${Math.floor(x / 75)}`;
+	// let tileClicked = `${Math.floor(y / 75)}${Math.floor(x / 75)}`;
+
+	let tileClicked = (Math.floor(y / 75) * 4) + Math.floor(x / 75);
+	// console.log(tileClicked);
 	let blank;
 	let blankIndex;
 	let swapTile;
 	let swapTileIndex;
 	let temp;
 	let thisClose = 0;
-	let finalCheck = true;
-	for(let i = 0; i < canvArray.length; i++){
-		if(canvArray[i][0] !== 'blank'){
-			if(canvArray[i][5] !== canvArray[i][0].src.match(/\d{2}(?=\.jpg)/)[0]){
-				thisClose++;
-			}
-		} else {
-			if(canvArray[i][5] !== '33'){
-				thisClose++;
-			}
-		}
-		if(canvArray[i][0] === 'blank'){
-			if(![1, 10].includes(Math.abs(parseInt(canvArray[i][5], 10) - parseInt(tileClicked, 10)))){
-				return;
-			}
-			blank = canvArray[i];
-			blankIndex = i;
-		}
-		if(tileClicked === canvArray[i][5]){
-			swapTile = canvArray[i];
-			swapTileIndex = i;
-		}
+	let finalCheck;
+	// for(let i = 0; i < canvArray.length; i++){
+		// if(canvArray[i][0] !== 'blank'){
+		// 	if(canvArray[i][5] !== canvArray[i][0].src.match(/\d{2}(?=\.jpg)/)[0]){
+		// 		thisClose++;
+		// 	}
+		// } else {
+		// 	if(canvArray[i][5] !== '33'){
+		// 		thisClose++;
+		// 	}
+		// }
+
+		// if(canvArray[i][0] === 'blank'){
+		// 	if(![1, 10].includes(Math.abs(parseInt(canvArray[i][5], 10) - parseInt(tileClicked, 10)))){
+		// 		return;
+		// 	}
+		// 	blank = canvArray[i];
+		// 	blankIndex = i;
+		// }
+
+		// if(tileClicked === canvArray[i][5]){
+		// 	swapTile = canvArray[i];
+		// 	swapTileIndex = i;
+		// }
+
+// ----------------------
+		// if(canvArray[i][0] !== 'blank'){
+		// 	if(boardArray[i] !== i){
+		// 		thisClose++;
+		// 	}
+    //
+		// 	if(tileClicked === canvArray[i][4]){
+		// 		swapTile = canvArray[i];
+		// 		swapTileIndex = i;
+		// 	}
+    //
+		// } else {
+		// 	if(canvArray[i][5] !== '33'){
+		// 		thisClose++;
+		// 	}
+    //
+		// 	if(![1, 10].includes(Math.abs(parseInt(canvArray[i][5], 10) - parseInt(tileClicked, 10)))){
+		// 		return;
+		// 	}
+		// 	blank = canvArray[i];
+		// 	blankIndex = i;
+    //
+		// }
+
+
+		// if(canvArray[i][0] === 'blank'){
+    //
+		// }
+
+	// }
+
+	let blank2 = boardOrder.indexOf(15);
+	let rrr = boardOrder[tileClicked];
+
+	// if(rrr === 15){
+	// 	return;
+	// }
+	if(![1, 4].includes(Math.abs(tileClicked - blank2))){
+		return;
 	}
-	ctx.drawImage(swapTile[0], blank[1], blank[3], 75, 75);
-	ctx.clearRect(swapTile[1], swapTile[3], 75, 75);
-	temp = swapTile[0];
-	canvArray[swapTileIndex][0] = 'blank';
-	canvArray[blankIndex][0] = temp;
-	if(thisClose < 3){
-		for(let i = 0; i < canvArray.length; i++){
-			if(canvArray[i][0] !== 'blank'){
-				if(canvArray[i][5] !== canvArray[i][0].src.match(/\d{2}(?=\.jpg)/)[0]){
-					finalCheck = false;
-					break;
-				}
-			} else {
-				if(canvArray[i][5] !== '33'){
-					finalCheck = false;
-					break;
-				}
+
+
+
+	// blank = boardArray.indexOf(15);
+
+
+	ctx.clearRect(canvArray[tileClicked][0], canvArray[tileClicked][1], 75, 75);
+
+	ctx.drawImage(contact, canvArray[rrr][0], canvArray[rrr][1], 75, 75,
+	canvArray[blank2][0], canvArray[blank2][1], 75, 75);
+
+
+	// [
+	// 	boardArray[rrr], boardArray[blank]
+	// ] = [
+	// 	boardArray[blank], boardArray[rrr]
+	// ];
+
+	[
+		boardOrder[tileClicked], boardOrder[blank2]
+	] = [
+		boardOrder[blank2], boardOrder[tileClicked]
+	];
+
+	// console.log(boardArray);
+	console.log(boardOrder);
+	// let bool = true;
+	if(boardOrder[0] === 0 && boardOrder[3] === 3 && boardOrder[11] === 11 && boardOrder[14] === 14){
+		console.log('searching...');
+		finalCheck = true;
+		// console.log(boardOrder.every(x => boardOrder[x] === x));
+
+		for(let f = 0; f < boardOrder.length; f++){
+			if(boardOrder[f] !== f){
+				finalCheck = false;
+				break;
 			}
+
 		}
-	} else {
-		finalCheck = false;
+		console.log(finalCheck);
 	}
+
+
+
+
+
+	// ctx.drawImage(swapTile[0], blank[1], blank[3], 75, 75);
+	// ctx.clearRect(swapTile[1], swapTile[3], 75, 75);
+	// temp = swapTile[0];
+	// canvArray[swapTileIndex][0] = 'blank';
+	// canvArray[blankIndex][0] = temp;
+	// if(thisClose < 3){
+	// 	for(let i = 0; i < canvArray.length; i++){
+	// 		if(canvArray[i][0] !== 'blank'){
+	// 			if(canvArray[i][5] !== canvArray[i][0].src.match(/\d{2}(?=\.jpg)/)[0]){
+	// 				finalCheck = false;
+	// 				break;
+	// 			}
+	// 		} else {
+	// 			if(canvArray[i][5] !== '33'){
+	// 				finalCheck = false;
+	// 				break;
+	// 			}
+	// 		}
+	// 	}
+	// } else {
+	// 	finalCheck = false;
+	// }
 	if(finalCheck){
 		faderCanv.style.display = 'block';
 		canvasbuttons[1].style.display = 'none';
 		animate();
-		ctx.drawImage(image15, 225, 225, 75, 75);
+		ctx.drawImage(contact, 225, 225, 75, 75,
+		225, 225, 75, 75);
 		canvArray = [];
 	}
 }
