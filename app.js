@@ -146,7 +146,7 @@ console.log('drawing');
 
 };
 
-// let ooo = requestAnimationFrame(formCubes);
+let ooo = requestAnimationFrame(formCubes);
 
 
 
@@ -1049,6 +1049,7 @@ overlayContactButton.addEventListener('click', function(e){
 	// }
 
 // console.log(doable[1]);
+if(clicks < 1){
 	for(let i = 0; i < canvArray.length-1; i++){
 		// if(canvArray[i][0] != 'blank'){
 			ctx.drawImage(contact, canvArray[i][0], canvArray[i][1], 75, 75,
@@ -1056,6 +1057,7 @@ overlayContactButton.addEventListener('click', function(e){
 		// } else {}
 		// console.log(canvArray[doable[1][i]]);
 	}
+}
 	console.log(canvArray);
 	// console.log(boardArray);
 	console.log(boardOrder);
