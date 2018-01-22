@@ -130,23 +130,113 @@ sizeInput.setAttribute('aria-valuenow', 220);
 radioLinear.checked = true;
 radioLinear.setAttribute('aria-checked', true);
 
-let sideOrder = [3, 1, 2, 5, 4, 0];
+// let thou = 1020;
+// let sideOrder = [3, 1, 2, 5, 4, 0];
 
-function formCubes(timeStamp){
+// let ppp = new Image();
+// ppp.onload = (() => console.log('loaded image'));
+// ppp.src = 'images/p1a.jpg';
 
-ooo = requestAnimationFrame(formCubes);
-console.log('drawing');
-  if(t3 < sideOrder.length && timeStamp > ((t3 + 1) * 1000)){
-		pb[0].children[sideOrder[t3]].classList.add('first');
-		pb[1].children[sideOrder[t3]].classList.add('second');
-		console.log(timeStamp, t3);
-    t3++;
-		t3 === sideOrder.length && cancelAnimationFrame(ooo);
-	}
+// function formCubes(timeStamp){
+//
+// 	ooo = requestAnimationFrame(formCubes);
+// 	console.log('drawing');
+//   if(t3 < sideOrder.length && timeStamp > ((t3 + 1) * thou)){
+// 		pb[0].children[sideOrder[t3]].classList.add('first');
+// 		pb[1].children[sideOrder[t3]].classList.add('second');
+// 		console.log(timeStamp, t3);
+//     t3++;
+// 		thou *= .9;
+// 		if(t3 === sideOrder.length){
+// 			cancelAnimationFrame(ooo);
+// 			pb[0].classList.add('anim-cube');
+// 			pb[1].classList.add('anim-cube');
+// 		}
+//
+// 	}
+//
+// };
+//
+// let ooo = requestAnimationFrame(formCubes);
 
+
+// fetch('images/explosion.gif')
+// .then(res => {
+// 	// console.log(res.type, res.status, res.statusText, res.url);
+// 	return res.status !== 200 ? console.log('there was a problem fetching the resource. Status Code and Text: ' + res.status, res.statusText) : res.blob();
+// })
+// .then(res => {
+// 	// console.log(res, typeof res);
+// 	var objectURL = URL.createObjectURL(res);
+// 	explode[0].src = objectURL;
+// 	explode[1].src = objectURL;
+// })
+// .catch(err => console.log('Fetch error: ', err));
+
+let KEYFRAMES = {
+  one: [
+    {opacity: 1},
+    {opacity: 0},
+    {opacity: 1}
+  ],
+  two: [
+    {transform: 'translateX(0)'},
+    {transform: 'translateX(200px)'},
+    {transform: 'translateX(0)'}
+  ],
+  three: [
+    {transform: 'rotate(0deg)'},
+    {transform: 'rotate(200deg)'},
+    {transform: 'rotate(0deg)'}
+  ],
+  four: [
+		{transform: 'rotate(0deg)'},
+		{transform: 'rotate(400deg)'},
+		{transform: 'rotate(0deg)'}
+  ],
+  five: [
+		{transform: 'rotate(0deg)'},
+		{transform: 'rotate(100deg)'},
+		{transform: 'rotate(0deg)'}
+  ]
 };
 
-let ooo = requestAnimationFrame(formCubes);
+
+async function huhu(){
+	let pic;
+	try{
+		pic = await fetch('images/p1a.jpg');
+		console.log(pic, typeof pic);
+		pic = await pic.blob();
+		console.log(pic, typeof pic);
+		var objectURL = URL.createObjectURL(pic);
+		console.log(objectURL);
+		pb[0].children[0].style.backgroundImage = `url(${objectURL})`;
+	}
+	catch(err){
+		console.log('error', err);
+	}
+	return pic;
+}
+
+huhu().then((res) => {
+	console.log('about to animate...');
+	let animOne = pb[0].animate(KEYFRAMES.two, {duration: 1000, iterations: 2, delay: 1000, easing: 'ease-in-out'});
+	console.log(res);
+	return animOne;
+}).then((res) => {
+	console.log('about to animate 2...');
+	let animTwo = pb[0].animate(KEYFRAMES.one, {duration: 1000, iterations: 2, delay: 1000, easing: 'ease-in-out'});
+	console.log(res);
+});
+console.log('here');
+
+
+
+
+
+
+
 
 
 
