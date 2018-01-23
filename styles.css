@@ -952,12 +952,8 @@ select:focus{
 .front{
   transform: translateZ(calc(var(--size) / 2));
 }
-.first:nth-of-type(1){
-	background-image: url("images/p1a.jpg");
-}
-.second:nth-of-type(1){
-	background-image: url("images/p7a.jpg");
-}
+
+
 .left{
  	transform: rotateY(270deg) translateX(calc(var(--size) / -2));
 	-webkit-transform-origin: bottom left;
@@ -965,12 +961,7 @@ select:focus{
 	-o-transform-origin: bottom left;
   transform-origin: bottom left;
 }
-.first:nth-of-type(2){
-	background-image: url("images/p2a.jpg");
-}
-.second:nth-of-type(2){
-	background-image: url("images/p8a.jpg");
-}
+
 .right{
  	transform: rotateY(-270deg) translateX(calc(var(--size) / 2));
 	-webkit-transform-origin: bottom right;
@@ -978,21 +969,13 @@ select:focus{
 	-o-transform-origin: bottom right;
   transform-origin: bottom right;
 }
-.first:nth-of-type(3){
-	background-image: url("images/p3a.jpg");
-}
-.second:nth-of-type(3){
-	background-image: url("images/p9a.jpg");
-}
+
+
 .back{
   transform: translateZ(calc(var(--size) / -2)) rotateY(180deg);
 }
-.first:nth-of-type(4){
-	background-image: url("images/p4a.jpg");
-}
-.second:nth-of-type(4){
-	background-image: url("images/p10a.jpg");
-}
+
+
 .top{
 	transform: translateZ(calc(var(--size) / -2)) rotateX(90deg);
 	-webkit-transform-origin: top;
@@ -1000,12 +983,8 @@ select:focus{
 	-o-transform-origin: top;
 	transform-origin: top;
 }
-.first:nth-of-type(5){
-	background-image: url("images/p5a.jpg");
-}
-.second:nth-of-type(5){
-	background-image: url("images/p11a.jpg");
-}
+
+
 .bottom{
 	transform: translateZ(calc(var(--size) / -2)) rotateX(-90deg);
 	-webkit-transform-origin: bottom;
@@ -1013,12 +992,8 @@ select:focus{
 	-o-transform-origin: bottom;
 	transform-origin: bottom;
 }
-.first:nth-of-type(6){
-	background-image: url("images/p6a.jpg");
-}
-.second:nth-of-type(6){
-	background-image: url("images/p12a.jpg");
-}
+
+
 @media screen and (min-width: 460px){
 	body{
 		background-color: #555;
