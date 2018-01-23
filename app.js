@@ -175,14 +175,12 @@ radioLinear.setAttribute('aria-checked', true);
 
 let KEYFRAMES = {
   one: [
-    {opacity: 1},
-    {opacity: 0},
-    {opacity: 1}
+		{transform: 'rotateY(0deg) rotateX(18deg)'},
+    {transform: 'rotateY(90deg) rotateX(18deg)'}
   ],
   two: [
-    {transform: 'translateX(0)'},
-    {transform: 'translateX(200px)'},
-    {transform: 'translateX(0)'}
+		{transform: 'rotateY(90deg) rotateX(18deg)'},
+    {transform: 'rotateY(-90deg) rotateX(18deg)'}
   ],
   three: [
     {transform: 'rotate(0deg)'},
@@ -190,45 +188,68 @@ let KEYFRAMES = {
     {transform: 'rotate(0deg)'}
   ],
   four: [
-		{transform: 'rotate(0deg)'},
-		{transform: 'rotate(400deg)'},
-		{transform: 'rotate(0deg)'}
+    {background: '#4598b6'},
+    {background: '#444444'},
+    {background: '#4598b6'}
   ],
   five: [
-		{transform: 'rotate(0deg)'},
-		{transform: 'rotate(100deg)'},
-		{transform: 'rotate(0deg)'}
+    {background: '#b64598'},
+    {background: '#444444'},
+    {background: '#b64598'}
   ]
 };
 
+let KEYTIMING = {duration: 2000, iterations: 1, delay: 1000, fill: 'none', easing: 'ease-in-out'};
 
-async function huhu(){
-	let pic;
+let anims = ['one', 'two', 'three', 'four', 'five'];
+let no = 1, num = 0;
+async function buildCubes(){
+	let pic, pic2;
 	try{
-		pic = await fetch('images/p1a.jpg');
-		console.log(pic, typeof pic);
+		pic = await fetch(`images/project${no}.jpg`);
+		pic2 = await fetch(`images/project${no + 6}.jpg`);
+		console.log(pic, no, no+6);
 		pic = await pic.blob();
+		pic2 = await pic2.blob();
 		console.log(pic, typeof pic);
 		var objectURL = URL.createObjectURL(pic);
+		var objectURL2 = URL.createObjectURL(pic2);
 		console.log(objectURL);
-		pb[0].children[0].style.backgroundImage = `url(${objectURL})`;
+		pb[0].children[no - 1].style.backgroundImage = `url(${objectURL})`;
+		pb[1].children[no - 1].style.backgroundImage = `url(${objectURL2})`;
+		no++;
 	}
 	catch(err){
 		console.log('error', err);
 	}
-	return pic;
+	// return pic;
 }
 
-huhu().then((res) => {
-	console.log('about to animate...');
-	let animOne = pb[0].animate(KEYFRAMES.two, {duration: 1000, iterations: 2, delay: 1000, easing: 'ease-in-out'});
-	console.log(res);
-	return animOne;
-}).then((res) => {
-	console.log('about to animate 2...');
-	let animTwo = pb[0].animate(KEYFRAMES.one, {duration: 1000, iterations: 2, delay: 1000, easing: 'ease-in-out'});
-	console.log(res);
-});
+buildCubes().then(animCubes).then(buildCubes).then(animCubes);
+
+function animCubes(){
+	console.log('about to animate... ' + num);
+	let animOne = pb[0].animate(KEYFRAMES[anims[num]], KEYTIMING);
+	let animOne2 = pb[1].animate(KEYFRAMES[anims[num]], KEYTIMING);
+	console.log(animOne);
+	num++;
+	return Promise.all([animOne.finished, animOne2.finished]);
+}
+
+
+
+
+
+
+// .then((res) => {
+// 	// console.log(res);
+// 	console.log('about to animate 2...');
+// 	let animTwo = pb[0].animate(KEYFRAMES.three, {duration: 1000, iterations: 3, delay: 1000, easing: 'ease-in-out'});
+// 	console.log(res);
+// })
+
+
+
 console.log('here');
 
 
