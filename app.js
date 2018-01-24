@@ -173,48 +173,65 @@ radioLinear.setAttribute('aria-checked', true);
 // })
 // .catch(err => console.log('Fetch error: ', err));
 
+let degs = 360;
+// let yDegs = 360;
+
 let KEYFRAMES = {
   one: [
-		{transform: 'rotateY(0deg) rotateX(18deg)'},
-    {transform: 'rotateY(90deg) rotateX(18deg)'}
+		{transform: 'rotateY(0deg) rotateX(0deg)'},
+    {transform: `rotateY(${degs/2}deg) rotateX(${degs/2}deg)`},
+		{transform: `rotateY(${degs}deg) rotateX(${degs}deg)`}
   ],
   two: [
-		{transform: 'rotateY(90deg) rotateX(18deg)'},
-    {transform: 'rotateY(-90deg) rotateX(18deg)'}
+		{transform: 'rotateY(0deg) rotateX(0deg)'},
+    {transform: `rotateY(${-degs/2}deg) rotateX(${degs/2}deg)`},
+		{transform: `rotateY(${-degs}deg) rotateX(${degs}deg)`}
   ],
   three: [
-    {transform: 'rotate(0deg)'},
-    {transform: 'rotate(200deg)'},
-    {transform: 'rotate(0deg)'}
+		{transform: 'rotateY(0deg) rotateX(0deg)'},
+		{transform: `rotateY(${degs/2}deg) rotateX(${degs/2}deg)`},
+    {transform: `rotateY(${degs}deg) rotateX(${degs}deg)`}
   ],
   four: [
-    {background: '#4598b6'},
-    {background: '#444444'},
-    {background: '#4598b6'}
+		{transform: 'rotateY(0deg) rotateX(0deg)'},
+    {transform: `rotateY(${-degs/2}deg) rotateX(${degs/2}deg)`},
+		{transform: `rotateY(${-degs}deg) rotateX(${degs}deg)`}
   ],
   five: [
-    {background: '#b64598'},
-    {background: '#444444'},
-    {background: '#b64598'}
+		{transform: 'rotateY(0deg) rotateX(0deg)'},
+    {transform: `rotateY(${degs/2}deg) rotateX(${degs/2}deg)`},
+		{transform: `rotateY(${degs}deg) rotateX(${degs}deg)`}
+  ],
+	six: [
+		{transform: 'rotateY(0deg) rotateX(0deg)'},
+		// {transform: 'rotateY(290deg) rotateX(181deg)'},
+    {transform: `rotateY(${-degs/2}deg) rotateX(${degs/2}deg)`},
+		{transform: `rotateY(${-degs}deg) rotateX(${degs}deg)`}
   ]
 };
 
-let KEYTIMING = {duration: 2000, iterations: 1, delay: 1000, fill: 'none', easing: 'ease-in-out'};
+let KEYTIMING = {duration: 1000, iterations: 1, delay: 400, fill: 'none', easing: 'cubic-bezier(.51,.01,.68,.45)'};
 
-let anims = ['one', 'two', 'three', 'four', 'five'];
+let anims = ['one', 'two', 'three', 'four', 'five', 'six'];
 let no = 1, num = 0;
+let spin, spin2;
+// var animations = document.getAnimations ? document.getAnimations() : document.timeline.getAnimations();
 async function buildCubes(){
+
+
+	// console.log(spin);
 	let pic, pic2;
+	// console.log(pb[0].getAnimations());
 	try{
 		pic = await fetch(`images/project${no}.jpg`);
 		pic2 = await fetch(`images/project${no + 6}.jpg`);
-		console.log(pic, no, no+6);
+		// console.log(pic, pic2);
 		pic = await pic.blob();
 		pic2 = await pic2.blob();
-		console.log(pic, typeof pic);
+		// console.log(pic, typeof pic);
 		var objectURL = URL.createObjectURL(pic);
 		var objectURL2 = URL.createObjectURL(pic2);
-		console.log(objectURL);
+		// console.log(objectURL);
 		pb[0].children[no - 1].style.backgroundImage = `url(${objectURL})`;
 		pb[1].children[no - 1].style.backgroundImage = `url(${objectURL2})`;
 		no++;
@@ -225,20 +242,53 @@ async function buildCubes(){
 	// return pic;
 }
 
-buildCubes().then(animCubes).then(buildCubes).then(animCubes);
+buildCubes().then(animCubes)
+
+.then(buildCubes).then(animCubes).then(buildCubes).then(animCubes).then(buildCubes).then(animCubes).then(buildCubes).then(animCubes).then(buildCubes).then(animCubes);
 
 function animCubes(){
-	console.log('about to animate... ' + num);
-	let animOne = pb[0].animate(KEYFRAMES[anims[num]], KEYTIMING);
-	let animOne2 = pb[1].animate(KEYFRAMES[anims[num]], KEYTIMING);
-	console.log(animOne);
+	// console.log(pb[0].getAnimations());
+	// console.log('about to animate... ' + num);
+	spin = pb[0].animate([
+		{transform: 'rotateY(0deg) rotateX(0deg)'},
+		{transform: 'rotateY(180deg) rotateX(180deg)'}
+	], KEYTIMING);
+	spin2 = pb[1].animate([
+		{transform: 'rotateY(0deg) rotateX(0deg)'},
+		{transform: 'rotateY(180deg) rotateX(180deg)'}
+	], KEYTIMING);
+
+console.log(spin);
+	// console.log(hover);
 	num++;
-	return Promise.all([animOne.finished, animOne2.finished]);
+	if(document.timeline.getAnimations() && document.timeline.getAnimations().length > 0){
+
+		console.log(document.timeline.getAnimations()[0].currentTime)
+		console.log(hover);
+
+		// pb[0].getAnimations()[0].cancel();
+		// pb[0].getAnimations()[0].finish();
+	}
+
+	// console.log(pb[0].getAnimations());
+	// pb[0].getAnimations()[0].cancel();
+	return Promise.all([spin.finished, spin2.finished]);
+}
+let hover, hover2;
+function hoverCubes(){
+	hover = cc[0].animate([
+		{transform: 'translateY(0px)'},
+		{transform: 'translateY(10px)'}
+	], {duration: 1000, iterations: Infinity, direction: 'alternate'});
+	hover2 = cc[1].animate([
+		{transform: 'translateY(0px)'},
+		{transform: 'translateY(10px)'}
+	], {duration: 1000, iterations: Infinity, direction: 'alternate'});
+
+hover.finished ? console.log(hover) : console.log('not done');
 }
 
-
-
-
+hoverCubes();
 
 
 // .then((res) => {
