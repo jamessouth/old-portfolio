@@ -853,7 +853,7 @@ select:focus{
 	100% { transform: rotateX(0deg) rotateY(0deg); }
 }
 .photo-cube{
-  transition: transform .001s;
+  /*transition: transform .001s;*/
   width: var(--size);
   height: var(--size);
   -webkit-transform-style: preserve-3d;
