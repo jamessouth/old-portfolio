@@ -130,108 +130,63 @@ sizeInput.setAttribute('aria-valuenow', 220);
 radioLinear.checked = true;
 radioLinear.setAttribute('aria-checked', true);
 
-// let thou = 1020;
-// let sideOrder = [3, 1, 2, 5, 4, 0];
-
-// let ppp = new Image();
-// ppp.onload = (() => console.log('loaded image'));
-// ppp.src = 'images/p1a.jpg';
-
-// function formCubes(timeStamp){
-//
-// 	ooo = requestAnimationFrame(formCubes);
-// 	console.log('drawing');
-//   if(t3 < sideOrder.length && timeStamp > ((t3 + 1) * thou)){
-// 		pb[0].children[sideOrder[t3]].classList.add('first');
-// 		pb[1].children[sideOrder[t3]].classList.add('second');
-// 		console.log(timeStamp, t3);
-//     t3++;
-// 		thou *= .9;
-// 		if(t3 === sideOrder.length){
-// 			cancelAnimationFrame(ooo);
-// 			pb[0].classList.add('anim-cube');
-// 			pb[1].classList.add('anim-cube');
-// 		}
-//
-// 	}
-//
-// };
-//
-// let ooo = requestAnimationFrame(formCubes);
 
 
-// fetch('images/explosion.gif')
-// .then(res => {
-// 	// console.log(res.type, res.status, res.statusText, res.url);
-// 	return res.status !== 200 ? console.log('there was a problem fetching the resource. Status Code and Text: ' + res.status, res.statusText) : res.blob();
-// })
-// .then(res => {
-// 	// console.log(res, typeof res);
-// 	var objectURL = URL.createObjectURL(res);
-// 	explode[0].src = objectURL;
-// 	explode[1].src = objectURL;
-// })
-// .catch(err => console.log('Fetch error: ', err));
 
-let degs = 360;
-// let yDegs = 360;
+
+
 
 let KEYFRAMES = {
-  one: [
+	zero: [
 		{transform: 'rotateY(0deg) rotateX(0deg)'},
-    {transform: `rotateY(${degs/2}deg) rotateX(${degs/2}deg)`},
-		{transform: `rotateY(${degs}deg) rotateX(${degs}deg)`}
+		{transform: 'rotateY(0deg) rotateX(0deg)'}
+	],
+  one: [
+		{transform: 'rotateY(188deg) rotateX(194deg)'},
+		{transform: 'rotateY(360deg) rotateX(360deg)'}
   ],
   two: [
-		{transform: 'rotateY(0deg) rotateX(0deg)'},
-    {transform: `rotateY(${-degs/2}deg) rotateX(${degs/2}deg)`},
-		{transform: `rotateY(${-degs}deg) rotateX(${degs}deg)`}
+		{transform: 'rotateY(106deg) rotateX(11deg)'},
+		{transform: 'rotateY(0deg) rotateX(0deg)'}
   ],
   three: [
-		{transform: 'rotateY(0deg) rotateX(0deg)'},
-		{transform: `rotateY(${degs/2}deg) rotateX(${degs/2}deg)`},
-    {transform: `rotateY(${degs}deg) rotateX(${degs}deg)`}
+		{transform: 'rotateY(-112deg) rotateX(-55deg)'},
+		{transform: 'rotateY(0deg) rotateX(0deg)'}
   ],
   four: [
-		{transform: 'rotateY(0deg) rotateX(0deg)'},
-    {transform: `rotateY(${-degs/2}deg) rotateX(${degs/2}deg)`},
-		{transform: `rotateY(${-degs}deg) rotateX(${degs}deg)`}
+		{transform: 'rotateY(-259deg) rotateX(-14deg)'},
+		{transform: 'rotateY(0deg) rotateX(0deg)'}
   ],
   five: [
-		{transform: 'rotateY(0deg) rotateX(0deg)'},
-    {transform: `rotateY(${degs/2}deg) rotateX(${degs/2}deg)`},
-		{transform: `rotateY(${degs}deg) rotateX(${degs}deg)`}
+		{transform: 'rotateY(-170deg) rotateX(-91deg)'},
+		{transform: 'rotateY(0deg) rotateX(0deg)'}
   ],
 	six: [
-		{transform: 'rotateY(0deg) rotateX(0deg)'},
-		// {transform: 'rotateY(290deg) rotateX(181deg)'},
-    {transform: `rotateY(${-degs/2}deg) rotateX(${degs/2}deg)`},
-		{transform: `rotateY(${-degs}deg) rotateX(${degs}deg)`}
+		{transform: 'rotateY(13deg) rotateX(85deg)'},
+		{transform: 'rotateY(0deg) rotateX(0deg)'}
   ]
 };
 
-let KEYTIMING = {duration: 1000, iterations: 1, delay: 400, fill: 'none', easing: 'cubic-bezier(.51,.01,.68,.45)'};
+let KEYTIMING = {duration: 650, iterations: 1, delay: 250, easing: 'cubic-bezier(.81,.02,.75,.51)'};
 
-let anims = ['one', 'two', 'three', 'four', 'five', 'six'];
+let anims = ['zero', 'one', 'two', 'three', 'four', 'five', 'six'];
 let no = 1, num = 0;
 let spin, spin2;
-// var animations = document.getAnimations ? document.getAnimations() : document.timeline.getAnimations();
+
 async function buildCubes(){
 
-
-	// console.log(spin);
 	let pic, pic2;
-	// console.log(pb[0].getAnimations());
+
 	try{
 		pic = await fetch(`images/project${no}.jpg`);
 		pic2 = await fetch(`images/project${no + 6}.jpg`);
-		// console.log(pic, pic2);
+
 		pic = await pic.blob();
 		pic2 = await pic2.blob();
-		// console.log(pic, typeof pic);
+
 		var objectURL = URL.createObjectURL(pic);
 		var objectURL2 = URL.createObjectURL(pic2);
-		// console.log(objectURL);
+
 		pb[0].children[no - 1].style.backgroundImage = `url(${objectURL})`;
 		pb[1].children[no - 1].style.backgroundImage = `url(${objectURL2})`;
 		no++;
@@ -239,149 +194,60 @@ async function buildCubes(){
 	catch(err){
 		console.log('error', err);
 	}
-	// return pic;
+
 }
 
-buildCubes().then(animCubes)
+animCubes().then(buildCubes).then(animCubes)
 
-.then(buildCubes).then(animCubes).then(buildCubes).then(animCubes).then(buildCubes).then(animCubes).then(buildCubes).then(animCubes).then(buildCubes).then(animCubes);
+.then(buildCubes).then(animCubes).then(buildCubes).then(animCubes).then(buildCubes).then(animCubes).then(buildCubes).then(animCubes).then(buildCubes).then(animCubes).then(hoverCubes);
 
 function animCubes(){
-	// console.log(pb[0].getAnimations());
-	// console.log('about to animate... ' + num);
-	spin = pb[0].animate([
-		{transform: 'rotateY(0deg) rotateX(0deg)'},
-		{transform: 'rotateY(180deg) rotateX(180deg)'}
-	], KEYTIMING);
-	spin2 = pb[1].animate([
-		{transform: 'rotateY(0deg) rotateX(0deg)'},
-		{transform: 'rotateY(180deg) rotateX(180deg)'}
-	], KEYTIMING);
 
-console.log(spin);
-	// console.log(hover);
+	spin = pb[0].animate(
+		KEYFRAMES[anims[num]], KEYTIMING);
+	spin2 = pb[1].animate(
+		KEYFRAMES[anims[num]], KEYTIMING);
+
 	num++;
-	if(document.timeline.getAnimations() && document.timeline.getAnimations().length > 0){
+	num == 2 ? KEYTIMING.delay = 10:{};
 
-		console.log(document.timeline.getAnimations()[0].currentTime)
-		console.log(hover);
-
-		// pb[0].getAnimations()[0].cancel();
-		// pb[0].getAnimations()[0].finish();
-	}
-
-	// console.log(pb[0].getAnimations());
-	// pb[0].getAnimations()[0].cancel();
 	return Promise.all([spin.finished, spin2.finished]);
 }
+
 let hover, hover2;
 function hoverCubes(){
 	hover = cc[0].animate([
 		{transform: 'translateY(0px)'},
 		{transform: 'translateY(10px)'}
-	], {duration: 1000, iterations: Infinity, direction: 'alternate'});
+	], {duration: 1000, iterations: 20, direction: 'alternate'});
 	hover2 = cc[1].animate([
 		{transform: 'translateY(0px)'},
 		{transform: 'translateY(10px)'}
-	], {duration: 1000, iterations: Infinity, direction: 'alternate'});
+	], {duration: 1000, iterations: 20, direction: 'alternate'});
 
-hover.finished ? console.log(hover) : console.log('not done');
 }
 
-hoverCubes();
-
-
-// .then((res) => {
-// 	// console.log(res);
-// 	console.log('about to animate 2...');
-// 	let animTwo = pb[0].animate(KEYFRAMES.three, {duration: 1000, iterations: 3, delay: 1000, easing: 'ease-in-out'});
-// 	console.log(res);
-// })
-
-
-
-console.log('here');
-
-
-
-
-
-
-
-
-
-
-
-
-
 function panorama(timeStamp){
-
 	mmm = requestAnimationFrame(panorama);
-	// console.log('drawing');
-
-  // if(t3 < sideOrder.length && timeStamp > ((t3 + 1) * 1000)){
-	// 	pb[0].children[sideOrder[t3]].classList.add('first');
-	// 	pb[1].children[sideOrder[t3]].classList.add('second');
-	// 	console.log(timeStamp, t3);
-  //   t3++;
-	// 	t3 === sideOrder.length && cancelAnimationFrame(mmm);
-	// }
-
-	tableCtx.clearRect(0, 0, clearX, clearY);
-
+	tableCtx.clearRect(0, 0, CanvasXSize, CanvasYSize);
 	if(CanvasYSize + tableImageY < dy) {
 			tableImageY = imgH - CanvasYSize;
-			// console.log(tableImageY, imgH, CanvasYSize);
-			// tableCtx.drawImage(tableImg, 0, (imgH + tableImageY), imgW, CanvasYSize,
-			// 0, 0, CanvasXSize, CanvasYSize);
-
 	}
-
 	if(tableImageY < 0) {
-			// tableImageY = imgH - CanvasYSize;
-			// console.log(tableImageY, imgH, CanvasYSize);
 			tableCtx.drawImage(tableImg, 0, (imgH + tableImageY), imgW, CanvasYSize,
 			0, 0, CanvasXSize, CanvasYSize);
-
 	}
-
-
 	tableCtx.drawImage(tableImg, 0, tableImageY, imgW, CanvasYSize,
 	0, 0, CanvasXSize, CanvasYSize);
-
-// console.log(tableImg, 0, tableImageY, imgW, CanvasYSize,0, 0, CanvasXSize, CanvasYSize);
-
-// console.log(tableImageY);
 	tableImageY -= dy;
-
-
-
-
 };
 
-
-
-
-
-
-
-
-
-
-
-// 'modified from https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Basic_animations'
+// 'inspired by https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Basic_animations'
 let tableImg = new Image();
-// let imgHolder = [];
-
 let sources = {
 	'bluecloud': null, 'cloudvert': null, 'fire': null, 'greyclouds': null, 'jupiter': null, 'mars': null, 'moon': null, 'pano': null, 'rapid': null, 'shallow': null
 };
-
-
-// let sourcesSet = new Set();
 let tableSource;
-
-
 let CanvasXSize = 310;
 let CanvasYSize = 423;
 let speed = 2; //higher scrolls faster
@@ -390,69 +256,18 @@ let dy = speed;
 let imgW;
 let imgH;
 let tableImageX = 0;
-let clearX = CanvasXSize;
-let clearY = CanvasYSize;
 let tableCtx = table.querySelector('canvas#scroll').getContext('2d');
 // let intrvl;
 let myImageData;
 
-// function animTableCanvas(){
-//
-//
-//
-//
-//     // if (imgH > CanvasYSize) {
-//     //     clearY = imgH;
-// 		// 		// console.log(clearY);
-//     // } else {
-//     //
-// 		// 		// console.log(clearY);
-//     // }
-// 		// console.log(clearX, clearY);
-//     // tableCtx
-//
-//
-//     // intrvl = setInterval(draw, speed);
-// };
-// let cntr = 0;
 
-
-// window.setInterval(() => {console.log('3 second');}, 3000);
-
-
-// function draw() {
-// 		// console.log('drawing');
-// 		// cntr++;
-// 		// if(cntr % 333 === 0){
-// 		// 	console.log(cntr);
-// 		// }
-//
-//
-//     if (tableImageY > (CanvasYSize-imgH)) {
-//         tableCtx.drawImage(tableImg, tableImageX, tableImageY - imgH, imgW, imgH);
-// 				// console.log(tableImageY, tableImageY - imgH);
-//     }
-//
-// 		// console.log(tableImageY);
-// 		// myImageData = tableCtx.getImageData(155, 34, 1, 1);
-// 		// if(myImageData.data[3] !== 255){
-// 		// 	console.log(myImageData.data);
-// 		// }
-//
-// 		// featureTable.style.borderColor = `rgba(${myImageData.data[0]}, ${myImageData.data[1]}, ${myImageData.data[2]}, 255)`;
-//
+// console.log(tableImageY);
+// myImageData = tableCtx.getImageData(155, 34, 1, 1);
+// if(myImageData.data[3] !== 255){
+// 	console.log(myImageData.data);
 // }
-
-
-// featureTable.addEventListener('focus', function(e){
-// 	this.firstElementChild.style.color = 'white';
-// });
 //
-// featureTable.addEventListener('blur', function(e){
-// 	this.firstElementChild.style.color = 'black';
-// });
-
-
+// featureTable.style.borderColor = `rgba(${myImageData.data[0]}, ${myImageData.data[1]}, ${myImageData.data[2]}, 255)`;
 
 
 function clearTable(){
@@ -467,27 +282,17 @@ function handleTableHighlight(e){
 	if(e.target.tagName === 'TD' || e.target.tagName === 'IMG'){
 		if(e.target.headers){
 			featureColumn = e.target.headers.split(' ')[1];
-			// console.log(featureColumn);
 		} else {
 			featureColumn = e.target.parentNode.headers.split(' ')[1];
-			// console.log(featureColumn);
-
 		}
 		let highlightedCol = this.querySelectorAll(`td[headers*=${featureColumn}]`);
-		// console.log(highlightedCol);
 		let highlightedHeader = this.querySelector(`th[id=${featureColumn}] span`)
 		highlightedCol.forEach(x => x.classList.add('highlight'));
 		highlightedHeader.classList.add('highlightText');
 	}
-
 };
-
 featureTable.addEventListener('mouseover', handleTableHighlight);
 featureTable.addEventListener('mouseout', clearTable);
-
-
-
-
 ['mouseover', 'focus', 'touchstart'].forEach(evt => {
 	pb.forEach((x,i) => {
 		x.addEventListener(evt, e => {
@@ -522,25 +327,16 @@ check[0].addEventListener('change', function(e){
 });
 check[1].addEventListener('change', function(e){
 	if(e.target.checked){
-
-
 		fetch('images/explosion.gif')
 		.then(res => {
-			// console.log(res.type, res.status, res.statusText, res.url);
 			return res.status !== 200 ? console.log('there was a problem fetching the resource. Status Code and Text: ' + res.status, res.statusText) : res.blob();
 		})
 		.then(res => {
-			// console.log(res, typeof res);
 			var objectURL = URL.createObjectURL(res);
 			explode[0].src = objectURL;
 			explode[1].src = objectURL;
 		})
 		.catch(err => console.log('Fetch error: ', err));
-
-
-
-
-
 		checkLabel[1].textContent = 'DESTROY!';
 		this.setAttribute('aria-checked', true);
 		destroyFlag = true;
@@ -734,57 +530,15 @@ function handleMenu(e){
 			return;
 		}
 	}
-
-
 	[...cubeLinks, menuIcon, projectNotesIcon].forEach(x => {
 		x.tabIndex = "-1";
 		x.setAttribute('aria-hidden', true);
 	});
-	// menuIcon.tabIndex = "-1";
-	// menuIcon.setAttribute('aria-hidden', true);
-	// projectNotesIcon.tabIndex = "-1";
-	// projectNotesIcon.setAttribute('aria-hidden', true);
 	this.blur();
 	headline.setAttribute('aria-hidden', true);
 	[main, menuIcon, projectNotesIcon, subhead[0], subhead[1], desc[0], desc[1]].forEach(w => w.style.opacity = '0.35');
-
-	// main.style.opacity = '0.35';
-	// menuIcon.style.opacity = '0.35';
-	// projectNotesIcon.style.opacity = '0.35';
-	// for(let i = 0; i < subhead.length; i++){
-	// 	subhead[i].style.opacity = '0.35';
-	// 	desc[i].style.opacity = '0.35';
-	// }
-
-
-
-	// console.log(this, this.hamb);
-
 	if(this.hamb){
-
-
-
-		// image0.src = 'images/00.jpg';
-		// image1.src = 'images/01.jpg';
-		// image2.src = 'images/02.jpg';
-		// image3.src = 'images/03.jpg';
-		// image4.src = 'images/10.jpg';
-		// image5.src = 'images/11.jpg';
-		// image6.src = 'images/12.jpg';
-		// image7.src = 'images/13.jpg';
-		// image8.src = 'images/20.jpg';
-		// image9.src = 'images/21.jpg';
-		// image10.src = 'images/22.jpg';
-		// image11.src = 'images/23.jpg';
-		// image12.src = 'images/30.jpg';
-		// image13.src = 'images/31.jpg';
-		// image14.src = 'images/32.jpg';
-		// image15.src = 'images/33.jpg';
 		contact.src = 'images/contact.jpg';
-
-
-
-
 		this.children[0].classList.add('top-bun');
 		this.children[2].classList.add('bottom-bun');
 		overlay.style.display = 'flex';
@@ -796,66 +550,36 @@ function handleMenu(e){
 		setTimeout(() => {
 			overlayContactButton.focus();
 		}, 400);
-
-
 	} else {
-
-
-
-
 		overlay2.style.display = 'block';
 		if(tablePlayPauseButton.getAttribute('aria-pressed') === 'false'){
-			// tablePlayPauseButton.classList.add('pause');
-			// tablePlayPauseButton.classList.remove('play');
 			tablePlayPauseButton.className = 'play_pause pause';
-			// setTimeout(animTableCanvas, 1000);
-			// animTableCanvas();
-
 			tableChecks.forEach(c => c.src = 'images/check.png');
-			// console.log(Object.keys(sources));
-
 			tableSource = Object.keys(sources)[Math.floor(Math.random() * Object.keys(sources).length)];
-
-
 			if(!sources[tableSource]){
 				let newImg = new Image();
-
 				newImg.onload = function(){
 					imgW = this.width;
 					imgH = this.height;
 					tableImageY = imgH - CanvasYSize;
 				}
-
-
 				newImg.src = `images/${tableSource}.jpg`;
 				sources[tableSource] = newImg;
-
 				tableImg = sources[tableSource];
-
 			} else {
 				tableImg = sources[tableSource];
 				imgW = tableImg.width;
 				imgH = tableImg.height;
 				tableImageY = imgH - CanvasYSize;
 			}
-
-
-
-
 			let mmm = requestAnimationFrame(panorama);
-
-
 		}
-
 	}
-
 }
 ['click', 'keydown'].forEach(evt => {
 	menuIcon.addEventListener(evt, handleMenu);
 	projectNotesIcon.addEventListener(evt, handleMenu);
 });
-
-
 function flipCards(anims){
 	for(let i = 0; i < options.length; i++){
 		if(options[i].dataset.pos === '0'){
@@ -898,34 +622,17 @@ function destroyCube(cube){
 		explode[1].style.display = 'none';
 	}, (seconds.value * 1000) + 5490);
 }
-
-
 function handleClose(e){
-	// console.log(this, this.over);
-
 	[...cubeLinks, menuIcon, projectNotesIcon].forEach(x => {
 		x.tabIndex = "0";
 		x.removeAttribute('aria-hidden');
 	});
 	headline.removeAttribute('aria-hidden');
 	[main, menuIcon, projectNotesIcon, subhead[0], subhead[1], desc[0], desc[1]].forEach(w => w.style.opacity = '1');
-
-	// main.style.opacity = '1';
-	// menuIcon.style.opacity = '1';
-	// projectNotesIcon.style.opacity = '1';
-
-	// for(let i = 0; i < subhead.length; i++){
-	// 	subhead[i].style.opacity = '1';
-	// 	desc[i].style.opacity = '1';
-	// }
-
-
 	if(this.over){
 		overlay.style.display = 'none';
 		menuIcon.children[0].classList.remove('top-bun');
 		menuIcon.children[2].classList.remove('bottom-bun');
-
-
 		for(let i = 0; i < options.length; i++){
 			options[i].className = '';
 			options[i].style.transform = '';
@@ -935,73 +642,45 @@ function handleClose(e){
 			destroyCube(pb[1]);
 		}
 		menuIcon.focus();
-
-
 	} else {
 		overlay2.style.display = 'none';
-		// clearInterval(intrvl);
 		cancelAnimationFrame(mmm);
 	}
-
-
 }
-
 overlayCloseButton.addEventListener('click', handleClose);
 tableCloseButton.addEventListener('click', handleClose);
-
-
 tablePlayPauseButton.addEventListener('click', function(e){
-	// console.log(e.target);
 	if(this.getAttribute('aria-pressed') === 'false'){
-
 		this.className = 'play_pause play';
-
-		// this.firstElementChild.alt = 'play';
 		this.setAttribute('aria-pressed', true);
 		pauseExplain.textContent = 'pause/play toggle button. this table has an animation as its background. pause it for better performance. currently paused.';
 		dy = 0;
-		// clearInterval(intrvl);
 		cancelAnimationFrame(mmm);
-
 	} else {
 		this.className = 'play_pause pause';
-		// this.firstElementChild.alt = 'pause';
 		this.setAttribute('aria-pressed', false);
 		pauseExplain.textContent = 'pause/play toggle button. this table has an animation as its background. pause it for better performance. currently playing.';
 		dy = speed;
-		// intrvl = setInterval(draw, speed);
-
-
 		tableSource = Object.keys(sources)[Math.floor(Math.random() * Object.keys(sources).length)];
-
-
 		if(!sources[tableSource]){
 			let newImg = new Image();
-
 			newImg.onload = function(){
 				imgW = this.width;
 				imgH = this.height;
 				tableImageY = imgH - CanvasYSize;
 			}
-
 			newImg.src = `images/${tableSource}.jpg`;
 			sources[tableSource] = newImg;
 			tableImg = sources[tableSource];
-
 		} else {
 			tableImg = sources[tableSource];
 			imgW = tableImg.width;
 			imgH = tableImg.height;
 			tableImageY = imgH - CanvasYSize;
 		}
-
 		mmm = requestAnimationFrame(panorama);
-
 	}
-
 });
-
-
 overlayNextButton.addEventListener('click', function(){
 	if(switchFlag){
 		rotations.unshift(rotations.pop());
@@ -1056,15 +735,10 @@ function animate2(){
     t2++;
 	if(t2 === randBoxes.length){
 		linksDiv.style.zIndex = 5;
-		// linksDivLinks[0].tabIndex = "1";
-		// linksDivLinks[1].tabIndex = "1";
-
 		linksDivLinks.forEach(s => {
 			s.tabIndex = "1";
 			s.removeAttribute('aria-hidden');
 		});
-
-
 		linksDivLinks[0].focus();
 	}
 }
@@ -1096,23 +770,6 @@ function getRands(amt){
 	}
 	return [...nums];
 }
-// image0.src = 'images/loading.png';
-// image1.src = 'images/loading.png';
-// image2.src = 'images/loading.png';
-// image3.src = 'images/loading.png';
-// image4.src = 'images/loading.png';
-// image5.src = 'images/loading.png';
-// image6.src = 'images/loading.png';
-// image7.src = 'images/loading.png';
-// image8.src = 'images/loading.png';
-// image9.src = 'images/loading.png';
-// image10.src = 'images/loading.png';
-// image11.src = 'images/loading.png';
-// image12.src = 'images/loading.png';
-// image13.src = 'images/loading.png';
-// image14.src = 'images/loading.png';
-// image15.src = 'images/loading.png';
-// contact.src = 'images/loading.png';
 function checkBoard(){
 	let randos = getRands(canvArray.length - 1);
 	let solArray = [];
@@ -1137,101 +794,39 @@ let doable = checkBoard();
 while(getInversions(doable[0]) % 2 !== 0){
 	doable = checkBoard();
 }
-// canvArray[doable[1][0]].unshift(image0);
-// canvArray[doable[1][1]].unshift(image1);
-// canvArray[doable[1][2]].unshift(image2);
-// canvArray[doable[1][3]].unshift(image3);
-// canvArray[doable[1][4]].unshift(image4);
-// canvArray[doable[1][5]].unshift(image5);
-// canvArray[doable[1][6]].unshift(image6);
-// canvArray[doable[1][7]].unshift(image7);
-// canvArray[doable[1][8]].unshift(image8);
-// canvArray[doable[1][9]].unshift(image9);
-// canvArray[doable[1][10]].unshift(image10);
-// canvArray[doable[1][11]].unshift(image11);
-// canvArray[doable[1][12]].unshift(image12);
-// canvArray[doable[1][13]].unshift(image13);
-// canvArray[doable[1][14]].unshift(image14);
-// canvArray[15].unshift('blank');
-// let boardArray = doable[1].slice();
 let boardOrder = doable[0].slice();
-// let orderedArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 overlayContactButton.addEventListener('click', function(e){
-
-
-
-
 	canvasholder.style.display = 'flex';
 	[...overlayButtons, menuHold, subhead[0], subhead[1], desc[0], desc[1]].forEach(f => f.style.opacity = '0');
-
 	[...overlayButtons].forEach(g => g.setAttribute('aria-hidden', true));
-	// menuHold.style.opacity = '0';
-	// subhead[0].style.opacity = '0';
-	// desc[0].style.opacity = '0';
-	// subhead[1].style.opacity = '0';
-	// desc[1].style.opacity = '0';
-	// overlayNextButton.style.opacity = "0";
-	// overlayPrevButton.style.opacity = "0";
-	// overlayCloseButton.style.opacity = "0";
-	// overlayContactButton.style.opacity = "0";
 	[...overlayButtons, seconds].forEach(z => z.tabIndex = "-1");
-	// overlayNextButton.tabIndex = "-1";
-	// overlayPrevButton.tabIndex = "-1";
-	// overlayCloseButton.tabIndex = "-1";
-	// overlayContactButton.tabIndex = "-1";
-	// seconds.tabIndex = "-1";
-
 	for(let i = 0; i < options.length; i++){
 		options[i].tabIndex = "-1";
 		let thisInput = options[i].querySelectorAll('input');
-
 		if(thisInput[1]){
 			thisInput[1].tabIndex = "-1";
 		}
 		thisInput[0].tabIndex = "-1";
 	}
 	if(canvArray.length == 0){
-		// linksDivLinks[0].tabIndex = "1";
-		// linksDivLinks[1].tabIndex = "1";
-
 		linksDivLinks.forEach(s => {
 			s.tabIndex = "1";
 			s.removeAttribute('aria-hidden');
 		});
-
 		linksDivLinks[0].focus();
 	} else {
 		canvasbuttons[1].focus();
 	}
-	// for(let i = 0; i < canvArray.length; i++){
-	// 	if(canvArray[i][0] != 'blank'){
-	// 		ctx.drawImage(canvArray[i][0], canvArray[i][1], canvArray[i][3], 75, 75);
-	// 	} else {}
-	// }
-
-// console.log(doable[1]);
 if(clicks < 1){
 	for(let i = 0; i < canvArray.length-1; i++){
-		// if(canvArray[i][0] != 'blank'){
 			ctx.drawImage(contact, canvArray[i][0], canvArray[i][1], 75, 75,
 				canvArray[doable[1][i]][0], canvArray[doable[1][i]][1], 75, 75);
-		// } else {}
-		// console.log(canvArray[doable[1][i]]);
 	}
 }
-	console.log(canvArray);
-	// console.log(boardArray);
-	console.log(boardOrder);
-
-
-
 });
 function swapTiles(x, y){
 	if(canvArray.length === 0){return;}
-	// let tileClicked = `${Math.floor(y / 75)}${Math.floor(x / 75)}`;
-
 	let tileClicked = (Math.floor(y / 75) * 4) + Math.floor(x / 75);
-	// console.log(tileClicked);
 	let blank;
 	let blankIndex;
 	let swapTile;
@@ -1239,60 +834,7 @@ function swapTiles(x, y){
 	let temp;
 	let thisClose = 0;
 	let finalCheck;
-	// for(let i = 0; i < canvArray.length; i++){
-		// if(canvArray[i][0] !== 'blank'){
-		// 	if(canvArray[i][5] !== canvArray[i][0].src.match(/\d{2}(?=\.jpg)/)[0]){
-		// 		thisClose++;
-		// 	}
-		// } else {
-		// 	if(canvArray[i][5] !== '33'){
-		// 		thisClose++;
-		// 	}
-		// }
 
-		// if(canvArray[i][0] === 'blank'){
-		// 	if(![1, 10].includes(Math.abs(parseInt(canvArray[i][5], 10) - parseInt(tileClicked, 10)))){
-		// 		return;
-		// 	}
-		// 	blank = canvArray[i];
-		// 	blankIndex = i;
-		// }
-
-		// if(tileClicked === canvArray[i][5]){
-		// 	swapTile = canvArray[i];
-		// 	swapTileIndex = i;
-		// }
-
-// ----------------------
-		// if(canvArray[i][0] !== 'blank'){
-		// 	if(boardArray[i] !== i){
-		// 		thisClose++;
-		// 	}
-    //
-		// 	if(tileClicked === canvArray[i][4]){
-		// 		swapTile = canvArray[i];
-		// 		swapTileIndex = i;
-		// 	}
-    //
-		// } else {
-		// 	if(canvArray[i][5] !== '33'){
-		// 		thisClose++;
-		// 	}
-    //
-		// 	if(![1, 10].includes(Math.abs(parseInt(canvArray[i][5], 10) - parseInt(tileClicked, 10)))){
-		// 		return;
-		// 	}
-		// 	blank = canvArray[i];
-		// 	blankIndex = i;
-    //
-		// }
-
-
-		// if(canvArray[i][0] === 'blank'){
-    //
-		// }
-
-	// }
 
 	let blank2 = boardOrder.indexOf(15);
 	let rrr = boardOrder[tileClicked];
@@ -1346,31 +888,6 @@ function swapTiles(x, y){
 	}
 
 
-
-
-
-	// ctx.drawImage(swapTile[0], blank[1], blank[3], 75, 75);
-	// ctx.clearRect(swapTile[1], swapTile[3], 75, 75);
-	// temp = swapTile[0];
-	// canvArray[swapTileIndex][0] = 'blank';
-	// canvArray[blankIndex][0] = temp;
-	// if(thisClose < 3){
-	// 	for(let i = 0; i < canvArray.length; i++){
-	// 		if(canvArray[i][0] !== 'blank'){
-	// 			if(canvArray[i][5] !== canvArray[i][0].src.match(/\d{2}(?=\.jpg)/)[0]){
-	// 				finalCheck = false;
-	// 				break;
-	// 			}
-	// 		} else {
-	// 			if(canvArray[i][5] !== '33'){
-	// 				finalCheck = false;
-	// 				break;
-	// 			}
-	// 		}
-	// 	}
-	// } else {
-	// 	finalCheck = false;
-	// }
 	if(finalCheck){
 		faderCanv.style.display = 'block';
 		canvasbuttons[1].style.display = 'none';
@@ -1392,41 +909,19 @@ canvas.addEventListener('click', function(e){
 });
 canvasbuttons[0].addEventListener('click', e => { //contact info close button
 	canvasholder.style.display = 'none';
-	// overlay.style.filter = 'none';
-	// menuIcon.style.display = 'flex';
-	// projectNotesIcon.style.display = 'flex';
 	menuIcon.style.zIndex = '5';
-	// main.style.display = 'block';
 	menuHold.style.opacity = '1';
-
 	[subhead[0], subhead[1], desc[0], desc[1]].forEach(q => q.style.opacity = '.35');
 	[...overlayButtons].forEach(o => {
 		o.style.opacity = "1";
 		o.tabIndex = "1";
 	});
-
-	// subhead[0].style.opacity = '.35';
-	// desc[0].style.opacity = '.35';
-	// subhead[1].style.opacity = '.35';
-	// desc[1].style.opacity = '.35';
-	// overlayNextButton.style.opacity = "1";
-	// overlayPrevButton.style.opacity = "1";
 	overlayCloseButton.removeAttribute('aria-hidden');
 	overlayContactButton.removeAttribute('aria-hidden');
-	// overlayNextButton.tabIndex = "1";
-	// overlayPrevButton.tabIndex = "1";
-	// overlayCloseButton.tabIndex = "1";
-	// overlayContactButton.tabIndex = "1";
-	// linksDivLinks[0].tabIndex = "-1";
-	// linksDivLinks[1].tabIndex = "-1";
-
 	linksDivLinks.forEach(s => {
 		s.tabIndex = "-1";
 		s.setAttribute('aria-hidden', true);
 	});
-
-
-
 	seconds.tabIndex = seconds.hasAttribute('disabled') ? "-1" : "1";
 	for(let i = 0; i < options.length; i++){
 		if(options[i].dataset.pos === '0'){
@@ -1453,7 +948,6 @@ function rotate(e){
 	pb[whichPB].style.transform = `rotateX(${-rotObj[whichPB].ys}deg) rotateY(${rotObj[whichPB].xs}deg)`;
 };
 function getCube(e){
-
 	const cubeZeroCtr = { x : (cc[0].offsetLeft + cc[0].offsetWidth/2),
 				  y : (cc[0].offsetTop - 0 + cc[0].offsetHeight/2)
 				}
@@ -1466,13 +960,9 @@ function getCube(e){
 	const distFromCubeOne = Math.round(Math.sqrt(Math.pow(Math.abs(cubeOneCtr.x - xStart),2) + Math.pow(Math.abs(cubeOneCtr.y - yStart),2)));
 	if(distFromCubeZero <= distFromCubeOne){
 		whichPB = 0;
-		// classToAdd = 'first';
 	} else {
 		whichPB = 1;
-		// classToAdd = 'second';
 	}
-
-	// pb[whichPB].children[3].classList.add(classToAdd);
 	isRotating = true;
 };
 main.addEventListener('mousedown', getCube);
