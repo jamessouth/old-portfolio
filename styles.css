@@ -8,7 +8,6 @@
 	--size: 220px;
 	--delay: 0s;
 }
-
 body{
 	background-color: #555;
 	background: no-repeat url('images/sky-mob.jpg');
@@ -40,7 +39,6 @@ html{
 #tableexplain{
 	display: none;
 }
-
 .hamburger:focus,
 .star:focus{
 	outline: none;
@@ -57,8 +55,6 @@ html{
 	50%{transform: scale(.7); opacity: .7;}
 	100%{transform: scale(1); opacity: 1;}
 }
-
-
 .star{
 	position: absolute;
 	height: 24px;
@@ -70,11 +66,6 @@ html{
 	top: 40px;
 	animation: .7s 5 ease-out star;
 }
-.star hr{
-
-
-}
-
 .star hr:nth-of-type(1){
 	border: 2px #e2ba7d solid;
 	transform: translateY(4px) rotateZ(30deg);
@@ -87,7 +78,6 @@ html{
 	border: 2px #fecb7f solid;
 	transform: translateY(-4px) rotateZ(-30deg);
 }
-
 button{
 	position: absolute;
 	width: 58px;
@@ -112,12 +102,7 @@ button:hover, button:focus{
 	color: #000;
 	outline: none;
 }
-
-
-
-
 .table{
-	/*display: none;*/
 	position: absolute;
 	width: 310px;
 	height: 423px;
@@ -136,31 +121,24 @@ button:hover, button:focus{
 	top: 15px;
 	left: 15px;
 }
-
 button.play_pause{
 	width: 17px;
 	height: 28px;
 	top: 15px;
 	left: auto;
 	right: 15px;
-	/*background: none;*/
 	border: none;
 	border-radius: 0;
 	box-shadow: none;
 	background-repeat: no-repeat;
 	background-image: url('images/loading.png');
 }
-
 button.play{
 	background-image: url('images/play.png');
 }
-
 button.pause{
 	background-image: url('images/pause.png');
 }
-
-
-
 .table table{
 	table-layout: fixed;
 	width: 100%;
@@ -170,19 +148,14 @@ button.pause{
 }
 .table table thead tr th{
 	border-bottom: 1px green solid;
-
 	white-space: nowrap;
 }
-
-
-
 .table table thead tr th span{
 	font-family: 'Saira Condensed', sans-serif;
 	font-weight: 700;
 	border-bottom: 1px green solid;
 	padding: 3px 23px 0px 4px;
 }
-
 .table table th[scope="col"]{
 	transform: rotateZ(-60deg) translateX(20px) translateY(37px);
 	height: 75px;
@@ -191,66 +164,40 @@ button.pause{
 }
 .table table th[scope="row"]{
 	border-right: 1px green solid;
-
 }
 .table table td{
-	/*font-family: 'Saira Condensed', sans-serif;
-	font-weight: 700;*/
 	border-bottom: 1px green solid;
 	border-right: 1px green solid;
-	/*text-align: center;
-	font-size: 34px;
-	line-height: 24px;*/
-	/*height: 25px;*/
 }
 .table table td:hover{
 	background-color: #ffee58;
-
-
 }
-
 .table table tbody tr:hover{
 	background-color: lightyellow;
 }
-
 .table table thead:hover{
 	color: lightyellow;
 }
-
-
 .highlight{
 	background-color: lightyellow;
-
 }
 .highlight img,
 .table table tr:hover img{
 	filter: hue-rotate(160deg) invert(100%);
 }
-
 .highlightText{
 	color: lightyellow;
 }
-
 .table table td img:hover{
 	filter: hue-rotate(290deg) saturate(590%);
-
-}
-
-
-.table table td,
-.table table th{
-	/*border: 1px green solid;*/
 }
 .table table th#project{
 	width: 22px;
 	transform: rotateZ(-60deg) translateX(15px) translateY(35px);
 }
-
 .table table th#js{
-	/*width: 22px;*/
 	transform: rotateZ(-60deg) translateX(21px) translateY(38px);
 }
-
 .table table td[headers*="js"] img{
 	width: 28px;
 	height: 24px;
@@ -259,14 +206,10 @@ button.pause{
 	width: 30px;
 	height: 24px;
 }
-
 .table table td img{
 	display: block;
 }
-
-
 .table table th#threeD{
-
 	width: 32px;
 	transform: rotateZ(-60deg) translateX(20px) translateY(34px);
 }
@@ -300,33 +243,22 @@ button.pause{
 .table table th#canvas span{
 	padding-right: 18px;
 }
-
-
-
 .table table th#threeD span{
 	border-bottom: none;
 }
-
-
 .table canvas#scroll{
 	position: absolute;
 	background-color: transparent;
 	z-index: -1;
-
 }
-
 caption p:first-of-type{
 	font-size: 32px;
 	font-weight: 700;
 }
-
 caption p:last-of-type{
 	font-size: 16px;
 	font-weight: 700;
 }
-
-
-
 .top-bun{
 	transform: rotateZ(-30deg);
 	transition: transform .8s;
@@ -342,7 +274,6 @@ main > h1{
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
-	/*animation: 1.4s 1.8s 7 cubic-bezier(.4, 0, 1, 1) bob2;*/
 }
 main .hold .subhead{
 	position: absolute;
@@ -421,7 +352,6 @@ canvas#board{
 	top: 10px;
 	min-width: 300px;
 }
-
 button.next{
 	right: 70%;
 }
@@ -819,34 +749,6 @@ select:focus{
 	-moz-transform-style: preserve-3d;
 	transform-style: preserve-3d;
 	transform: rotateX(125deg) rotateY(-13deg) rotateZ(-19deg);
-}
-.anim-cube{
-	animation: 1.5s 7 cubic-bezier(.46, .04, .52, .96) bob;
-}
-@keyframes bob {
-	0% { transform: translateY(0); }
-	50% { transform: translateY(8px); }
-	100% { transform: translateY(0); }
-}
-@keyframes bob2 {
-	0% { margin-bottom: 0; }
-	50% { margin-bottom: .2em; }
-	100% { margin-bottom: 0; }
-}
-@keyframes moveAround {
-	0% { transform: rotateX(8deg) rotateY(-12deg); }
-	8.333% { transform: rotateX(-8deg) rotateY(-12deg); }
-	16.666% { transform: rotateX(-8deg) rotateY(12deg); }
-	25% { transform: rotateX(8deg) rotateY(12deg); }
-	33.333% { transform: rotateX(-8deg) rotateY(12deg); }
-	41.666% { transform: rotateX(8deg) rotateY(12deg); }
-	50% { transform: rotateX(-8deg) rotateY(12deg); }
-	58.333% { transform: rotateX(-8deg) rotateY(-12deg); }
-	66.666% { transform: rotateX(8deg) rotateY(-12deg); }
-	75% { transform: rotateX(-8deg) rotateY(-12deg); }
-	83.333% { transform: rotateX(8deg) rotateY(-12deg); }
-	91.666% { transform: rotateX(-8deg) rotateY(-12deg); }
-	100% { transform: rotateX(0deg) rotateY(0deg); }
 }
 .photo-cube{
   /*transition: transform .001s;*/
