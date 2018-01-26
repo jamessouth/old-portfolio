@@ -1,7 +1,6 @@
 const main = document.querySelector('main');
 const pb = document.querySelectorAll('.photo-cube');
 const cc = document.querySelectorAll('.cube-container');
-const body = document.querySelector('body');
 const menuIcon = document.querySelector('.hamburger');
 const projectNotesIcon = document.querySelector('.star');
 const table = document.querySelector('.overlay2 .table');
@@ -59,13 +58,10 @@ const proj7 = pb[1].querySelector('.front');
 const proj9 = pb[1].querySelector('.right');
 const proj10 = pb[1].querySelector('.back');
 const proj11 = pb[1].querySelector('.top');
-// let classToAdd = '';
-
 menuIcon.hamb = true;
 projectNotesIcon.hamb = false;
 overlayCloseButton.over = true;
 tableCloseButton.over = false;
-
 let ctx = canvas.getContext('2d');
 let ctxFader = faderCanv.getContext('2d');
 let depths = [0, -2000, -3250, -4500];
@@ -75,27 +71,10 @@ let switchFlag = true;
 let nextAnims = ['applyAnimFTB', 'applyAnimMFTF', 'applyAnimMBTMF', 'applyAnimBTMB'];
 let prevAnims = ['applyAnimFTMF', 'applyAnimMFTMB', 'applyAnimMBTB', 'applyAnimBTF'];
 let boxes = [];
-let t = 0;
-let t2 = 0;
-let t3 = 0;
+let timerOne = 0;
+let timerTwo = 0;
 let shades = [];
 let canvArray = [];
-// let image0 = new Image();
-// let image1 = new Image();
-// let image2 = new Image();
-// let image3 = new Image();
-// let image4 = new Image();
-// let image5 = new Image();
-// let image6 = new Image();
-// let image7 = new Image();
-// let image8 = new Image();
-// let image9 = new Image();
-// let image10 = new Image();
-// let image11 = new Image();
-// let image12 = new Image();
-// let image13 = new Image();
-// let image14 = new Image();
-// let image15 = new Image();
 let contact = new Image();
 let clicks = 0;
 let isRotating = false;
@@ -129,13 +108,6 @@ sizeInput.value = 220;
 sizeInput.setAttribute('aria-valuenow', 220);
 radioLinear.checked = true;
 radioLinear.setAttribute('aria-checked', true);
-
-
-
-
-
-
-
 let KEYFRAMES = {
 	zero: [
 		{transform: 'rotateY(0deg) rotateX(0deg)'},
@@ -166,54 +138,40 @@ let KEYFRAMES = {
 		{transform: 'rotateY(0deg) rotateX(0deg)'}
   ]
 };
-
 let KEYTIMING = {duration: 650, iterations: 1, delay: 250, easing: 'cubic-bezier(.81,.02,.75,.51)'};
-
 let anims = ['zero', 'one', 'two', 'three', 'four', 'five', 'six'];
 let no = 1, num = 0;
 let spin, spin2;
-
+let panoAnim;
 async function buildCubes(){
-
 	let pic, pic2;
-
 	try{
 		pic = await fetch(`images/project${no}.jpg`);
 		pic2 = await fetch(`images/project${no + 6}.jpg`);
-
 		pic = await pic.blob();
 		pic2 = await pic2.blob();
-
 		var objectURL = URL.createObjectURL(pic);
 		var objectURL2 = URL.createObjectURL(pic2);
-
 		pb[0].children[no - 1].style.backgroundImage = `url(${objectURL})`;
 		pb[1].children[no - 1].style.backgroundImage = `url(${objectURL2})`;
 		no++;
 	}
 	catch(err){
-		console.log('error', err);
+		console.log('error ', err);
 	}
-
 }
-
-animCubes().then(buildCubes).then(animCubes)
-
-.then(buildCubes).then(animCubes).then(buildCubes).then(animCubes).then(buildCubes).then(animCubes).then(buildCubes).then(animCubes).then(buildCubes).then(animCubes).then(hoverCubes);
-
+animCubes().then(buildCubes).then(animCubes).then(buildCubes).then(animCubes).then(buildCubes).then(animCubes).then(buildCubes).then(animCubes).then(buildCubes).then(animCubes).then(buildCubes).then(animCubes).then(hoverCubes);
 function animCubes(){
-
 	spin = pb[0].animate(
 		KEYFRAMES[anims[num]], KEYTIMING);
 	spin2 = pb[1].animate(
 		KEYFRAMES[anims[num]], KEYTIMING);
-
 	num++;
-	num == 2 ? KEYTIMING.delay = 10:{};
-
+	if(num === 2){
+		KEYTIMING.delay = 10;
+	}
 	return Promise.all([spin.finished, spin2.finished]);
 }
-
 let hover, hover2;
 function hoverCubes(){
 	hover = cc[0].animate([
@@ -224,11 +182,9 @@ function hoverCubes(){
 		{transform: 'translateY(0px)'},
 		{transform: 'translateY(10px)'}
 	], {duration: 1000, iterations: 20, direction: 'alternate'});
-
 }
-
 function panorama(timeStamp){
-	mmm = requestAnimationFrame(panorama);
+	panoAnim = requestAnimationFrame(panorama);
 	tableCtx.clearRect(0, 0, CanvasXSize, CanvasYSize);
 	if(CanvasYSize + tableImageY < dy) {
 			tableImageY = imgH - CanvasYSize;
@@ -239,9 +195,10 @@ function panorama(timeStamp){
 	}
 	tableCtx.drawImage(tableImg, 0, tableImageY, imgW, CanvasYSize,
 	0, 0, CanvasXSize, CanvasYSize);
+	myImageData = tableCtx.getImageData(155, 34, 1, 1);
+	featureTable.style.borderColor = `rgba(${myImageData.data[0]}, ${myImageData.data[1]}, ${myImageData.data[2]}, 255)`;
 	tableImageY -= dy;
-};
-
+}
 // 'inspired by https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Basic_animations'
 let tableImg = new Image();
 let sources = {
@@ -255,27 +212,12 @@ let tableImageY = 0;
 let dy = speed;
 let imgW;
 let imgH;
-let tableImageX = 0;
 let tableCtx = table.querySelector('canvas#scroll').getContext('2d');
-// let intrvl;
 let myImageData;
-
-
-// console.log(tableImageY);
-// myImageData = tableCtx.getImageData(155, 34, 1, 1);
-// if(myImageData.data[3] !== 255){
-// 	console.log(myImageData.data);
-// }
-//
-// featureTable.style.borderColor = `rgba(${myImageData.data[0]}, ${myImageData.data[1]}, ${myImageData.data[2]}, 255)`;
-
-
 function clearTable(){
 	tableTDs.forEach(c => c.classList.remove('highlight'));
 	tableTHSpans.forEach(h => h.classList.remove('highlightText'));
 }
-
-
 function handleTableHighlight(e){
 	clearTable();
 	let featureColumn;
@@ -286,11 +228,11 @@ function handleTableHighlight(e){
 			featureColumn = e.target.parentNode.headers.split(' ')[1];
 		}
 		let highlightedCol = this.querySelectorAll(`td[headers*=${featureColumn}]`);
-		let highlightedHeader = this.querySelector(`th[id=${featureColumn}] span`)
+		let highlightedHeader = this.querySelector(`th[id=${featureColumn}] span`);
 		highlightedCol.forEach(x => x.classList.add('highlight'));
 		highlightedHeader.classList.add('highlightText');
 	}
-};
+}
 featureTable.addEventListener('mouseover', handleTableHighlight);
 featureTable.addEventListener('mouseout', clearTable);
 ['mouseover', 'focus', 'touchstart'].forEach(evt => {
@@ -521,10 +463,8 @@ function handleMenu(e){
 		if(e.key.toLowerCase() === 'tab' || e.keyCode === 9){
 			return;
 		} else if(e.key.toLowerCase() === 'enter' || e.keyCode === 13){
-
 		} else if(e.key.toLowerCase() === ' ' || e.keyCode === 32){
 			e.preventDefault();
-
 		} else {
 			e.preventDefault();
 			return;
@@ -562,7 +502,7 @@ function handleMenu(e){
 					imgW = this.width;
 					imgH = this.height;
 					tableImageY = imgH - CanvasYSize;
-				}
+				};
 				newImg.src = `images/${tableSource}.jpg`;
 				sources[tableSource] = newImg;
 				tableImg = sources[tableSource];
@@ -572,7 +512,7 @@ function handleMenu(e){
 				imgH = tableImg.height;
 				tableImageY = imgH - CanvasYSize;
 			}
-			let mmm = requestAnimationFrame(panorama);
+			panoAnim = requestAnimationFrame(panorama);
 		}
 	}
 }
@@ -644,7 +584,7 @@ function handleClose(e){
 		menuIcon.focus();
 	} else {
 		overlay2.style.display = 'none';
-		cancelAnimationFrame(mmm);
+		cancelAnimationFrame(panoAnim);
 	}
 }
 overlayCloseButton.addEventListener('click', handleClose);
@@ -655,7 +595,7 @@ tablePlayPauseButton.addEventListener('click', function(e){
 		this.setAttribute('aria-pressed', true);
 		pauseExplain.textContent = 'pause/play toggle button. this table has an animation as its background. pause it for better performance. currently paused.';
 		dy = 0;
-		cancelAnimationFrame(mmm);
+		cancelAnimationFrame(panoAnim);
 	} else {
 		this.className = 'play_pause pause';
 		this.setAttribute('aria-pressed', false);
@@ -668,7 +608,7 @@ tablePlayPauseButton.addEventListener('click', function(e){
 				imgW = this.width;
 				imgH = this.height;
 				tableImageY = imgH - CanvasYSize;
-			}
+			};
 			newImg.src = `images/${tableSource}.jpg`;
 			sources[tableSource] = newImg;
 			tableImg = sources[tableSource];
@@ -678,7 +618,7 @@ tablePlayPauseButton.addEventListener('click', function(e){
 			imgH = tableImg.height;
 			tableImageY = imgH - CanvasYSize;
 		}
-		mmm = requestAnimationFrame(panorama);
+		panoAnim = requestAnimationFrame(panorama);
 	}
 });
 overlayNextButton.addEventListener('click', function(){
@@ -730,10 +670,10 @@ function randomizeBoxes(){
 }
 let randBoxes = randomizeBoxes();
 function animate2(){
-    if(t2 < randBoxes.length - 1){ requestAnimationFrame(animate2); }
-	ctx.clearRect(randBoxes[t2][0], randBoxes[t2][1], 20, 20);
-    t2++;
-	if(t2 === randBoxes.length){
+    if(timerTwo < randBoxes.length - 1){ requestAnimationFrame(animate2); }
+	ctx.clearRect(randBoxes[timerTwo][0], randBoxes[timerTwo][1], 20, 20);
+    timerTwo++;
+	if(timerTwo === randBoxes.length){
 		linksDiv.style.zIndex = 5;
 		linksDivLinks.forEach(s => {
 			s.tabIndex = "1";
@@ -746,12 +686,12 @@ for(let i = 100; i >= 0; i--){
 	shades.push(i/100);
 }
 function animate(){
-    if(t < shades.length){ requestAnimationFrame(animate); }
-	ctxFader.fillStyle = `rgba(173, 216, 230, ${shades[t]})`;
+    if(timerOne < shades.length){ requestAnimationFrame(animate); }
+	ctxFader.fillStyle = `rgba(173, 216, 230, ${shades[timerOne]})`;
 	ctxFader.clearRect(0, 0, 75, 75);
 	ctxFader.fillRect(0, 0, 75, 75);
-    t++;
-	if(t === shades.length){
+    timerOne++;
+	if(timerOne === shades.length){
 		faderCanv.style.display = 'none';
 		canvas.style.backgroundColor = 'transparent';
 		window.setTimeout(animate2, 2000);
@@ -808,7 +748,7 @@ overlayContactButton.addEventListener('click', function(e){
 		}
 		thisInput[0].tabIndex = "-1";
 	}
-	if(canvArray.length == 0){
+	if(canvArray.length === 0){
 		linksDivLinks.forEach(s => {
 			s.tabIndex = "1";
 			s.removeAttribute('aria-hidden');
@@ -819,75 +759,32 @@ overlayContactButton.addEventListener('click', function(e){
 	}
 if(clicks < 1){
 	for(let i = 0; i < canvArray.length-1; i++){
-			ctx.drawImage(contact, canvArray[i][0], canvArray[i][1], 75, 75,
-				canvArray[doable[1][i]][0], canvArray[doable[1][i]][1], 75, 75);
+			ctx.drawImage(contact, canvArray[i][0], canvArray[i][1], 75, 75, canvArray[doable[1][i]][0], canvArray[doable[1][i]][1], 75, 75);
 	}
 }
 });
 function swapTiles(x, y){
 	if(canvArray.length === 0){return;}
 	let tileClicked = (Math.floor(y / 75) * 4) + Math.floor(x / 75);
-	let blank;
-	let blankIndex;
-	let swapTile;
-	let swapTileIndex;
-	let temp;
-	let thisClose = 0;
+	let blank = boardOrder.indexOf(15);
 	let finalCheck;
-
-
-	let blank2 = boardOrder.indexOf(15);
-	let rrr = boardOrder[tileClicked];
-
-	// if(rrr === 15){
-	// 	return;
-	// }
-	if(![1, 4].includes(Math.abs(tileClicked - blank2))){
+	let brdInd = boardOrder[tileClicked];
+	if(![1, 4].includes(Math.abs(tileClicked - blank))){
 		return;
 	}
-
-
-
-	// blank = boardArray.indexOf(15);
-
-
 	ctx.clearRect(canvArray[tileClicked][0], canvArray[tileClicked][1], 75, 75);
-
-	ctx.drawImage(contact, canvArray[rrr][0], canvArray[rrr][1], 75, 75,
-	canvArray[blank2][0], canvArray[blank2][1], 75, 75);
-
-
-	// [
-	// 	boardArray[rrr], boardArray[blank]
-	// ] = [
-	// 	boardArray[blank], boardArray[rrr]
-	// ];
-
-	[
-		boardOrder[tileClicked], boardOrder[blank2]
-	] = [
-		boardOrder[blank2], boardOrder[tileClicked]
-	];
-
-	// console.log(boardArray);
-	console.log(boardOrder);
-	// let bool = true;
+	ctx.drawImage(contact, canvArray[brdInd][0], canvArray[brdInd][1], 75, 75,
+	canvArray[blank][0], canvArray[blank][1], 75, 75);
+	[boardOrder[tileClicked], boardOrder[blank]] = [boardOrder[blank], boardOrder[tileClicked]];
 	if(boardOrder[0] === 0 && boardOrder[3] === 3 && boardOrder[11] === 11 && boardOrder[14] === 14){
-		console.log('searching...');
 		finalCheck = true;
-		// console.log(boardOrder.every(x => boardOrder[x] === x));
-
 		for(let f = 0; f < boardOrder.length; f++){
 			if(boardOrder[f] !== f){
 				finalCheck = false;
 				break;
 			}
-
 		}
-		console.log(finalCheck);
 	}
-
-
 	if(finalCheck){
 		faderCanv.style.display = 'block';
 		canvasbuttons[1].style.display = 'none';
@@ -946,14 +843,14 @@ function rotate(e){
 	rotObj[whichPB].xs = xPos - xStart + rotObj[whichPB].x;
 	rotObj[whichPB].ys = yPos - yStart + rotObj[whichPB].y;
 	pb[whichPB].style.transform = `rotateX(${-rotObj[whichPB].ys}deg) rotateY(${rotObj[whichPB].xs}deg)`;
-};
+}
 function getCube(e){
 	const cubeZeroCtr = { x : (cc[0].offsetLeft + cc[0].offsetWidth/2),
 				  y : (cc[0].offsetTop - 0 + cc[0].offsetHeight/2)
-				}
+				};
 	const cubeOneCtr = { x : (cc[1].offsetLeft + cc[1].offsetWidth/2),
 				  y : (cc[1].offsetTop - 0 + cc[1].offsetHeight/2)
-				}
+				};
 	xStart = (e.x || Math.floor(e.touches[0].clientX)) + window.scrollX;
 	yStart = (e.y || Math.floor(e.touches[0].clientY)) - 0 + window.scrollY;
 	const distFromCubeZero = Math.round(Math.sqrt(Math.pow(Math.abs(cubeZeroCtr.x - xStart),2) + Math.pow(Math.abs(cubeZeroCtr.y - yStart),2)));
@@ -964,7 +861,7 @@ function getCube(e){
 		whichPB = 1;
 	}
 	isRotating = true;
-};
+}
 main.addEventListener('mousedown', getCube);
 main.addEventListener('touchstart', getCube, {passive: true});
 main.addEventListener('mousemove', rotate);
@@ -982,7 +879,7 @@ function releaseCube(e){
 	}
 	rotObj[whichPB].x = rotObj[whichPB].xs || 0;
 	rotObj[whichPB].y = rotObj[whichPB].ys || 0;
-};
+}
 main.addEventListener('mouseup', releaseCube);
 main.addEventListener('touchend', releaseCube);
 main.addEventListener('mouseleave', (e) => {
