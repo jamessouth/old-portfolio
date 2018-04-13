@@ -66,7 +66,7 @@ let ctx = canvas.getContext('2d');
 let ctxFader = faderCanv.getContext('2d');
 let depths = [0, -2000, -3250, -4500];
 let rotations = [0, 1, 2, 3];
-let descs = ['personal profile page', 'responsive layout', 'registration form', 'photo gallery', 'sass refactor of project 2', 'svg site update', 'interactive video player', 'accessibility refactor', 'web app dashboard', 'react employee directory', 'react flickr gallery', 'portfolio'];
+let descs = ['random quotes', 'interactive form', 'tic tac toe', '15 puzzle generator', 'node.js web scraper', 'svg site update', 'interactive video player', 'accessibility refactor', 'web app dashboard', 'react employee directory', 'react flickr gallery', 'portfolio'];
 let switchFlag = true;
 let nextAnims = ['applyAnimFTB', 'applyAnimMFTF', 'applyAnimMBTMF', 'applyAnimBTMB'];
 let prevAnims = ['applyAnimFTMF', 'applyAnimMFTMB', 'applyAnimMBTB', 'applyAnimBTF'];
@@ -250,8 +250,8 @@ check[0].addEventListener('change', function(e){
 	if(e.target.checked){
 		checkLabel[0].textContent = 'GIFs!';
 		this.setAttribute('aria-checked', true);
-		proj3.style.backgroundImage = 'url("images/p3.gif")';
-		proj4.style.backgroundImage = 'url("images/p4.gif")';
+		// proj3.style.backgroundImage = 'url("images/p3.gif")';
+		// proj4.style.backgroundImage = 'url("images/p4.gif")';
 		proj7.style.backgroundImage = 'url("images/p7.gif")';
 		proj9.style.backgroundImage = 'url("images/p9.gif")';
 		proj10.style.backgroundImage = 'url("images/p10.gif")';
@@ -259,8 +259,8 @@ check[0].addEventListener('change', function(e){
 	} else {
 		checkLabel[0].textContent = 'no GIFs';
 		this.setAttribute('aria-checked', false);
-		proj3.style.backgroundImage = 'url("images/project3.jpg")';
-		proj4.style.backgroundImage = 'url("images/project4.jpg")';
+		// proj3.style.backgroundImage = 'url("images/project3.jpg")';
+		// proj4.style.backgroundImage = 'url("images/project4.jpg")';
 		proj7.style.backgroundImage = 'url("images/project7.jpg")';
 		proj9.style.backgroundImage = 'url("images/project9.jpg")';
 		proj10.style.backgroundImage = 'url("images/project10.jpg")';
