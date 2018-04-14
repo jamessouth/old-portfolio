@@ -252,7 +252,7 @@ button.pause{
 	z-index: -1;
 }
 caption p:first-of-type{
-	font-size: 32px;
+	font-size: 22px;
 	font-weight: 700;
 }
 caption p:last-of-type{
