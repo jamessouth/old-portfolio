@@ -1,5 +1,24 @@
 import animate from '../web-animations-next.min.js';
 
+
+import './styles.css';
+import Explosion from './images/explosion.gif';
+import Contact from './images/contact.jpg';
+import Check from './images/check.png';
+
+import Bluecloud from './images/bluecloud.jpg';
+import Cloudvert from './images/cloudvert.jpg';
+import Fire from './images/fire.jpg';
+import Greyclouds from './images/greyclouds.jpg';
+import Jupiter from './images/jupiter.jpg';
+import Mars from './images/mars.jpg';
+import Moon from './images/moon.jpg';
+import Pano from './images/pano.jpg';
+import Rapid from './images/rapid.jpg';
+import Shallow from './images/shallow.jpg';
+
+
+
 const main = document.querySelector('main');
 const pb = document.querySelectorAll('.photo-cube');
 const cc = document.querySelectorAll('.cube-container');
@@ -197,15 +216,16 @@ function panorama(timeStamp){
   }
   tableCtx.drawImage(tableImg, 0, tableImageY, imgW, CanvasYSize,
   0, 0, CanvasXSize, CanvasYSize);
-  myImageData = tableCtx.getImageData(155, 34, 1, 1);
-  featureTable.style.borderColor = `rgba(${myImageData.data[0]}, ${myImageData.data[1]}, ${myImageData.data[2]}, 255)`;
+  // myImageData = tableCtx.getImageData(155, 34, 1, 1);
+  // featureTable.style.borderColor = `rgba(${myImageData.data[0]}, ${myImageData.data[1]}, ${myImageData.data[2]}, 255)`;
   tableImageY -= dy;
 }
 // 'inspired by https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Basic_animations'
 let tableImg = new Image();
-let sources = {
-  'bluecloud': null, 'cloudvert': null, 'fire': null, 'greyclouds': null, 'jupiter': null, 'mars': null, 'moon': null, 'pano': null, 'rapid': null, 'shallow': null
-};
+// let sources = {
+//   'Bluecloud': null, 'Cloudvert': null, 'Fire': null, 'Greyclouds': null, 'Jupiter': null, 'Mars': null, 'Moon': null, 'Pano': null, 'Rapid': null, 'Shallow': null
+// };
+const sources = [Bluecloud, Cloudvert, Fire, Greyclouds, Jupiter, Mars, Moon, Pano, Rapid, Shallow];
 let tableSource;
 let CanvasXSize = 310;
 let CanvasYSize = 423;
@@ -271,7 +291,7 @@ check[0].addEventListener('change', function(e){
 });
 check[1].addEventListener('change', function(e){
   if(e.target.checked){
-    fetch('../images/explosion.gif')
+    fetch(Explosion)
     .then(res => {
       return res.status !== 200 ? console.log('there was a problem fetching the resource. Status Code and Text: ' + res.status, res.statusText) : res.blob();
     })
@@ -480,7 +500,7 @@ function handleMenu(e){
   headline.setAttribute('aria-hidden', true);
   [main, menuIcon, projectNotesIcon, subhead[0], subhead[1], desc[0], desc[1]].forEach(w => w.style.opacity = '0.35');
   if(this.hamb){
-    contact.src = '../images/contact.jpg';
+    contact.src = Contact;
     this.children[0].classList.add('top-bun');
     this.children[2].classList.add('bottom-bun');
     overlay.style.display = 'flex';
@@ -496,24 +516,24 @@ function handleMenu(e){
     overlay2.style.display = 'block';
     if(tablePlayPauseButton.getAttribute('aria-pressed') === 'false'){
       tablePlayPauseButton.className = 'play_pause pause';
-      tableChecks.forEach(c => c.src = '../images/check.png');
-      tableSource = Object.keys(sources)[Math.floor(Math.random() * Object.keys(sources).length)];
-      if(!sources[tableSource]){
-        let newImg = new Image();
-        newImg.onload = function(){
-          imgW = this.width;
-          imgH = this.height;
-          tableImageY = imgH - CanvasYSize;
-        };
-        newImg.src = `../images/${tableSource}.jpg`;
-        sources[tableSource] = newImg;
-        tableImg = sources[tableSource];
-      } else {
-        tableImg = sources[tableSource];
+      tableChecks.forEach(c => c.src = Check);
+      tableSource = sources[Math.floor(Math.random() * sources.length)];
+      console.log(tableSource);
+        // let newImg = new Image();
+        // newImg.onload = function(){
+        //   imgW = this.width;
+        //   imgH = this.height;
+        //   tableImageY = imgH - CanvasYSize;
+        // };
+        // newImg.src = tableSource;
+        // sources[tableSource] = newImg;
+        tableImg.src = tableSource;
+console.log(tableImg);
+        // tableImg = sources[tableSource];
         imgW = tableImg.width;
         imgH = tableImg.height;
         tableImageY = imgH - CanvasYSize;
-      }
+
       panoAnim = requestAnimationFrame(panorama);
     }
   }
@@ -603,23 +623,23 @@ tablePlayPauseButton.addEventListener('click', function(e){
     this.setAttribute('aria-pressed', false);
     pauseExplain.textContent = 'pause/play toggle button. this table has an animation as its background. pause it for better performance. currently playing.';
     dy = speed;
-    tableSource = Object.keys(sources)[Math.floor(Math.random() * Object.keys(sources).length)];
-    if(!sources[tableSource]){
-      let newImg = new Image();
-      newImg.onload = function(){
-        imgW = this.width;
-        imgH = this.height;
-        tableImageY = imgH - CanvasYSize;
-      };
-      newImg.src = `../images/${tableSource}.jpg`;
-      sources[tableSource] = newImg;
-      tableImg = sources[tableSource];
-    } else {
-      tableImg = sources[tableSource];
+    tableSource = sources[Math.floor(Math.random() * sources.length)];
+
+      // let newImg = new Image();
+      // newImg.onload = function(){
+      //   imgW = this.width;
+      //   imgH = this.height;
+      //   tableImageY = imgH - CanvasYSize;
+      // };
+      // newImg.src = `../images/${tableSource}.jpg`;
+      // sources[tableSource] = newImg;
+      tableImg.src = tableSource;
+
+      // tableImg = sources[tableSource];
       imgW = tableImg.width;
       imgH = tableImg.height;
       tableImageY = imgH - CanvasYSize;
-    }
+
     panoAnim = requestAnimationFrame(panorama);
   }
 });
