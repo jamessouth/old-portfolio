@@ -10,7 +10,7 @@
 }
 body{
 	background-color: #555;
-	background: no-repeat url('./images/sky-mob.jpg');
+	background: no-repeat url('../images/sky-mob.jpg');
 	background-position: center center;
 	background-attachment: fixed;
 	background-size: cover;
@@ -131,13 +131,13 @@ button.play_pause{
 	border-radius: 0;
 	box-shadow: none;
 	background-repeat: no-repeat;
-	background-image: url('./images/loading.png');
+	background-image: url('../images/loading.png');
 }
 button.play{
-	background-image: url('./images/play.png');
+	background-image: url('../images/play.png');
 }
 button.pause{
-	background-image: url('./images/pause.png');
+	background-image: url('../images/pause.png');
 }
 .table table{
 	table-layout: fixed;
@@ -404,7 +404,7 @@ button.contact{
 	left: -91px;
 }
 .canvasbuttons #contactinfolinks{
-	background-image: url('./images/winterscape2.jpg');
+	background-image: url('../images/winterscape2.jpg');
 	position: absolute;
 	left: -316px;
 	top: 0;
@@ -482,7 +482,7 @@ button.contact{
 	border-bottom-color: #bdbdbd;
 	box-shadow: 18px 20px 51px 6px black;
 	background-color: wheat;
-	background: no-repeat url('./images/sky-sq.jpg');
+	background: no-repeat url('../images/sky-sq.jpg');
 	-webkit-transform-origin: 50% 50%;
 	-moz-transform-origin: 50% 50%;
 	-o-transform-origin: 50% 50%;
@@ -883,7 +883,7 @@ select:focus{
 @media screen and (min-width: 460px){
 	body{
 		background-color: #555;
-		background: no-repeat url('./images/sky-mob2.jpg');
+		background: no-repeat url('../images/sky-mob2.jpg');
 		background-position: center center;
 		background-attachment: fixed;
 		background-size: cover;
@@ -901,7 +901,7 @@ select:focus{
 @media screen and (min-width: 768px){
 	body{
 		background-color: #555;
-		background: no-repeat url('./images/sky-tab.jpg');
+		background: no-repeat url('../images/sky-tab.jpg');
 		background-position: center center;
 		background-attachment: fixed;
 		background-size: cover;
@@ -948,7 +948,7 @@ select:focus{
 @media screen and (min-width: 1050px){
 	body{
 		background-color: #555;
-		background: no-repeat url('./images/sky-med.jpg');
+		background: no-repeat url('../images/sky-med.jpg');
 		background-position: center center;
 		background-attachment: fixed;
 		background-size: cover;
@@ -957,7 +957,7 @@ select:focus{
 @media screen and (min-width: 1900px){
 	body{
 		background-color: #555;
-		background: no-repeat url('./images/sky-big.jpg');
+		background: no-repeat url('../images/sky-big.jpg');
 		background-position: center center;
 		background-attachment: fixed;
 		background-size: cover;

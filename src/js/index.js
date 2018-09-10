@@ -1,35 +1,43 @@
-import animate from '../web-animations-next.min.js';
+import "@babel/polyfill";
+
+import './web-animations-next.min.js';
 
 
-import './styles.css';
-import './index.html';
-import Explosion from './images/explosion.gif';
-import Contact from './images/contact.jpg';
-import Check from './images/check.png';
+import '../css/styles.css';
+import '../html/index.html';
 
-import Bluecloud from './images/bluecloud.jpg';
-import Cloudvert from './images/cloudvert.jpg';
-import Fire from './images/fire.jpg';
-import Greyclouds from './images/greyclouds.jpg';
-import Jupiter from './images/jupiter.jpg';
-import Mars from './images/mars.jpg';
-import Moon from './images/moon.jpg';
-import Pano from './images/pano.jpg';
-import Rapid from './images/rapid.jpg';
-import Shallow from './images/shallow.jpg';
+import Explosion from '../images/explosion.gif';
+import Contact from '../images/contact.jpg';
+import Check from '../images/check.png';
 
-import Project1 from './images/project1.jpg';
-import Project2 from './images/project2.jpg';
-import Project3 from './images/project3.jpg';
-import Project4 from './images/project4.jpg';
-import Project5 from './images/project5.jpg';
-import Project6 from './images/project6.jpg';
-import Project7 from './images/project7.jpg';
-import Project8 from './images/project8.jpg';
-import Project9 from './images/project9.jpg';
-import Project10 from './images/project10.jpg';
-import Project11 from './images/project11.jpg';
-import Project12 from './images/project12.jpg';
+import Bluecloud from '../images/bluecloud.jpg';
+import Cloudvert from '../images/cloudvert.jpg';
+import Fire from '../images/fire.jpg';
+import Greyclouds from '../images/greyclouds.jpg';
+import Jupiter from '../images/jupiter.jpg';
+import Mars from '../images/mars.jpg';
+import Moon from '../images/moon.jpg';
+import Pano from '../images/pano.jpg';
+import Rapid from '../images/rapid.jpg';
+import Shallow from '../images/shallow.jpg';
+
+import Project1 from '../images/project1.jpg';
+import Project2 from '../images/project2.jpg';
+import Project3 from '../images/project3.jpg';
+import Project4 from '../images/project4.jpg';
+import Project5 from '../images/project5.jpg';
+import Project6 from '../images/project6.jpg';
+import Project7 from '../images/project7.jpg';
+import Project8 from '../images/project8.jpg';
+import Project9 from '../images/project9.jpg';
+import Project10 from '../images/project10.jpg';
+import Project11 from '../images/project11.jpg';
+import Project12 from '../images/project12.jpg';
+
+import Project7GIF from '../images/p7.gif';
+import Project9GIF from '../images/p9.gif';
+import Project10GIF from '../images/p10.gif';
+import Project11GIF from '../images/p11.gif';
 
 
 const main = document.querySelector('main');
@@ -283,21 +291,17 @@ check[0].addEventListener('change', function(e){
   if(e.target.checked){
     checkLabel[0].textContent = 'GIFs!';
     this.setAttribute('aria-checked', true);
-    // proj3.style.backgroundImage = 'url("images/p3.gif")';
-    // proj4.style.backgroundImage = 'url("images/p4.gif")';
-    proj7.style.backgroundImage = 'url("../images/p7.gif")';
-    proj9.style.backgroundImage = 'url("../images/p9.gif")';
-    proj10.style.backgroundImage = 'url("../images/p10.gif")';
-    proj11.style.backgroundImage = 'url("../images/p11.gif")';
+    proj7.style.backgroundImage = `url(${Project7GIF})`;
+    proj9.style.backgroundImage = `url(${Project9GIF})`;
+    proj10.style.backgroundImage = `url(${Project10GIF})`;
+    proj11.style.backgroundImage = `url(${Project11GIF})`;
   } else {
     checkLabel[0].textContent = 'no GIFs';
     this.setAttribute('aria-checked', false);
-    // proj3.style.backgroundImage = 'url("images/project3.jpg")';
-    // proj4.style.backgroundImage = 'url("images/project4.jpg")';
-    proj7.style.backgroundImage = 'url("../images/project7.jpg")';
-    proj9.style.backgroundImage = 'url("../images/project9.jpg")';
-    proj10.style.backgroundImage = 'url("../images/project10.jpg")';
-    proj11.style.backgroundImage = 'url("../images/project11.jpg")';
+    proj7.style.backgroundImage = `url(${Project7})`;
+    proj9.style.backgroundImage = `url(${Project9})`;
+    proj10.style.backgroundImage = `url(${Project10})`;
+    proj11.style.backgroundImage = `url(${Project11})`;
   }
 });
 check[1].addEventListener('change', function(e){

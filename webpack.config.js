@@ -1,40 +1,43 @@
 const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-
-const extractPlugin = new ExtractTextPlugin({
-  filename: 'main.css'
-});
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-  entry: './src/index.js',
+  mode: 'development',
+  entry: ['@babel/polyfill', './src/js/index.js'],
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '/dist'
+    // publicPath: '/dist'
   },
   module: {
     rules: [
       {
         test: /\.js$/,
-        use: [
-          {
-            loader: 'babel-loader',
-            options: {
-              presets: ['env']
-            }
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],
+            cacheDirectory: true
           }
-        ]
+        }
       },
-      {
-        test: /\.scss$/,
-        use: extractPlugin.extract({
-          use: ['css-loader', 'sass-loader']
-        })
-      },
+      // {
+      //   test: /\.scss$/,
+      //   use: extractPlugin.extract({
+      //     use: ['css-loader', 'sass-loader']
+      //   })
+      // },
       {
         test: /\.css$/,
         use: [
+          // {
+          //   loader: MiniCssExtractPlugin.loader,
+          //   options: {
+          //     publicPath: '/dist'
+          //   }
+          // },
           'style-loader',
           'css-loader'
         ]
@@ -53,18 +56,16 @@ module.exports = {
       },
       {
         test: /\.html$/,
-        use: [
-            {
-            loader: 'html-loader',
-          }
-        ]
+        use: ['html-loader']
       }
     ]
   },
   plugins: [
-    extractPlugin,
+    new MiniCssExtractPlugin({
+      filename: 'main.css',
+    }),
     new HTMLWebpackPlugin({
-      template: './src/index.html'
+      template: './src/html/index.html'
     }),
   ],
   devServer: {
