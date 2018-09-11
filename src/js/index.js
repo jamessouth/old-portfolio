@@ -6,20 +6,11 @@ import './web-animations-next.min.js';
 import '../css/styles.css';
 import '../html/index.html';
 
+
+
 import Explosion from '../images/explosion.gif';
 import Contact from '../images/contact.jpg';
-import Check from '../images/check.png';
 
-import Bluecloud from '../images/bluecloud.jpg';
-import Cloudvert from '../images/cloudvert.jpg';
-import Fire from '../images/fire.jpg';
-import Greyclouds from '../images/greyclouds.jpg';
-import Jupiter from '../images/jupiter.jpg';
-import Mars from '../images/mars.jpg';
-import Moon from '../images/moon.jpg';
-import Pano from '../images/pano.jpg';
-import Rapid from '../images/rapid.jpg';
-import Shallow from '../images/shallow.jpg';
 
 import Project1 from '../images/project1.jpg';
 import Project2 from '../images/project2.jpg';
@@ -43,23 +34,16 @@ import Project11GIF from '../images/p11.gif';
 const main = document.querySelector('main');
 const pb = document.querySelectorAll('.photo-cube');
 const cc = document.querySelectorAll('.cube-container');
-const menuIcon = document.querySelector('.hamburger');
-const projectNotesIcon = document.querySelector('.star');
-const table = document.querySelector('.overlay2 .table');
-const featureTable = table.querySelector('table');
-const tableTDs = featureTable.querySelectorAll('td');
-const tableTHSpans = featureTable.querySelectorAll('thead th span');
-const tableCloseButton = document.querySelector('.overlay2 .table button');
-const tablePlayPauseButton = document.querySelector('.overlay2 .table button.play_pause');
-const tableChecks = featureTable.querySelectorAll('img[alt="check"]');
-const pauseExplain = document.querySelector('#pauseexplain');
+// const menuIcon = document.querySelector('.hamburger');
+// const projectNotesIcon = document.querySelector('.star');
+
 const canvas = document.querySelector('canvas#board');
 const canvasholder = document.querySelector('.canvasholder');
 const sizeInput = document.querySelector('.menu-hold .slider input');
 const sizeInputP = document.querySelector('.menu-hold .slider p');
 const sizeTrack = document.querySelector('.menu-hold .slider .track');
 const overlay = document.querySelector('div.overlay');
-const overlay2 = document.querySelector('div.overlay2');
+// const overlay2 = document.querySelector('div.overlay2');
 const overlayCloseButton = overlay.querySelector('button.close');
 const overlayNextButton = overlay.querySelector('button.next');
 const overlayPrevButton = overlay.querySelector('button.prev');
@@ -100,10 +84,10 @@ const proj7 = pb[1].querySelector('.front');
 const proj9 = pb[1].querySelector('.right');
 const proj10 = pb[1].querySelector('.back');
 const proj11 = pb[1].querySelector('.top');
-menuIcon.hamb = true;
-projectNotesIcon.hamb = false;
+// menuIcon.hamb = true;
+// projectNotesIcon.hamb = false;
 overlayCloseButton.over = true;
-tableCloseButton.over = false;
+
 let ctx = canvas.getContext('2d');
 let ctxFader = faderCanv.getContext('2d');
 let depths = [0, -2000, -3250, -4500];
@@ -184,7 +168,7 @@ let KEYTIMING = {duration: 650, iterations: 1, delay: 250, easing: 'cubic-bezier
 let anims = ['zero', 'one', 'two', 'three', 'four', 'five', 'six'];
 let no = 1, num = 0;
 let spin, spin2;
-let panoAnim;
+
 const cubeProjectImgs = [null, Project1, Project2, Project3, Project4, Project5, Project6, Project7, Project8, Project9, Project10, Project11, Project12];
 async function buildCubes(){
   let pic, pic2;
@@ -226,56 +210,10 @@ function hoverCubes(){
     {transform: 'translateY(10px)'}
   ], {duration: 1000, iterations: 20, direction: 'alternate'});
 }
-function panorama(timeStamp){
-  panoAnim = requestAnimationFrame(panorama);
-  tableCtx.clearRect(0, 0, CanvasXSize, CanvasYSize);
-  if(CanvasYSize + tableImageY < dy) {
-      tableImageY = imgH - CanvasYSize;
-  }
-  if(tableImageY < 0) {
-      tableCtx.drawImage(tableImg, 0, (imgH + tableImageY), imgW, CanvasYSize,
-      0, 0, CanvasXSize, CanvasYSize);
-  }
-  tableCtx.drawImage(tableImg, 0, tableImageY, imgW, CanvasYSize,
-  0, 0, CanvasXSize, CanvasYSize);
-  myImageData = tableCtx.getImageData(155, 34, 1, 1);
-  featureTable.style.borderColor = `rgba(${myImageData.data[0]}, ${myImageData.data[1]}, ${myImageData.data[2]}, 255)`;
-  tableImageY -= dy;
-}
-// 'inspired by https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Basic_animations'
-let tableImg = new Image();
-const sources = [Bluecloud, Cloudvert, Fire, Greyclouds, Jupiter, Mars, Moon, Pano, Rapid, Shallow];
-let tableSource;
-let CanvasXSize = 310;
-let CanvasYSize = 423;
-let speed = 2; //higher scrolls faster
-let tableImageY = 0;
-let dy = speed;
-let imgW;
-let imgH;
-let tableCtx = table.querySelector('canvas#scroll').getContext('2d');
-let myImageData;
-function clearTable(){
-  tableTDs.forEach(c => c.classList.remove('highlight'));
-  tableTHSpans.forEach(h => h.classList.remove('highlightText'));
-}
-function handleTableHighlight(e){
-  clearTable();
-  let featureColumn;
-  if(e.target.tagName === 'TD' || e.target.tagName === 'IMG'){
-    if(e.target.headers){
-      featureColumn = e.target.headers.split(' ')[1];
-    } else {
-      featureColumn = e.target.parentNode.headers.split(' ')[1];
-    }
-    let highlightedCol = this.querySelectorAll(`td[headers*=${featureColumn}]`);
-    let highlightedHeader = this.querySelector(`th[id=${featureColumn}] span`);
-    highlightedCol.forEach(x => x.classList.add('highlight'));
-    highlightedHeader.classList.add('highlightText');
-  }
-}
-featureTable.addEventListener('mouseover', handleTableHighlight);
-featureTable.addEventListener('mouseout', clearTable);
+
+
+
+
 ['mouseover', 'focus', 'touchstart'].forEach(evt => {
   pb.forEach((x,i) => {
     x.addEventListener(evt, e => {
@@ -495,58 +433,47 @@ function handleRangeUpdate() {
 }
 sizeInput.addEventListener('change', handleRangeUpdate);
 sizeInput.addEventListener('mousemove', handleRangeUpdate);
-function handleMenu(e){
-  if(e.type === 'keydown'){
-    if(e.key.toLowerCase() === 'tab' || e.keyCode === 9){
-      return;
-    } else if(e.key.toLowerCase() === 'enter' || e.keyCode === 13){
-    } else if(e.key.toLowerCase() === ' ' || e.keyCode === 32){
-      e.preventDefault();
-    } else {
-      e.preventDefault();
-      return;
-    }
-  }
-  [...cubeLinks, menuIcon, projectNotesIcon].forEach(x => {
-    x.tabIndex = "-1";
-    x.setAttribute('aria-hidden', true);
-  });
-  this.blur();
-  headline.setAttribute('aria-hidden', true);
-  [main, menuIcon, projectNotesIcon, subhead[0], subhead[1], desc[0], desc[1]].forEach(w => w.style.opacity = '0.35');
-  if(this.hamb){
-    contact.src = Contact;
-    this.children[0].classList.add('top-bun');
-    this.children[2].classList.add('bottom-bun');
-    overlay.style.display = 'flex';
-    if(switchFlag){
-      handleLinearTransInit();
-    } else {
-      handleCurvedTransInit();
-    }
-    setTimeout(() => {
-      overlayContactButton.focus();
-    }, 400);
-  } else {
-    overlay2.style.display = 'block';
-    if(tablePlayPauseButton.getAttribute('aria-pressed') === 'false'){
-      tablePlayPauseButton.className = 'play_pause pause';
-      tableChecks.forEach(c => c.src = Check);
-      tableSource = sources[Math.floor(Math.random() * sources.length)];
-      tableImg.onload = function(){
-        imgW = this.width;
-        imgH = this.height;
-        tableImageY = imgH - CanvasYSize;
-      };
-      tableImg.src = tableSource;
-      panoAnim = requestAnimationFrame(panorama);
-    }
-  }
-}
-['click', 'keydown'].forEach(evt => {
-  menuIcon.addEventListener(evt, handleMenu);
-  projectNotesIcon.addEventListener(evt, handleMenu);
-});
+// function handleMenu(e){
+//   if(e.type === 'keydown'){
+//     if(e.key.toLowerCase() === 'tab' || e.keyCode === 9){
+//       return;
+//     } else if(e.key.toLowerCase() === 'enter' || e.keyCode === 13){
+//     } else if(e.key.toLowerCase() === ' ' || e.keyCode === 32){
+//       e.preventDefault();
+//     } else {
+//       e.preventDefault();
+//       return;
+//     }
+//   }
+//   [...cubeLinks, menuIcon, projectNotesIcon].forEach(x => {
+//     x.tabIndex = "-1";
+//     x.setAttribute('aria-hidden', true);
+//   });
+//   this.blur();
+//   headline.setAttribute('aria-hidden', true);
+//   [main, menuIcon, projectNotesIcon, subhead[0], subhead[1], desc[0], desc[1]].forEach(w => w.style.opacity = '0.35');
+//   if(this.hamb){
+//     contact.src = Contact;
+//     this.children[0].classList.add('top-bun');
+//     this.children[2].classList.add('bottom-bun');
+//     overlay.style.display = 'flex';
+//     if(switchFlag){
+//       handleLinearTransInit();
+//     } else {
+//       handleCurvedTransInit();
+//     }
+//     setTimeout(() => {
+//       overlayContactButton.focus();
+//     }, 400);
+//   } else {
+//     overlay2.style.display = 'block';
+//
+//   }
+// }
+// ['click', 'keydown'].forEach(evt => {
+//   menuIcon.addEventListener(evt, handleMenu);
+//   projectNotesIcon.addEventListener(evt, handleMenu);
+// });
 function flipCards(anims){
   for(let i = 0; i < options.length; i++){
     if(options[i].dataset.pos === '0'){
@@ -582,96 +509,75 @@ function destroyCube(cube){
     }
   });
   menuIcon.style.display = 'none';
-  projectNotesIcon.style.display = 'none';
+  // projectNotesIcon.style.display = 'none';
   cube.classList.add('blowup');
   window.setTimeout(() => {
     explode[0].style.display = 'none';
     explode[1].style.display = 'none';
   }, (seconds.value * 1000) + 5490);
 }
-function handleClose(e){
-  [...cubeLinks, menuIcon, projectNotesIcon].forEach(x => {
-    x.tabIndex = "0";
-    x.removeAttribute('aria-hidden');
-  });
-  headline.removeAttribute('aria-hidden');
-  [main, menuIcon, projectNotesIcon, subhead[0], subhead[1], desc[0], desc[1]].forEach(w => w.style.opacity = '1');
-  if(this.over){
-    overlay.style.display = 'none';
-    menuIcon.children[0].classList.remove('top-bun');
-    menuIcon.children[2].classList.remove('bottom-bun');
-    for(let i = 0; i < options.length; i++){
-      options[i].className = '';
-      options[i].style.transform = '';
-    }
-    if(destroyFlag){
-      destroyCube(pb[0]);
-      destroyCube(pb[1]);
-    }
-    menuIcon.focus();
-  } else {
-    overlay2.style.display = 'none';
-    cancelAnimationFrame(panoAnim);
-  }
-}
-overlayCloseButton.addEventListener('click', handleClose);
-tableCloseButton.addEventListener('click', handleClose);
-tablePlayPauseButton.addEventListener('click', function(e){
-  if(this.getAttribute('aria-pressed') === 'false'){
-    this.className = 'play_pause play';
-    this.setAttribute('aria-pressed', true);
-    pauseExplain.textContent = 'pause/play toggle button. this table has an animation as its background. pause it for better performance. currently paused.';
-    dy = 0;
-    cancelAnimationFrame(panoAnim);
-  } else {
-    this.className = 'play_pause pause';
-    this.setAttribute('aria-pressed', false);
-    pauseExplain.textContent = 'pause/play toggle button. this table has an animation as its background. pause it for better performance. currently playing.';
-    dy = speed;
-    tableSource = sources[Math.floor(Math.random() * sources.length)];
-    tableImg.onload = function(){
-      imgW = this.width;
-      imgH = this.height;
-      tableImageY = imgH - CanvasYSize;
-    };
-    tableImg.src = tableSource;
-    panoAnim = requestAnimationFrame(panorama);
-  }
-});
-overlayNextButton.addEventListener('click', function(){
-  if(switchFlag){
-    rotations.unshift(rotations.pop());
-    for(let i = 0; i < options.length; i++){
-      options[i].dataset.pos = rotations[i];
-    }
-    depths.unshift(depths.pop());
-    handleLinearTransInit();
-  } else {
-    flipCards(nextAnims);
-    rotations.unshift(rotations.pop());
-    for(let i = 0; i < options.length; i++){
-      options[i].dataset.pos = rotations[i];
-    }
-    handleCurvedTransNextPrev();
-  }
-});
-overlayPrevButton.addEventListener('click', function(){
-  if(switchFlag){
-    rotations = rotations.slice(1).concat(rotations[0]);
-    for(let i = 0; i < options.length; i++){
-      options[i].dataset.pos = rotations[i];
-    }
-    depths = depths.slice(1).concat(depths[0]);
-    handleLinearTransInit();
-  } else {
-    flipCards(prevAnims);
-    rotations = rotations.slice(1).concat(rotations[0]);
-    for(let i = 0; i < options.length; i++){
-      options[i].dataset.pos = rotations[i];
-    }
-    handleCurvedTransNextPrev();
-  }
-});
+// function handleClose(e){
+//   [...cubeLinks, menuIcon, projectNotesIcon].forEach(x => {
+//     x.tabIndex = "0";
+//     x.removeAttribute('aria-hidden');
+//   });
+//   headline.removeAttribute('aria-hidden');
+//   [main, menuIcon, projectNotesIcon, subhead[0], subhead[1], desc[0], desc[1]].forEach(w => w.style.opacity = '1');
+//   if(this.over){
+//     overlay.style.display = 'none';
+//     menuIcon.children[0].classList.remove('top-bun');
+//     menuIcon.children[2].classList.remove('bottom-bun');
+//     for(let i = 0; i < options.length; i++){
+//       options[i].className = '';
+//       options[i].style.transform = '';
+//     }
+//     if(destroyFlag){
+//       destroyCube(pb[0]);
+//       destroyCube(pb[1]);
+//     }
+//     menuIcon.focus();
+//   } else {
+//     overlay2.style.display = 'none';
+//     cancelAnimationFrame(panoAnim);
+//   }
+// }
+// overlayCloseButton.addEventListener('click', handleClose);
+// tableCloseButton.addEventListener('click', handleClose);
+
+// overlayNextButton.addEventListener('click', function(){
+//   if(switchFlag){
+//     rotations.unshift(rotations.pop());
+//     for(let i = 0; i < options.length; i++){
+//       options[i].dataset.pos = rotations[i];
+//     }
+//     depths.unshift(depths.pop());
+//     handleLinearTransInit();
+//   } else {
+//     flipCards(nextAnims);
+//     rotations.unshift(rotations.pop());
+//     for(let i = 0; i < options.length; i++){
+//       options[i].dataset.pos = rotations[i];
+//     }
+//     handleCurvedTransNextPrev();
+//   }
+// });
+// overlayPrevButton.addEventListener('click', function(){
+//   if(switchFlag){
+//     rotations = rotations.slice(1).concat(rotations[0]);
+//     for(let i = 0; i < options.length; i++){
+//       options[i].dataset.pos = rotations[i];
+//     }
+//     depths = depths.slice(1).concat(depths[0]);
+//     handleLinearTransInit();
+//   } else {
+//     flipCards(prevAnims);
+//     rotations = rotations.slice(1).concat(rotations[0]);
+//     for(let i = 0; i < options.length; i++){
+//       options[i].dataset.pos = rotations[i];
+//     }
+//     handleCurvedTransNextPrev();
+//   }
+// });
 for(let q = 0; q < 15; q++){
   for(let z = 0; z < 15; z++){
     boxes.push([q * 20, z * 20]);

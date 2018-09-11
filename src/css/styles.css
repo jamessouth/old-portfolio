@@ -20,7 +20,7 @@ body{
 html{
 	overflow-x: hidden;
 }
-.hamburger{
+/* .hamburger{
 	position: absolute;
 	height: 24px;
 	width: 30px;
@@ -29,17 +29,16 @@ html{
 	justify-content: space-between;
 	left: 20px;
 	top: 40px;
-}
+} */
 #menuexplain,
 #contactexplain,
 #twitterexplain,
 #emailexplain,
 #starexplain,
-#pauseexplain,
-#tableexplain{
+#pauseexplain{
 	display: none;
 }
-.hamburger:focus,
+/* .hamburger:focus,
 .star:focus{
 	outline: none;
 	border: 3px #f81b14 outset;
@@ -49,7 +48,7 @@ html{
 .hamburger hr{
 	border: 2px black solid;
 	border-radius: 8px;
-}
+} */
 @keyframes star{
 	0%{transform: scale(1); opacity: 1;}
 	50%{transform: scale(.7); opacity: .7;}
@@ -79,12 +78,12 @@ html{
 	transform: translateY(-4px) rotateZ(-30deg);
 }
 button{
-	position: absolute;
+	/* position: absolute; */
 	width: 58px;
 	height: 30px;
 	font-size: 16px;
-	top: 35px;
-	z-index: 444;
+	/* top: 35px;
+	z-index: 444; */
 	box-shadow: 8px 5px 15px 0px #382123;
 	color: whitesmoke;
 	background: linear-gradient(to right, #505b1c, #7ac670);
@@ -102,163 +101,9 @@ button:hover, button:focus{
 	color: #000;
 	outline: none;
 }
-.table{
-	position: absolute;
-	width: 310px;
-	height: 423px;
-	background-color: transparent;
-	z-index: 35;
-	transform: translateX(-50%);
-	left: 50%;
-	top: 15px;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-}
-.table button{
-	width: 20px;
-	height: 23px;
-	top: 15px;
-	left: 15px;
-}
-button.play_pause{
-	width: 17px;
-	height: 28px;
-	top: 15px;
-	left: auto;
-	right: 15px;
-	border: none;
-	border-radius: 0;
-	box-shadow: none;
-	background-repeat: no-repeat;
-	background-image: url('../images/loading.png');
-}
-button.play{
-	background-image: url('../images/play.png');
-}
-button.pause{
-	background-image: url('../images/pause.png');
-}
-.table table{
-	table-layout: fixed;
-	width: 100%;
-	border-collapse: collapse;
-	border: 2px solid red;
-	outline: none;
-}
-.table table thead tr th{
-	border-bottom: 1px green solid;
-	white-space: nowrap;
-}
-.table table thead tr th span{
-	font-family: 'Saira Condensed', sans-serif;
-	font-weight: 700;
-	border-bottom: 1px green solid;
-	padding: 3px 23px 0px 4px;
-}
-.table table th[scope="col"]{
-	transform: rotateZ(-60deg) translateX(20px) translateY(37px);
-	height: 75px;
-	width: 28px;
-	transform-origin: bottom;
-}
-.table table th[scope="row"]{
-	border-right: 1px green solid;
-}
-.table table td{
-	border-bottom: 1px green solid;
-	border-right: 1px green solid;
-}
-.table table td:hover{
-	background-color: #ffee58;
-}
-.table table tbody tr:hover{
-	background-color: lightyellow;
-}
-.table table thead:hover{
-	color: lightyellow;
-}
-.highlight{
-	background-color: lightyellow;
-}
-.highlight img,
-.table table tr:hover img{
-	filter: hue-rotate(160deg) invert(100%);
-}
-.highlightText{
-	color: lightyellow;
-}
-.table table td img:hover{
-	filter: hue-rotate(290deg) saturate(590%);
-}
-.table table th#project{
-	width: 22px;
-	transform: rotateZ(-60deg) translateX(15px) translateY(35px);
-}
-.table table th#js{
-	transform: rotateZ(-60deg) translateX(21px) translateY(38px);
-}
-.table table td[headers*="js"] img{
-	width: 28px;
-	height: 24px;
-}
-.table table td[headers*="threeD"] img{
-	width: 30px;
-	height: 24px;
-}
-.table table td img{
-	display: block;
-}
-.table table th#threeD{
-	width: 32px;
-	transform: rotateZ(-60deg) translateX(20px) translateY(34px);
-}
-.table table th#project span{
-	padding-right: 43px;
-}
-.table table th#js span{
-	padding-right: 25px;
-}
-.table table th#libraries span{
-	padding-right: 33px;
-}
-.table table th#sass span{
-	padding-right: 57px;
-}
-.table table th#svgs span{
-	padding-right: 55px;
-}
-.table table th#video span{
-	padding-right: 51px;
-}
-.table table th#wai-aria span{
-	padding-right: 27px;
-}
-.table table th#apis span{
-	padding-right: 24px;
-}
-.table table th#react span{
-	padding-right: 51px;
-}
-.table table th#canvas span{
-	padding-right: 18px;
-}
-.table table th#threeD span{
-	border-bottom: none;
-}
-.table canvas#scroll{
-	position: absolute;
-	background-color: transparent;
-	z-index: -1;
-}
-caption p:first-of-type{
-	font-size: 22px;
-	font-weight: 700;
-}
-caption p:last-of-type{
-	font-size: 16px;
-	font-weight: 700;
-}
+
+
+
 .top-bun{
 	transform: rotateZ(-30deg);
 	transition: transform .8s;
@@ -327,15 +172,8 @@ div.overlay{
 	justify-content: center;
 	align-items: center;
 }
-div.overlay2{
-	display: none;
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	overflow: hidden;
-	background-color: transparent;
-	z-index: 35;
-}
+
+
 .canvasholder{
 	display: none;
 	background-color: transparent;
@@ -735,7 +573,7 @@ select:focus{
 	perspective: 700px;
 	margin: 7px 0 0 -1px;
 }
-.cube-container {
+.cube-container{
 	-webkit-perspective: 1500px;
 	-moz-perspective: 1500px;
 	perspective: 1500px;
@@ -846,7 +684,8 @@ select:focus{
 .blowup{
 	animation: 3s var(--delay) cubic-bezier(0, .53, 0, .96) forwards flyAway;
 }
-.front{
+.front,
+.front1{
   transform: translateZ(calc(var(--size) / 2));
 }
 .left{
