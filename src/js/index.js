@@ -39,61 +39,58 @@ const cc = document.querySelectorAll('.cube-container');
 
 const canvas = document.querySelector('canvas#board');
 const canvasholder = document.querySelector('.canvasholder');
-const sizeInput = document.querySelector('.menu-hold .slider input');
-const sizeInputP = document.querySelector('.menu-hold .slider p');
-const sizeTrack = document.querySelector('.menu-hold .slider .track');
-const overlay = document.querySelector('div.overlay');
+const sizeInput = document.querySelector('.slider input');
+const sizeInputP = document.querySelector('.slider p');
+const sizeTrack = document.querySelector('.slider .track');
+// const overlay = document.querySelector('div.overlay');
 // const overlay2 = document.querySelector('div.overlay2');
-const overlayCloseButton = overlay.querySelector('button.close');
-const overlayNextButton = overlay.querySelector('button.next');
-const overlayPrevButton = overlay.querySelector('button.prev');
-const overlayContactButton = overlay.querySelector('button.contact');
-const menuHolder = document.querySelector('.menu-hold ul');
-const options = document.querySelectorAll('.menu-hold ul li');
+// const overlayCloseButton = overlay.querySelector('button.close');
+// const overlayNextButton = overlay.querySelector('button.next');
+// const overlayPrevButton = overlay.querySelector('button.prev');
+// const overlayContactButton = overlay.querySelector('button.contact');
+const menuHolder = document.querySelector('ul');
+const options = document.querySelectorAll('li');
 const menuHold = document.querySelector('.menu-hold');
-const overlayButtons = document.querySelectorAll('.overlay > button');
+// const overlayButtons = document.querySelectorAll('.overlay > button');
 const hold = main.querySelector('div.hold');
-const flipSwitch = document.querySelector('.menu-hold div.flip-switch');
-const radioLinear = flipSwitch.querySelector('input[id="linear"]');
-const radioCurved = flipSwitch.querySelector('input[id="curved"]');
-const switchHolder = flipSwitch.querySelector('div.rect-prism-container');
-const theSwitch = flipSwitch.querySelector('div.switch-rect');
-const switchBottom = theSwitch.querySelector('div.switch-bottom');
-const switchLeft = theSwitch.querySelector('div.switch-left');
+
+
+
+
 const check = document.querySelectorAll('.menu-hold input.check');
 const checkLabel = document.querySelectorAll('.menu-hold input.check + label');
 const subhead = hold.querySelectorAll('.subhead:nth-of-type(odd)');
 const desc = hold.querySelectorAll('.subhead:nth-of-type(even)');
-const liOverlay = menuHolder.querySelectorAll('.li-overlay');
+// const liOverlay = menuHolder.querySelectorAll('.li-overlay');
 const cubeLinks = document.querySelectorAll('div.cube-container div.photo-cube div a');
 let destroyFlag = false;
 const explode = document.querySelectorAll('.explode');
 const headline = main.querySelector('h1');
 const seconds = document.querySelector('.menu-hold select');
 const secondsLabel = document.querySelector('.menu-hold label[for="sec"]');
-const secondsP = document.querySelector('.menu-hold ul li p.seconds');
-const canvasbuttons = document.querySelectorAll('.canvasbuttons button');
-const faderCanv = document.querySelector('.canvasbuttons #fader');
-const linksDiv = document.querySelector('.canvasbuttons #contactinfolinks');
-const linksDivLinks = document.querySelectorAll('.canvasbuttons #contactinfolinks a');
-const clickCounter = document.querySelector('.canvasbuttons .clickCounter p:last-of-type');
-const helpText = document.querySelector('.canvasbuttons .help');
-const proj3 = pb[0].querySelector('.right');
-const proj4 = pb[0].querySelector('.back');
+const secondsP = document.querySelector('li p.seconds');
+const canvasbutton = document.querySelector('.canvasbutton button');
+const faderCanv = document.querySelector('.canvasbutton #fader');
+const linksDiv = document.querySelector('#contactinfolinks');
+const linksDivLinks = document.querySelectorAll('#contactinfolinks a');
+const clickCounter = document.querySelector('.canvasbutton .clickCounter p:last-of-type');
+const helpText = document.querySelector('.canvasbutton .help');
+// const proj3 = pb[0].querySelector('.right');
+// const proj4 = pb[0].querySelector('.back');
 const proj7 = pb[1].querySelector('.front');
 const proj9 = pb[1].querySelector('.right');
 const proj10 = pb[1].querySelector('.back');
 const proj11 = pb[1].querySelector('.top');
 // menuIcon.hamb = true;
 // projectNotesIcon.hamb = false;
-overlayCloseButton.over = true;
+// overlayCloseButton.over = true;
 
 let ctx = canvas.getContext('2d');
 let ctxFader = faderCanv.getContext('2d');
 let depths = [0, -2000, -3250, -4500];
 let rotations = [0, 1, 2, 3];
 let descs = ['random quotes', 'interactive form', 'tic tac toe', '15 puzzle generator', 'node web scraper', 'node/express/pug twitter interface', 'interactive video player', 'accessibility refactor', 'web app dashboard', 'react employee directory', 'react flickr gallery', 'portfolio'];
-let switchFlag = true;
+// let switchFlag = true;
 let nextAnims = ['applyAnimFTB', 'applyAnimMFTF', 'applyAnimMBTMF', 'applyAnimBTMB'];
 let prevAnims = ['applyAnimFTMF', 'applyAnimMFTMB', 'applyAnimMBTB', 'applyAnimBTF'];
 let boxes = [];
@@ -132,8 +129,8 @@ seconds.value = 0;
 seconds.children[0].setAttribute('aria-selected', true);
 sizeInput.value = 220;
 sizeInput.setAttribute('aria-valuenow', 220);
-radioLinear.checked = true;
-radioLinear.setAttribute('aria-checked', true);
+// radioLinear.checked = true;
+// radioLinear.setAttribute('aria-checked', true);
 let KEYFRAMES = {
   zero: [
     {transform: 'rotateY(0deg) rotateX(0deg)'},
@@ -257,9 +254,9 @@ check[1].addEventListener('change', function(e){
     checkLabel[1].textContent = 'DESTROY!';
     this.setAttribute('aria-checked', true);
     destroyFlag = true;
-    seconds.style.filter = 'blur(0px)';
-    secondsLabel.style.filter = 'blur(0px)';
-    secondsP.style.filter = 'blur(0px)';
+    seconds.style.display = 'block';
+    secondsLabel.style.display = 'block';
+    secondsP.style.display = 'block';
     seconds.removeAttribute('disabled');
     seconds.setAttribute('aria-disabled', false);
     seconds.tabIndex = "1";
@@ -267,9 +264,9 @@ check[1].addEventListener('change', function(e){
     checkLabel[1].textContent = 'do not destroy';
     this.setAttribute('aria-checked', false);
     destroyFlag = false;
-    seconds.style.filter = 'blur(30px)';
-    secondsLabel.style.filter = 'blur(30px)';
-    secondsP.style.filter = 'blur(30px)';
+    seconds.style.display = 'none';
+    secondsLabel.style.display = 'none';
+    secondsP.style.display = 'none';
     seconds.setAttribute('disabled', '');
     seconds.setAttribute('aria-disabled', true);
     seconds.tabIndex = "-1";
@@ -300,111 +297,81 @@ function tabIndMgrCurrentItem(i){
     seconds.tabIndex = "1";
   }
 }
-function styleMgr(i){
-  if(parseInt(options[i].style.transform.match(/(-?\d+)(?=px\)$)/)[0], 10) === -4500){
-    options[i].style.opacity = '0.3';
-    liOverlay[i].style.display = 'block';
-    tabIndMgr(i);
-  } else if(parseInt(options[i].style.transform.match(/(-?\d+)(?=px\)$)/)[0], 10) === -3250){
-    options[i].style.opacity = '0.45';
-    liOverlay[i].style.display = 'block';
-    options[i].tabIndex = "-1";
-  } else if(parseInt(options[i].style.transform.match(/(-?\d+)(?=px\)$)/)[0], 10) === -2000){
-    options[i].style.opacity = '0.65';
-    liOverlay[i].style.display = 'block';
-    tabIndMgr(i);
-  } else {
-    options[i].style.opacity = '1';
-    liOverlay[i].style.display = 'none';
-    tabIndMgrCurrentItem(i);
-  }
-}
-function handleLinearTransInit(){
- for(let i = 0; i < options.length; i++){
-   options[i].className = '';
-   if(options[i].dataset.pos === '0'){
-     options[i].style.transform = `rotateX(0deg) translateY(-180px) translateZ(${depths[i]}px)`;
-   } else {
-     options[i].style.transform = `rotateX(5deg) translateY(-180px) translateZ(${depths[i]}px)`;
-   }
-   styleMgr(i);
- }
-}
-function handleCurvedTransInit(){
-  for(let i = 0; i < options.length; i++){
-    let menuCard = options[i];
-    liOverlay[i].style.display = 'none';
-    menuCard.style.opacity = '1';
-    if(menuCard.dataset.pos === '0'){
-      menuCard.style.transform = 'rotateX(0deg) translateY(-180px) translateZ(0px)';
-      tabIndMgrCurrentItem(i);
-    } else if(menuCard.dataset.pos === '1'){
-      menuCard.style.transform = 'rotateX(30deg) translateY(-180px) translateZ(0px)';
-      tabIndMgr(i);
-    } else if(menuCard.dataset.pos === '2'){
-      menuCard.style.transform = 'rotateX(40deg) translateY(-180px) translateZ(0px)';
-      menuCard.tabIndex = "-1";
-    } else {
-      menuCard.style.transform = 'rotateX(50deg) translateY(-180px) translateZ(0px)';
-      tabIndMgr(i);
-    }
-  }
-}
-function handleCurvedTransNextPrev(){
-  for(let i = 0; i < options.length; i++){
-    let menuCard = options[i];
-    if(menuCard.dataset.pos === '0'){
-      tabIndMgrCurrentItem(i);
-    } else if(menuCard.dataset.pos === '1'){
-      tabIndMgr(i);
-    } else if(menuCard.dataset.pos === '2'){
-      menuCard.tabIndex = "-1";
-    } else {
-      tabIndMgr(i);
-    }
-  }
-}
-flipSwitch.addEventListener('click', function(e){
-  if(e.target.tagName === 'LABEL'){
-    e.preventDefault();
-  }
-  if(switchFlag){
-    radioCurved.checked = true;
-    radioLinear.setAttribute('aria-checked', false);
-    radioCurved.setAttribute('aria-checked', true);
-    switchHolder.style.margin = '22px 0 0 5px';
-    theSwitch.style.transform = 'rotateX(57deg) rotateY(13deg) rotateZ(-19deg)';
-    switchBottom.style.borderTopWidth = '3px';
-    switchBottom.style.borderBottomWidth = '4px';
-    switchLeft.style.borderRightWidth = '3px';
-    switchLeft.style.borderLeftWidth = '4px';
-    switchLeft.style.borderTopWidth = '3px';
-    radioLinear.blur();
-    radioCurved.focus();
-    handleCurvedTransInit();
-    switchFlag = false;
-  } else {
-    radioLinear.checked = true;
-    radioCurved.setAttribute('aria-checked', false);
-    radioLinear.setAttribute('aria-checked', true);
-    switchHolder.style.margin = '7px 0 0 -1px';
-    theSwitch.style.transform = 'rotateX(125deg) rotateY(-13deg) rotateZ(-19deg)';
-    switchBottom.style.borderTopWidth = '4px';
-    switchBottom.style.borderBottomWidth = '3px';
-    switchLeft.style.borderRightWidth = '5px';
-    switchLeft.style.borderLeftWidth = '3px';
-    switchLeft.style.borderTopWidth = '4px';
-    radioCurved.blur();
-    radioLinear.focus();
-    handleLinearTransInit();
-    switchFlag = true;
-  }
-});
+// function styleMgr(i){
+//   if(parseInt(options[i].style.transform.match(/(-?\d+)(?=px\)$)/)[0], 10) === -4500){
+//     options[i].style.opacity = '0.3';
+//     liOverlay[i].style.display = 'block';
+//     tabIndMgr(i);
+//   } else if(parseInt(options[i].style.transform.match(/(-?\d+)(?=px\)$)/)[0], 10) === -3250){
+//     options[i].style.opacity = '0.45';
+//     liOverlay[i].style.display = 'block';
+//     options[i].tabIndex = "-1";
+//   } else if(parseInt(options[i].style.transform.match(/(-?\d+)(?=px\)$)/)[0], 10) === -2000){
+//     options[i].style.opacity = '0.65';
+//     liOverlay[i].style.display = 'block';
+//     tabIndMgr(i);
+//   } else {
+//     options[i].style.opacity = '1';
+//     liOverlay[i].style.display = 'none';
+//     tabIndMgrCurrentItem(i);
+//   }
+// }
+// function handleLinearTransInit(){
+//  for(let i = 0; i < options.length; i++){
+//    options[i].className = '';
+//    if(options[i].dataset.pos === '0'){
+//      options[i].style.transform = `rotateX(0deg) translateY(-180px) translateZ(${depths[i]}px)`;
+//    } else {
+//      options[i].style.transform = `rotateX(5deg) translateY(-180px) translateZ(${depths[i]}px)`;
+//    }
+//    styleMgr(i);
+//  }
+// }
+// function handleCurvedTransInit(){
+//   for(let i = 0; i < options.length; i++){
+//     let menuCard = options[i];
+//     liOverlay[i].style.display = 'none';
+//     menuCard.style.opacity = '1';
+//     if(menuCard.dataset.pos === '0'){
+//       menuCard.style.transform = 'rotateX(0deg) translateY(-180px) translateZ(0px)';
+//       tabIndMgrCurrentItem(i);
+//     } else if(menuCard.dataset.pos === '1'){
+//       menuCard.style.transform = 'rotateX(30deg) translateY(-180px) translateZ(0px)';
+//       tabIndMgr(i);
+//     } else if(menuCard.dataset.pos === '2'){
+//       menuCard.style.transform = 'rotateX(40deg) translateY(-180px) translateZ(0px)';
+//       menuCard.tabIndex = "-1";
+//     } else {
+//       menuCard.style.transform = 'rotateX(50deg) translateY(-180px) translateZ(0px)';
+//       tabIndMgr(i);
+//     }
+//   }
+// }
+// function handleCurvedTransNextPrev(){
+//   for(let i = 0; i < options.length; i++){
+//     let menuCard = options[i];
+//     if(menuCard.dataset.pos === '0'){
+//       tabIndMgrCurrentItem(i);
+//     } else if(menuCard.dataset.pos === '1'){
+//       tabIndMgr(i);
+//     } else if(menuCard.dataset.pos === '2'){
+//       menuCard.tabIndex = "-1";
+//     } else {
+//       tabIndMgr(i);
+//     }
+//   }
+// }
+
+
 function handleSelectUpdate() {
   [...this.children].forEach(x => x.setAttribute('aria-selected', false));
   this.children[this.value].setAttribute('aria-selected', true);
   const suffix = this.dataset.sizing;
   document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+  if(destroyFlag){
+    destroyCube(pb[0]);
+    destroyCube(pb[1]);
+  }
 }
 seconds.addEventListener('change', handleSelectUpdate);
 sizeInput.addEventListener('focus', function(e){
@@ -413,14 +380,14 @@ sizeInput.addEventListener('focus', function(e){
 sizeInput.addEventListener('blur', function(e){
   this.parentNode.style.border = "none";
 });
-[radioLinear, radioCurved].forEach(x => x.addEventListener('focus', function(e){
-  this.parentNode.style.boxSizing = "content-box";
-  this.parentNode.style.border = "3px white solid";
-}));
-[radioLinear, radioCurved].forEach(x => x.addEventListener('blur', function(e){
-  this.parentNode.style.border = "none";
-  this.parentNode.style.boxSizing = "border-box";
-}));
+// [radioLinear, radioCurved].forEach(x => x.addEventListener('focus', function(e){
+//   this.parentNode.style.boxSizing = "content-box";
+//   this.parentNode.style.border = "3px white solid";
+// }));
+// [radioLinear, radioCurved].forEach(x => x.addEventListener('blur', function(e){
+//   this.parentNode.style.border = "none";
+//   this.parentNode.style.boxSizing = "border-box";
+// }));
 function handleRangeUpdate() {
   const suffix = this.dataset.sizing;
   const width = this.max - this.min;
@@ -453,7 +420,7 @@ sizeInput.addEventListener('mousemove', handleRangeUpdate);
 //   headline.setAttribute('aria-hidden', true);
 //   [main, menuIcon, projectNotesIcon, subhead[0], subhead[1], desc[0], desc[1]].forEach(w => w.style.opacity = '0.35');
 //   if(this.hamb){
-//     contact.src = Contact;
+
 //     this.children[0].classList.add('top-bun');
 //     this.children[2].classList.add('bottom-bun');
 //     overlay.style.display = 'flex';
@@ -474,19 +441,8 @@ sizeInput.addEventListener('mousemove', handleRangeUpdate);
 //   menuIcon.addEventListener(evt, handleMenu);
 //   projectNotesIcon.addEventListener(evt, handleMenu);
 // });
-function flipCards(anims){
-  for(let i = 0; i < options.length; i++){
-    if(options[i].dataset.pos === '0'){
-      options[i].className = anims[0];
-    } else if(options[i].dataset.pos === '1'){
-      options[i].className = anims[1];
-    } else if(options[i].dataset.pos === '2'){
-      options[i].className = anims[2];
-    } else {
-      options[i].className = anims[3];
-    }
-  }
-}
+
+
 function destroyCube(cube){
   cube.addEventListener('animationend', () => {
     headline.style.marginBottom = '0';
@@ -508,7 +464,7 @@ function destroyCube(cube){
       explode[1].style.marginTop = `${((sizeInput.value - 220) / 3) + 0}px`;
     }
   });
-  menuIcon.style.display = 'none';
+  // menuIcon.style.display = 'none';
   // projectNotesIcon.style.display = 'none';
   cube.classList.add('blowup');
   window.setTimeout(() => {
@@ -531,10 +487,7 @@ function destroyCube(cube){
 //       options[i].className = '';
 //       options[i].style.transform = '';
 //     }
-//     if(destroyFlag){
-//       destroyCube(pb[0]);
-//       destroyCube(pb[1]);
-//     }
+
 //     menuIcon.focus();
 //   } else {
 //     overlay2.style.display = 'none';
@@ -658,34 +611,40 @@ while(getInversions(doable[0]) % 2 !== 0){
   doable = checkBoard();
 }
 let boardOrder = doable[0].slice();
-overlayContactButton.addEventListener('click', function(e){
-  canvasholder.style.display = 'flex';
-  [...overlayButtons, menuHold, subhead[0], subhead[1], desc[0], desc[1]].forEach(f => f.style.opacity = '0');
-  [...overlayButtons].forEach(g => g.setAttribute('aria-hidden', true));
-  [...overlayButtons, seconds].forEach(z => z.tabIndex = "-1");
-  for(let i = 0; i < options.length; i++){
-    options[i].tabIndex = "-1";
-    let thisInput = options[i].querySelectorAll('input');
-    if(thisInput[1]){
-      thisInput[1].tabIndex = "-1";
-    }
-    thisInput[0].tabIndex = "-1";
-  }
-  if(canvArray.length === 0){
-    linksDivLinks.forEach(s => {
-      s.tabIndex = "1";
-      s.removeAttribute('aria-hidden');
-    });
-    linksDivLinks[0].focus();
-  } else {
-    canvasbuttons[1].focus();
-  }
-if(clicks < 1){
+
+if(canvArray.length === 0){
+  linksDivLinks.forEach(s => {
+    s.tabIndex = "1";
+    s.removeAttribute('aria-hidden');
+  });
+  linksDivLinks[0].focus();
+}
+
+
+
+contact.onload = () => {
   for(let i = 0; i < canvArray.length-1; i++){
       ctx.drawImage(contact, canvArray[i][0], canvArray[i][1], 75, 75, canvArray[doable[1][i]][0], canvArray[doable[1][i]][1], 75, 75);
   }
 }
-});
+contact.src = Contact;
+
+
+// overlayContactButton.addEventListener('click', function(e){
+//   canvasholder.style.display = 'flex';
+//   [...overlayButtons, menuHold, subhead[0], subhead[1], desc[0], desc[1]].forEach(f => f.style.opacity = '0');
+//   [...overlayButtons].forEach(g => g.setAttribute('aria-hidden', true));
+//   [...overlayButtons, seconds].forEach(z => z.tabIndex = "-1");
+//   for(let i = 0; i < options.length; i++){
+//     options[i].tabIndex = "-1";
+//     let thisInput = options[i].querySelectorAll('input');
+//     if(thisInput[1]){
+//       thisInput[1].tabIndex = "-1";
+//     }
+//     thisInput[0].tabIndex = "-1";
+//   }
+//
+// });
 function swapTiles(x, y){
   if(canvArray.length === 0){return;}
   let tileClicked = (Math.floor(y / 75) * 4) + Math.floor(x / 75);
@@ -710,7 +669,7 @@ function swapTiles(x, y){
   }
   if(finalCheck){
     faderCanv.style.display = 'block';
-    canvasbuttons[1].style.display = 'none';
+    canvasbutton.style.display = 'none';
     animate1();
     ctx.drawImage(contact, 225, 225, 75, 75,
     225, 225, 75, 75);
@@ -727,37 +686,37 @@ canvas.addEventListener('click', function(e){
   }
   clickCounter.textContent = clicks;
 });
-canvasbuttons[0].addEventListener('click', e => { //contact info close button
-  canvasholder.style.display = 'none';
-  menuIcon.style.zIndex = '5';
-  menuHold.style.opacity = '1';
-  [subhead[0], subhead[1], desc[0], desc[1]].forEach(q => q.style.opacity = '.35');
-  [...overlayButtons].forEach(o => {
-    o.style.opacity = "1";
-    o.tabIndex = "1";
-  });
-  overlayCloseButton.removeAttribute('aria-hidden');
-  overlayContactButton.removeAttribute('aria-hidden');
-  linksDivLinks.forEach(s => {
-    s.tabIndex = "-1";
-    s.setAttribute('aria-hidden', true);
-  });
-  seconds.tabIndex = seconds.hasAttribute('disabled') ? "-1" : "1";
-  for(let i = 0; i < options.length; i++){
-    if(options[i].dataset.pos === '0'){
-      tabIndMgrCurrentItem(i);
-    }
-  }
-  overlayCloseButton.focus();
-});
-canvasbuttons[1].addEventListener('click', e => {
+// canvasbutton[0].addEventListener('click', e => { //contact info close button
+//   canvasholder.style.display = 'none';
+//   menuIcon.style.zIndex = '5';
+//   menuHold.style.opacity = '1';
+//   [subhead[0], subhead[1], desc[0], desc[1]].forEach(q => q.style.opacity = '.35');
+//   [...overlayButtons].forEach(o => {
+//     o.style.opacity = "1";
+//     o.tabIndex = "1";
+//   });
+//   overlayCloseButton.removeAttribute('aria-hidden');
+//   overlayContactButton.removeAttribute('aria-hidden');
+//   linksDivLinks.forEach(s => {
+//     s.tabIndex = "-1";
+//     s.setAttribute('aria-hidden', true);
+//   });
+//   seconds.tabIndex = seconds.hasAttribute('disabled') ? "-1" : "1";
+//   for(let i = 0; i < options.length; i++){
+//     if(options[i].dataset.pos === '0'){
+//       tabIndMgrCurrentItem(i);
+//     }
+//   }
+//   overlayCloseButton.focus();
+// });
+canvasbutton.addEventListener('click', e => {
   helpText.style.display = 'none';
   ctx.clearRect(0, 0, 300, 300);
   ctx.drawImage(contact, 0, 0, 300, 300);
   canvArray = [];
   canvas.style.backgroundColor = 'transparent';
   window.setTimeout(animate2, 2000);
-  canvasbuttons[1].style.display = 'none';
+  canvasbutton.style.display = 'none';
 });
 function rotate(e){
   if(!isRotating) return;
