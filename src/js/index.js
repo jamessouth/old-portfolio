@@ -52,9 +52,9 @@ const menuHolder = document.querySelector('ul');
 const options = document.querySelectorAll('li');
 const menuHold = document.querySelector('.menu-hold');
 // const overlayButtons = document.querySelectorAll('.overlay > button');
-const hold = main.querySelector('div.hold');
+const hold = main.querySelector('.hold');
 
-
+const applyButton = document.querySelector('#apply');
 
 
 const check = document.querySelectorAll('.menu-hold input.check');
@@ -89,7 +89,8 @@ let ctx = canvas.getContext('2d');
 let ctxFader = faderCanv.getContext('2d');
 let depths = [0, -2000, -3250, -4500];
 let rotations = [0, 1, 2, 3];
-let descs = ['random quotes', 'interactive form', 'tic tac toe', '15 puzzle generator', 'node web scraper', 'node/express/pug twitter interface', 'interactive video player', 'accessibility refactor', 'web app dashboard', 'react employee directory', 'react flickr gallery', 'portfolio'];
+let projects = ['random quotes', 'interactive form', 'tic tac toe', '15 puzzle generator', 'node web scraper', 'twitter interface', 'interactive video', 'accessibility refactor', 'web app dashboard', 'employee directory', 'flickr gallery', 'portfolio'];
+const features = ['', '', '', 'AJAX webcam vue routing geolocation', '', 'Node express pug ES6 AJAX', '', '', 'AJAX vue-cli routing vuex Chart.js', 'React WAI-ARIA AJAX', 'React routing AJAX', 'Webpack babel eslint'];
 // let switchFlag = true;
 let nextAnims = ['applyAnimFTB', 'applyAnimMFTF', 'applyAnimMBTMF', 'applyAnimBTMB'];
 let prevAnims = ['applyAnimFTMF', 'applyAnimMFTMB', 'applyAnimMBTB', 'applyAnimBTF'];
@@ -134,34 +135,38 @@ sizeInput.setAttribute('aria-valuenow', 220);
 let KEYFRAMES = {
   zero: [
     {transform: 'rotateY(0deg) rotateX(0deg)'},
-    {transform: 'rotateY(0deg) rotateX(0deg)'}
+    {transform: 'rotateY(30deg) rotateX(30deg)'},
+    {transform: 'rotateY(0deg) rotateX(0deg)'},
+    {transform: 'rotateY(0deg) rotateX(0deg)'},
+    {transform: 'rotateY(0deg) rotateX(0deg)'},
+    {transform: 'rotateY(0deg) rotateX(0deg)'},
   ],
   one: [
-    {transform: 'rotateY(188deg) rotateX(194deg)'},
+    {transform: 'rotateY(30deg) rotateX(30deg)'},
     {transform: 'rotateY(360deg) rotateX(360deg)'}
   ],
-  two: [
-    {transform: 'rotateY(106deg) rotateX(11deg)'},
-    {transform: 'rotateY(0deg) rotateX(0deg)'}
-  ],
-  three: [
-    {transform: 'rotateY(-112deg) rotateX(-55deg)'},
-    {transform: 'rotateY(0deg) rotateX(0deg)'}
-  ],
-  four: [
-    {transform: 'rotateY(-259deg) rotateX(-14deg)'},
-    {transform: 'rotateY(0deg) rotateX(0deg)'}
-  ],
-  five: [
-    {transform: 'rotateY(-170deg) rotateX(-91deg)'},
-    {transform: 'rotateY(0deg) rotateX(0deg)'}
-  ],
-  six: [
-    {transform: 'rotateY(13deg) rotateX(85deg)'},
-    {transform: 'rotateY(0deg) rotateX(0deg)'}
-  ]
+  // two: [
+  //   {transform: 'rotateY(360deg) rotateX(360deg)'},
+  //   {transform: 'rotateY(40deg) rotateX(50deg)'}
+  // ],
+  // three: [
+  //   {transform: 'rotateY(40deg) rotateX(50deg)'},
+  //   {transform: 'rotateY(20deg) rotateX(70deg)'}
+  // ],
+  // four: [
+  //   {transform: 'rotateY(20deg) rotateX(70deg)'},
+  //   {transform: 'rotateY(90deg) rotateX(-50deg)'}
+  // ],
+  // five: [
+  //   {transform: 'rotateY(90deg) rotateX(-50deg)'},
+  //   {transform: 'rotateY(-30deg) rotateX(110deg)'}
+  // ],
+  // six: [
+  //   {transform: 'rotateY(-30deg) rotateX(110deg)'},
+  //   {transform: 'rotateY(0deg) rotateX(0deg)'}
+  // ]
 };
-let KEYTIMING = {duration: 650, iterations: 1, delay: 250, easing: 'cubic-bezier(.81,.02,.75,.51)'};
+let KEYTIMING = {duration: 1650, iterations: 1, delay: 250, easing: 'cubic-bezier(.81,.02,.75,.51)'};
 let anims = ['zero', 'one', 'two', 'three', 'four', 'five', 'six'];
 let no = 1, num = 0;
 let spin, spin2;
@@ -191,9 +196,9 @@ function animCubes(){
   spin2 = pb[1].animate(
     KEYFRAMES[anims[num]], KEYTIMING);
   num++;
-  if(num === 2){
-    KEYTIMING.delay = 10;
-  }
+  // if(num === 2){
+  //   KEYTIMING.delay = 10;
+  // }
   return Promise.all([spin.finished, spin2.finished]);
 }
 let hover, hover2;
@@ -216,8 +221,8 @@ function hoverCubes(){
     x.addEventListener(evt, e => {
       if(e.target.tagName === 'A'){
         let projNum = e.target.id;
-        subhead[i].textContent = 'Project ' + projNum;
-        desc[i].textContent = descs[projNum - 1];
+        subhead[i].textContent = projects[projNum - 1];
+        desc[i].textContent = features[projNum - 1];
       }
     }, true);
   });
@@ -388,11 +393,12 @@ sizeInput.addEventListener('blur', function(e){
 //   this.parentNode.style.border = "none";
 //   this.parentNode.style.boxSizing = "border-box";
 // }));
+
 function handleRangeUpdate() {
   const suffix = this.dataset.sizing;
   const width = this.max - this.min;
   const perc = Math.floor(((this.value - width) / width) * 100) / 100;
-  document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+
   this.setAttribute('aria-valuenow', this.value);
   sizeInputP.textContent = `<\u00A0\u00A0\u00A0${this.value}px\u00A0\u00A0\u00A0>`;
   sizeTrack.style.width = `${perc * 142}px`;
@@ -400,6 +406,13 @@ function handleRangeUpdate() {
 }
 sizeInput.addEventListener('change', handleRangeUpdate);
 sizeInput.addEventListener('mousemove', handleRangeUpdate);
+
+applyButton.addEventListener('click', e => {
+  document.documentElement.style.setProperty('--size', `${sizeInput.value}px`);
+});
+
+
+
 // function handleMenu(e){
 //   if(e.type === 'keydown'){
 //     if(e.key.toLowerCase() === 'tab' || e.keyCode === 9){
@@ -744,10 +757,10 @@ function getCube(e){
   }
   isRotating = true;
 }
-main.addEventListener('mousedown', getCube);
-main.addEventListener('touchstart', getCube, {passive: true});
-main.addEventListener('mousemove', rotate);
-main.addEventListener('touchmove', rotate, {passive: true});
+hold.addEventListener('mousedown', getCube);
+hold.addEventListener('touchstart', getCube, {passive: true});
+hold.addEventListener('mousemove', rotate);
+hold.addEventListener('touchmove', rotate, {passive: true});
 document.addEventListener('touchmove', e => {
   if(e.target.tagName === 'A'){
     e.preventDefault();
@@ -762,9 +775,9 @@ function releaseCube(e){
   rotObj[whichPB].x = rotObj[whichPB].xs || 0;
   rotObj[whichPB].y = rotObj[whichPB].ys || 0;
 }
-main.addEventListener('mouseup', releaseCube);
-main.addEventListener('touchend', releaseCube);
-main.addEventListener('mouseleave', (e) => {
+hold.addEventListener('mouseup', releaseCube);
+hold.addEventListener('touchend', releaseCube);
+hold.addEventListener('mouseleave', (e) => {
   isRotating = false;
   xEnd = e.x + window.scrollX;
   yEnd = e.y - 0 + window.scrollY;

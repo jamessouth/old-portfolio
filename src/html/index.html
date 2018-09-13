@@ -104,6 +104,7 @@
               <label for="size">side:</label>
               <input tabindex="-1" id="size" type="range" name="size" aria-valuemin="220" min="220" aria-valuemax="440" max="440" aria-valuenow="220" value="220" data-sizing="px">
               <p>&lt;&nbsp;&nbsp;&nbsp;220px&nbsp;&nbsp;&nbsp;&gt;</p>
+              <button id="apply" type="button" tabindex="1">apply</button>
             </div>
           </li>
 
@@ -120,7 +121,7 @@
             <label for="destroy">do not destroy</label>
             <label for="sec">wait</label>
             <select aria-disabled="true" tabindex="-1" disabled="" id="sec" name="delay" data-sizing="s">
-              <option aria-selected="true">0</option>
+              <option disabled aria-selected="true">0</option>
               <option aria-selected="false">1</option>
               <option aria-selected="false">2</option>
               <option aria-selected="false">3</option>
@@ -131,7 +132,7 @@
               <option aria-selected="false">8</option>
               <option aria-selected="false">9</option>
             </select>
-            <p class="seconds"> seconds after close</p>
+            <p class="seconds"> seconds after selection</p>
           </li>
         </ul>
       </div>

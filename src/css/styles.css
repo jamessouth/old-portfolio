@@ -102,7 +102,9 @@ button:hover, button:focus{
 	outline: none;
 }
 
-
+#apply{
+	margin-top: 1em;
+}
 
 /* .top-bun{
 	transform: rotateZ(-30deg);
@@ -113,7 +115,7 @@ button:hover, button:focus{
 	transition: transform .8s;
 } */
 main > h1{
-	padding: 1em 0 3em;
+	padding: 1em 0 0;
 	text-align: center;
 	cursor: default;
 	-webkit-user-select: none;
@@ -123,8 +125,10 @@ main > h1{
 main .hold .subhead{
 	position: absolute;
 	left: 50%;
+	width: 90%;
+	text-align: center;
 	transform: translateX(-50%);
-	color: #1e0f0e;
+	color: #fff;
 	font-size: 30px;
 	text-shadow: 0px 0px 7px white;
 	cursor: default;
@@ -137,23 +141,26 @@ main .hold .subhead:nth-of-type(1){
 }
 main .hold .subhead:nth-of-type(2){
 	top: 105px;
-	font-size: 20px;
-	width: 235px;
+	font-size: 24px;
+	width: 86%;
 	text-align: center;
 }
 main .hold .subhead:nth-of-type(3){
 	top: calc((var(--size) * 1.2) + 160px);
-	text-shadow: 1px 1px 0 white;
+	/* text-shadow: 1px 1px 0 white; */
+	width: 90%;
+	text-align: center;
 }
 main .hold .subhead:nth-of-type(4){
 	top: calc((var(--size) * 1.2) + 192px);
-	font-size: 20px;
-	width: 235px;
+	font-size: 24px;
+	width: 86%;
 	text-align: center;
-	text-shadow: 1px 1px 0 white;
+	/* text-shadow: 1px 1px 0 white; */
 }
 .hold{
 	display: flex;
+	padding-top: 96px;
 	flex-direction: column;
 	justify-content: space-around;
 	align-items: center;
@@ -349,6 +356,10 @@ li{
 }
 li:focus{
 	border: 10px outset #fbe2a4;
+}
+
+li:first-of-type{
+	z-index: 0;
 }
 /* @keyframes frontToBack {
 	0% { transform: rotateX(0deg) translateY(-180px) translateZ(0px); }
@@ -739,9 +750,10 @@ select:focus{
 		border-color: #fecb7f;
 	}
 	main > h1{
-		margin-bottom: 2.8em;
+		/* margin-bottom: 2.8em; */
 	}
 	.hold{
+		padding-top: 192px;
 		flex-direction: row;
 	}
 	main .hold .subhead{
