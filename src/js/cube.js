@@ -52,7 +52,7 @@ let rotObj = {
   }
 };
 
-let rando = () => Math.floor(Math.random() * 720) - 360;
+let rando = () => Math.floor(Math.random() * 360) - 180;
 
 let KEYFRAMES = () => ([
   {transform: 'rotateX(0deg) rotateY(0deg)'},
