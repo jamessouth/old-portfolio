@@ -21,7 +21,6 @@ html{
   overflow-x: hidden;
 }
 
-#contactexplain,
 #twitterexplain,
 #emailexplain{
   display: none;
@@ -53,8 +52,7 @@ button:hover, button:focus{
   margin-top: 1em;
 }
 
-
-main > h1{
+h1{
   padding: 1em 0 0;
   text-align: center;
   cursor: default;
@@ -120,12 +118,9 @@ main > h1{
   min-width: 300px;
 }
 
-
 .menu-hold{
   padding-top: 30px;
   width: 100%;
-
-
 }
 .canvasbutton{
   display: flex;
@@ -200,13 +195,11 @@ svg{
   display: block;
 }
 ul{
-
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   grid-gap: 20px;
   margin: 3em auto;
   width: 90%;
-
 }
 li{
   color: black;
@@ -257,7 +250,6 @@ li:first-of-type{
   z-index: -1;
   top: 26px;
 }
-
 input[type=checkbox] {
   background-color: transparent;
 	-webkit-appearance: none;
@@ -325,7 +317,7 @@ select{
 }
 label[for="sec"],
 select,
-p.seconds{
+select + div{
   display: none;
 }
 select:-moz-focusring{
@@ -335,6 +327,10 @@ select:-moz-focusring{
 select:focus{
   border: 3px solid #f81b14;
   outline: none;
+}
+
+select + div p{
+  display: inline-block;
 }
 
 .cube-container{

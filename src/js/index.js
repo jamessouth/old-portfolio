@@ -35,24 +35,18 @@ const checkLabel = document.querySelectorAll('.menu-hold input.check + label');
 const headline = document.querySelector('h1');
 const seconds = document.querySelector('select');
 const secondsLabel = document.querySelector('label[for="sec"]');
-const secondsP = document.querySelector('p.seconds');
+const secondsDiv = document.querySelector('select + div');
 
 const explode = document.querySelectorAll('.explode');
 const pb = document.querySelectorAll('.photo-cube');
-let destroyFlag = false;
-
+const destroyBtn = secondsDiv.querySelector('button');
 const subhead = document.querySelectorAll('.subhead:nth-of-type(odd)');
 const desc = document.querySelectorAll('.subhead:nth-of-type(even)');
 
 check[0].checked = false;
 check[1].checked = false;
-check[0].setAttribute('aria-checked', false);
-check[1].setAttribute('aria-checked', false);
 seconds.value = 0;
-[...seconds.children].forEach(x => x.setAttribute('aria-selected', false));
-seconds.children[0].setAttribute('aria-selected', true);
 sizeInput.value = 220;
-sizeInput.setAttribute('aria-valuenow', 220);
 
 
 const proj7 = pb[1].querySelector('.front');
@@ -63,14 +57,12 @@ const proj11 = pb[1].querySelector('.top');
 check[0].addEventListener('change', (e) => {
   if (e.target.checked) {
     checkLabel[0].textContent = 'GIFs!';
-    check[0].setAttribute('aria-checked', true);
     proj7.style.backgroundImage = `url(${Project7GIF})`;
     proj9.style.backgroundImage = `url(${Project9GIF})`;
     proj10.style.backgroundImage = `url(${Project10GIF})`;
     proj11.style.backgroundImage = `url(${Project11GIF})`;
   } else {
     checkLabel[0].textContent = 'no GIFs';
-    check[0].setAttribute('aria-checked', false);
     proj7.style.backgroundImage = `url(${Project7})`;
     proj9.style.backgroundImage = `url(${Project9})`;
     proj10.style.backgroundImage = `url(${Project10})`;
@@ -90,24 +82,16 @@ check[1].addEventListener('change', (e) => {
       })
       .catch(err => console.log('Fetch error: ', err));
     checkLabel[1].textContent = 'DESTROY!';
-    check[1].setAttribute('aria-checked', true);
-    destroyFlag = true;
     seconds.style.display = 'block';
     secondsLabel.style.display = 'block';
-    secondsP.style.display = 'block';
+    secondsDiv.style.display = 'block';
     seconds.removeAttribute('disabled');
-    seconds.setAttribute('aria-disabled', false);
-    seconds.tabIndex = '1';
   } else {
     checkLabel[1].textContent = 'do not destroy';
-    check[1].setAttribute('aria-checked', false);
-    destroyFlag = false;
     seconds.style.display = 'none';
     secondsLabel.style.display = 'none';
-    secondsP.style.display = 'none';
+    secondsDiv.style.display = 'none';
     seconds.setAttribute('disabled', '');
-    seconds.setAttribute('aria-disabled', true);
-    seconds.tabIndex = '-1';
   }
 });
 
@@ -142,16 +126,15 @@ function destroyCube(cube) {
   }, (seconds.value * 1000) + 5490);
 }
 
+destroyBtn.addEventListener('click', () => {
+  destroyCube(pb[0]);
+  destroyCube(pb[1]);
+});
+
 
 function handleSelectUpdate() {
-  [...this.children].forEach(x => x.setAttribute('aria-selected', false));
-  this.children[this.value].setAttribute('aria-selected', true);
   const suffix = this.dataset.sizing;
   document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
-  if (destroyFlag) {
-    destroyCube(pb[0]);
-    destroyCube(pb[1]);
-  }
 }
 seconds.addEventListener('change', handleSelectUpdate);
 sizeInput.addEventListener('focus', () => {
@@ -166,7 +149,6 @@ function handleRangeUpdate() {
   const width = this.max - this.min;
   const perc = Math.floor(((this.value - width) / width) * 100) / 100;
 
-  this.setAttribute('aria-valuenow', this.value);
   sizeInputP.textContent = `<\u00A0\u00A0\u00A0${this.value}px\u00A0\u00A0\u00A0>`;
   sizeTrack.style.width = `${perc * 142}px`;
   sizeTrack.style.backgroundColor = `hsl(${perc * 720}, 65%, 30%)`;

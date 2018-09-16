@@ -52,8 +52,7 @@ function animate2() {
   if (timerTwo === randBoxes.length) {
     linksDiv.style.zIndex = 5;
     linksDivLinks.forEach((s) => {
-      s.tabIndex = '1';
-      s.removeAttribute('aria-hidden');
+      s.tabIndex = '0';
     });
     linksDivLinks[0].focus();
   }
@@ -106,16 +105,6 @@ while (getInversions(doable[0]) % 2 !== 0) {
   doable = checkBoard();
 }
 const boardOrder = doable[0].slice();
-
-
-if (canvArray.length === 0) {
-  linksDivLinks.forEach((s) => {
-    s.tabIndex = '1';
-    s.removeAttribute('aria-hidden');
-  });
-  linksDivLinks[0].focus();
-}
-
 
 contact.onload = () => {
   for (let i = 0; i < canvArray.length - 1; i += 1) {

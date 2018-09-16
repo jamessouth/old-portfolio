@@ -20,8 +20,34 @@ const subhead = hold.querySelectorAll('.subhead:nth-of-type(odd)');
 const desc = hold.querySelectorAll('.subhead:nth-of-type(even)');
 
 
-const projects = ['random quotes', 'interactive form', 'tic tac toe', '15 puzzle generator', 'node web scraper', 'twitter interface', 'interactive video', 'accessibility refactor', 'web app dashboard', 'employee directory', 'flickr gallery', 'portfolio'];
-const features = ['', '', '', 'AJAX webcam vue routing geolocation', '', 'Node express pug ES6 AJAX', '', '', 'AJAX vue-cli routing vuex Chart.js', 'React WAI-ARIA AJAX', 'React routing AJAX', 'Webpack babel eslint'];
+const projects = [
+  'random quotes',
+  'interactive form',
+  'tic tac toe',
+  '15 puzzle generator',
+  'node web scraper',
+  'twitter interface',
+  'interactive video',
+  'accessibility refactor',
+  'web app dashboard',
+  'employee directory',
+  'flickr gallery',
+  'portfolio',
+];
+const features = [
+  '',
+  '',
+  '',
+  'vue ajax webcam routing geolocation',
+  '',
+  'node express pug es6 ajax',
+  '',
+  '',
+  'vue-cli routing vuex ajax chart.js',
+  'react wai-aria ajax',
+  'react routing ajax',
+  'webpack babel wai-aria eslint',
+];
 
 let isRotating = false;
 let xStart;
