@@ -61,6 +61,27 @@ for (let i = 100; i >= 0; i -= 1) {
   shades.push(i / 100);
 }
 
+
+
+CSS.paintWorklet.addModule('src/js/burst.js');
+
+let start = 0;
+requestAnimationFrame(function raf(now) {
+  // const count = Math.floor(now - start);
+  canvasbutton.parentNode.style.cssText = `--atick: ${start}`
+  if(start > 300) {
+    // start = 400;
+    canvasbutton.parentNode.style.cssText = `--atick: ${300}`;
+    return;
+  }
+  start++;
+  requestAnimationFrame(raf);
+});
+
+
+
+
+
 function animate1() {
   if (timerOne < shades.length) { requestAnimationFrame(animate1); }
   ctxFader.fillStyle = `rgba(173, 216, 230, ${shades[timerOne]})`;

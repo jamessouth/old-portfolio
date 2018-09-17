@@ -132,6 +132,12 @@ h1{
   width: 300px;
   height: 44px;
   position: relative;
+  --atick: 0;
+}
+
+.canvasbutton.animating{
+  background-color: white;
+  background-image: paint(burst);
 }
 
 .canvasbutton p{
