@@ -135,8 +135,7 @@ h1{
   --atick: 0;
 }
 
-.canvasbutton.animating{
-  background-color: white;
+.animating{
   background-image: paint(burst);
 }
 

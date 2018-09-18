@@ -1,34 +1,17 @@
 class BurstPainter {
   static get inputProperties() { return ['--atick']; }
+
   paint(ctx, geom, props) {
-    console.log('i ran.....');
-
-    // const colors = ['red', 'green', 'blue'];
-    // const size = 32;
-    // for(let y = 0; y < geom.height/size; y++) {
-    //   for(let x = 0; x < geom.width/size; x++) {
-    //     const color = colors[(x + y) % colors.length];
-    //     ctx.beginPath();
-    //     ctx.fillStyle = color;
-    //     ctx.rect(x * size, y * size, size, size);
-    //     ctx.fill();
-    //   }
-    // }
-    let tick = parseFloat(props.get('--atick').toString());
-    if(tick < 0) {tick = 0;}
-    if(tick > geom.width) {tick = geom.width;}
-
-    const ht = geom.height/2;
-    ctx.strokeStyle = 'red';
-    ctx.beginPath();
-    ctx.moveTo(0, ht);
-    ctx.lineTo(tick, ht);
-    ctx.stroke();
-
-
-
-
+    const tick = parseFloat(props.get('--atick').toString());
+    if (tick < 300) {
+      ctx.fillStyle = `hsl(${tick + 30}deg, 85%, 49%)`;
+      ctx.fillRect(0, 0, tick / 2, geom.height);
+      ctx.fillRect(geom.width - tick / 2, 0, geom.width, geom.height);
+    } else {
+      ctx.fillStyle = `hsl(${(tick % 30) + 15}deg, 85%, 49%)`;
+      ctx.arc(geom.width / 2, geom.height / 2, 19 * Math.log(tick - 300) + 5, 0, Math.PI * 2);
+    }
+    ctx.fill();
   }
 }
-
 registerPaint('burst', BurstPainter);
