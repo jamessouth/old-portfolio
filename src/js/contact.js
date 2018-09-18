@@ -1,5 +1,6 @@
 import Contact from '../images/contact.jpg';
 
+CSS.paintWorklet.addModule('src/js/burst.js');
 const canvas = document.querySelector('#board');
 
 
@@ -19,6 +20,7 @@ const shades = [];
 let canvArray = [];
 const contact = new Image();
 let clicks = 0;
+let paintStart = 0;
 
 for (let q = 0; q < 15; q += 1) {
   for (let z = 0; z < 15; z += 1) {
@@ -45,8 +47,8 @@ function randomizeBoxes() {
 }
 const randBoxes = randomizeBoxes();
 
-function animate2() {
-  if (timerTwo < randBoxes.length - 1) { requestAnimationFrame(animate2); }
+function animateRevealContact() {
+  if (timerTwo < randBoxes.length - 1) { requestAnimationFrame(animateRevealContact); }
   ctx.clearRect(randBoxes[timerTwo][0], randBoxes[timerTwo][1], 20, 20);
   timerTwo += 1;
   if (timerTwo === randBoxes.length) {
@@ -61,8 +63,19 @@ for (let i = 100; i >= 0; i -= 1) {
   shades.push(i / 100);
 }
 
-function animate1() {
-  if (timerOne < shades.length) { requestAnimationFrame(animate1); }
+function animatePaint() {
+  if (paintStart < 900) {
+    requestAnimationFrame(animatePaint);
+  } else {
+    canvasbutton.parentNode.classList.remove('animating');
+    return;
+  }
+  canvasbutton.parentNode.style.cssText = `--atick: ${paintStart}`;
+  paintStart += 5;
+}
+
+function animateFader() {
+  if (timerOne < shades.length) { requestAnimationFrame(animateFader); }
   ctxFader.fillStyle = `rgba(173, 216, 230, ${shades[timerOne]})`;
   ctxFader.clearRect(0, 0, 75, 75);
   ctxFader.fillRect(0, 0, 75, 75);
@@ -70,7 +83,9 @@ function animate1() {
   if (timerOne === shades.length) {
     faderCanv.style.display = 'none';
     canvas.style.backgroundColor = 'transparent';
-    setTimeout(animate2, 2000);
+    canvasbutton.parentNode.classList.add('animating');
+    animatePaint();
+    setTimeout(animateRevealContact, 3000);
   }
 }
 for (let i = 0; i < 4; i += 1) {
@@ -140,7 +155,7 @@ function swapTiles(x, y) {
   if (finalCheck) {
     faderCanv.style.display = 'block';
     canvasbutton.style.display = 'none';
-    animate1();
+    animateFader();
     ctx.drawImage(contact, 225, 225, 75, 75,
       225, 225, 75, 75);
     canvArray = [];
@@ -164,6 +179,6 @@ canvasbutton.addEventListener('click', () => {
   ctx.drawImage(contact, 0, 0, 300, 300);
   canvArray = [];
   canvas.style.backgroundColor = 'transparent';
-  setTimeout(animate2, 2000);
+  setTimeout(animateRevealContact, 3000);
   canvasbutton.style.display = 'none';
 });
