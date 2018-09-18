@@ -220,3 +220,14 @@ function releaseCube() {
 hold.addEventListener('mouseup', releaseCube);
 hold.addEventListener('touchend', releaseCube);
 hold.addEventListener('mouseleave', releaseCube);
+
+
+
+
+
+
+
+class Cube extends HTMLElement {
+
+}
+window.customElements.define('cu-be', Cube);
