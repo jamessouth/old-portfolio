@@ -12,42 +12,92 @@ import Project11 from '../images/project11.jpg';
 import Project12 from '../images/project12.jpg';
 
 
-const main = document.querySelector('main');
+// const main = document.querySelector('main');
 const pb = document.querySelectorAll('.photo-cube');
 const cc = document.querySelectorAll('.cube-container');
-const hold = main.querySelector('.hold');
+const hold = document.querySelector('.hold');
 const subhead = hold.querySelectorAll('.subhead:nth-of-type(odd)');
 const desc = hold.querySelectorAll('.subhead:nth-of-type(even)');
 
 
-const projects = [
-  'random quotes',
-  'interactive form',
-  'tic tac toe',
-  '15 puzzle generator',
-  'node web scraper',
-  'twitter interface',
-  'interactive video',
-  'accessibility refactor',
-  'web app dashboard',
-  'employee directory',
-  'flickr gallery',
-  'portfolio',
-];
-const features = [
-  '',
-  '',
-  '',
-  'vue ajax webcam routing geolocation',
-  '',
-  'node express pug es6 ajax',
-  '',
-  '',
-  'vue-cli routing vuex ajax chart.js',
-  'react wai-aria ajax',
-  'react routing ajax',
-  'webpack babel wai-aria eslint',
-];
+const panelData = [
+    {
+      aria: 'random quotes; ',
+      href: 'https://jamessouth.github.io/JS-Project-1/',
+      pic: Project1,
+      _class: 'front',
+    },
+    {
+      aria: 'interactive form; ',
+      href: 'https://jamessouth.github.io/JS-Project-3/',
+      pic: Project2,
+      _class: 'left',
+    },
+    {
+      aria: 'tic tac toe; ',
+      href: 'https://jamessouth.github.io/JS-Project-4/',
+      pic: Project3,
+      _class: 'right',
+    },
+    {
+      aria: '15 puzzle generator; vue ajax webcam routing geolocation',
+      href: 'https://jamessouth.github.io/fifteenpuzzlegenerator/',
+      pic: Project4,
+      _class: 'back',
+    },
+    {
+      aria: 'node web scraper; ',
+      href: 'https://github.com/jamessouth/JS-Project-6/',
+      pic: Project5,
+      _class: 'top',
+    },
+    {
+      aria: 'twitter interface; node express pug es6 ajax',
+      href: 'https://github.com/jamessouth/JS-Project-7/',
+      pic: Project6,
+      _class: 'bottom',
+    },
+    {
+      aria: 'interactive video; ',
+      href: 'https://jamessouth.github.io/Project-7/',
+      pic: Project7,
+      _class: 'front',
+    },
+    {
+      aria: 'accessibility refactor; ',
+      href: 'https://jamessouth.github.io/Project-8/',
+      pic: Project8,
+      _class: 'left',
+    },
+    {
+      aria: 'web app dashboard; vue-cli routing vuex ajax chart.js',
+      href: 'https://jamessouth.github.io/Project-9/',
+      pic: Project9,
+      _class: 'right',
+    },
+    {
+      aria: 'employee directory; react wai-aria ajax',
+      href: 'https://jamessouth.github.io/React-Project-10/',
+      pic: Project10,
+      _class: 'back',
+    },
+    {
+      aria: 'flickr gallery; react routing ajax',
+      href: 'https://github.com/jamessouth/Project-11/',
+      pic: Project11,
+      _class: 'top',
+    },
+    {
+      aria: 'portfolio; webpack babel wai-aria eslint',
+      href: '#1',
+      pic: Project12,
+      _class: 'bottom',
+    }
+  ];
+
+
+
+
 
 let isRotating = false;
 let xStart;
@@ -85,38 +135,30 @@ const KEYTIMING = {
   duration: 6000, iterations: 1, delay: 1000, easing: 'linear',
 };
 
-let no = 1;
-let spin;
-let spin2;
+let no = 0;
 
-const cubeProjectImgs = [
-  null,
-  Project1,
-  Project2,
-  Project3,
-  Project4,
-  Project5,
-  Project6,
-  Project7,
-  Project8,
-  Project9,
-  Project10,
-  Project11,
-  Project12,
-];
+
+
+
 
 async function buildCubes() {
   let pic;
   let pic2;
   try {
-    pic = await fetch(cubeProjectImgs[no]);
-    pic2 = await fetch(cubeProjectImgs[no + 6]);
+    pic = await fetch(panelData[no].pic);
+    pic2 = await fetch(panelData[no + 6].pic);
     pic = await pic.blob();
     pic2 = await pic2.blob();
     const objectURL = URL.createObjectURL(pic);
     const objectURL2 = URL.createObjectURL(pic2);
-    pb[0].children[no - 1].style.backgroundImage = `url(${objectURL})`;
-    pb[1].children[no - 1].style.backgroundImage = `url(${objectURL2})`;
+
+
+    let panel = new Panel({ ...panelData[no] });
+    let panel2 = new Panel({ ...panelData[no + 6] });
+    pb[0].appendChild(panel);
+    pb[1].appendChild(panel2);
+    // pb[0].children[no - 1].style.backgroundImage = `url(${objectURL})`;
+    // pb[1].children[no - 1].style.backgroundImage = `url(${objectURL2})`;
     no += 1;
   } catch (err) {
     console.log('error ', err);
@@ -137,8 +179,8 @@ function hoverCubes() {
 }
 
 function animCubes() {
-  spin = pb[0].animate(KEYFRAMES(), KEYTIMING);
-  spin2 = pb[1].animate(KEYFRAMES(), KEYTIMING);
+  const spin = pb[0].animate(KEYFRAMES(), KEYTIMING);
+  const spin2 = pb[1].animate(KEYFRAMES(), KEYTIMING);
 
   const si = setInterval(() => {
     buildCubes();
@@ -225,9 +267,125 @@ hold.addEventListener('mouseleave', releaseCube);
 
 
 
+let panelTemplate = document.createElement('template');
+panelTemplate.innerHTML = `
+<style>
+.common-cube{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-size: contain;
+}
+.front{
+  transform: translateZ(calc(var(--size) / 2));
+}
+.left{
+   transform: rotateY(270deg) translateX(calc(var(--size) / -2));
+  -webkit-transform-origin: bottom left;
+  -moz-transform-origin: bottom left;
+  -o-transform-origin: bottom left;
+  transform-origin: bottom left;
+}
+.right{
+   transform: rotateY(-270deg) translateX(calc(var(--size) / 2));
+  -webkit-transform-origin: bottom right;
+  -moz-transform-origin: bottom right;
+  -o-transform-origin: bottom right;
+  transform-origin: bottom right;
+}
+.back{
+  transform: translateZ(calc(var(--size) / -2)) rotateY(180deg);
+}
+.top{
+  transform: translateZ(calc(var(--size) / -2)) rotateX(90deg);
+  -webkit-transform-origin: top;
+  -moz-transform-origin: top;
+  -o-transform-origin: top;
+  transform-origin: top;
+}
+.bottom{
+  transform: translateZ(calc(var(--size) / -2)) rotateX(-90deg);
+  -webkit-transform-origin: bottom;
+  -moz-transform-origin: bottom;
+  -o-transform-origin: bottom;
+  transform-origin: bottom;
+}
+</style>
+
+<div class="common-cube">
+  <a tabindex="0"></a>
+</div>
+`;
 
 
-class Cube extends HTMLElement {
+
+// <div class="common-cube front">
+//   <a aria-label="Random Quotes" id="1" tabindex="0" href="https://jamessouth.github.io/JS-Project-1/"></a>
+// </div>
+// <div class="common-cube left">
+//   <a aria-label="Interactive Form" id="2" tabindex="0" href="https://jamessouth.github.io/JS-Project-3/"></a>
+// </div>
+// <div class="common-cube right">
+//   <a aria-label="Tic Tac Toe" id="3" tabindex="0" href="https://jamessouth.github.io/JS-Project-4/"></a>
+// </div>
+// <div class="common-cube back">
+//   <a aria-label="15 puzzle generator" id="4" tabindex="0" href="https://jamessouth.github.io/fifteenpuzzlegenerator/"></a>
+// </div>
+// <div class="common-cube top">
+//   <a aria-label="Node web scraper" id="5" tabindex="0" href="https://github.com/jamessouth/JS-Project-6"></a>
+// </div>
+// <div class="common-cube bottom">
+//   <a aria-label="Node/express/pug Twitter interface" id="6" tabindex="0" href="https://github.com/jamessouth/JS-Project-7"></a>
+// </div>
+
+
+
+class Panel extends HTMLElement {
+  constructor(config) {
+    super();
+    // { this.aria, this.href, this._class, this.pic } = config;
+
+    Object.assign(this, config);
+
+
+    // console.log(this.aria);
+
+    let shadowRoot = this.attachShadow({ mode: 'open', });
+    shadowRoot.appendChild(panelTemplate.content.cloneNode(true));
+    // console.log(this.anchor);
+
+    this.anchor.setAttribute('aria-label', this.aria);
+    this.anchor.setAttribute('href', this.href);
+    this.div.classList.add(this._class);
+    this.div.style.backgroundImage = `url(${this.pic})`;
+
+
+  }
+
+  connectedCallback() {
+
+
+
+
+
+
+  }
+
+  get panelNumber() {
+    return this.getAttribute('num');
+  }
+
+  get photoCube() {
+    return this.parentNode;
+  }
+
+  get anchor() {
+    return this.shadowRoot.querySelector('a');
+  }
+
+  get div() {
+    return this.shadowRoot.querySelector('div');
+  }
 
 }
-window.customElements.define('cu-be', Cube);
+window.customElements.define('cube-panel', Panel);
