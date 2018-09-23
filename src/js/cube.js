@@ -24,74 +24,62 @@ const panelData = [
     {
       aria: 'random quotes; ',
       href: 'https://jamessouth.github.io/JS-Project-1/',
-      pic: Project1,
-      _class: 'front',
+      pic: Project1
     },
     {
       aria: 'interactive form; ',
       href: 'https://jamessouth.github.io/JS-Project-3/',
-      pic: Project2,
-      _class: 'left',
+      pic: Project2
     },
     {
       aria: 'tic tac toe; ',
       href: 'https://jamessouth.github.io/JS-Project-4/',
-      pic: Project3,
-      _class: 'right',
+      pic: Project3
     },
     {
       aria: '15 puzzle generator; vue ajax webcam routing geolocation',
       href: 'https://jamessouth.github.io/fifteenpuzzlegenerator/',
-      pic: Project4,
-      _class: 'back',
+      pic: Project4
     },
     {
       aria: 'node web scraper; ',
       href: 'https://github.com/jamessouth/JS-Project-6/',
-      pic: Project5,
-      _class: 'top',
+      pic: Project5
     },
     {
       aria: 'twitter interface; node express pug es6 ajax',
       href: 'https://github.com/jamessouth/JS-Project-7/',
-      pic: Project6,
-      _class: 'bottom',
+      pic: Project6
     },
     {
       aria: 'interactive video; ',
       href: 'https://jamessouth.github.io/Project-7/',
-      pic: Project7,
-      _class: 'front',
+      pic: Project7
     },
     {
       aria: 'accessibility refactor; ',
       href: 'https://jamessouth.github.io/Project-8/',
-      pic: Project8,
-      _class: 'left',
+      pic: Project8
     },
     {
       aria: 'web app dashboard; vue-cli routing vuex ajax chart.js',
       href: 'https://jamessouth.github.io/Project-9/',
-      pic: Project9,
-      _class: 'right',
+      pic: Project9
     },
     {
       aria: 'employee directory; react wai-aria ajax',
       href: 'https://jamessouth.github.io/React-Project-10/',
-      pic: Project10,
-      _class: 'back',
+      pic: Project10
     },
     {
       aria: 'flickr gallery; react routing ajax',
       href: 'https://github.com/jamessouth/Project-11/',
-      pic: Project11,
-      _class: 'top',
+      pic: Project11
     },
     {
       aria: 'portfolio; webpack babel wai-aria eslint',
       href: '#1',
-      pic: Project12,
-      _class: 'bottom',
+      pic: Project12
     }
   ];
 
@@ -138,31 +126,12 @@ const KEYTIMING = {
 let no = 0;
 
 
-
-
-
-async function buildCubes() {
-  let pic;
-  let pic2;
-  try {
-    pic = await fetch(panelData[no].pic);
-    pic2 = await fetch(panelData[no + 6].pic);
-    pic = await pic.blob();
-    pic2 = await pic2.blob();
-    const objectURL = URL.createObjectURL(pic);
-    const objectURL2 = URL.createObjectURL(pic2);
-
-
-    let panel = new Panel({ ...panelData[no] });
-    let panel2 = new Panel({ ...panelData[no + 6] });
-    pb[0].appendChild(panel);
-    pb[1].appendChild(panel2);
-    // pb[0].children[no - 1].style.backgroundImage = `url(${objectURL})`;
-    // pb[1].children[no - 1].style.backgroundImage = `url(${objectURL2})`;
-    no += 1;
-  } catch (err) {
-    console.log('error ', err);
-  }
+function buildCubes() {
+  let panel = new Panel({ ...panelData[no] }, no);
+  let panel2 = new Panel({ ...panelData[no + 6] }, no + 6);
+  pb[0].appendChild(panel);
+  pb[1].appendChild(panel2);
+  no += 1;
 }
 
 function hoverCubes() {
@@ -193,24 +162,10 @@ function animCubes() {
 }
 animCubes().then(hoverCubes);
 
-
-['mouseover', 'focus', 'touchstart'].forEach((evt) => {
-  pb.forEach((x, i) => {
-    x.addEventListener(evt, (e) => {
-      if (e.target.tagName === 'A') {
-        const projNum = e.target.id;
-        subhead[i].textContent = projects[projNum - 1];
-        desc[i].textContent = features[projNum - 1];
-      }
-    }, true);
-  });
-});
-
-
 function rotate(e) {
   if (!isRotating) return;
-  const xPos = (e.x || Math.floor(e.touches[0].clientX)) + window.scrollX;
-  const yPos = (e.y || Math.floor(e.touches[0].clientY)) - 0 + window.scrollY;
+  const xPos = (e.touches ? Math.floor(e.touches[0].clientX) : e.x) + window.scrollX;
+  const yPos = (e.touches ? Math.floor(e.touches[0].clientY) : e.y) + window.scrollY;
   rotObj[whichPB].xs = xPos - xStart + rotObj[whichPB].x;
   rotObj[whichPB].ys = yPos - yStart + rotObj[whichPB].y;
   pb[whichPB].style.transform = `rotateX(${-rotObj[whichPB].ys}deg) rotateY(${rotObj[whichPB].xs}deg)`;
@@ -246,11 +201,6 @@ hold.addEventListener('mousemove', rotate);
 hold.addEventListener('touchmove', rotate, { passive: true });
 
 
-hold.addEventListener('touchmove', (e) => {
-  if (e.target.tagName === 'A') {
-    e.preventDefault();
-  }
-}, { passive: false });
 
 function releaseCube() {
   isRotating = false;
@@ -265,99 +215,85 @@ hold.addEventListener('mouseleave', releaseCube);
 
 
 
-
-
-let panelTemplate = document.createElement('template');
-panelTemplate.innerHTML = `
-<style>
-.common-cube{
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  background-size: contain;
-}
-.front{
-  transform: translateZ(calc(var(--size) / 2));
-}
-.left{
-   transform: rotateY(270deg) translateX(calc(var(--size) / -2));
+const classes = [
+  `  transform: translateZ(calc(var(--size) / 2));
+  }</style>`,
+  `  transform: rotateY(270deg) translateX(calc(var(--size) / -2));
   -webkit-transform-origin: bottom left;
   -moz-transform-origin: bottom left;
   -o-transform-origin: bottom left;
   transform-origin: bottom left;
-}
-.right{
-   transform: rotateY(-270deg) translateX(calc(var(--size) / 2));
+  }</style>`,
+  `  transform: rotateY(-270deg) translateX(calc(var(--size) / 2));
   -webkit-transform-origin: bottom right;
   -moz-transform-origin: bottom right;
   -o-transform-origin: bottom right;
   transform-origin: bottom right;
-}
-.back{
-  transform: translateZ(calc(var(--size) / -2)) rotateY(180deg);
-}
-.top{
-  transform: translateZ(calc(var(--size) / -2)) rotateX(90deg);
+  }</style>`,
+  `  transform: translateZ(calc(var(--size) / -2)) rotateY(180deg);
+  }</style>`,
+  `  transform: translateZ(calc(var(--size) / -2)) rotateX(90deg);
   -webkit-transform-origin: top;
   -moz-transform-origin: top;
   -o-transform-origin: top;
   transform-origin: top;
-}
-.bottom{
-  transform: translateZ(calc(var(--size) / -2)) rotateX(-90deg);
+  }</style>`,
+  `  transform: translateZ(calc(var(--size) / -2)) rotateX(-90deg);
   -webkit-transform-origin: bottom;
   -moz-transform-origin: bottom;
   -o-transform-origin: bottom;
   transform-origin: bottom;
-}
-</style>
+  }</style>`
+];
 
-<div class="common-cube">
+
+
+let panelTemplate = document.createElement('template');
+let htmlStr = `
+<div>
   <a tabindex="0"></a>
 </div>
+<style>
+div:focus,
+a:focus{
+  outline: none;
+}
+a{
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+}
+div{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-size: contain;
 `;
 
 
-
-// <div class="common-cube front">
-//   <a aria-label="Random Quotes" id="1" tabindex="0" href="https://jamessouth.github.io/JS-Project-1/"></a>
-// </div>
-// <div class="common-cube left">
-//   <a aria-label="Interactive Form" id="2" tabindex="0" href="https://jamessouth.github.io/JS-Project-3/"></a>
-// </div>
-// <div class="common-cube right">
-//   <a aria-label="Tic Tac Toe" id="3" tabindex="0" href="https://jamessouth.github.io/JS-Project-4/"></a>
-// </div>
-// <div class="common-cube back">
-//   <a aria-label="15 puzzle generator" id="4" tabindex="0" href="https://jamessouth.github.io/fifteenpuzzlegenerator/"></a>
-// </div>
-// <div class="common-cube top">
-//   <a aria-label="Node web scraper" id="5" tabindex="0" href="https://github.com/jamessouth/JS-Project-6"></a>
-// </div>
-// <div class="common-cube bottom">
-//   <a aria-label="Node/express/pug Twitter interface" id="6" tabindex="0" href="https://github.com/jamessouth/JS-Project-7"></a>
-// </div>
-
-
-
 class Panel extends HTMLElement {
-  constructor(config) {
+  constructor(config, num) {
     super();
-    // { this.aria, this.href, this._class, this.pic } = config;
 
     Object.assign(this, config);
-
-
-    // console.log(this.aria);
-
     let shadowRoot = this.attachShadow({ mode: 'open', });
+    panelTemplate.innerHTML = `${htmlStr}${classes[num % 6]}`;
     shadowRoot.appendChild(panelTemplate.content.cloneNode(true));
-    // console.log(this.anchor);
 
     this.anchor.setAttribute('aria-label', this.aria);
     this.anchor.setAttribute('href', this.href);
-    this.div.classList.add(this._class);
     this.div.style.backgroundImage = `url(${this.pic})`;
+
+
+
+    ['mouseover', 'focus', 'touchstart'].forEach((evt) => {
+        this.addEventListener(evt, (e) => {
+          const projData = this.anchor.getAttribute('aria-label').split('; ');
+          subhead[Math.floor(num / 6)].textContent = projData[0];
+          desc[Math.floor(num / 6)].textContent = projData[1];
+        }, true);
+    });
+
 
 
   }
@@ -371,9 +307,9 @@ class Panel extends HTMLElement {
 
   }
 
-  get panelNumber() {
+  /* get panelNumber() {
     return this.getAttribute('num');
-  }
+  } */
 
   get photoCube() {
     return this.parentNode;

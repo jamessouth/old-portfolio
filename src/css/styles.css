@@ -77,22 +77,23 @@ h1{
 .subhead:nth-of-type(1){
   top: 73px;
 }
-.subhead:nth-of-type(2){
+.subhead:nth-of-type(2),
+.subhead:nth-of-type(4){
   top: 105px;
   font-size: 24px;
   width: 86%;
-  text-align: center;
+  /* text-align: center; */
 }
 .subhead:nth-of-type(3){
   top: calc((var(--size) * 1.2) + 160px);
   width: 90%;
-  text-align: center;
+  /* text-align: center; */
 }
 .subhead:nth-of-type(4){
   top: calc((var(--size) * 1.2) + 192px);
-  font-size: 24px;
-  width: 86%;
-  text-align: center;
+  /* font-size: 24px;
+  width: 86%; */
+  /* text-align: center; */
 }
 .hold{
   display: flex;
@@ -358,20 +359,9 @@ select + div p{
   transform-style: preserve-3d;
   transform: rotateX(0deg) rotateY(0deg);
 }
-.photo-cube div:focus,
-.photo-cube div a:focus{
-  outline: none;
-}
 
 
 
-
-
-.photo-cube a{
-  width: 100%;
-  height: 100%;
-  display: inline-block;
-}
 @keyframes flyAway {
   100% { transform: rotateX(179deg) rotateY(-328deg) scale3d(.01, .01, .01); }
 }
@@ -422,17 +412,18 @@ select + div p{
   }
   .subhead:nth-of-type(even){
     top: 105px;
-    font-size: 22px;
-    width: 260px;
+    /* font-size: 22px;
+    width: 260px; */
   }
-  .subhead:nth-of-type(3){
-    left: 75%;
-    text-shadow: 0px 0px 7px white;
-  }
+  .subhead:nth-of-type(3),
   .subhead:nth-of-type(4){
     left: 75%;
-    text-shadow: 0px 0px 7px white;
+    /* text-shadow: 0px 0px 7px white; */
   }
+  /* .subhead:nth-of-type(4){
+    left: 75%;
+    text-shadow: 0px 0px 7px white;
+  } */
   .cube-container:nth-of-type(1){
     margin-bottom: 5em;
   }
