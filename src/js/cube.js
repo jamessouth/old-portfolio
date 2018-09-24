@@ -11,6 +11,10 @@ import Project10 from '../images/project10.jpg';
 import Project11 from '../images/project11.jpg';
 import Project12 from '../images/project12.jpg';
 
+import Project7GIF from '../images/p7.gif';
+import Project9GIF from '../images/p9.gif';
+import Project10GIF from '../images/p10.gif';
+import Project11GIF from '../images/p11.gif';
 
 // const main = document.querySelector('main');
 const pb = document.querySelectorAll('.photo-cube');
@@ -21,71 +25,71 @@ const desc = hold.querySelectorAll('.subhead:nth-of-type(even)');
 
 
 const panelData = [
-    {
-      aria: 'random quotes; ',
-      href: 'https://jamessouth.github.io/JS-Project-1/',
-      pic: Project1
-    },
-    {
-      aria: 'interactive form; ',
-      href: 'https://jamessouth.github.io/JS-Project-3/',
-      pic: Project2
-    },
-    {
-      aria: 'tic tac toe; ',
-      href: 'https://jamessouth.github.io/JS-Project-4/',
-      pic: Project3
-    },
-    {
-      aria: '15 puzzle generator; vue ajax webcam routing geolocation',
-      href: 'https://jamessouth.github.io/fifteenpuzzlegenerator/',
-      pic: Project4
-    },
-    {
-      aria: 'node web scraper; ',
-      href: 'https://github.com/jamessouth/JS-Project-6/',
-      pic: Project5
-    },
-    {
-      aria: 'twitter interface; node express pug es6 ajax',
-      href: 'https://github.com/jamessouth/JS-Project-7/',
-      pic: Project6
-    },
-    {
-      aria: 'interactive video; ',
-      href: 'https://jamessouth.github.io/Project-7/',
-      pic: Project7
-    },
-    {
-      aria: 'accessibility refactor; ',
-      href: 'https://jamessouth.github.io/Project-8/',
-      pic: Project8
-    },
-    {
-      aria: 'web app dashboard; vue-cli routing vuex ajax chart.js',
-      href: 'https://jamessouth.github.io/Project-9/',
-      pic: Project9
-    },
-    {
-      aria: 'employee directory; react wai-aria ajax',
-      href: 'https://jamessouth.github.io/React-Project-10/',
-      pic: Project10
-    },
-    {
-      aria: 'flickr gallery; react routing ajax',
-      href: 'https://github.com/jamessouth/Project-11/',
-      pic: Project11
-    },
-    {
-      aria: 'portfolio; webpack babel wai-aria eslint',
-      href: '#1',
-      pic: Project12
-    }
-  ];
-
-
-
-
+  {
+    aria: 'random quotes; ',
+    href: 'https://jamessouth.github.io/JS-Project-1/',
+    pic: Project1,
+  },
+  {
+    aria: 'interactive form; ',
+    href: 'https://jamessouth.github.io/JS-Project-3/',
+    pic: Project2,
+  },
+  {
+    aria: 'tic tac toe; ',
+    href: 'https://jamessouth.github.io/JS-Project-4/',
+    pic: Project3,
+  },
+  {
+    aria: '15 puzzle generator; vue ajax webcam routing geolocation',
+    href: 'https://jamessouth.github.io/fifteenpuzzlegenerator/',
+    pic: Project4,
+  },
+  {
+    aria: 'node web scraper; ',
+    href: 'https://github.com/jamessouth/JS-Project-6/',
+    pic: Project5,
+  },
+  {
+    aria: 'twitter interface; node express pug es6 ajax',
+    href: 'https://github.com/jamessouth/JS-Project-7/',
+    pic: Project6,
+  },
+  {
+    aria: 'interactive video; ',
+    href: 'https://jamessouth.github.io/Project-7/',
+    pic: Project7,
+    gif: Project7GIF,
+  },
+  {
+    aria: 'accessibility refactor; ',
+    href: 'https://jamessouth.github.io/Project-8/',
+    pic: Project8,
+  },
+  {
+    aria: 'web app dashboard; vue-cli routing vuex ajax chart.js',
+    href: 'https://jamessouth.github.io/Project-9/',
+    pic: Project9,
+    gif: Project9GIF,
+  },
+  {
+    aria: 'employee directory; react wai-aria ajax',
+    href: 'https://jamessouth.github.io/React-Project-10/',
+    pic: Project10,
+    gif: Project10GIF,
+  },
+  {
+    aria: 'flickr gallery; react routing ajax',
+    href: 'https://github.com/jamessouth/Project-11/',
+    pic: Project11,
+    gif: Project11GIF,
+  },
+  {
+    aria: 'portfolio; webpack babel wai-aria eslint',
+    href: '#1',
+    pic: Project12,
+  },
+];
 
 let isRotating = false;
 let xStart;
@@ -126,14 +130,6 @@ const KEYTIMING = {
 let no = 0;
 
 
-function buildCubes() {
-  let panel = new Panel({ ...panelData[no] }, no);
-  let panel2 = new Panel({ ...panelData[no + 6] }, no + 6);
-  pb[0].appendChild(panel);
-  pb[1].appendChild(panel2);
-  no += 1;
-}
-
 function hoverCubes() {
   cc[0].animate([
     { transform: 'translateY(0px)' },
@@ -147,20 +143,6 @@ function hoverCubes() {
   });
 }
 
-function animCubes() {
-  const spin = pb[0].animate(KEYFRAMES(), KEYTIMING);
-  const spin2 = pb[1].animate(KEYFRAMES(), KEYTIMING);
-
-  const si = setInterval(() => {
-    buildCubes();
-    if (spin.currentTime >= 4999) {
-      clearInterval(si);
-    }
-  }, 1000);
-
-  return Promise.all([spin.finished, spin2.finished]);
-}
-animCubes().then(hoverCubes);
 
 function rotate(e) {
   if (!isRotating) return;
@@ -201,7 +183,6 @@ hold.addEventListener('mousemove', rotate);
 hold.addEventListener('touchmove', rotate, { passive: true });
 
 
-
 function releaseCube() {
   isRotating = false;
   rotObj[whichPB].x = rotObj[whichPB].xs || 0;
@@ -212,7 +193,6 @@ function releaseCube() {
 hold.addEventListener('mouseup', releaseCube);
 hold.addEventListener('touchend', releaseCube);
 hold.addEventListener('mouseleave', releaseCube);
-
 
 
 const classes = [
@@ -243,13 +223,12 @@ const classes = [
   -moz-transform-origin: bottom;
   -o-transform-origin: bottom;
   transform-origin: bottom;
-  }</style>`
+  }</style>`,
 ];
 
 
-
-let panelTemplate = document.createElement('template');
-let htmlStr = `
+const panelTemplate = document.createElement('template');
+const htmlStr = `
 <div>
   <a tabindex="0"></a>
 </div>
@@ -272,11 +251,15 @@ div{
 
 
 class Panel extends HTMLElement {
+  static get observedAttributes() {
+    return ['gif'];
+  }
+
   constructor(config, num) {
     super();
 
     Object.assign(this, config);
-    let shadowRoot = this.attachShadow({ mode: 'open', });
+    const shadowRoot = this.attachShadow({ mode: 'open' });
     panelTemplate.innerHTML = `${htmlStr}${classes[num % 6]}`;
     shadowRoot.appendChild(panelTemplate.content.cloneNode(true));
 
@@ -284,32 +267,28 @@ class Panel extends HTMLElement {
     this.anchor.setAttribute('href', this.href);
     this.div.style.backgroundImage = `url(${this.pic})`;
 
+    if ([6, 8, 9, 10].includes(num)) {
+      this.setAttribute('gif', false);
+      this.setAttribute('gif-name', this.gif);
+    }
 
 
     ['mouseover', 'focus', 'touchstart'].forEach((evt) => {
-        this.addEventListener(evt, (e) => {
-          const projData = this.anchor.getAttribute('aria-label').split('; ');
-          subhead[Math.floor(num / 6)].textContent = projData[0];
-          desc[Math.floor(num / 6)].textContent = projData[1];
-        }, true);
+      this.addEventListener(evt, () => {
+        const projData = this.anchor.getAttribute('aria-label').split('; ');
+        [subhead[Math.floor(num / 6)].textContent,
+          desc[Math.floor(num / 6)].textContent] = projData;
+      }, true);
     });
-
-
-
   }
 
-  connectedCallback() {
-
-
-
-
-
-
+  attributeChangedCallback(attrName, oldVal, newVal) {
+    if (newVal === 'true') {
+      this.div.style.backgroundImage = `url(${this.getAttribute('gif-name')})`;
+    } else {
+      this.div.style.backgroundImage = `url(${this.pic})`;
+    }
   }
-
-  /* get panelNumber() {
-    return this.getAttribute('num');
-  } */
 
   get photoCube() {
     return this.parentNode;
@@ -322,6 +301,28 @@ class Panel extends HTMLElement {
   get div() {
     return this.shadowRoot.querySelector('div');
   }
-
 }
 window.customElements.define('cube-panel', Panel);
+
+function buildCubes() {
+  const panel = new Panel({ ...panelData[no] }, no);
+  const panel2 = new Panel({ ...panelData[no + 6] }, no + 6);
+  pb[0].appendChild(panel);
+  pb[1].appendChild(panel2);
+  no += 1;
+}
+
+function animCubes() {
+  const spin = pb[0].animate(KEYFRAMES(), KEYTIMING);
+  const spin2 = pb[1].animate(KEYFRAMES(), KEYTIMING);
+
+  const si = setInterval(() => {
+    buildCubes();
+    if (spin.currentTime >= 4999) {
+      clearInterval(si);
+    }
+  }, 1000);
+
+  return Promise.all([spin.finished, spin2.finished]);
+}
+animCubes().then(hoverCubes);
