@@ -16,7 +16,6 @@ import Project9GIF from '../images/p9.gif';
 import Project10GIF from '../images/p10.gif';
 import Project11GIF from '../images/p11.gif';
 
-// const main = document.querySelector('main');
 const pb = document.querySelectorAll('.photo-cube');
 const cc = document.querySelectorAll('.cube-container');
 const hold = document.querySelector('.hold');
@@ -288,10 +287,6 @@ class Panel extends HTMLElement {
     } else {
       this.div.style.backgroundImage = `url(${this.pic})`;
     }
-  }
-
-  get photoCube() {
-    return this.parentNode;
   }
 
   get anchor() {
