@@ -1,6 +1,7 @@
 import Contact from '../images/contact.jpg';
+import 'css-paint-polyfill';
 
-if ('paintWorklet' in CSS){
+if ('paintWorklet' in CSS) {
   CSS.paintWorklet.addModule('src/js/burst.js');
 }
 

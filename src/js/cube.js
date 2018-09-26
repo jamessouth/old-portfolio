@@ -123,7 +123,7 @@ const KEYFRAMES = () => ([
 ]);
 
 const KEYTIMING = {
-  duration: 6000, iterations: 1, delay: 1000, easing: 'linear',
+  duration: 6000, iterations: 1, delay: 600, easing: 'linear',
 };
 
 let no = 0;
@@ -242,10 +242,13 @@ a{
   display: inline-block;
 }
 div{
+  height: 100%;
+  background-size: contain;
+}
+:host{
   width: 100%;
   height: 100%;
   position: absolute;
-  background-size: contain;
 `;
 
 
@@ -297,7 +300,7 @@ class Panel extends HTMLElement {
     return this.shadowRoot.querySelector('div');
   }
 }
-window.customElements.define('cube-panel', Panel);
+
 
 function buildCubes() {
   const panel = new Panel({ ...panelData[no] }, no);
@@ -313,11 +316,24 @@ function animCubes() {
 
   const si = setInterval(() => {
     buildCubes();
-    if (spin.currentTime >= 4999) {
+    if (no > 5) {
       clearInterval(si);
     }
   }, 1000);
 
   return Promise.all([spin.finished, spin2.finished]);
 }
-animCubes().then(hoverCubes);
+
+
+if (window.customElements && HTMLElement.prototype.attachShadow) {
+  window.customElements.define('cube-panel', Panel);
+  animCubes().then(hoverCubes);
+} else {
+  const info = document.createElement('p');
+  info.innerHTML = `Hello! Your browser does not support custom elements. Try a (non-Microsoft) browser like <span>Google Chrome</span>.
+  Native support for custom elements will ship in <span>Firefox</span> 63 in late October; until then, you can do the following: open a new tab and go to <span>about:config</span>.
+  Click through any warnings and in the search bar, type in <span>webcomponent</span>.
+  Toggle the <span>...customelements.enabled</span> and <span>...shadowdom.enabled</span> flags to <span>true</span> and reload this page.
+  When done, you may want to toggle the flags back to false.`;
+  hold.insertBefore(info, subhead[0]);
+}
