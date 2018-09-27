@@ -3,9 +3,7 @@ import '@babel/polyfill';
 import './web-animations-next.min';
 
 
-import '../css/indexStyles.css';
-import '../css/cubeStyles.css';
-import '../css/contactStyles.css';
+import '../css/main.scss';
 import '../html/index.html';
 
 import './cube';

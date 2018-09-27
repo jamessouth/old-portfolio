@@ -23,25 +23,23 @@ module.exports = {
           }
         }
       },
-      // {
-      //   test: /\.scss$/,
-      //   use: extractPlugin.extract({
-      //     use: ['css-loader', 'sass-loader']
-      //   })
-      // },
       {
-        test: /\.css$/,
-        use: [
-          // {
-          //   loader: MiniCssExtractPlugin.loader,
-          //   options: {
-          //     publicPath: '/dist'
-          //   }
-          // },
-          'style-loader',
-          'css-loader'
-        ]
+        test: /\.scss$/,
+        loaders: ['style-loader', 'css-loader', 'sass-loader']
       },
+      // {
+      //   test: /\.css$/,
+      //   use: [
+      //     {
+      //       loader: MiniCssExtractPlugin.loader,
+      //       options: {
+      //         publicPath: '/dist'
+      //       }
+      //     },
+      //     'style-loader',
+      //     'css-loader'
+      //   ]
+      // },
       {
         test: /\.(png|svg|jpg|gif)$/,
         use: [
