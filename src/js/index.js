@@ -3,23 +3,13 @@ import '@babel/polyfill';
 import './web-animations-next.min';
 
 
-import '../css/styles.css';
+import '../css/main.scss';
 import '../html/index.html';
 
 import './cube';
 import './contact';
 
 import Explosion from '../images/explosion.gif';
-
-import Project7 from '../images/project7.jpg';
-import Project9 from '../images/project9.jpg';
-import Project10 from '../images/project10.jpg';
-import Project11 from '../images/project11.jpg';
-
-import Project7GIF from '../images/p7.gif';
-import Project9GIF from '../images/p9.gif';
-import Project10GIF from '../images/p10.gif';
-import Project11GIF from '../images/p11.gif';
 
 
 const sizeInput = document.querySelector('.slider input');
@@ -49,24 +39,18 @@ seconds.value = 0;
 sizeInput.value = 220;
 
 
-const proj7 = pb[1].querySelector('.front');
-const proj9 = pb[1].querySelector('.right');
-const proj10 = pb[1].querySelector('.back');
-const proj11 = pb[1].querySelector('.top');
+function loopPanels(bool, text) {
+  [0, 2, 3, 4].forEach((ind) => {
+    pb[1].children[ind].setAttribute('gif', bool);
+  });
+  checkLabel[0].textContent = text;
+}
 
 check[0].addEventListener('change', (e) => {
   if (e.target.checked) {
-    checkLabel[0].textContent = 'GIFs!';
-    proj7.style.backgroundImage = `url(${Project7GIF})`;
-    proj9.style.backgroundImage = `url(${Project9GIF})`;
-    proj10.style.backgroundImage = `url(${Project10GIF})`;
-    proj11.style.backgroundImage = `url(${Project11GIF})`;
+    loopPanels(true, 'GIFs!');
   } else {
-    checkLabel[0].textContent = 'no GIFs';
-    proj7.style.backgroundImage = `url(${Project7})`;
-    proj9.style.backgroundImage = `url(${Project9})`;
-    proj10.style.backgroundImage = `url(${Project10})`;
-    proj11.style.backgroundImage = `url(${Project11})`;
+    loopPanels(false, 'no GIFs');
   }
 });
 check[1].addEventListener('change', (e) => {

@@ -1,6 +1,10 @@
 import Contact from '../images/contact.jpg';
+import 'css-paint-polyfill';
 
-CSS.paintWorklet.addModule('src/js/burst.js');
+if ('paintWorklet' in CSS) {
+  CSS.paintWorklet.addModule('src/js/burst.js');
+}
+
 const canvas = document.querySelector('#board');
 
 
