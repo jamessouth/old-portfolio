@@ -1,6 +1,8 @@
-@import 'extends';
-@import 'mixins';
+
+
 @import 'variables';
+@import 'mixins';
+
 
 *{
   margin: 0;
@@ -13,24 +15,19 @@
   --delay: 0s;
 }
 body{
-  @extend %bodybg;
   @include bodybg('../images/sky-mob.jpg');
   position: relative;
   min-height: 100vh;
   @media #{$mobile2} {
-    // @extend %bodybg;
     @include bodybg('../images/sky-mob2.jpg');
   }
   @media #{$tablet} {
-    // @extend %bodybg;
     @include bodybg('../images/sky-tab.jpg');
   }
   @media #{$medium} {
-    // @extend %bodybg;
     @include bodybg('../images/sky-med.jpg');
   }
   @media #{$big} {
-    // @extend %bodybg;
     @include bodybg('../images/sky-big.jpg');
   }
 }
@@ -40,44 +37,36 @@ html{
 
 
 .hold{
-  display: flex;
   padding-top: 96px;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
+  @include flex(column, space-around, center);
+
+  & > p:not(.subhead){
+    @include text(22px, 90%, #372f16, 32px);
+    padding: 10px;
+    background: linear-gradient(#bfc1c0de 0%, #eed6aade 100%);
+    background: linear-gradient(#bfc1c0 0%, #eed6aa 100%);
+    & span{
+      font-family: cursive;
+      background-color: #efebe3;
+    }
+
+    @media #{$tablet} {
+      @include position($tp: 115px);
+    }
+  }
+
   @media #{$tablet} {
     padding-top: 192px;
     flex-direction: row;
   }
 }
 
-.hold > p:not(.subhead){
-  font-size: 22px;
-  width: 90%;
-  line-height: 32px;
-  color: #372f16;
-  padding: 10px;
-  background: linear-gradient(#bfc1c0de 0%, #eed6aade 100%);
-  background: linear-gradient(#bfc1c0 0%, #eed6aa 100%);
-  & span{
-    font-family: cursive;
-    background-color: #efebe3;
-  }
-
-
-  @media #{$tablet} {
-    position: absolute;
-    top: 115px;
-  }
-}
+// .hold
 
 
 button{
-  width: 58px;
-  height: 30px;
-  font-size: 16px;
+  @include text(16px, 58px, whitesmoke, $ht: 30px);
   box-shadow: 8px 5px 15px 0px #382123;
-  color: whitesmoke;
   background: linear-gradient(to right, #505b1c, #7ac670);
   border: 2px solid #fbe2a4;
   border-radius: 20px;
@@ -103,65 +92,60 @@ h1{
   @extend %user_select;
 }
 .subhead{
-  position: absolute;
-  left: 50%;
-  width: 90%;
+  @include text(30px, 90%, #fff);
+  @include position($lt: 50%);
   transform: translateX(-50%);
-  color: #fff;
-  font-size: 30px;
   text-shadow: 0px 0px 7px white;
+
+  &:nth-of-type(1){
+    top: 73px;
+  }
+
+  &:nth-of-type(2),
+  &:nth-of-type(4){
+    top: 105px;
+    @include text(24px, 86%);
+  }
+
+  &:nth-of-type(3){
+    top: calc((var(--size) * 1.2) + 160px);
+    width: 90%;
+    @media #{$tablet} {
+      left: 75%;
+    }
+  }
+
+  &:nth-of-type(4){
+    top: calc((var(--size) * 1.2) + 192px);
+    @media #{$tablet} {
+      left: 75%;
+    }
+  }
+
+  &:nth-of-type(odd){
+    @media #{$tablet} {
+      top: 73px;
+    }
+  }
+
+  &:nth-of-type(even){
+    @media #{$tablet} {
+      top: 105px;
+    }
+  }
+
+
   @extend %user_select;
   @media #{$tablet} {
     left: 25%;
     font-size: 32px;
   }
 }
-.subhead:nth-of-type(1){
-  top: 73px;
-}
-.subhead:nth-of-type(2),
-.subhead:nth-of-type(4){
-  top: 105px;
-  font-size: 24px;
-  width: 86%;
-}
-.subhead:nth-of-type(3){
-  top: calc((var(--size) * 1.2) + 160px);
-  width: 90%;
-  @media #{$tablet} {
-    left: 75%;
-  }
-}
-.subhead:nth-of-type(4){
-  top: calc((var(--size) * 1.2) + 192px);
-  @media #{$tablet} {
-    left: 75%;
-  }
-}
-
-.subhead:nth-of-type(odd){
-  @media #{$tablet} {
-    top: 73px;
-  }
-}
-.subhead:nth-of-type(even){
-  @media #{$tablet} {
-    top: 105px;
-  }
-}
-
-
-
 
 .menu-hold{
   padding-top: 30px;
   width: 100%;
 }
-
-
-
-
-
 
 ul{
   display: grid;
@@ -170,57 +154,61 @@ ul{
   margin: 3em auto;
   width: 90%;
   @media #{$ul_expand} {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    @include flex(row, space-around);
   }
 }
 li{
   @extend %user_select;
-  color: black;
-  font-size: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  @include text(20px, $color: #000);
+  @include flex(column, center, center);
   min-width: 200px;
   min-height: 250px;
   border: 10px solid #56400b;
   background: linear-gradient(#f0d2ac 0%, #2f3905 200%);
   outline: none;
+
+  &:last-of-type{
+    @media #{$li_expand} {
+      grid-column-end: span 2;
+    }
+  }
+
+
   @media #{$medium} {
     min-width: 250px;
   }
 }
-li:last-of-type{
-  @media #{$li_expand} {
-    grid-column-end: span 2;
-  }
-}
+// li
 
 
 .slider{
   position: relative;
   border-radius: 12px;
+
+  & input{
+    @extend %appearance;
+    width: 85%;
+    cursor: ew-resize;
+
+    &:focus{
+      outline: none;
+      outline-offset: 0;
+    }
+
+  }
+
+  // & input
+
+
 }
-.slider input{
-  @extend %appearance;
-  width: 85%;
-  cursor: ew-resize;
-}
-.slider input:focus{
-  outline: none;
-  outline-offset: 0;
-}
+// .slider
+// .slider
 .track{
-  width: 0px;
+  @include position($lt: 15px, $tp: 26px);
+  @include text($width: 0px, $ht: 16px);
   min-width: 0px;
   max-width: 138px;
-  height: 16px;
-  position: absolute;
-  left: 15px;
   z-index: -1;
-  top: 26px;
 }
 input[type=checkbox] {
   @extend %appearance;
@@ -230,17 +218,14 @@ input[type=checkbox]:after {
   content: 'x';
   background-color: transparent;
   display: inline-block;
-  color: #fff;
-  height: 70px;
+  @include text($color: #fff, $ht: 70px);
   text-shadow: 4px 6px 13px #444;
   text-align: center;
 }
 input[type=checkbox]:checked:after {
   content: "\2713";
   background-color: transparent;
-  font-weight: 600;
-  font-size: 1em;
-  line-height: 1;
+  @include text(1em, $lh: 1, $wt: 600);
   text-shadow: 4px 6px 13px #444;
 }
 input[type=checkbox]:focus{
@@ -248,38 +233,27 @@ input[type=checkbox]:focus{
   border: 3px solid white;
 }
 input[id=gifs] {
-  font-size: 70px;
-  height: 85px;
+  @include text(70px, $ht: 85px);
 }
 input[id=gifs]:after{
-  position: relative;
-  transform: translateX(-50%);
-  left: 50%;
-  width: 70px;
-  margin-top: -29px;
+  @include inputAfter(70px, -29px);
 }
 input[id=gifs]:checked:after{
   padding: 6px 1px 1px 10px;
   left: 46%;
 }
 input[id=destroy] {
-    font-size: 50px;
-  height: 82px;
+  @include text(50px, $ht: 82px);
 }
 input[id=destroy]:after{
-  position: relative;
-  transform: translateX(-50%);
-  left: 50%;
-  width: 136px;
-  margin-top: 15px;
+  @include inputAfter(136px, 15px);
 }
 input[id=destroy]:checked:after{
   padding: 9px 0px 0px 3px;
   height: 50px;
 }
 select{
-  font-size: 20px;
-  width: 60px;
+  @include text(20px, 60px);
   padding-left: 5px;
   border: none;
   background-color: white;
@@ -303,27 +277,22 @@ select + div p{
   display: inline-block;
 }
 
-
-
-
-
-
-
 @keyframes flyAway {
   100% { transform: rotateX(179deg) rotateY(-328deg) scale3d(.01, .01, .01); }
 }
 .explode{
   display: none;
+  &:last-of-type{
+    transform: rotateY(180deg);
+  }
 }
-.explode:last-of-type{
-  transform: rotateY(180deg);
-}
+// .explode
 .blowup{
   animation: 3s var(--delay) cubic-bezier(0, .53, 0, .96) forwards flyAway;
 }
 
 
-
+@import 'extends';
 
 @import 'cubeStyles';
 @import 'contactStyles';

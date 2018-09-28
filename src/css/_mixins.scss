@@ -1,3 +1,44 @@
 @mixin bodybg($url) {
-  background: no-repeat url($url);
+  background: center center/cover no-repeat url($url) #555 fixed;
+}
+
+@mixin inputAfter($width, $marginTop) {
+  position: relative;
+  transform: translateX(-50%);
+  left: 50%;
+  width: $width;
+  margin-top: $marginTop;
+}
+
+@mixin text($size: null, $width: null, $color: null, $lh: null, $wt: null, $ht: null) {
+	font-size: $size;
+  width: $width;
+	color: $color;
+	line-height: $lh;
+  font-weight: $wt;
+  height: $ht;
+}
+
+@mixin flex($dir, $just, $align: null) {
+  display: flex;
+  flex-direction: $dir;
+  justify-content: $just;
+  align-items: $align;
+}
+
+@mixin three($dist: null, $pers: null) {
+  -webkit-perspective: $dist;
+  -moz-perspective: $dist;
+  perspective: $dist;
+  -webkit-transform-style: $pers;
+  -moz-transform-style: $pers;
+  transform-style: $pers;
+}
+
+@mixin position($rt: null, $lt: null, $tp: null, $bm: null) {
+  position: absolute;
+  right: $rt;
+  left: $lt;
+  top: $tp;
+  bottom: $bm;
 }

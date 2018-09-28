@@ -9,93 +9,74 @@
 }
 
 .canvasholder{
-  display: flex;
+  @include flex(column, space-around, center);
   background-color: transparent;
   margin: 3em 0;
   position: relative;
   height: 400px;
-  justify-content: space-around;
-  flex-direction: column;
-  align-items: center;
 }
 
 .canvasbutton{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
+  @include flex(row, space-around, center);
   border-radius: 2px;
   background: radial-gradient(#f7ce8c 9%, #2c380e 163%);
-  width: 300px;
-  height: 44px;
+  @include text($width: 300px, $ht: 44px);
   position: relative;
   --atick: 0;
+  & p{
+    display: inline-block;
+    @include text($size: 18px, $color: #071821, $wt: bold);
+    text-align: center;
+  }
 }
 
 .animating{
   background-image: paint(burst);
 }
 
-.canvasbutton p{
-  display: inline-block;
-  text-align: center;
-  font-weight: bold;
-  font-size: 18px;
-  color: #071821;
-}
+// .canvasbutton
 #fader{
   display: none;
   background-color: transparent;
-  position: absolute;
-  top: -103px;
-  right: 0;
+  @include position($tp: -103px, $rt: 0);
 }
 
 #contactinfolinks{
   background-image: url('../images/winterscape2.jpg');
-  position: absolute;
-  top: 14px;
-  width: 300px;
-  height: 300px;
+  @include position($tp: 14px);
+  @include text($width: 300px, $ht: 300px);
   z-index: -5;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
+  @include flex(column, space-around, center);
+  & a{
+    border: 3px solid transparent;
+  }
+  & a:focus,
+  & a:hover{
+    outline: none;
+    border-color: #2f2f2f;
+  }
 }
 svg{
-  height: 85px;
-  width: 80px;
+  @include text($width: 80px, $ht: 85px);
   fill: #2f2f2f;
 }
 
 
-#contactinfolinks a{
-  border: 3px solid transparent;
-}
-#contactinfolinks a:focus,
-#contactinfolinks a:hover{
-  outline: none;
-  border-color: #2f2f2f;
-}
+// #contactinfolinks
+// #contactinfolinks
 .help{
-  position: absolute;
-  bottom: 70px;
-  right: 0;
-  width: 75px;
-  height: 75px;
-  line-height: 15px;
+  @include position($rt: 0, $bm: 70px);
+  @include text($width: 75px, $lh: 15px, $ht: 75px);
   padding-top: 10px;
+  & p{
+    color: #001b40;
+    @extend %user_select;
+    &:first-of-type{
+      font-size: 25px;
+      display: block;
+    }
+  }
 }
 
-.help p{
-  color: #001b40;
-  cursor: default;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-}
-.help p:first-of-type{
-  font-size: 25px;
-  display: block;
-}
+// .help
+// .help p
