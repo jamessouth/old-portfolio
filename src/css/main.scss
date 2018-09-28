@@ -1,6 +1,13 @@
 
 
+
+
+
+
+
 @import 'variables';
+
+@import 'extends';
 @import 'mixins';
 
 
@@ -167,6 +174,10 @@ li{
   background: linear-gradient(#f0d2ac 0%, #2f3905 200%);
   outline: none;
 
+  &:first-of-type{
+    z-index: 0;
+  }
+
   &:last-of-type{
     @media #{$li_expand} {
       grid-column-end: span 2;
@@ -292,7 +303,6 @@ select + div p{
 }
 
 
-@import 'extends';
 
 @import 'cubeStyles';
 @import 'contactStyles';
