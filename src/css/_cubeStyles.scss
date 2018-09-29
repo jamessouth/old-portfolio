@@ -1,6 +1,3 @@
-
-
-
 .cube-container{
   @include three($dist: 1500px);
   margin-bottom: 5em;
@@ -11,10 +8,7 @@
     }
   }
 }
-// .cube-container
-
 .photo-cube{
-  /*transition: transform .001s;*/
   width: var(--size);
   height: var(--size);
   @include three($pers: preserve-3d);

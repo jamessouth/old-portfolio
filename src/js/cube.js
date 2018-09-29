@@ -10,7 +10,6 @@ import Project9 from '../images/project9.jpg';
 import Project10 from '../images/project10.jpg';
 import Project11 from '../images/project11.jpg';
 import Project12 from '../images/project12.jpg';
-
 import Project7GIF from '../images/p7.gif';
 import Project9GIF from '../images/p9.gif';
 import Project10GIF from '../images/p10.gif';
@@ -21,8 +20,6 @@ const cc = document.querySelectorAll('.cube-container');
 const hold = document.querySelector('.hold');
 const subhead = hold.querySelectorAll('.subhead:nth-of-type(odd)');
 const desc = hold.querySelectorAll('.subhead:nth-of-type(even)');
-
-
 const panelData = [
   {
     aria: 'random quotes; ',
@@ -84,17 +81,15 @@ const panelData = [
     gif: Project11GIF,
   },
   {
-    aria: 'portfolio; webpack babel wai-aria eslint',
-    href: '#1',
+    aria: 'portfolio; webpack babel a11y sass web components css paint',
+    href: '',
     pic: Project12,
   },
 ];
-
 let isRotating = false;
 let xStart;
 let yStart;
 let whichPB = 0;
-
 const rotObj = {
   0: {
     x: 0,
@@ -109,9 +104,7 @@ const rotObj = {
     ys: 0,
   },
 };
-
 const rando = () => Math.floor(Math.random() * 360) - 180;
-
 const KEYFRAMES = () => ([
   { transform: 'rotateX(0deg) rotateY(0deg)' },
   { transform: `rotateX(${rando()}deg) rotateY(${rando()}deg)` },
@@ -121,14 +114,10 @@ const KEYFRAMES = () => ([
   { transform: `rotateX(${rando()}deg) rotateY(${rando()}deg)` },
   { transform: 'rotateX(0deg) rotateY(0deg)' },
 ]);
-
 const KEYTIMING = {
-  duration: 6000, iterations: 1, delay: 600, easing: 'linear',
+  duration: 6000, iterations: 1, delay: 900, easing: 'linear',
 };
-
 let no = 0;
-
-
 function hoverCubes() {
   cc[0].animate([
     { transform: 'translateY(0px)' },
@@ -141,8 +130,6 @@ function hoverCubes() {
     duration: 1000, iterations: 20, direction: 'alternate',
   });
 }
-
-
 function rotate(e) {
   if (!isRotating) return;
   const xPos = (e.touches ? Math.floor(e.touches[0].clientX) : e.x) + window.scrollX;
@@ -151,22 +138,19 @@ function rotate(e) {
   rotObj[whichPB].ys = yPos - yStart + rotObj[whichPB].y;
   pb[whichPB].style.transform = `rotateX(${-rotObj[whichPB].ys}deg) rotateY(${rotObj[whichPB].xs}deg)`;
 }
-
+function getCenter(cube) {
+  return {
+    x: (cube.offsetLeft + cube.offsetWidth / 2),
+    y: (cube.offsetTop + cube.offsetHeight / 2),
+  };
+}
 function getCube(e) {
-  const cubeZeroCtr = {
-    x: (cc[0].offsetLeft + cc[0].offsetWidth / 2),
-    y: (cc[0].offsetTop - 0 + cc[0].offsetHeight / 2),
-  };
-  const cubeOneCtr = {
-    x: (cc[1].offsetLeft + cc[1].offsetWidth / 2),
-    y: (cc[1].offsetTop - 0 + cc[1].offsetHeight / 2),
-  };
+  const cubeZeroCtr = getCenter(cc[0]);
+  const cubeOneCtr = getCenter(cc[1]);
   xStart = (e.x || Math.floor(e.touches[0].clientX)) + window.scrollX;
-  yStart = (e.y || Math.floor(e.touches[0].clientY)) - 0 + window.scrollY;
-  const distFromCubeZero = Math.round(Math.sqrt((Math.abs(cubeZeroCtr.x - xStart) ** 2)
-  + (Math.abs(cubeZeroCtr.y - yStart) ** 2)));
-  const distFromCubeOne = Math.round(Math.sqrt((Math.abs(cubeOneCtr.x - xStart) ** 2)
-  + (Math.abs(cubeOneCtr.y - yStart) ** 2)));
+  yStart = (e.y || Math.floor(e.touches[0].clientY)) + window.scrollY;
+  const distFromCubeZero = Math.round(Math.hypot(cubeZeroCtr.x - xStart, cubeZeroCtr.y - yStart));
+  const distFromCubeOne = Math.round(Math.hypot(cubeOneCtr.x - xStart, cubeOneCtr.y - yStart));
   if (distFromCubeZero <= distFromCubeOne) {
     whichPB = 0;
   } else {
@@ -174,26 +158,18 @@ function getCube(e) {
   }
   isRotating = true;
 }
-
-
 hold.addEventListener('mousedown', getCube);
 hold.addEventListener('touchstart', getCube, { passive: true });
 hold.addEventListener('mousemove', rotate);
 hold.addEventListener('touchmove', rotate, { passive: true });
-
-
 function releaseCube() {
   isRotating = false;
   rotObj[whichPB].x = rotObj[whichPB].xs || 0;
   rotObj[whichPB].y = rotObj[whichPB].ys || 0;
 }
-
-
 hold.addEventListener('mouseup', releaseCube);
 hold.addEventListener('touchend', releaseCube);
 hold.addEventListener('mouseleave', releaseCube);
-
-
 const classes = [
   `  transform: translateZ(calc(var(--size) / 2));
   }</style>`,
@@ -224,8 +200,6 @@ const classes = [
   transform-origin: bottom;
   }</style>`,
 ];
-
-
 const panelTemplate = document.createElement('template');
 const htmlStr = `
 <div>
@@ -250,8 +224,6 @@ div{
   height: 100%;
   position: absolute;
 `;
-
-
 class Panel extends HTMLElement {
   static get observedAttributes() {
     return ['gif'];
@@ -259,22 +231,17 @@ class Panel extends HTMLElement {
 
   constructor(config, num) {
     super();
-
     Object.assign(this, config);
     const shadowRoot = this.attachShadow({ mode: 'open' });
     panelTemplate.innerHTML = `${htmlStr}${classes[num % 6]}`;
     shadowRoot.appendChild(panelTemplate.content.cloneNode(true));
-
     this.anchor.setAttribute('aria-label', this.aria);
     this.anchor.setAttribute('href', this.href);
     this.div.style.backgroundImage = `url(${this.pic})`;
-
     if ([6, 8, 9, 10].includes(num)) {
       this.setAttribute('gif', false);
       this.setAttribute('gif-name', this.gif);
     }
-
-
     ['mouseover', 'focus', 'touchstart'].forEach((evt) => {
       this.addEventListener(evt, () => {
         const projData = this.anchor.getAttribute('aria-label').split('; ');
@@ -300,8 +267,6 @@ class Panel extends HTMLElement {
     return this.shadowRoot.querySelector('div');
   }
 }
-
-
 function buildCubes() {
   const panel = new Panel({ ...panelData[no] }, no);
   const panel2 = new Panel({ ...panelData[no + 6] }, no + 6);
@@ -309,31 +274,25 @@ function buildCubes() {
   pb[1].appendChild(panel2);
   no += 1;
 }
-
 function animCubes() {
   const spin = pb[0].animate(KEYFRAMES(), KEYTIMING);
   const spin2 = pb[1].animate(KEYFRAMES(), KEYTIMING);
-
   const si = setInterval(() => {
     buildCubes();
     if (no > 5) {
       clearInterval(si);
     }
   }, 1000);
-
   return Promise.all([spin.finished, spin2.finished]);
 }
-
-
 if (window.customElements && HTMLElement.prototype.attachShadow) {
   window.customElements.define('cube-panel', Panel);
   animCubes().then(hoverCubes);
 } else {
   const info = document.createElement('p');
   info.innerHTML = `Hello! Your browser does not support custom elements. Try a (non-Microsoft) browser like <span>Google Chrome</span>.
-  Native support for custom elements will ship in <span>Firefox</span> 63 in late October; until then, you can do the following: open a new tab and go to <span>about:config</span>.
+  Native support for custom elements will ship in <span>Firefox</span> 63 in late October 2018; until then, do the following: open a new tab and go to <span>about:config</span>.
   Click through any warnings and in the search bar, type in <span>webcomponent</span>.
-  Toggle the <span>...customelements.enabled</span> and <span>...shadowdom.enabled</span> flags to <span>true</span> and reload this page.
-  When done, you may want to toggle the flags back to false.`;
+  Toggle the <span>...customelements.enabled</span> and <span>...shadowdom.enabled</span> flags to <span>true</span> and reload this page.`;
   hold.insertBefore(info, subhead[0]);
 }

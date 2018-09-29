@@ -4,17 +4,13 @@ import 'css-paint-polyfill';
 if ('paintWorklet' in CSS) {
   CSS.paintWorklet.addModule('src/js/burst.js');
 }
-
 const canvas = document.querySelector('#board');
-
-
 const canvasbutton = document.querySelector('.canvasbutton button');
 const faderCanv = document.querySelector('#fader');
 const linksDiv = document.querySelector('#contactinfolinks');
 const linksDivLinks = document.querySelectorAll('#contactinfolinks a');
 const clickCounter = document.querySelector('.clickCounter p:last-of-type');
 const helpText = document.querySelector('.help');
-
 const ctx = canvas.getContext('2d');
 const ctxFader = faderCanv.getContext('2d');
 const boxes = [];
@@ -25,13 +21,11 @@ let canvArray = [];
 const contact = new Image();
 let clicks = 0;
 let paintStart = 0;
-
 for (let q = 0; q < 15; q += 1) {
   for (let z = 0; z < 15; z += 1) {
     boxes.push([q * 20, z * 20]);
   }
 }
-
 function getRands(amt) {
   const nums = new Set();
   while (nums.size < amt) {
@@ -40,7 +34,6 @@ function getRands(amt) {
   }
   return [...nums];
 }
-
 function randomizeBoxes() {
   const randos = getRands(boxes.length);
   const randArray = [];
@@ -50,7 +43,6 @@ function randomizeBoxes() {
   return randArray;
 }
 const randBoxes = randomizeBoxes();
-
 function animateRevealContact() {
   if (timerTwo < randBoxes.length - 1) { requestAnimationFrame(animateRevealContact); }
   ctx.clearRect(randBoxes[timerTwo][0], randBoxes[timerTwo][1], 20, 20);
@@ -66,7 +58,6 @@ function animateRevealContact() {
 for (let i = 100; i >= 0; i -= 1) {
   shades.push(i / 100);
 }
-
 function animatePaint() {
   if (paintStart < 900) {
     requestAnimationFrame(animatePaint);
@@ -77,7 +68,6 @@ function animatePaint() {
   canvasbutton.parentNode.style.cssText = `--atick: ${paintStart}`;
   paintStart += 5;
 }
-
 function animateFader() {
   if (timerOne < shades.length) { requestAnimationFrame(animateFader); }
   ctxFader.fillStyle = `rgba(173, 216, 230, ${shades[timerOne]})`;
@@ -97,7 +87,6 @@ for (let i = 0; i < 4; i += 1) {
     canvArray.push([j * 75, i * 75]);
   }
 }
-
 function checkBoard() {
   const randos = getRands(canvArray.length - 1);
   const solArray = [];
@@ -106,7 +95,6 @@ function checkBoard() {
   });
   return [solArray.concat([15]), randos.concat([15])];
 }
-
 function getInversions(arr) {
   let inversions = 0;
   for (let i = 0; i < arr.length; i += 1) {
@@ -124,7 +112,6 @@ while (getInversions(doable[0]) % 2 !== 0) {
   doable = checkBoard();
 }
 const boardOrder = doable[0].slice();
-
 contact.onload = () => {
   for (let i = 0; i < canvArray.length - 1; i += 1) {
     ctx.drawImage(contact, canvArray[i][0], canvArray[i][1], 75, 75,
@@ -132,7 +119,6 @@ contact.onload = () => {
   }
 };
 contact.src = Contact;
-
 function swapTiles(x, y) {
   if (canvArray.length === 0) { return; }
   const tileClicked = (Math.floor(y / 75) * 4) + Math.floor(x / 75);
@@ -165,7 +151,6 @@ function swapTiles(x, y) {
     canvArray = [];
   }
 }
-
 canvas.addEventListener('click', (e) => {
   const x = e.offsetX;
   const y = e.offsetY;
@@ -176,7 +161,6 @@ canvas.addEventListener('click', (e) => {
   }
   clickCounter.textContent = clicks;
 });
-
 canvasbutton.addEventListener('click', () => {
   helpText.style.display = 'none';
   ctx.clearRect(0, 0, 300, 300);
