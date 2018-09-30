@@ -1,9 +1,22 @@
 import Contact from '../images/contact.jpg';
 import 'css-paint-polyfill';
 
-if ('paintWorklet' in CSS) {
-  CSS.paintWorklet.addModule('src/js/burst.js');
+
+function getComponent() {
+  return import(/* webpackChunkName: "burst" */ 'burst')
+    .then(({ default: _ }) => {
+      if ('paintWorklet' in CSS) {
+        CSS.paintWorklet.addModule('src/js/burst.js');
+      }
+    })
+    .catch(error => 'An error occurred while loading the component');
 }
+
+getComponent();
+
+
+
+
 const canvas = document.querySelector('#board');
 const canvasbutton = document.querySelector('.canvasbutton button');
 const faderCanv = document.querySelector('#fader');

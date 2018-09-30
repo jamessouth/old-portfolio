@@ -1,12 +1,14 @@
 const path = require('path');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   entry: ['@babel/polyfill', './src/js/index.js'],
   output: {
-    filename: 'main.js',
+    filename: '[name].bundle.js',
+    chunkFilename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
     // publicPath: '/dist'
   },
@@ -27,19 +29,6 @@ module.exports = {
         test: /\.scss$/,
         loaders: ['style-loader', 'css-loader', 'sass-loader']
       },
-      // {
-      //   test: /\.css$/,
-      //   use: [
-      //     {
-      //       loader: MiniCssExtractPlugin.loader,
-      //       options: {
-      //         publicPath: '/dist'
-      //       }
-      //     },
-      //     'style-loader',
-      //     'css-loader'
-      //   ]
-      // },
       {
         test: /\.(png|svg|jpg|gif)$/,
         use: [
@@ -59,6 +48,7 @@ module.exports = {
     ]
   },
   plugins: [
+    new CleanWebpackPlugin(['dist'], { exclude: ['images'] }),
     new MiniCssExtractPlugin({
       filename: 'main.css',
     }),
