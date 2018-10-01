@@ -1,5 +1,5 @@
-import '@babel/polyfill';
-import './web-animations-next.min';
+// import '@babel/polyfill';
+
 import '../css/main.scss';
 import '../html/index.html';
 import './cube';

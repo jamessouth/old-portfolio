@@ -3,6 +3,12 @@
   "version": "1.0.0",
   "description": "portfolio",
   "private": "true",
+  "browserslist": [
+    "last 2 versions",
+    "> 1%",
+    "not dead",
+    "not ie < 12"
+  ],
   "scripts": {
     "lint": "eslint",
     "build": "webpack-dev-server",
@@ -40,6 +46,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
-    "css-paint-polyfill": "^1.0.3"
+    "css-paint-polyfill": "^1.0.3",
+    "web-animations-js": "^2.3.1"
   }
 }

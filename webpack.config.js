@@ -4,11 +4,14 @@ const HTMLWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-  mode: 'production',
-  entry: ['@babel/polyfill', './src/js/index.js'],
+  mode: 'development',
+  devtool: 'inline-source-map',
+  entry: {
+    main: './src/js/index.js',
+    burst: './src/js/burst.js',
+  },
   output: {
     filename: '[name].bundle.js',
-    chunkFilename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
     // publicPath: '/dist'
   },
@@ -16,11 +19,20 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        exclude: /node_modules/,
+        include: [
+          path.resolve(__dirname, 'src/js')
+        ],
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env'],
+            presets: [
+              [
+                '@babel/preset-env',
+                {
+                  'useBuiltIns': 'usage',
+                }
+              ]
+            ],
             cacheDirectory: true
           }
         }
