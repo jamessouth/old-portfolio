@@ -14,4 +14,4 @@ class BurstPainter {
     ctx.fill();
   }
 }
-registerPaint('burst', BurstPainter);
+// registerPaint('burst', BurstPainter);

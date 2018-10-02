@@ -1,4 +1,3 @@
-// import './web-animations-next.min';
 import Project1 from '../images/project1.jpg';
 import Project2 from '../images/project2.jpg';
 import Project3 from '../images/project3.jpg';
@@ -119,17 +118,14 @@ const KEYTIMING = {
   duration: 6000, iterations: 1, delay: 900, easing: 'linear',
 };
 let no = 0;
+const KEYFRAMES2 = [
+  { transform: 'translateY(0px)' },
+  { transform: 'translateY(10px)' },
+];
+const KEYTIMING2 = { duration: 1000, iterations: 20, direction: 'alternate' };
 function hoverCubes() {
-  cc[0].animate([
-    { transform: 'translateY(0px)' },
-    { transform: 'translateY(10px)' },
-  ], { duration: 1000, iterations: 20, direction: 'alternate' });
-  cc[1].animate([
-    { transform: 'translateY(0px)' },
-    { transform: 'translateY(10px)' },
-  ], {
-    duration: 1000, iterations: 20, direction: 'alternate',
-  });
+  cc[0].animate(KEYFRAMES2, KEYTIMING2);
+  cc[1].animate(KEYFRAMES2, KEYTIMING2);
 }
 function rotate(e) {
   if (!isRotating) return;

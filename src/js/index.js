@@ -3,7 +3,7 @@
 import '../css/main.scss';
 import '../html/index.html';
 import './cube';
-import './contact';
+// import './contact';
 import Explosion from '../images/explosion.gif';
 
 const sizeInput = document.querySelector('.slider input');
@@ -117,3 +117,25 @@ sizeInput.addEventListener('mousemove', handleRangeUpdate);
 applyButton.addEventListener('click', () => {
   document.documentElement.style.setProperty('--size', `${sizeInput.value}px`);
 });
+
+function getComponent() {
+  return import(/* webpackChunkName: "contact" */ './contact').then(({ default: default }) => {
+
+  }).catch(err => 'error happened');
+}
+
+
+setTimeout(getComponent, 6545);
+
+
+
+
+
+
+
+
+
+
+
+
+// 15

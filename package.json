@@ -45,8 +45,6 @@
     "webpack-dev-server": "^3.1.8"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.0.0",
-    "css-paint-polyfill": "^1.0.3",
-    "web-animations-js": "^2.3.1"
+    "@babel/polyfill": "^7.0.0"
   }
 }

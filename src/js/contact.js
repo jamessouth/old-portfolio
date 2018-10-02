@@ -1,10 +1,9 @@
 import Contact from '../images/contact.jpg';
 // import './burst';
-import 'css-paint-polyfill';
 
-if ('paintWorklet' in CSS) {
-  CSS.paintWorklet.addModule('burst.bundle.js');
-}
+// if ('paintWorklet' in CSS) {
+  // CSS.paintWorklet.addModule('burst.bundle.js');
+// }
 const canvas = document.querySelector('#board');
 const canvasbutton = document.querySelector('.canvasbutton button');
 const faderCanv = document.querySelector('#fader');

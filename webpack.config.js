@@ -8,10 +8,11 @@ module.exports = {
   devtool: 'inline-source-map',
   entry: {
     main: './src/js/index.js',
-    burst: './src/js/burst.js',
+    // contact: './src/js/contact.js',
   },
   output: {
     filename: '[name].bundle.js',
+    chunkFilename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
     // publicPath: '/dist'
   },
@@ -65,7 +66,8 @@ module.exports = {
       filename: 'main.css',
     }),
     new HTMLWebpackPlugin({
-      template: './src/html/index.html'
+      template: './src/html/index.html',
+      title: 'baarrrrrrrrfffffffffff',
     }),
   ],
   devServer: {

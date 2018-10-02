@@ -31,8 +31,8 @@ const server = http.createServer((req, res) => {
   //   });
   // }
 
-  if(req.url === '/main.js'){
-    fs.readFile('dist/main.js', 'utf8', (err, js) => {
+  if(req.url.includes('bundle')){
+    fs.readFile(path.join(__dirname, '/dist', req.url), 'utf8', (err, js) => {
       res.writeHead(200, { "Content-Type": "application/javascript" });
       res.end(js);
     });
@@ -40,7 +40,7 @@ const server = http.createServer((req, res) => {
 
 
 
-  if(!req.url.includes('/images/') && /(\.png|\.svg|\.jpg|\.gif)/.test(req.url)){
+  if(req.url.includes('/images/') && /(\.png|\.svg|\.jpg|\.gif)/.test(req.url)){
     const ext = req.url.includes('.jpg') ? 'jpeg' : path.extname(req.url).substring(1);
     fs.readFile(path.join(__dirname, '/dist', req.url), (err, img) => {
       res.writeHead(200, { "Content-Type": `image/${ext}` });
@@ -50,13 +50,13 @@ const server = http.createServer((req, res) => {
 
 
 
-  if(req.url.includes('/images/')){
-    const ext = req.url.includes('.jpg') ? 'jpeg' : path.extname(req.url).substring(1);
-    fs.readFile(path.join(__dirname, req.url), (err, img) => {
-      res.writeHead(200, { "Content-Type": `image/${ext}` });
-      res.end(img);
-    });
-  }
+  // if(req.url.includes('/images/')){
+  //   const ext = req.url.includes('.jpg') ? 'jpeg' : path.extname(req.url).substring(1);
+  //   fs.readFile(path.join(__dirname, req.url), (err, img) => {
+  //     res.writeHead(200, { "Content-Type": `image/${ext}` });
+  //     res.end(img);
+  //   });
+  // }
 
 });
 
