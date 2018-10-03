@@ -8,7 +8,6 @@ module.exports = {
   devtool: 'inline-source-map',
   entry: {
     main: './src/js/index.js',
-    // contact: './src/js/contact.js',
   },
   output: {
     filename: '[name].bundle.js',
@@ -26,6 +25,7 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
+            plugins: ['@babel/plugin-syntax-dynamic-import'],
             presets: [
               [
                 '@babel/preset-env',

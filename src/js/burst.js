@@ -1,4 +1,4 @@
-class BurstPainter {
+export default class {
   static get inputProperties() { return ['--atick']; }
 
   paint(ctx, geom, props) {
@@ -14,4 +14,3 @@ class BurstPainter {
     ctx.fill();
   }
 }
-// registerPaint('burst', BurstPainter);

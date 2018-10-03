@@ -3,7 +3,6 @@
 import '../css/main.scss';
 import '../html/index.html';
 import './cube';
-// import './contact';
 import Explosion from '../images/explosion.gif';
 
 const sizeInput = document.querySelector('.slider input');
@@ -12,7 +11,7 @@ const sizeTrack = document.querySelector('.track');
 const applyButton = document.querySelector('#apply');
 const check = document.querySelectorAll('.menu-hold input.check');
 const checkLabel = document.querySelectorAll('.menu-hold input.check + label');
-const headline = document.querySelector('h1');
+const headline = document.querySelector('h1:first-of-type');
 const seconds = document.querySelector('select');
 const secondsLabel = document.querySelector('label[for="sec"]');
 const secondsDiv = document.querySelector('select + div');
@@ -119,16 +118,12 @@ applyButton.addEventListener('click', () => {
 });
 
 function getComponent() {
-  return import(/* webpackChunkName: "contact" */ './contact').then(({ default: default }) => {
-
-  }).catch(err => 'error happened');
+  return import(/* webpackChunkName: "contact" */ './contact').catch(err => console.log(err));
 }
 
 
-setTimeout(getComponent, 6545);
 
-
-
+document.addEventListener('scroll', getComponent, { once: true });
 
 
 

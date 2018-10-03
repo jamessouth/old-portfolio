@@ -35,7 +35,6 @@
   @include position($tp: -103px, $rt: 0);
 }
 #contactinfolinks{
-  background-image: url('../images/winterscape2.jpg');
   @include position($tp: 14px);
   @include text($width: 300px, $ht: 300px);
   z-index: -5;

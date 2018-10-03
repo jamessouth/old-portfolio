@@ -1,13 +1,17 @@
 import Contact from '../images/contact.jpg';
-// import './burst';
+import ContactBG from '../images/winterscape2.jpg';
+import GH from '../images/gh64.png';
+
+
 
 // if ('paintWorklet' in CSS) {
-  // CSS.paintWorklet.addModule('burst.bundle.js');
+
 // }
 const canvas = document.querySelector('#board');
 const canvasbutton = document.querySelector('.canvasbutton button');
 const faderCanv = document.querySelector('#fader');
 const linksDiv = document.querySelector('#contactinfolinks');
+const linksDivImg = document.querySelector('#contactinfolinks img');
 const linksDivLinks = document.querySelectorAll('#contactinfolinks a');
 const clickCounter = document.querySelector('.clickCounter p:last-of-type');
 const helpText = document.querySelector('.help');
@@ -21,6 +25,8 @@ let canvArray = [];
 const contact = new Image();
 let clicks = 0;
 let paintStart = 0;
+linksDiv.style.backgroundImage = `url(${ContactBG})`
+linksDivImg.src = GH;
 for (let q = 0; q < 15; q += 1) {
   for (let z = 0; z < 15; z += 1) {
     boxes.push([q * 20, z * 20]);
@@ -151,6 +157,9 @@ function swapTiles(x, y) {
     canvArray = [];
   }
 }
+function getComponent() {
+  return import(/* webpackChunkName: "burst" */ './burst').catch(err => console.log(err));
+}
 canvas.addEventListener('click', (e) => {
   const x = e.offsetX;
   const y = e.offsetY;
@@ -158,6 +167,14 @@ canvas.addEventListener('click', (e) => {
   clicks += 1;
   if (clicks === 1) {
     helpText.style.display = 'none';
+
+    getComponent().then(() => CSS.paintWorklet.addModule('burst.bundle.js'));
+
+    import BurstPainter from './burst';
+    CSS.paintWorklet.addModule('src/js/burst.js');
+    registerPaint('burst', BurstPainter);
+
+
   }
   clickCounter.textContent = clicks;
 });
