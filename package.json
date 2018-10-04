@@ -11,8 +11,9 @@
   ],
   "scripts": {
     "lint": "eslint",
+    "analyze": "webpack --profile --json > stats.json",
     "build": "webpack-dev-server",
-    "build:prod": "webpack"
+    "build:prod": "webpack && node devserver.js"
   },
   "repository": {
     "type": "git",

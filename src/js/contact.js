@@ -2,11 +2,6 @@ import Contact from '../images/contact.jpg';
 import ContactBG from '../images/winterscape2.jpg';
 import GH from '../images/gh64.png';
 
-
-
-// if ('paintWorklet' in CSS) {
-
-// }
 const canvas = document.querySelector('#board');
 const canvasbutton = document.querySelector('.canvasbutton button');
 const faderCanv = document.querySelector('#fader');
@@ -157,8 +152,11 @@ function swapTiles(x, y) {
     canvArray = [];
   }
 }
-function getComponent() {
-  return import(/* webpackChunkName: "burst" */ './burst').catch(err => console.log(err));
+function getPolyfill() {
+  return import(/* webpackChunkName: "paint_polyfill" */ 'css-paint-polyfill').catch(err => console.log(err));
+}
+if (!CSS.paintWorklet) {
+  getPolyfill();
 }
 canvas.addEventListener('click', (e) => {
   const x = e.offsetX;
@@ -167,14 +165,7 @@ canvas.addEventListener('click', (e) => {
   clicks += 1;
   if (clicks === 1) {
     helpText.style.display = 'none';
-
-    getComponent().then(() => CSS.paintWorklet.addModule('burst.bundle.js'));
-
-    import BurstPainter from './burst';
-    CSS.paintWorklet.addModule('src/js/burst.js');
-    registerPaint('burst', BurstPainter);
-
-
+    CSS.paintWorklet.addModule('./burst.js');
   }
   clickCounter.textContent = clicks;
 });

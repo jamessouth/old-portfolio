@@ -116,21 +116,7 @@ sizeInput.addEventListener('mousemove', handleRangeUpdate);
 applyButton.addEventListener('click', () => {
   document.documentElement.style.setProperty('--size', `${sizeInput.value}px`);
 });
-
-function getComponent() {
+function getContactJS() {
   return import(/* webpackChunkName: "contact" */ './contact').catch(err => console.log(err));
 }
-
-
-
-document.addEventListener('scroll', getComponent, { once: true });
-
-
-
-
-
-
-
-
-
-// 15
+document.addEventListener('scroll', getContactJS, { once: true });

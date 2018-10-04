@@ -31,7 +31,7 @@ const server = http.createServer((req, res) => {
   //   });
   // }
 
-  if(req.url.includes('bundle')){
+  if(req.url.includes('.js')){
     fs.readFile(path.join(__dirname, '/dist', req.url), 'utf8', (err, js) => {
       res.writeHead(200, { "Content-Type": "application/javascript" });
       res.end(js);
