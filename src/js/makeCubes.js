@@ -86,24 +86,9 @@ const panelData = [
     pic: Project12,
   },
 ];
-let isRotating = false;
-let xStart;
-let yStart;
-let whichPB = 0;
-const rotObj = {
-  0: {
-    x: 0,
-    y: 0,
-    xs: 0,
-    ys: 0,
-  },
-  1: {
-    x: 0,
-    y: 0,
-    xs: 0,
-    ys: 0,
-  },
-};
+
+
+
 const rando = () => Math.floor(Math.random() * 360) - 180;
 const KEYFRAMES = () => ([
   { transform: 'rotateX(0deg) rotateY(0deg)' },
@@ -127,46 +112,8 @@ function hoverCubes() {
   cc[0].animate(KEYFRAMES2, KEYTIMING2);
   cc[1].animate(KEYFRAMES2, KEYTIMING2);
 }
-function rotate(e) {
-  if (!isRotating) return;
-  const xPos = (e.touches ? Math.floor(e.touches[0].clientX) : e.x) + window.scrollX;
-  const yPos = (e.touches ? Math.floor(e.touches[0].clientY) : e.y) + window.scrollY;
-  rotObj[whichPB].xs = xPos - xStart + rotObj[whichPB].x;
-  rotObj[whichPB].ys = yPos - yStart + rotObj[whichPB].y;
-  pb[whichPB].style.transform = `rotateX(${-rotObj[whichPB].ys}deg) rotateY(${rotObj[whichPB].xs}deg)`;
-}
-function getCenter(cube) {
-  return {
-    x: (cube.offsetLeft + cube.offsetWidth / 2),
-    y: (cube.offsetTop + cube.offsetHeight / 2),
-  };
-}
-function getCube(e) {
-  const cubeZeroCtr = getCenter(cc[0]);
-  const cubeOneCtr = getCenter(cc[1]);
-  xStart = (e.x || Math.floor(e.touches[0].clientX)) + window.scrollX;
-  yStart = (e.y || Math.floor(e.touches[0].clientY)) + window.scrollY;
-  const distFromCubeZero = Math.round(Math.hypot(cubeZeroCtr.x - xStart, cubeZeroCtr.y - yStart));
-  const distFromCubeOne = Math.round(Math.hypot(cubeOneCtr.x - xStart, cubeOneCtr.y - yStart));
-  if (distFromCubeZero <= distFromCubeOne) {
-    whichPB = 0;
-  } else {
-    whichPB = 1;
-  }
-  isRotating = true;
-}
-hold.addEventListener('mousedown', getCube);
-hold.addEventListener('touchstart', getCube, { passive: true });
-hold.addEventListener('mousemove', rotate);
-hold.addEventListener('touchmove', rotate, { passive: true });
-function releaseCube() {
-  isRotating = false;
-  rotObj[whichPB].x = rotObj[whichPB].xs || 0;
-  rotObj[whichPB].y = rotObj[whichPB].ys || 0;
-}
-hold.addEventListener('mouseup', releaseCube);
-hold.addEventListener('touchend', releaseCube);
-hold.addEventListener('mouseleave', releaseCube);
+
+
 const classes = [
   `  transform: translateZ(calc(var(--size) / 2));
   }</style>`,
@@ -264,6 +211,9 @@ class Panel extends HTMLElement {
     return this.shadowRoot.querySelector('div');
   }
 }
+function getUseCubesJS() {
+  return import(/* webpackChunkName: "useCubes" */ './useCubes').catch(err => console.log(err));
+}
 function buildCubes() {
   const panel = new Panel({ ...panelData[no] }, no);
   const panel2 = new Panel({ ...panelData[no + 6] }, no + 6);
@@ -277,11 +227,17 @@ function animCubes() {
   const si = setInterval(() => {
     buildCubes();
     if (no > 5) {
+      getUseCubesJS();
       clearInterval(si);
     }
   }, 1000);
   return Promise.all([spin.finished, spin2.finished]);
 }
+
+
+
+
+
 if (window.customElements && HTMLElement.prototype.attachShadow) {
   window.customElements.define('cube-panel', Panel);
   animCubes().then(hoverCubes);

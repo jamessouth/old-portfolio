@@ -3,15 +3,16 @@ const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
-
-// main 68.5 33.4 31.3 ''
-// cont 4.35 ''     '' 3.5
-// poly 8.56 ''     '' 0
-// html 7.63 7.71 7.79 7.78
-// vend ''   35.5   '' 44.8
-// runt ''   ''   2.24 2.19
-// tot  89   89.5 89.7 89.6
+// main 68.5 33.4 31.3 ''   30.6
+// cont 4.35 ''     '' 3.5  4.52
+// poly 8.56 ''     '' 0    8.63
+// html 7.63 7.71 7.79 7.78 7.79
+// vend ''   35.5   '' 44.8 37.1
+// runt ''   ''   2.24 2.19 2.33
+// cube ''   ''   ''   ''   1.49
+// tot  89   89.5 89.7 89.6 92.46
 
 
 
@@ -74,6 +75,12 @@ module.exports = {
     ]
   },
   optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        parallel: true,
+        sourceMap: true,
+      })
+    ],
     runtimeChunk: 'single',
     splitChunks: {
       chunks: 'all',
