@@ -61,13 +61,10 @@ function releaseCube() {
   rotObj[whichPB].x = rotObj[whichPB].xs || 0;
   rotObj[whichPB].y = rotObj[whichPB].ys || 0;
 }
-hold.addEventListener('mousedown', getCube);
+hold.addEventListener('mousedown', getCube, { passive: true });
 hold.addEventListener('touchstart', getCube, { passive: true });
-hold.addEventListener('mousemove', rotate);
+hold.addEventListener('mousemove', rotate, { passive: true });
 hold.addEventListener('touchmove', rotate, { passive: true });
 hold.addEventListener('mouseup', releaseCube);
 hold.addEventListener('touchend', releaseCube);
 hold.addEventListener('mouseleave', releaseCube);
-
-
-// [].forEach((evt) => );

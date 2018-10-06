@@ -1,8 +1,8 @@
-class BurstPainter{
-  static get inputProperties() { return ['--atick']; }
+class B{
+  static get inputProperties() { return ['--a']; }
 
   paint(ctx, geom, props) {
-    const tick = parseFloat(props.get('--atick').toString());
+    const tick = parseFloat(props.get('--a').toString());
     if (tick < 300) {
       ctx.fillStyle = `hsl(${tick + 30}deg, 85%, 49%)`;
       ctx.fillRect(0, 0, tick / 2, geom.height);
@@ -14,4 +14,4 @@ class BurstPainter{
     ctx.fill();
   }
 }
-registerPaint('burst', BurstPainter);
+registerPaint('b', B);

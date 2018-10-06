@@ -87,7 +87,7 @@ module.exports = {
     },
   },
   plugins: [
-    new CleanWebpackPlugin(['dist'], { exclude: ['images', 'burst.js'] }),
+    new CleanWebpackPlugin(['dist'], { exclude: ['images', 'burst.min.js'] }),
     new MiniCssExtractPlugin({
       filename: 'main.css',
     }),

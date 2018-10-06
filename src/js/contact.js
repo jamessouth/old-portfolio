@@ -66,7 +66,7 @@ function animatePaint() {
     canvasbutton.parentNode.classList.remove('animating');
     return;
   }
-  canvasbutton.parentNode.style.cssText = `--atick: ${paintStart}`;
+  canvasbutton.parentNode.style.cssText = `--a: ${paintStart}`;
   paintStart += 5;
 }
 function animateFader() {
@@ -165,7 +165,7 @@ canvas.addEventListener('click', (e) => {
   clicks += 1;
   if (clicks === 1) {
     helpText.style.display = 'none';
-    CSS.paintWorklet.addModule('./burst.js');
+    CSS.paintWorklet.addModule('./burst.min.js');
   }
   clickCounter.textContent = clicks;
 });

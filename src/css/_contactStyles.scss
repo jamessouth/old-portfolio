@@ -19,7 +19,7 @@
   background: radial-gradient(#f7ce8c 9%, #2c380e 163%);
   @include text($width: 300px, $ht: 44px);
   position: relative;
-  --atick: 0;
+  --a: 0;
   & p{
     display: inline-block;
     @include text($size: 18px, $color: #071821, $wt: bold);
@@ -27,7 +27,7 @@
   }
 }
 .animating{
-  background-image: paint(burst);
+  background-image: paint(b);
 }
 #fader{
   display: none;
