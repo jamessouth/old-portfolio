@@ -18,6 +18,8 @@ import Project11GIF from '../images/p11.gif';
 const pb = document.querySelectorAll('.photo-cube');
 const cc = document.querySelectorAll('.cube-container');
 const hold = document.querySelector('.hold');
+const perf = performance.now();
+let interval = 1000;
 const subhead = hold.querySelectorAll('.subhead:nth-of-type(odd)');
 const desc = hold.querySelectorAll('.subhead:nth-of-type(even)');
 const panelData = [
@@ -86,7 +88,6 @@ const panelData = [
     pic: Project12,
   },
 ];
-
 
 
 const rando = () => Math.floor(Math.random() * 360) - 180;
@@ -214,29 +215,24 @@ class Panel extends HTMLElement {
 function getUseCubesJS() {
   return import(/* webpackChunkName: "useCubes" */ './useCubes').catch(err => console.log(err));
 }
-function buildCubes() {
-  const panel = new Panel({ ...panelData[no] }, no);
-  const panel2 = new Panel({ ...panelData[no + 6] }, no + 6);
-  pb[0].appendChild(panel);
-  pb[1].appendChild(panel2);
-  no += 1;
+function buildCubes(time) {
+  if (no < 6) requestAnimationFrame(buildCubes);
+  if ((Math.floor(time || perf) - perf) > interval) {
+    const panel = new Panel({ ...panelData[no] }, no);
+    const panel2 = new Panel({ ...panelData[no + 6] }, no + 6);
+    pb[0].appendChild(panel);
+    pb[1].appendChild(panel2);
+    no += 1;
+    interval += 1000;
+    if (no > 5) getUseCubesJS();
+  }
 }
 function animCubes() {
   const spin = pb[0].animate(KEYFRAMES(), KEYTIMING);
   const spin2 = pb[1].animate(KEYFRAMES(), KEYTIMING);
-  const si = setInterval(() => {
-    buildCubes();
-    if (no > 5) {
-      getUseCubesJS();
-      clearInterval(si);
-    }
-  }, 1000);
+  buildCubes();
   return Promise.all([spin.finished, spin2.finished]);
 }
-
-
-
-
 
 if (window.customElements && HTMLElement.prototype.attachShadow) {
   window.customElements.define('cube-panel', Panel);
