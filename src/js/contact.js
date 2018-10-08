@@ -22,6 +22,12 @@ let clicks = 0;
 let paintStart = 0;
 linksDiv.style.backgroundImage = `url(${ContactBG})`
 linksDivImg.src = GH;
+function getPaintPolyfill() {
+  return import(/* webpackChunkName: "paint_polyfill" */ 'css-paint-polyfill').catch(err => console.log(err));
+}
+if (!CSS.paintWorklet) {
+  getPaintPolyfill();
+}
 for (let q = 0; q < 15; q += 1) {
   for (let z = 0; z < 15; z += 1) {
     boxes.push([q * 20, z * 20]);
@@ -151,12 +157,6 @@ function swapTiles(x, y) {
       225, 225, 75, 75);
     canvArray = [];
   }
-}
-function getPolyfill() {
-  return import(/* webpackChunkName: "paint_polyfill" */ 'css-paint-polyfill').catch(err => console.log(err));
-}
-if (!CSS.paintWorklet) {
-  getPolyfill();
 }
 canvas.addEventListener('click', (e) => {
   const x = e.offsetX;
