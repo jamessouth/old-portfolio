@@ -20,14 +20,6 @@ let canvArray = [];
 const contact = new Image();
 let clicks = 0;
 let paintStart = 0;
-linksDiv.style.backgroundImage = `url(${ContactBG})`
-linksDivImg.src = GH;
-function getPaintPolyfill() {
-  return import(/* webpackChunkName: "paint_polyfill" */ 'css-paint-polyfill').catch(err => console.log(err));
-}
-if (!CSS.paintWorklet) {
-  getPaintPolyfill();
-}
 for (let q = 0; q < 15; q += 1) {
   for (let z = 0; z < 15; z += 1) {
     boxes.push([q * 20, z * 20]);
@@ -85,7 +77,9 @@ function animateFader() {
     faderCanv.style.display = 'none';
     canvas.style.backgroundColor = 'transparent';
     canvasbutton.parentNode.classList.add('animating');
-    animatePaint();
+    if (CSS.paintWorklet) {
+      animatePaint();
+    }
     setTimeout(animateRevealContact, 3000);
   }
 }
@@ -165,11 +159,23 @@ canvas.addEventListener('click', (e) => {
   clicks += 1;
   if (clicks === 1) {
     helpText.style.display = 'none';
-    CSS.paintWorklet.addModule('./burst.min.js');
+  }
+  if (clicks === 10) {
+    if (CSS.paintWorklet) {
+      CSS.paintWorklet.addModule('./burst.min.js');
+    }
+  }
+  if (clicks === 20) {
+    linksDivImg.src = GH;
+  }
+  if (clicks === 30) {
+    linksDiv.style.backgroundImage = `url(${ContactBG})`;
   }
   clickCounter.textContent = clicks;
 });
 canvasbutton.addEventListener('click', () => {
+  linksDivImg.src = GH;
+  linksDiv.style.backgroundImage = `url(${ContactBG})`;
   helpText.style.display = 'none';
   ctx.clearRect(0, 0, 300, 300);
   ctx.drawImage(contact, 0, 0, 300, 300);

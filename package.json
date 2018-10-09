@@ -51,7 +51,6 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
-    "css-paint-polyfill": "^1.0.3",
     "lodash-es": "^4.17.11",
     "web-animations-js": "^2.3.1"
   }
