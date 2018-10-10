@@ -21,6 +21,8 @@ const LodashWebpackPlugin = require('lodash-webpack-plugin');
 module.exports = {
   mode: 'development',
   devtool: 'inline-source-map',
+  // mode: 'production',
+  // devtool: 'source-map',
   entry: {
     main: './src/js/index.js',
   },

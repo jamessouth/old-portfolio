@@ -19,7 +19,7 @@ const shades = [];
 let canvArray = [];
 const contact = new Image();
 let clicks = 0;
-let paintStart = 0;
+let animatePaint;
 for (let q = 0; q < 15; q += 1) {
   for (let z = 0; z < 15; z += 1) {
     boxes.push([q * 20, z * 20]);
@@ -57,16 +57,7 @@ function animateRevealContact() {
 for (let i = 100; i >= 0; i -= 1) {
   shades.push(i / 100);
 }
-function animatePaint() {
-  if (paintStart < 900) {
-    requestAnimationFrame(animatePaint);
-  } else {
-    canvasbutton.parentNode.classList.remove('animating');
-    return;
-  }
-  canvasbutton.parentNode.style.cssText = `--a: ${paintStart}`;
-  paintStart += 5;
-}
+
 function animateFader() {
   if (timerOne < shades.length) { requestAnimationFrame(animateFader); }
   ctxFader.fillStyle = `rgba(173, 216, 230, ${shades[timerOne]})`;
@@ -160,15 +151,18 @@ canvas.addEventListener('click', (e) => {
   if (clicks === 1) {
     helpText.style.display = 'none';
   }
-  if (clicks === 10) {
-    if (CSS.paintWorklet) {
+  if (CSS.paintWorklet) {
+    if (clicks === 10) {
+      import(/* webpackChunkName: "animPaint" */ './animPaint').then(mod => animatePaint = mod.default).catch(err => console.log(err));
+    }
+    if (clicks === 20) {
       CSS.paintWorklet.addModule('./burst.min.js');
     }
   }
-  if (clicks === 20) {
+  if (clicks === 30) {
     linksDivImg.src = GH;
   }
-  if (clicks === 30) {
+  if (clicks === 40) {
     linksDiv.style.backgroundImage = `url(${ContactBG})`;
   }
   clickCounter.textContent = clicks;

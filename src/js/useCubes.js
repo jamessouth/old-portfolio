@@ -29,7 +29,9 @@ const rotObj = {
   },
 };
 function rotate(e) {
+  console.log('rot bfr');
   if (!isRotating) return;
+  console.log('rot aftr');
   const xPos = (e.touches ? Math.floor(e.touches[0].clientX) : e.x) + window.scrollX;
   const yPos = (e.touches ? Math.floor(e.touches[0].clientY) : e.y) + window.scrollY;
   rotObj[whichPB].xs = xPos - xStart + rotObj[whichPB].x;
@@ -43,6 +45,7 @@ function getCenter(cube) {
   };
 }
 function getCube(e) {
+  console.log('get');
   const cubeZeroCtr = getCenter(cc[0]);
   const cubeOneCtr = getCenter(cc[1]);
   xStart = (e.x || Math.floor(e.touches[0].clientX)) + window.scrollX;
