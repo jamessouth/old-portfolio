@@ -9,6 +9,7 @@
   }
 }
 .photo-cube{
+  will-change: transform;
   width: var(--size);
   height: var(--size);
   @include three($pers: preserve-3d);
