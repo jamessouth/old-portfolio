@@ -19,10 +19,10 @@ const LodashWebpackPlugin = require('lodash-webpack-plugin');
 
 
 module.exports = {
-  mode: 'development',
-  devtool: 'inline-source-map',
-  // mode: 'production',
-  // devtool: 'source-map',
+  // mode: 'development',
+  // devtool: 'inline-source-map',
+  mode: 'production',
+  devtool: 'source-map',
   entry: {
     main: './src/js/index.js',
   },
@@ -91,7 +91,7 @@ module.exports = {
     },
   },
   plugins: [
-    new CleanWebpackPlugin(['dist'], { exclude: ['images', 'burst.min.js'] }),
+    new CleanWebpackPlugin(['dist'], { exclude: ['images', 'burst.min.js', 'worker.js'] }),
     new LodashWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: 'main.css',

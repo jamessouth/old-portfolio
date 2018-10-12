@@ -2,6 +2,7 @@ import Contact from '../images/contact.jpg';
 import ContactBG from '../images/winterscape2.jpg';
 import GH from '../images/gh64.png';
 
+const myWorker = new Worker('worker.js');
 const canvas = document.querySelector('#board');
 const canvasbutton = document.querySelector('.canvasbutton button');
 const faderCanv = document.querySelector('#fader');
@@ -20,6 +21,11 @@ let canvArray = [];
 const contact = new Image();
 let clicks = 0;
 let animatePaint;
+
+
+
+
+// myWorker.postMessage({a:1, b:2});
 for (let q = 0; q < 15; q += 1) {
   for (let z = 0; z < 15; z += 1) {
     boxes.push([q * 20, z * 20]);
