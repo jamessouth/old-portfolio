@@ -113,7 +113,7 @@ function hoverCubes() {
   cc[0].animate(KEYFRAMES2, KEYTIMING2);
   cc[1].animate(KEYFRAMES2, KEYTIMING2);
 }
-// 
+//
 // function getAnimPolyfill() {
 //   return import(/* webpackChunkName: "anim_polyfill" */ 'web-animations-js').catch(err => console.log(err));
 // }

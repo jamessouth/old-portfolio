@@ -12,7 +12,7 @@ const importsArr = [
   once(() => import(/* webpackChunkName: "destroyOpt" */ './destroyOpt')),
   once(() => import(/* webpackChunkName: "contact" */ './contact'))
 ];
-// 9.8, 12.85, 16.8, 18.4, 9.65, 19.2, 17.8, 23.5, 21.1,
+
 const lazyLoad = throttle(lazy, 1000, {
   'leading': false,
   'trailing': true
