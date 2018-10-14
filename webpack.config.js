@@ -5,6 +5,9 @@ const HTMLWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const LodashWebpackPlugin = require('lodash-webpack-plugin');
+const ScriptExtHTMLWebpackPlugin = require('script-ext-html-webpack-plugin');
+
+
 
 // main 68.5 33.4 31.3 ''   30.6
 // cont 4.35 ''     '' 3.5  4.52
@@ -99,6 +102,13 @@ module.exports = {
     new HTMLWebpackPlugin({
       template: './src/html/index.html',
       title: 'Portfolio',
+    }),
+    new ScriptExtHTMLWebpackPlugin({
+      // defaultAttribute: 'async',
+      preload: {
+        test: /\.js$/,
+        chunks: 'async',
+      },
     }),
     new webpack.HashedModuleIdsPlugin(),
   ],
