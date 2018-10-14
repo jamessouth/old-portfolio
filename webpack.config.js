@@ -18,6 +18,23 @@ const ScriptExtHTMLWebpackPlugin = require('script-ext-html-webpack-plugin');
 // cube ''   ''   ''   ''   1.49
 // tot  89   89.5 89.7 89.6 92.46
 
+// no preload, img in html, full throttling
+// 7.35,20
+// 7.44,17
+// 7.33,17
+// 7.33,20
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -105,10 +122,10 @@ module.exports = {
     }),
     new ScriptExtHTMLWebpackPlugin({
       // defaultAttribute: 'async',
-      preload: {
-        test: /\.js$/,
-        chunks: 'async',
-      },
+      // preload: {
+      //   test: /\.js$/,
+      //   chunks: 'async',
+      // },
     }),
     new webpack.HashedModuleIdsPlugin(),
   ],

@@ -7,7 +7,8 @@ const canvas = document.querySelector('#board');
 const canvasbutton = document.querySelector('.canvasbutton button');
 const faderCanv = document.querySelector('#fader');
 const linksDiv = document.querySelector('#contactinfolinks');
-const linksDivImg = document.querySelector('#contactinfolinks img');
+const linksDivImg = new Image();
+linksDivImg.setAttribute('alt', 'github logo');
 const linksDivLinks = document.querySelectorAll('#contactinfolinks a');
 const clickCounter = document.querySelector('.clickCounter p:last-of-type');
 const helpText = document.querySelector('.help');
@@ -81,6 +82,8 @@ myWorker.addEventListener('message', e => {
     if (finalCheck) {
       faderCanv.style.display = 'block';
       canvasbutton.style.display = 'none';
+      linksDivImg.onload = () => linksDivLinks[1].appendChild(linksDivImg);
+      linksDivImg.src = GH;
       animateFader();
       ctx.drawImage(contact, 225, 225, 75, 75,
         225, 225, 75, 75);
@@ -103,15 +106,15 @@ myWorker.addEventListener('message', e => {
         CSS.paintWorklet.addModule('./burst.min.js');
       }
     }
-    if (clicks === 30) {
-      linksDivImg.src = GH;
-    }
+
+
     if (clicks === 40) {
       linksDiv.style.backgroundImage = `url(${ContactBG})`;
     }
     clickCounter.textContent = clicks;
   });
   canvasbutton.addEventListener('click', () => {
+    linksDivImg.onload = () => linksDivLinks[1].appendChild(linksDivImg);
     linksDivImg.src = GH;
     linksDiv.style.backgroundImage = `url(${ContactBG})`;
     helpText.style.display = 'none';
