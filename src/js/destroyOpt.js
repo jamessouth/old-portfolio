@@ -12,10 +12,6 @@ const secondsLabel = document.querySelector('label[for="sec"]');
 const secondsDiv = document.querySelector('select + div');
 const expl1 = new Image();
 const expl2 = new Image();
-expl1.setAttribute('alt', 'explosion');
-expl2.setAttribute('alt', 'explosion');
-expl1.classList.add('explode');
-expl2.classList.add('explode');
 const pb = document.querySelectorAll('.photo-cube');
 const destroyBtn = secondsDiv.querySelector('button');
 const subhead = document.querySelectorAll('.subhead:nth-of-type(odd)');
@@ -23,24 +19,16 @@ const desc = document.querySelectorAll('.subhead:nth-of-type(even)');
 
 check.checked = false;
 seconds.value = 0;
-
+[expl1, expl2].forEach((expl, ind) => {
+  expl.setAttribute('alt', 'explosion');
+  expl.classList.add('explode');
+  expl.onload = () => hold.insertBefore(expl, pb[ind].parentNode);
+  expl.src = Explosion;
+});
 
 check.addEventListener('change', (e) => {
   if (e.target.checked) {
-    // fetch(Explosion)
-    //   .then(res => (res.status !== 200
-    //     ? console.log(`there was a problem fetching the resource. Status Code and Text: ${res.status}, ${res.statusText}`)
-    //     : res.blob()))
-    //   .then((res) => {
-    //     const objectURL = URL.createObjectURL(res);
-    //     [...explode].forEach((el) => el.src = objectURL);
-    //   })
-    //   .catch(err => console.log('Fetch error: ', err));
 
-    expl1.onload = () => hold.insertBefore(expl1, pb[0].parentNode);
-    expl1.src = Explosion;
-    expl2.onload = () => hold.insertBefore(expl2, pb[1].parentNode);
-    expl2.src = Explosion;
     checkLabel.textContent = 'DESTROY!';
     [seconds, secondsLabel, secondsDiv].forEach((el) => el.style.display = 'block');
     seconds.removeAttribute('disabled');

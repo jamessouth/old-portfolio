@@ -24,11 +24,11 @@ const ScriptExtHTMLWebpackPlugin = require('script-ext-html-webpack-plugin');
 // 7.33,17
 // 7.33,20
 
-
-
-
-
-
+// no preload, NO img in html, full throttling
+// 6.26,19.6
+// 6.24,19.6
+// 6.26,18.64
+// 6.28,18.68
 
 
 

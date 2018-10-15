@@ -83,7 +83,7 @@ myWorker.addEventListener('message', e => {
       faderCanv.style.display = 'block';
       canvasbutton.style.display = 'none';
       linksDivImg.onload = () => linksDivLinks[1].appendChild(linksDivImg);
-      linksDivImg.src = GH;
+      // linksDivImg.src = GH;
       animateFader();
       ctx.drawImage(contact, 225, 225, 75, 75,
         225, 225, 75, 75);
@@ -106,9 +106,11 @@ myWorker.addEventListener('message', e => {
         CSS.paintWorklet.addModule('./burst.min.js');
       }
     }
-
-
     if (clicks === 30) {
+      linksDivImg.src = GH;
+    }
+
+    if (clicks === 40) {
       linksDiv.style.backgroundImage = `url(${ContactBG})`;
     }
     clickCounter.textContent = clicks;
