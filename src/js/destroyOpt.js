@@ -2,6 +2,7 @@
 
 import Explosion from '../images/explosion.gif';
 
+const hold = document.querySelector('.hold');
 const sizeInput = document.querySelector('.slider input');
 const check = document.querySelector('#destroy');
 const checkLabel = document.querySelector('label[for="destroy"]');
@@ -36,9 +37,9 @@ check.addEventListener('change', (e) => {
     //   })
     //   .catch(err => console.log('Fetch error: ', err));
 
-    expl1.onload = () => pb[0].parentNode.insertBefore(expl1);
+    expl1.onload = () => hold.insertBefore(expl1, pb[0].parentNode);
     expl1.src = Explosion;
-    expl2.onload = () => pb[1].parentNode.insertBefore(expl2);
+    expl2.onload = () => hold.insertBefore(expl2, pb[1].parentNode);
     expl2.src = Explosion;
     checkLabel.textContent = 'DESTROY!';
     [seconds, secondsLabel, secondsDiv].forEach((el) => el.style.display = 'block');
@@ -54,7 +55,7 @@ check.addEventListener('change', (e) => {
 
 function destroyCube(cube) {
   cube.addEventListener('animationend', () => {
-    explode[0].style.display = 'block';
+    expl1.style.display = 'block';
     headline.style.marginBottom = '0';
     cube.style.display = 'none';
     cube.parentNode.style.display = 'none';
@@ -63,18 +64,18 @@ function destroyCube(cube) {
       desc[i].style.display = 'none';
     }
     if (window.innerWidth < 768) {
-      explode[0].style.width = '560px';
-      explode[0].style.height = '420px';
-      explode[0].style.marginTop = `${-167 + (document.documentElement.clientHeight / 2) - 210}px`;
+      expl1.style.width = '560px';
+      expl1.style.height = '420px';
+      expl1.style.marginTop = `${-167 + (document.documentElement.clientHeight / 2) - 210}px`;
     } else {
-      explode[1].style.display = 'block';
-      explode[0].style.marginTop = `${((sizeInput.value - 220) / 3) + 26}px`;
-      explode[1].style.marginTop = `${((sizeInput.value - 220) / 3) + 0}px`;
+      expl2.style.display = 'block';
+      expl1.style.marginTop = `${((sizeInput.value - 220) / 3) + 26}px`;
+      expl2.style.marginTop = `${((sizeInput.value - 220) / 3) + 0}px`;
     }
   });
   cube.classList.add('blowup');
   setTimeout(() => {
-    [...explode].forEach((el) => el.style.display = 'none');
+    [expl1, expl2].forEach((el) => el.style.display = 'none');
   }, (seconds.value * 1000) + 5490);
 }
 

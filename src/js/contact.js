@@ -108,7 +108,7 @@ myWorker.addEventListener('message', e => {
     }
 
 
-    if (clicks === 40) {
+    if (clicks === 30) {
       linksDiv.style.backgroundImage = `url(${ContactBG})`;
     }
     clickCounter.textContent = clicks;
