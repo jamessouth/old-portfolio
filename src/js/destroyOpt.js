@@ -19,18 +19,25 @@ const desc = document.querySelectorAll('.subhead:nth-of-type(even)');
 
 check.checked = false;
 seconds.value = 0;
-[expl1, expl2].forEach((expl, ind) => {
-  expl.setAttribute('alt', 'explosion');
-  expl.classList.add('explode');
-  expl.onload = () => hold.insertBefore(expl, pb[ind].parentNode);
-  expl.src = Explosion;
-});
+
 
 check.addEventListener('change', (e) => {
   if (e.target.checked) {
 
+    [expl1, expl2].forEach((expl, ind) => {
+      expl.setAttribute('alt', 'explosion');
+      expl.classList.add('explode');
+      expl.onload = () => {
+        hold.insertBefore(expl, pb[ind].parentNode);
+        [seconds, secondsLabel, secondsDiv].forEach((el) => el.style.display = 'block');
+      }
+      expl.src = Explosion;
+    });
+
+
+
     checkLabel.textContent = 'DESTROY!';
-    [seconds, secondsLabel, secondsDiv].forEach((el) => el.style.display = 'block');
+
     seconds.removeAttribute('disabled');
   } else {
     checkLabel.textContent = 'do not destroy';

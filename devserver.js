@@ -41,7 +41,8 @@ const server = http.createServer((req, res) => {
 
 
   if(req.url.includes('/images/') && /(\.png|\.svg|\.jpg|\.gif)/.test(req.url)){
-    const ext = req.url.includes('.jpg') ? 'jpeg' : path.extname(req.url).substring(1);
+    let ext = req.url.includes('.jpg') ? 'jpeg' : path.extname(req.url).substring(1);
+    ext = req.url.includes('.svg') ? 'svg+xml' : ext;
     fs.readFile(path.join(__dirname, '/dist', req.url), (err, img) => {
       res.writeHead(200, { "Content-Type": `image/${ext}` });
       res.end(img);

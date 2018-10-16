@@ -1,14 +1,11 @@
 import Contact from '../images/contact.jpg';
-import ContactBG from '../images/winterscape2.jpg';
-import GH from '../images/gh64.png';
+import ContactBG from '../images/cont.jpg';
 
 const myWorker = new Worker('./worker.js');
 const canvas = document.querySelector('#board');
 const canvasbutton = document.querySelector('.canvasbutton button');
 const faderCanv = document.querySelector('#fader');
 const linksDiv = document.querySelector('#contactinfolinks');
-const linksDivImg = new Image();
-linksDivImg.setAttribute('alt', 'github logo');
 const linksDivLinks = document.querySelectorAll('#contactinfolinks a');
 const clickCounter = document.querySelector('.clickCounter p:last-of-type');
 const helpText = document.querySelector('.help');
@@ -82,8 +79,6 @@ myWorker.addEventListener('message', e => {
     if (finalCheck) {
       faderCanv.style.display = 'block';
       canvasbutton.style.display = 'none';
-      linksDivImg.onload = () => linksDivLinks[1].appendChild(linksDivImg);
-      // linksDivImg.src = GH;
       animateFader();
       ctx.drawImage(contact, 225, 225, 75, 75,
         225, 225, 75, 75);
@@ -106,18 +101,14 @@ myWorker.addEventListener('message', e => {
         CSS.paintWorklet.addModule('./burst.min.js');
       }
     }
-    if (clicks === 30) {
-      linksDivImg.src = GH;
-    }
 
-    if (clicks === 40) {
+
+    if (clicks === 30) {
       linksDiv.style.backgroundImage = `url(${ContactBG})`;
     }
     clickCounter.textContent = clicks;
   });
   canvasbutton.addEventListener('click', () => {
-    linksDivImg.onload = () => linksDivLinks[1].appendChild(linksDivImg);
-    linksDivImg.src = GH;
     linksDiv.style.backgroundImage = `url(${ContactBG})`;
     helpText.style.display = 'none';
     ctx.clearRect(0, 0, 300, 300);

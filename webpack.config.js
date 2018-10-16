@@ -29,7 +29,27 @@ const ScriptExtHTMLWebpackPlugin = require('script-ext-html-webpack-plugin');
 // 6.24,19.6
 // 6.26,18.64
 // 6.28,18.68
+// 6.2,18.74
 
+// no preload, NO img or gmail in html, full throttling
+// 6.4,18.8
+// 6.23,18.64
+
+// no preload, no imgs in anchors, thrtld
+// 6.22,18.63
+// 6.1,18.61
+// 6.18,19.6
+// 6.17,18.15
+
+// no preload, no dest, no imgs in anchors, thrtld
+// 6.46,18.74
+// 6.17,18.57
+
+// preload async only
+// 8.42,17.56
+// 8,17
+// 8,17
+// 8,17
 
 
 
@@ -122,10 +142,10 @@ module.exports = {
     }),
     new ScriptExtHTMLWebpackPlugin({
       // defaultAttribute: 'async',
-      // preload: {
-      //   test: /\.js$/,
-      //   chunks: 'async',
-      // },
+      preload: {
+        test: /\.js$/,
+        chunks: 'async',
+      },
     }),
     new webpack.HashedModuleIdsPlugin(),
   ],
