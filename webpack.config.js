@@ -51,7 +51,20 @@ const ScriptExtHTMLWebpackPlugin = require('script-ext-html-webpack-plugin');
 // 8,17
 // 8,17
 
+// with anim poly
+// 9.12,18.25
+// 9,18
+// 9.4,18.5
 
+// no anim poly, preload destroy and contact
+// 6.25,16.46
+
+
+// preload contact
+// 6.44,16.9
+
+// all async
+// 3.58,14.95 no scroll
 
 
 
@@ -131,7 +144,7 @@ module.exports = {
     },
   },
   plugins: [
-    new CleanWebpackPlugin(['dist'], { exclude: ['images', 'burst.min.js', 'worker.js'] }),
+    new CleanWebpackPlugin(['dist'], { exclude: ['burst.min.js', 'worker.js'] }),
     new LodashWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: 'main.css',
@@ -141,9 +154,9 @@ module.exports = {
       title: 'Portfolio',
     }),
     new ScriptExtHTMLWebpackPlugin({
-      // defaultAttribute: 'async',
+      defaultAttribute: 'async',
       preload: {
-        test: /\.js$/,
+        test: /contact(?!.+map)/,
         chunks: 'async',
       },
     }),

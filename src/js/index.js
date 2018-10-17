@@ -3,6 +3,11 @@ import '../css/main.scss';
 import '../html/index.html';
 import './makeCubes';
 
+
+if (!document.body.animate) {
+  import(/* webpackChunkName: "anim_polyfill" */ 'web-animations-js').catch(err => console.log(err));
+}
+
 const ht = window.innerHeight;
 const opts = document.querySelectorAll('li');
 const canvas = document.querySelector('#board');
