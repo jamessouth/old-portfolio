@@ -18,58 +18,6 @@ const ScriptExtHTMLWebpackPlugin = require('script-ext-html-webpack-plugin');
 // cube ''   ''   ''   ''   1.49
 // tot  89   89.5 89.7 89.6 92.46
 
-// no preload, img in html, full throttling
-// 7.35,20
-// 7.44,17
-// 7.33,17
-// 7.33,20
-
-// no preload, NO img in html, full throttling
-// 6.26,19.6
-// 6.24,19.6
-// 6.26,18.64
-// 6.28,18.68
-// 6.2,18.74
-
-// no preload, NO img or gmail in html, full throttling
-// 6.4,18.8
-// 6.23,18.64
-
-// no preload, no imgs in anchors, thrtld
-// 6.22,18.63
-// 6.1,18.61
-// 6.18,19.6
-// 6.17,18.15
-
-// no preload, no dest, no imgs in anchors, thrtld
-// 6.46,18.74
-// 6.17,18.57
-
-// preload async only
-// 8.42,17.56
-// 8,17
-// 8,17
-// 8,17
-
-// with anim poly
-// 9.12,18.25
-// 9,18
-// 9.4,18.5
-
-// no anim poly, preload destroy and contact
-// 6.25,16.46
-
-
-// preload contact
-// 6.44,16.9
-
-// all async
-// 3.58,14.95 no scroll
-
-
-
-
-
 
 module.exports = {
   // mode: 'development',
@@ -144,7 +92,7 @@ module.exports = {
     },
   },
   plugins: [
-    new CleanWebpackPlugin(['dist'], { exclude: ['burst.min.js', 'worker.js'] }),
+    new CleanWebpackPlugin(['dist'], { exclude: ['burst.min.js', 'worker.min.js'] }),
     new LodashWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: 'main.css',
@@ -155,10 +103,6 @@ module.exports = {
     }),
     new ScriptExtHTMLWebpackPlugin({
       defaultAttribute: 'async',
-      preload: {
-        test: /contact(?!.+map)/,
-        chunks: 'async',
-      },
     }),
     new webpack.HashedModuleIdsPlugin(),
   ],

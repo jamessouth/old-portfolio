@@ -14,7 +14,7 @@
     "analyze": "webpack --profile --json > stats.json",
     "build": "webpack-dev-server",
     "build:prod": "webpack && node devserver.js",
-    "prebuild:prod": "rm -f dist/burst.min.js && npx minify src/js/burst.js --out-file dist/burst.min.js"
+    "prebuild:prod": "rm -f dist/burst.min.js dist/worker.min.js && npx minify src/js/burst.js --out-file dist/burst.min.js && npx babel src/js/worker.js --presets=@babel/preset-env | npx uglifyjs -m toplevel -c toplevel,unsafe -o dist/worker.min.js"
   },
   "repository": {
     "type": "git",
@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/jamessouth/Project-12#readme",
   "devDependencies": {
+    "@babel/cli": "^7.1.2",
     "@babel/core": "^7.0.0",
     "@babel/plugin-syntax-dynamic-import": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
@@ -46,6 +47,7 @@
     "sass-loader": "^7.1.0",
     "script-ext-html-webpack-plugin": "^2.0.1",
     "style-loader": "^0.23.0",
+    "uglify-js": "^3.4.9",
     "webpack": "^4.17.2",
     "webpack-cli": "^3.1.0",
     "webpack-dev-server": "^3.1.8"

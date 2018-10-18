@@ -1,7 +1,7 @@
 import Contact from '../images/contact.jpg';
 import ContactBG from '../images/cont.jpg';
 
-const myWorker = new Worker('./worker.js');
+const myWorker = new Worker('./worker.min.js');
 const canvas = document.querySelector('#board');
 const canvasbutton = document.querySelector('.canvasbutton button');
 const faderCanv = document.querySelector('#fader');
