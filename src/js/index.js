@@ -1,6 +1,6 @@
 import { once, throttle } from 'lodash-es';
 import '../css/main.scss';
-import '../html/index.html';
+// import '../html/index.html';
 import './makeCubes';
 
 

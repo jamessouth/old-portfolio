@@ -75,7 +75,14 @@ module.exports = {
       },
       {
         test: /\.html$/,
-        use: ['html-loader']
+        include: [
+          path.resolve(__dirname, 'src/html')
+        ],
+        use: [
+          {
+            loader: 'html-loader',
+          }
+        ]
       }
     ]
   },
