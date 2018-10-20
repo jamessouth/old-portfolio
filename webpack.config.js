@@ -73,17 +73,17 @@ module.exports = {
           }
         ]
       },
-      {
-        test: /\.html$/,
-        include: [
-          path.resolve(__dirname, 'src/html')
-        ],
-        use: [
-          {
-            loader: 'html-loader',
-          }
-        ]
-      }
+      // {
+      //   test: /\.html$/,
+      //   include: [
+      //     path.resolve(__dirname, 'src/html')
+      //   ],
+      //   use: [
+      //     {
+      //       loader: 'html-loader',
+      //     }
+      //   ]
+      // }
     ]
   },
   optimization: {
@@ -107,6 +107,7 @@ module.exports = {
     new HTMLWebpackPlugin({
       template: './src/html/index.html',
       title: 'Portfolio',
+      filename: 'index_pretty.html',
     }),
     new ScriptExtHTMLWebpackPlugin({
       defaultAttribute: 'async',

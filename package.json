@@ -13,7 +13,7 @@
     "lint": "eslint",
     "analyze": "webpack --profile --json > stats.json",
     "build": "webpack-dev-server",
-    "build:prod": "webpack && node devserver.js",
+    "build:prod": "webpack && npx html-minifier dist/index_pretty.html --collapse-whitespace --remove-script-type-attributes -o dist/index.html && rm dist/index_pretty.html && node devserver.js",
     "prebuild:prod": "rm -f dist/burst.min.js dist/worker.min.js && npx minify src/js/burst.js --out-file dist/burst.min.js && npx babel src/js/worker.js --presets=@babel/preset-env | npx uglifyjs -m toplevel -c toplevel,unsafe -o dist/worker.min.js"
   },
   "repository": {
@@ -40,6 +40,7 @@
     "eslint-plugin-import": "^2.14.0",
     "file-loader": "^2.0.0",
     "html-loader": "^0.5.5",
+    "html-minifier": "^3.5.19",
     "html-webpack-plugin": "^3.2.0",
     "lodash-webpack-plugin": "^0.11.5",
     "mini-css-extract-plugin": "^0.4.2",
