@@ -56,4 +56,6 @@ while (getInversions(doable[0]) % 2 !== 0) {
   doable = checkBoard();
 }
 const [boardOrder, drawOrder] = doable;
-postMessage({ shades, canvArray, randBoxes, boardOrder, drawOrder });
+postMessage({
+  shades, canvArray, randBoxes, boardOrder, drawOrder,
+});

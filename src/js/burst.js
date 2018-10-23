@@ -1,4 +1,4 @@
-class B{
+class B {
   static get inputProperties() { return ['--a']; }
 
   paint(ctx, geom, props) {

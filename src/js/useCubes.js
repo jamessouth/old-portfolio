@@ -1,13 +1,6 @@
-
-
-
-
 const pb = document.querySelectorAll('.photo-cube');
 const cc = document.querySelectorAll('.cube-container');
 const hold = document.querySelector('.hold');
-
-
-
 let xStart;
 let yStart;
 let whichPB = 0;
@@ -41,6 +34,7 @@ function getCenter(cube) {
 }
 function getCube(e) {
   hold.addEventListener('mousemove', rotate, { passive: true });
+  hold.addEventListener('touchmove', rotate, { passive: true });
   scrY = window.scrollY;
   const cubeZeroCtr = getCenter(cc[0]);
   const cubeOneCtr = getCenter(cc[1]);
@@ -58,11 +52,10 @@ function releaseCube() {
   rotObj[whichPB].x = rotObj[whichPB].xs || 0;
   rotObj[whichPB].y = rotObj[whichPB].ys || 0;
   hold.removeEventListener('mousemove', rotate, { passive: true });
+  hold.removeEventListener('touchmove', rotate, { passive: true });
 }
 hold.addEventListener('mousedown', getCube, { passive: true });
-// hold.addEventListener('touchstart', getCube, { passive: true });
-
-// hold.addEventListener('touchmove', rotate, { passive: true });
+hold.addEventListener('touchstart', getCube, { passive: true });
 hold.addEventListener('mouseup', releaseCube);
-// hold.addEventListener('touchend', releaseCube);
+hold.addEventListener('touchend', releaseCube);
 hold.addEventListener('mouseleave', releaseCube);

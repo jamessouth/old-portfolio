@@ -83,13 +83,11 @@ const panelData = [
     gif: Project11GIF,
   },
   {
-    aria: 'portfolio; webpack babel a11y sass web components css paint',
+    aria: 'portfolio; webpack babel a11y sass components workers paint',
     href: '',
     pic: Project12,
   },
 ];
-
-
 const rando = () => Math.floor(Math.random() * 360) - 180;
 const KEYFRAMES = () => ([
   { transform: 'rotateX(0deg) rotateY(0deg)' },
@@ -113,7 +111,6 @@ function hoverCubes() {
   cc[0].animate(KEYFRAMES2, KEYTIMING2);
   cc[1].animate(KEYFRAMES2, KEYTIMING2);
 }
-
 const classes = [
   `  transform: translateZ(calc(var(--size) / 2));
   }</style>`,
@@ -232,7 +229,6 @@ function animCubes() {
   buildCubes();
   return Promise.all([spin.finished, spin2.finished]);
 }
-
 if (window.customElements && HTMLElement.prototype.attachShadow) {
   window.customElements.define('cube-panel', Panel);
   animCubes().then(hoverCubes);

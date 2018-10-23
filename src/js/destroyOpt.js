@@ -1,5 +1,3 @@
-
-
 import Explosion from '../images/explosion.gif';
 
 const hold = document.querySelector('.hold');
@@ -16,38 +14,27 @@ const pb = document.querySelectorAll('.photo-cube');
 const destroyBtn = secondsDiv.querySelector('button');
 const subhead = document.querySelectorAll('.subhead:nth-of-type(odd)');
 const desc = document.querySelectorAll('.subhead:nth-of-type(even)');
-
 check.checked = false;
 seconds.value = 0;
-
-
 check.addEventListener('change', (e) => {
   if (e.target.checked) {
-
     [expl1, expl2].forEach((expl, ind) => {
       expl.setAttribute('alt', 'explosion');
       expl.classList.add('explode');
       expl.onload = () => {
         hold.insertBefore(expl, pb[ind].parentNode);
-        [seconds, secondsLabel, secondsDiv].forEach((el) => el.style.display = 'block');
-      }
+        [seconds, secondsLabel, secondsDiv].forEach(el => el.style.display = 'block');
+      };
       expl.src = Explosion;
     });
-
-
-
     checkLabel.textContent = 'DESTROY!';
-
     seconds.removeAttribute('disabled');
   } else {
     checkLabel.textContent = 'do not destroy';
-    [seconds, secondsLabel, secondsDiv].forEach((el) => el.style.display = 'none');
+    [seconds, secondsLabel, secondsDiv].forEach(el => el.style.display = 'none');
     seconds.setAttribute('disabled', '');
   }
 });
-
-
-
 function destroyCube(cube) {
   cube.addEventListener('animationend', () => {
     expl1.style.display = 'block';
@@ -70,10 +57,9 @@ function destroyCube(cube) {
   });
   cube.classList.add('blowup');
   setTimeout(() => {
-    [expl1, expl2].forEach((el) => el.style.display = 'none');
+    [expl1, expl2].forEach(el => el.style.display = 'none');
   }, (seconds.value * 1000) + 5490);
 }
-
 destroyBtn.addEventListener('click', () => {
   destroyCube(pb[0]);
   destroyCube(pb[1]);
