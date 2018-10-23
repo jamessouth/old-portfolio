@@ -6,6 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const LodashWebpackPlugin = require('lodash-webpack-plugin');
 const ScriptExtHTMLWebpackPlugin = require('script-ext-html-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 
 
@@ -58,8 +59,12 @@ module.exports = {
         }
       },
       {
-        test: /\.scss$/,
-        loaders: ['style-loader', 'css-loader', 'sass-loader']
+        test: /\.(sa|sc|c)ss$/,
+        loaders: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'sass-loader'
+        ]
       },
       {
         test: /\.(png|svg|jpg|gif)$/,
@@ -72,18 +77,7 @@ module.exports = {
             }
           }
         ]
-      },
-      // {
-      //   test: /\.html$/,
-      //   include: [
-      //     path.resolve(__dirname, 'src/html')
-      //   ],
-      //   use: [
-      //     {
-      //       loader: 'html-loader',
-      //     }
-      //   ]
-      // }
+      }
     ]
   },
   optimization: {
@@ -91,7 +85,8 @@ module.exports = {
       new UglifyJsPlugin({
         parallel: true,
         sourceMap: true,
-      })
+      }),
+      new OptimizeCSSAssetsPlugin({})
     ],
     runtimeChunk: 'single',
     splitChunks: {
@@ -102,7 +97,8 @@ module.exports = {
     new CleanWebpackPlugin(['dist'], { exclude: ['burst.min.js', 'worker.min.js'] }),
     new LodashWebpackPlugin(),
     new MiniCssExtractPlugin({
-      filename: 'main.css',
+      filename: '[name].css',
+      chunkFilename: '[id].css',
     }),
     new HTMLWebpackPlugin({
       template: './src/html/index.html',

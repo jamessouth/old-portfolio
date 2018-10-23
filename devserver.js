@@ -17,19 +17,12 @@ const server = http.createServer((req, res) => {
     });
   }
 
-  // if(req.url === '/styles.css'){
-  //   fs.readFile('styles.css', 'utf8', (err, css) => {
-  //     res.writeHead(200, { "Content-Type": "text/css" });
-  //     res.end(css);
-  //   });
-  // }
-
-  // if(req.url === '/web-animations-next.min.js'){
-  //   fs.readFile('web-animations-next.min.js', 'utf8', (err, js) => {
-  //     res.writeHead(200, { "Content-Type": "application/javascript" });
-  //     res.end(js);
-  //   });
-  // }
+  if(/.css$/.test(req.url)){
+    fs.readFile(path.join(__dirname, '/dist', req.url), 'utf8', (err, css) => {
+      res.writeHead(200, { "Content-Type": "text/css" });
+      res.end(css);
+    });
+  }
 
   if(req.url.includes('.js')){
     fs.readFile(path.join(__dirname, '/dist', req.url), 'utf8', (err, js) => {
@@ -37,8 +30,6 @@ const server = http.createServer((req, res) => {
       res.end(js);
     });
   }
-
-
 
   if(req.url.includes('/images/') && /(\.png|\.svg|\.jpg|\.gif)/.test(req.url)){
     let ext = req.url.includes('.jpg') ? 'jpeg' : path.extname(req.url).substring(1);
@@ -48,16 +39,6 @@ const server = http.createServer((req, res) => {
       res.end(img);
     });
   }
-
-
-
-  // if(req.url.includes('/images/')){
-  //   const ext = req.url.includes('.jpg') ? 'jpeg' : path.extname(req.url).substring(1);
-  //   fs.readFile(path.join(__dirname, req.url), (err, img) => {
-  //     res.writeHead(200, { "Content-Type": `image/${ext}` });
-  //     res.end(img);
-  //   });
-  // }
 
 });
 
