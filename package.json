@@ -3,11 +3,18 @@
   "version": "1.0.0",
   "description": "portfolio",
   "private": "true",
+  "browserslist": [
+    "last 2 versions",
+    "> 1%",
+    "not dead",
+    "not ie < 12"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "./node_modules/.bin/eslint",
+    "lint": "eslint",
+    "analyze": "webpack --profile --json > stats.json",
     "build": "webpack-dev-server",
-    "build:prod": "webpack -p"
+    "build:prod": "webpack && npx html-minifier dist/index_pretty.html --collapse-whitespace --remove-script-type-attributes -o dist/index.html && rm dist/index_pretty.html && node devserver.js",
+    "prebuild:prod": "rm -f dist/burst.min.js dist/worker.min.js && npx minify src/js/burst.js --out-file dist/burst.min.js && npx babel src/js/worker.js --presets=@babel/preset-env | npx uglifyjs -m toplevel -c toplevel,unsafe -o dist/worker.min.js"
   },
   "repository": {
     "type": "git",
@@ -20,26 +27,36 @@
   },
   "homepage": "https://github.com/jamessouth/Project-12#readme",
   "devDependencies": {
-    "@babel/core": "^7.0.0",
-    "@babel/preset-env": "^7.0.0",
-    "babel-loader": "^8.0.2",
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+    "@babel/preset-env": "^7.1.0",
+    "babel-loader": "^8.0.4",
+    "babel-minify": "^0.5.0",
+    "clean-webpack-plugin": "^0.1.19",
     "css-loader": "^1.0.0",
-    "eslint": "^5.5.0",
+    "eslint": "^5.7.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
     "file-loader": "^2.0.0",
     "html-loader": "^0.5.5",
+    "html-minifier": "3.5.19",
     "html-webpack-plugin": "^3.2.0",
-    "mini-css-extract-plugin": "^0.4.2",
-    "node-sass": "^4.9.3",
+    "lodash-webpack-plugin": "^0.11.5",
+    "mini-css-extract-plugin": "^0.4.4",
+    "node-sass": "^4.9.4",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
     "sass-loader": "^7.1.0",
-    "style-loader": "^0.23.0",
-    "webpack": "^4.17.2",
-    "webpack-cli": "^3.1.0",
-    "webpack-dev-server": "^3.1.8"
+    "script-ext-html-webpack-plugin": "^2.0.1",
+    "style-loader": "^0.23.1",
+    "uglify-js": "^3.4.9",
+    "webpack": "^4.22.0",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10"
   },
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
-    "css-paint-polyfill": "^1.0.3"
+    "lodash-es": "^4.17.11",
+    "web-animations-js": "^2.3.1"
   }
 }

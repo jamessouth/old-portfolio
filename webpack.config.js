@@ -1,45 +1,56 @@
 const path = require('path');
+const webpack = require('webpack');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const LodashWebpackPlugin = require('lodash-webpack-plugin');
+const ScriptExtHTMLWebpackPlugin = require('script-ext-html-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = {
-  mode: 'development',
-  entry: ['@babel/polyfill', './src/js/index.js'],
+  mode: 'production',
+  devtool: 'source-map',
+  entry: {
+    main: './src/js/index.js',
+  },
   output: {
-    filename: 'main.js',
+    filename: '[name].[contenthash].js',
+    chunkFilename: '[name].[contenthash].js',
     path: path.resolve(__dirname, 'dist'),
-    // publicPath: '/dist'
   },
   module: {
     rules: [
       {
         test: /\.js$/,
-        exclude: /node_modules/,
+        include: [
+          path.resolve(__dirname, 'src/js'),
+        ],
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env'],
-            cacheDirectory: true
-          }
-        }
+            plugins: ['@babel/plugin-syntax-dynamic-import'],
+            presets: [
+              [
+                '@babel/preset-env',
+                {
+                  'useBuiltIns': 'usage',
+                  'modules': false,
+                },
+              ],
+            ],
+            cacheDirectory: true,
+          },
+        },
       },
       {
-        test: /\.scss$/,
-        loaders: ['style-loader', 'css-loader', 'sass-loader']
+        test: /\.(sa|sc|c)ss$/,
+        loaders: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'sass-loader',
+        ],
       },
-      // {
-      //   test: /\.css$/,
-      //   use: [
-      //     {
-      //       loader: MiniCssExtractPlugin.loader,
-      //       options: {
-      //         publicPath: '/dist'
-      //       }
-      //     },
-      //     'style-loader',
-      //     'css-loader'
-      //   ]
-      // },
       {
         test: /\.(png|svg|jpg|gif)$/,
         use: [
@@ -47,26 +58,44 @@ module.exports = {
             loader: 'file-loader',
             options: {
               outputPath: 'images/',
-              publicPath: 'images/'
-            }
-          }
-        ]
+              publicPath: 'images/',
+            },
+          },
+        ],
       },
-      {
-        test: /\.html$/,
-        use: ['html-loader']
-      }
-    ]
+    ],
+  },
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        parallel: true,
+        sourceMap: true,
+      }),
+      new OptimizeCSSAssetsPlugin({}),
+    ],
+    runtimeChunk: 'single',
+    splitChunks: {
+      chunks: 'all',
+    },
   },
   plugins: [
+    new CleanWebpackPlugin(['dist'], { exclude: ['burst.min.js', 'worker.min.js'] }),
+    new LodashWebpackPlugin(),
     new MiniCssExtractPlugin({
-      filename: 'main.css',
+      filename: '[name].css',
+      chunkFilename: '[id].css',
     }),
     new HTMLWebpackPlugin({
-      template: './src/html/index.html'
+      template: './src/html/index.html',
+      title: 'Portfolio',
+      filename: 'index_pretty.html',
     }),
+    new ScriptExtHTMLWebpackPlugin({
+      defaultAttribute: 'async',
+    }),
+    new webpack.HashedModuleIdsPlugin(),
   ],
   devServer: {
-    port: 3000
-  }
+    port: 3000,
+  },
 };

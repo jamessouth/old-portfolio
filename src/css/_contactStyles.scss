@@ -2,12 +2,10 @@
 #emailexplain{
   display: none;
 }
-
 #board{
   background-color: lightblue;
   min-width: 300px;
 }
-
 .canvasholder{
   @include flex(column, space-around, center);
   background-color: transparent;
@@ -15,40 +13,35 @@
   position: relative;
   height: 400px;
 }
-
 .canvasbutton{
   @include flex(row, space-around, center);
   border-radius: 2px;
   background: radial-gradient(#f7ce8c 9%, #2c380e 163%);
   @include text($width: 300px, $ht: 44px);
   position: relative;
-  --atick: 0;
+  --a: 0;
   & p{
     display: inline-block;
     @include text($size: 18px, $color: #071821, $wt: bold);
     text-align: center;
   }
 }
-
 .animating{
-  background-image: paint(burst);
+  background-image: paint(b);
 }
-
-// .canvasbutton
 #fader{
   display: none;
   background-color: transparent;
   @include position($tp: -103px, $rt: 0);
 }
-
 #contactinfolinks{
-  background-image: url('../images/winterscape2.jpg');
   @include position($tp: 14px);
   @include text($width: 300px, $ht: 300px);
   z-index: -5;
   @include flex(column, space-around, center);
   & a{
     border: 3px solid transparent;
+    @include text($width: 80px, $ht: 80px);
   }
   & a:focus,
   & a:hover{
@@ -56,14 +49,6 @@
     border-color: #2f2f2f;
   }
 }
-svg{
-  @include text($width: 80px, $ht: 85px);
-  fill: #2f2f2f;
-}
-
-
-// #contactinfolinks
-// #contactinfolinks
 .help{
   @include position($rt: 0, $bm: 70px);
   @include text($width: 75px, $lh: 15px, $ht: 75px);
@@ -77,6 +62,3 @@ svg{
     }
   }
 }
-
-// .help
-// .help p
