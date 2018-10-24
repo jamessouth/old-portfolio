@@ -59,3 +59,8 @@ hold.addEventListener('touchstart', getCube, { passive: true });
 hold.addEventListener('mouseup', releaseCube);
 hold.addEventListener('touchend', releaseCube);
 hold.addEventListener('mouseleave', releaseCube);
+document.addEventListener('touchmove', e => {
+  if (e.target.tagName === 'CUBE-PANEL') {
+    e.preventDefault();
+  }
+}, {passive: false});
