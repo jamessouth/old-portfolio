@@ -34,7 +34,9 @@ function getCenter(cube) {
 }
 function getCube(e) {
   hold.addEventListener('mousemove', rotate, { passive: true });
-  hold.addEventListener('touchmove', rotate, { passive: true });
+  if (e.target.tagName === 'CUBE-PANEL') {
+    hold.addEventListener('touchmove', rotate, { passive: true });
+  }
   scrY = window.scrollY;
   const cubeZeroCtr = getCenter(cc[0]);
   const cubeOneCtr = getCenter(cc[1]);
