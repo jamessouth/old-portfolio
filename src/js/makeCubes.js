@@ -1,6 +1,3 @@
-if (!document.body.animate) {
-  import(/* webpackChunkName: "anim_polyfill" */ 'web-animations-js').catch(err => console.log(err));
-}
 import Project1 from '../images/project1.jpg';
 import Project2 from '../images/project2.jpg';
 import Project3 from '../images/project3.jpg';
@@ -234,7 +231,11 @@ function animCubes() {
 }
 if (window.customElements && HTMLElement.prototype.attachShadow) {
   window.customElements.define('cube-panel', Panel);
-  animCubes().then(hoverCubes);
+  if (!document.body.animate) {
+    import(/* webpackChunkName: "anim_polyfill" */ 'web-animations-js').then(animCubes).then(hoverCubes).catch(err => console.log(err));
+  } else {
+    animCubes().then(hoverCubes);
+  }
 } else {
   const info = document.createElement('p');
   info.innerHTML = `Hello! Your browser does not support custom elements. Try a (non-Microsoft) browser like <span>Google Chrome</span>.

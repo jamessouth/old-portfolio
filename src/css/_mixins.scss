@@ -1,6 +1,3 @@
-@mixin bodybg($url) {
-  background: center center/cover no-repeat url($url) #555 fixed;
-}
 @mixin inputAfter($width, $marginTop) {
   position: relative;
   transform: translateX(-50%);

@@ -12,20 +12,36 @@
   --delay: 0s;
 }
 body{
-  @include bodybg('../images/sky-mob.jpg');
+  background-color: #555;
+  background: no-repeat url('../images/sky-mob.jpg');
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
   position: relative;
   min-height: 100vh;
   @media #{$mobile2} {
-    @include bodybg('../images/sky-mob2.jpg');
+    background: no-repeat url('../images/sky-mob2.jpg');
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: cover;
   }
   @media #{$tablet} {
-    @include bodybg('../images/sky-tab.jpg');
+    background: no-repeat url('../images/sky-tab.jpg');
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: cover;
   }
   @media #{$medium} {
-    @include bodybg('../images/sky-med.jpg');
+    background: no-repeat url('../images/sky-med.jpg');
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: cover;
   }
   @media #{$big} {
-    @include bodybg('../images/sky-big.jpg');
+    background: no-repeat url('../images/sky-big.jpg');
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: cover;
   }
 }
 html{
