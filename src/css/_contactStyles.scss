@@ -37,7 +37,7 @@
 #contactinfolinks{
   @include position($tp: 14px);
   @include text($width: 300px, $ht: 300px);
-  z-index: -5;
+  z-index: -2;
   @include flex(column, space-around, center);
   & a{
     border: 3px solid transparent;

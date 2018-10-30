@@ -101,8 +101,6 @@ myWorker.addEventListener('message', e => {
         CSS.paintWorklet.addModule('./burst.min.js');
       }
     }
-
-
     if (clicks === 30) {
       linksDiv.style.backgroundImage = `url(${ContactBG})`;
     }
