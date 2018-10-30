@@ -1,5 +1,5 @@
 @mixin bodybg($url) {
-  background: center center/cover no-repeat url($url) #555 fixed;
+  background: center center/cover no-repeat url($url) #555;
 }
 @mixin inputAfter($width, $marginTop) {
   position: relative;

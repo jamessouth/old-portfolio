@@ -12,9 +12,17 @@
   --delay: 0s;
 }
 body{
-  @include bodybg('../images/sky-mob.jpg');
   position: relative;
-  min-height: 100vh;
+}
+body:after{
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  z-index: -1;
+  @include bodybg('../images/sky-mob.jpg');
   @media #{$mobile2} {
     @include bodybg('../images/sky-mob2.jpg');
   }
