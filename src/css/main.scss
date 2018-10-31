@@ -23,17 +23,32 @@ body:after{
   height: 100vh;
   z-index: -3;
   @include bodybg('../images/sky-mob.jpg');
+  @media #{$retina} {
+    @include bodybg('../images/sky-mob@2x.jpg');
+  }
   @media #{$mobile2} {
     @include bodybg('../images/sky-mob2.jpg');
+    @media #{$retina} {
+      @include bodybg('../images/sky-mob2@2x.jpg');
+    }
   }
   @media #{$tablet} {
     @include bodybg('../images/sky-tab.jpg');
+    @media #{$retina} {
+      @include bodybg('../images/sky-tab@2x.jpg');
+    }
   }
   @media #{$medium} {
     @include bodybg('../images/sky-med.jpg');
+    @media #{$retina} {
+      @include bodybg('../images/sky-med@2x.jpg');
+    }
   }
   @media #{$big} {
     @include bodybg('../images/sky-big.jpg');
+    @media #{$retina} {
+      @include bodybg('../images/sky-big@2x.jpg');
+    }
   }
 }
 html{
