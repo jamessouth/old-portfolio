@@ -270,9 +270,6 @@ select + div p{
 }
 .explode{
   display: none;
-  &:last-of-type{
-    transform: rotateY(180deg);
-  }
 }
 .blowup{
   animation: 3s var(--delay) cubic-bezier(0, .53, 0, .96) forwards flyAway;
