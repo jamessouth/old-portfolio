@@ -57,11 +57,21 @@ myWorker.addEventListener('message', e => {
     if (canvArray.length === 0) { return; }
     const tileClicked = (Math.floor(y / 75) * 4) + Math.floor(x / 75);
     const blank = boardOrder.indexOf(15);
+    if (blank % 4 === 0) {
+      if (![-4, 1, 4].includes(tileClicked - blank)) {
+        return;
+      }
+    } else if ((blank + 1) % 4 === 0) {
+      if (![-4, -1, 4].includes(tileClicked - blank)) {
+        return;
+      }
+    } else {
+      if (![1, 4].includes(Math.abs(tileClicked - blank))) {
+        return;
+      }
+    }
     let finalCheck;
     const brdInd = boardOrder[tileClicked];
-    if (![1, 4].includes(Math.abs(tileClicked - blank))) {
-      return;
-    }
     ctx.clearRect(canvArray[tileClicked][0], canvArray[tileClicked][1], 75, 75);
     ctx.drawImage(contact, canvArray[brdInd][0], canvArray[brdInd][1], 75, 75,
       canvArray[blank][0], canvArray[blank][1], 75, 75);
@@ -104,7 +114,7 @@ myWorker.addEventListener('message', e => {
     if (clicks === 30) {
       linksDiv.style.backgroundImage = `url(${ContactBG})`;
     }
-    clickCounter.textContent = clicks;
+    clickCounter.textContent = `\u00A0${clicks}`;
   });
   canvasbutton.addEventListener('click', () => {
     linksDiv.style.backgroundImage = `url(${ContactBG})`;
