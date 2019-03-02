@@ -188,7 +188,7 @@ class Panel extends HTMLElement {
         const projData = this.anchor.getAttribute('aria-label').split('; ');
         [subhead[Math.floor(num / 6)].textContent,
           desc[Math.floor(num / 6)].textContent] = projData;
-      }, true);
+      }, { capture: true, passive: true });
     });
   }
 

@@ -4,20 +4,19 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
-const LodashWebpackPlugin = require('lodash-webpack-plugin');
 const ScriptExtHTMLWebpackPlugin = require('script-ext-html-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = {
-  mode: 'production',
-  devtool: 'source-map',
+  mode: 'development',
+  devtool: 'inline-source-map',
   entry: {
     main: './src/js/index.js',
   },
   output: {
     filename: '[name].[contenthash].js',
     chunkFilename: '[name].[contenthash].js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'docs'),
   },
   module: {
     rules: [
@@ -79,15 +78,14 @@ module.exports = {
     },
   },
   plugins: [
-    new CleanWebpackPlugin(['dist'], { exclude: ['burst.min.js', 'worker.min.js'] }),
-    new LodashWebpackPlugin(),
+    new CleanWebpackPlugin(['docs'], { exclude: ['burst.min.js', 'worker.min.js'] }),
     new MiniCssExtractPlugin({
       filename: '[name].css',
       chunkFilename: '[id].css',
     }),
     new HTMLWebpackPlugin({
       template: './src/html/index.html',
-      title: 'Portfolio',
+      title: 'James South - Portfolio',
       filename: 'index_pretty.html',
     }),
     new ScriptExtHTMLWebpackPlugin({
@@ -97,5 +95,6 @@ module.exports = {
   ],
   devServer: {
     port: 3000,
+    index: 'index_pretty.html',
   },
 };
