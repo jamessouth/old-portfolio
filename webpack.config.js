@@ -95,6 +95,7 @@ module.exports = {
   ],
   devServer: {
     port: 3000,
+    contentBase: path.join(__dirname, 'docs'),
     index: 'index_pretty.html',
   },
 };

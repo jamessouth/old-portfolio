@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign, no-return-assign */
 import Explosion from '../images/explosion.gif';
 
 const hold = document.querySelector('.hold');

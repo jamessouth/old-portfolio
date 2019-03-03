@@ -41,7 +41,7 @@ function checkBoard() {
 }
 function getInversions(arr) {
   let inversions = 0;
-  for (let i = 0; i < arr.length; i += 1) {
+  for (let i = 0; i < arr.length; i += 1) { // eslint-disable-next-line
     if (arr[i] == null) { continue; }
     for (let j = 0; j < arr.length; j += 1) {
       if (arr[i] > arr[j + i]) {

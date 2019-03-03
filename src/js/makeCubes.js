@@ -54,14 +54,14 @@ const panelData = [
     pic: Project6,
   },
   {
-    aria: 'interactive video; ',
-    href: 'https://jamessouth.github.io/Project-7/',
+    aria: 'face scramble!; nativescript typescript angular',
+    href: 'https://github.com/jamessouth/face-scramble',
     pic: Project7,
     gif: Project7GIF,
   },
   {
-    aria: 'accessibility refactor; ',
-    href: 'https://jamessouth.github.io/Project-8/',
+    aria: 'vue-style-lint; node fp ci tdd npm|v1.0.3',
+    href: 'https://www.npmjs.com/package/vue-style-lint',
     pic: Project8,
   },
   {
