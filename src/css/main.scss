@@ -98,7 +98,11 @@ button:hover, button:focus{
 }
 h1{
   padding: 1em 0 0;
+  font-size: 28px;
   @extend %user_select;
+  @media #{$mobile2} {
+    font-size: 2em;
+  }
 }
 .subhead{
   @include text(30px, 90%, #fff);

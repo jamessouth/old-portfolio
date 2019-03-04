@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[0],{hHaJ:function(n,t,e){"use strict";e.r(t),e.d(t,"default",function(){return c});var a=0,o=document.querySelector(".canvasbutton button");function c(){a<900?(requestAnimationFrame(c),o.parentNode.style.cssText="--a: ".concat(a),a+=5):o.parentNode.classList.remove("animating")}}}]);
+//# sourceMappingURL=animPaint.1dc4d8ea08008ddebdf3.js.map

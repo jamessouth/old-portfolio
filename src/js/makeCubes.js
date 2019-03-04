@@ -54,24 +54,24 @@ const panelData = [
     pic: Project6,
   },
   {
-    aria: 'face scramble!; nativescript typescript angular',
+    aria: 'face scramble!; angular typescript nativescript',
     href: 'https://github.com/jamessouth/face-scramble',
     pic: Project7,
     gif: Project7GIF,
   },
   {
-    aria: 'vue-style-lint; node fp ci tdd npm|v1.0.3',
+    aria: 'vue-style-lint; node es6 fp ci tdd npm|v1.0.3',
     href: 'https://www.npmjs.com/package/vue-style-lint',
     pic: Project8,
   },
   {
-    aria: 'web app dashboard; vue-cli routing vuex ajax chart.js',
+    aria: 'web app dashboard; pwa vue-cli vuex ajax chart.js',
     href: 'https://jamessouth.github.io/Project-9/',
     pic: Project9,
     gif: Project9GIF,
   },
   {
-    aria: 'employee directory; react wai-aria ajax',
+    aria: 'employee directory; pwa react a11y tdd ajax',
     href: 'https://github.com/jamessouth/React-Project-10',
     pic: Project10,
     gif: Project10GIF,
@@ -83,7 +83,7 @@ const panelData = [
     gif: Project11GIF,
   },
   {
-    aria: 'portfolio; webpack babel a11y sass components workers paint',
+    aria: 'portfolio; webpack babel a11y sass components worker paint',
     href: '',
     pic: Project12,
   },

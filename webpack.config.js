@@ -6,10 +6,11 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
 const ScriptExtHTMLWebpackPlugin = require('script-ext-html-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const WorkboxPlugin = require('workbox-webpack-plugin');
 
 module.exports = {
-  mode: 'development',
-  devtool: 'inline-source-map',
+  mode: 'production', // development
+  devtool: 'source-map', // inline-
   entry: {
     main: './src/js/index.js',
   },
@@ -92,6 +93,61 @@ module.exports = {
       defaultAttribute: 'async',
     }),
     new webpack.HashedModuleIdsPlugin(),
+    new WorkboxPlugin.GenerateSW({
+      exclude: [/\.(?:png|jpg|jpeg|svg|gif)$/, /\.map$/, /^index_pretty/],
+      globDirectory: './docs',
+      globPatterns: ['./burst.min.js', './worker.min.js'],
+      cacheId: 'james south portfolio',
+      runtimeCaching: [
+        {
+          urlPattern: /\.(?:png|jpg|jpeg|svg|gif)$/,
+          handler: 'CacheFirst',
+          options: {
+            cacheName: 'images',
+            expiration: {
+              maxAgeSeconds: 60 * 60 * 24 * 180,
+              purgeOnQuotaError: true,
+            },
+          },
+        },
+        {
+          urlPattern: /\.(?:html)$/,
+          handler: 'NetworkFirst',
+          options: {
+            cacheName: 'html',
+            networkTimeoutSeconds: 3,
+            expiration: {
+              maxEntries: 1,
+              purgeOnQuotaError: true,
+            },
+          },
+        },
+        {
+          urlPattern: /^https:\/\/fonts\.googleapis\.com/,
+          handler: 'StaleWhileRevalidate',
+          options: {
+            cacheName: 'google-fonts-css',
+            expiration: {
+              maxEntries: 1,
+              maxAgeSeconds: 60 * 60 * 24 * 30,
+              purgeOnQuotaError: true,
+            },
+          },
+        },
+        {
+          urlPattern: /^https:\/\/fonts\.gstatic\.com/,
+          handler: 'CacheFirst',
+          options: {
+            cacheName: 'google-fonts',
+            expiration: {
+              maxEntries: 1,
+              maxAgeSeconds: 60 * 60 * 24 * 365,
+              purgeOnQuotaError: true,
+            },
+          },
+        },
+      ],
+    }),
   ],
   devServer: {
     port: 3000,
