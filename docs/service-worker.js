@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.0.0/workbox-sw.js");
 
 importScripts(
-  "precache-manifest.25b69f770d583fcf90cdbe7486f4a82f.js"
+  "precache-manifest.126e7a84a3e2cbf69fd607d21535dae9.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "james south portfolio"});
@@ -37,6 +37,5 @@ self.__precacheManifest = [
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
 workbox.routing.registerRoute(/\.(?:png|jpg|jpeg|svg|gif)$/, new workbox.strategies.CacheFirst({ "cacheName":"images", plugins: [new workbox.expiration.Plugin({ maxAgeSeconds: 15552000, purgeOnQuotaError: true })] }), 'GET');
-workbox.routing.registerRoute(/\.(?:html)$/, new workbox.strategies.NetworkFirst({ "cacheName":"html","networkTimeoutSeconds":3, plugins: [new workbox.expiration.Plugin({ maxEntries: 1, purgeOnQuotaError: true })] }), 'GET');
 workbox.routing.registerRoute(/^https:\/\/fonts\.googleapis\.com/, new workbox.strategies.StaleWhileRevalidate({ "cacheName":"google-fonts-css", plugins: [new workbox.expiration.Plugin({ maxEntries: 1, maxAgeSeconds: 2592000, purgeOnQuotaError: true })] }), 'GET');
 workbox.routing.registerRoute(/^https:\/\/fonts\.gstatic\.com/, new workbox.strategies.CacheFirst({ "cacheName":"google-fonts", plugins: [new workbox.expiration.Plugin({ maxEntries: 1, maxAgeSeconds: 31536000, purgeOnQuotaError: true })] }), 'GET');

@@ -87,14 +87,13 @@ module.exports = {
     new HTMLWebpackPlugin({
       template: './src/html/index.html',
       title: 'James South - Portfolio',
-      filename: 'index_pretty.html',
     }),
     new ScriptExtHTMLWebpackPlugin({
       defaultAttribute: 'async',
     }),
     new webpack.HashedModuleIdsPlugin(),
     new WorkboxPlugin.GenerateSW({
-      exclude: [/\.(?:png|jpg|jpeg|svg|gif)$/, /\.map$/, /^index_pretty/],
+      exclude: [/\.(?:png|jpg|jpeg|svg|gif)$/, /\.map$/],
       globDirectory: './docs',
       globPatterns: ['./burst.min.js', './worker.min.js'],
       cacheId: 'james south portfolio',
@@ -106,18 +105,6 @@ module.exports = {
             cacheName: 'images',
             expiration: {
               maxAgeSeconds: 60 * 60 * 24 * 180,
-              purgeOnQuotaError: true,
-            },
-          },
-        },
-        {
-          urlPattern: /\.(?:html)$/,
-          handler: 'NetworkFirst',
-          options: {
-            cacheName: 'html',
-            networkTimeoutSeconds: 3,
-            expiration: {
-              maxEntries: 1,
               purgeOnQuotaError: true,
             },
           },
@@ -152,6 +139,6 @@ module.exports = {
   devServer: {
     port: 3000,
     contentBase: path.join(__dirname, 'docs'),
-    index: 'index_pretty.html',
+    index: 'index.html',
   },
 };
