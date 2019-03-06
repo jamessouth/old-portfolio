@@ -6,7 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
 const ScriptExtHTMLWebpackPlugin = require('script-ext-html-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const WorkboxPlugin = require('workbox-webpack-plugin');
+const { InjectManifest } = require('workbox-webpack-plugin');
 
 module.exports = {
   mode: 'production', // development
@@ -79,6 +79,9 @@ module.exports = {
     },
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('production'),
+    }),
     new CleanWebpackPlugin(['docs'], { exclude: ['burst.min.js', 'worker.min.js'] }),
     new MiniCssExtractPlugin({
       filename: '[name].css',
@@ -92,48 +95,11 @@ module.exports = {
       defaultAttribute: 'async',
     }),
     new webpack.HashedModuleIdsPlugin(),
-    new WorkboxPlugin.GenerateSW({
-      exclude: [/\.(?:png|jpg|jpeg|svg|gif)$/, /\.map$/],
-      globDirectory: './docs',
-      globPatterns: ['./burst.min.js', './worker.min.js'],
-      cacheId: 'james south portfolio',
-      runtimeCaching: [
-        {
-          urlPattern: /\.(?:png|jpg|jpeg|svg|gif)$/,
-          handler: 'CacheFirst',
-          options: {
-            cacheName: 'images',
-            expiration: {
-              maxAgeSeconds: 60 * 60 * 24 * 180,
-              purgeOnQuotaError: true,
-            },
-          },
-        },
-        {
-          urlPattern: /^https:\/\/fonts\.googleapis\.com/,
-          handler: 'StaleWhileRevalidate',
-          options: {
-            cacheName: 'google-fonts-css',
-            expiration: {
-              maxEntries: 1,
-              maxAgeSeconds: 60 * 60 * 24 * 30,
-              purgeOnQuotaError: true,
-            },
-          },
-        },
-        {
-          urlPattern: /^https:\/\/fonts\.gstatic\.com/,
-          handler: 'CacheFirst',
-          options: {
-            cacheName: 'google-fonts',
-            expiration: {
-              maxEntries: 1,
-              maxAgeSeconds: 60 * 60 * 24 * 365,
-              purgeOnQuotaError: true,
-            },
-          },
-        },
-      ],
+    new InjectManifest({
+      swSrc: './src/sw.js',
+      swDest: 'service-worker.js',
+      importWorkboxFrom: 'local',
+      exclude: [/\.(?:png|jpg|jpeg|svg|gif)$/, /\.map$/, /^manifest.*\.js(?:on)?$/, /(animPaint|contact|destroyOpt|gifOpt|sizeOpt|useCubes|anim_polyfill)/],
     }),
   ],
   devServer: {

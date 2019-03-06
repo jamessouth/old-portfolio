@@ -1,5 +1,3 @@
-importScripts("precache-manifest.b66bb4427c64f7ea9c422a6dc736c6b3.js", "workbox-v4.0.0/workbox-sw.js");
-workbox.setConfig({modulePathPrefix: "workbox-v4.0.0"});
 /* eslint-disable no-undef, no-restricted-globals, no-underscore-dangle */
 import { precacheAndRoute } from 'workbox-precaching/precacheAndRoute.mjs';
 import { registerRoute } from 'workbox-routing/registerRoute.mjs';
@@ -99,4 +97,3 @@ workbox.routing.setCatchHandler(({ event }) => {
   }
   return Response.error();
 });
-
