@@ -14,7 +14,7 @@
     "analyze": "webpack --profile --json > stats.json",
     "dev": "webpack-dev-server",
     "build:prod": "webpack && cp src/favicon.ico docs/favicon.ico && cp src/manifest.json docs/manifest.json && cp -r src/images/icons/ docs/images/icons",
-    "prebuild:prod": "rm -f docs/burst.min.js docs/worker.min.js && npx minify src/js/burst.js --out-file docs/burst.min.js && npx babel src/js/worker.js --presets=@babel/preset-env | npx uglifyjs -m toplevel -c toplevel,unsafe -o docs/worker.min.js"
+    "prebuild:prod": "rm -f docs/burst.min.js docs/worker.min.js && npx minify src/js/burst.js --out-file docs/burst.min.js && npx babel src/js/worker.js --presets=@babel/preset-env | npx uglifyjs -m toplevel -c toplevel,unsafe -o docs/worker.min.js && webpack --config sw-webpack.config.js"
   },
   "repository": {
     "type": "git",

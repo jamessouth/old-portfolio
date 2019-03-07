@@ -52,7 +52,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.(png|svg|jpg|gif)$/,
+        test: /\.(png|svg|jpg|jpeg|gif)$/,
         use: [
           {
             loader: 'file-loader',
@@ -79,9 +79,6 @@ module.exports = {
     },
   },
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production'),
-    }),
     new CleanWebpackPlugin(['docs'], { exclude: ['burst.min.js', 'worker.min.js'] }),
     new MiniCssExtractPlugin({
       filename: '[name].css',
@@ -98,7 +95,7 @@ module.exports = {
     new InjectManifest({
       swSrc: './src/sw.js',
       swDest: 'service-worker.js',
-      importWorkboxFrom: 'local',
+      importWorkboxFrom: 'disabled',
       exclude: [/\.(?:png|jpg|jpeg|svg|gif)$/, /\.map$/, /^manifest.*\.js(?:on)?$/, /(animPaint|contact|destroyOpt|gifOpt|sizeOpt|useCubes|anim_polyfill)/],
     }),
   ],
