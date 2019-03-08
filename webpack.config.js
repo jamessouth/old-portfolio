@@ -9,8 +9,8 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const { InjectManifest } = require('workbox-webpack-plugin');
 
 module.exports = {
-  mode: 'production', // development
-  devtool: 'source-map', // inline-
+  mode: 'development', // production
+  devtool: 'inline-source-map', // 
   entry: {
     main: './src/js/index.js',
   },
@@ -59,6 +59,9 @@ module.exports = {
             options: {
               outputPath: 'images/',
               publicPath: 'images/',
+              name(file) {
+                return /((7|9|10|11|explosion)\.(gif|jpg))$/.test(file) ? '[name].[hash].[ext]' : '[hash].[ext]';
+              },
             },
           },
         ],
@@ -96,6 +99,7 @@ module.exports = {
       swSrc: './src/sw.js',
       swDest: 'service-worker.js',
       importWorkboxFrom: 'disabled',
+      precacheManifestFilename: 'precache-manifest-v7.[manifestHash].js',
       exclude: [/\.(?:png|jpg|jpeg|svg|gif)$/, /\.map$/, /^manifest.*\.js(?:on)?$/, /(animPaint|contact|destroyOpt|gifOpt|sizeOpt|useCubes|anim_polyfill)/],
     }),
   ],

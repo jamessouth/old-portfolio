@@ -93,6 +93,30 @@ button:hover, button:focus{
   color: #000;
   outline: none;
 }
+@keyframes flash{
+  50% { opacity: 0; }
+  51% { opacity: 1; }
+}
+button.installbtn{
+  position: fixed;
+  bottom: 23px;
+  left: 23px;
+  box-shadow: none;
+  border-radius: 0;
+  border: none;
+  height: 40px;
+  width: 80px;
+  z-index: 7;
+}
+div.installdiv{
+  background-color: #fbe2a4;
+  position: fixed;
+  bottom: 13px;
+  left: 13px;
+  height: 60px;
+  width: 100px;
+  animation: 1.4s flash ease-in 20;
+}
 #apply{
   margin-top: 1em;
 }

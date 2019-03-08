@@ -18,7 +18,33 @@
     <meta name="msapplication-TileColor" content="#2d89ef">
     <meta name="msapplication-TileImage" content="/images/icons/mstile-144x144.png">
     <script>
-      if ('serviceWorker' in navigator) window.addEventListener('load', function() {navigator.serviceWorker.register('/service-worker.js');});
+      let refreshing;
+      let deferredPrompt;
+      const btnBg = document.createElement('div');
+      const btnAdd = document.createElement('button');
+      btnAdd.textContent = 'install me!';
+      btnAdd.className = "installbtn";
+      btnBg.className = "installdiv";
+      if ('serviceWorker' in navigator) window.addEventListener('load', function() {
+        document.body.appendChild(btnAdd);
+        document.body.appendChild(btnBg);
+        navigator.serviceWorker.register('/service-worker.js');
+      });
+      navigator.serviceWorker.addEventListener('controllerchange', function() {!refreshing && window.location.reload() && (refreshing = true);});
+
+
+      // btnAdd.style.display = 'none';
+
+      // window.addEventListener('beforeinstallprompt', function(e) {
+      //   e.preventDefault();
+      //   deferredPrompt = e;
+      //   setTimeout(function() {
+      //
+      //   }, 2132);
+      //   // btnAdd.style.display = 'block';
+      // });
+
+
     </script>
   </head>
   <body ondragstart="return false;">
