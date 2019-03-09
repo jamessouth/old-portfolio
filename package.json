@@ -34,8 +34,8 @@
     "babel-loader": "^8.0.5",
     "babel-minify": "^0.5.0",
     "clean-webpack-plugin": "^1.0.1",
-    "css-loader": "^2.1.0",
-    "eslint": "^5.15.0",
+    "css-loader": "^2.1.1",
+    "eslint": "^5.15.1",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.16.0",
     "file-loader": "^3.0.1",
@@ -51,7 +51,7 @@
     "webpack": "^4.29.6",
     "webpack-cli": "^3.2.3",
     "webpack-dev-server": "^3.2.1",
-    "workbox-webpack-plugin": "^4.0.0"
+    "workbox-webpack-plugin": "^4.1.0"
   },
   "dependencies": {
     "@babel/polyfill": "^7.2.5",

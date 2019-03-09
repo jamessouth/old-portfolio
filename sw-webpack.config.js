@@ -1,12 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-
-
 const TerserWebpackPlugin = require('terser-webpack-plugin');
-
-
-
 
 module.exports = {
   mode: 'production', // development
@@ -16,36 +11,13 @@ module.exports = {
   },
   output: {
     filename: 'sw.js',
-    // chunkFilename: '[name].[contenthash].js',
     path: path.resolve(__dirname, 'src'),
   },
   module: {
     rules: [
       {
         test: /\.m?js$/,
-        // include: [
-        //   path.resolve(__dirname, 'src/js'),
-        // ],
-        // use: {
-        //   loader: 'babel-loader',
-        //   options: {
-        //     plugins: ['@babel/plugin-syntax-dynamic-import'],
-        //     presets: [
-        //       [
-        //         '@babel/preset-env',
-        //         {
-        //           'useBuiltIns': 'usage',
-        //           'modules': false,
-        //         },
-        //       ],
-        //     ],
-        //     cacheDirectory: true,
-        //   },
-        // },
       },
-
-
-
     ],
   },
   optimization: {
@@ -56,17 +28,11 @@ module.exports = {
         sourceMap: true,
       }),
     ],
-    // runtimeChunk: 'single',
-    // splitChunks: {
-    //   chunks: 'all',
-    // },
   },
   plugins: [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production'),
     }),
     new CleanWebpackPlugin(['src/sw.js', 'src/sw.js.map']),
-
   ],
-
 };

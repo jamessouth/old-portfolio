@@ -1,20 +1,15 @@
 /* eslint-disable no-undef, no-restricted-globals, no-underscore-dangle */
-import { precacheAndRoute } from 'workbox-precaching/precacheAndRoute.mjs';
+import { clientsClaim } from 'workbox-core/clientsClaim.mjs';
+import { setCacheNameDetails } from 'workbox-core/setCacheNameDetails.mjs';
+import { skipWaiting } from 'workbox-core/skipWaiting.mjs';
+import { Plugin as ExpirationPlugin } from 'workbox-expiration/Plugin.mjs';
 import { cleanupOutdatedCaches } from 'workbox-precaching/cleanupOutdatedCaches.mjs';
+import { precacheAndRoute } from 'workbox-precaching/precacheAndRoute.mjs';
 import { registerRoute } from 'workbox-routing/registerRoute.mjs';
 import { setCatchHandler } from 'workbox-routing/setCatchHandler.mjs';
 import { setDefaultHandler } from 'workbox-routing/setDefaultHandler.mjs';
 import { CacheFirst } from 'workbox-strategies/CacheFirst.mjs';
 import { StaleWhileRevalidate } from 'workbox-strategies/StaleWhileRevalidate.mjs';
-import { Plugin as ExpirationPlugin } from 'workbox-expiration/Plugin.mjs';
-import { setCacheNameDetails } from 'workbox-core/setCacheNameDetails.mjs';
-import { clientsClaim } from 'workbox-core/clientsClaim.mjs';
-import { skipWaiting } from 'workbox-core/skipWaiting.mjs';
-
-
-skipWaiting();
-clientsClaim();
-
 
 const prefix = 'james south portfolio';
 const FALLBACK_IMAGE_7_URL = '/images/project7.0d460c6cd15e9ed3f683a05d1a282fbb.jpg';
@@ -22,15 +17,12 @@ const FALLBACK_IMAGE_9_URL = '/images/project9.fef701d08faf6c81fe7b50e9c45f79ad.
 const FALLBACK_IMAGE_10_URL = '/images/project10.38128e3e605efa9c9dc9aecec6ffe3f7.jpg';
 const FALLBACK_IMAGE_11_URL = '/images/project11.f50561f0701ba64315826deee4556c17.jpg';
 
-
+skipWaiting();
+clientsClaim();
 setCacheNameDetails({ prefix });
-
 self.__precacheManifest = [].concat(self.__precacheManifest || []);
-
 precacheAndRoute(self.__precacheManifest, {});
-
 cleanupOutdatedCaches();
-
 
 registerRoute(
   /\.(?:js)$/,
@@ -44,7 +36,6 @@ registerRoute(
     ],
   })
 );
-
 
 registerRoute(
   /\.(?:png|jpg|jpeg|svg|gif)$/,
@@ -99,9 +90,7 @@ setDefaultHandler(
   })
 );
 
-
 setCatchHandler(({ event }) => {
-  console.log(event.request);
   if (event.request.destination === 'image' && /\.gif$/.test(event.request.url) && !event.request.url.includes('explosion')) {
     switch (event.request.url.match(/\d{1,2}(?=\.\w{32})/)[0]) {
       case '7':
