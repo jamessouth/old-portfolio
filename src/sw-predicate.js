@@ -18,11 +18,11 @@ const FALLBACK_IMAGE_10_URL = '/images/project10.38128e3e605efa9c9dc9aecec6ffe3f
 const FALLBACK_IMAGE_11_URL = '/images/project11.f50561f0701ba64315826deee4556c17.jpg';
 
 skipWaiting();
-clientsClaim();
 setCacheNameDetails({ prefix });
 self.__precacheManifest = [].concat(self.__precacheManifest || []);
 precacheAndRoute(self.__precacheManifest, {});
 cleanupOutdatedCaches();
+clientsClaim();
 
 registerRoute(
   /\.(?:js)$/,
