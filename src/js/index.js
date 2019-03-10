@@ -3,7 +3,6 @@ import './makeCubes';
 
 const opts = document.querySelectorAll('li');
 const canvas = document.querySelector('#board');
-
 const IOoptions = {
   root: null,
   rootMargin: '0px 0px 40px 0px',
@@ -30,6 +29,12 @@ function IOcallback(entries, observer) {
   });
 };
 
-const observer = new IntersectionObserver(IOcallback, IOoptions);
-
-[...opts, canvas].forEach(el => observer.observe(el));
+if (!window.IntersectionObserver) {
+  import(/* webpackChunkName: "sizeOpt" */ './sizeOpt').catch(err => console.log(err));
+  import(/* webpackChunkName: "gifOpt" */ './gifOpt').catch(err => console.log(err));
+  import(/* webpackChunkName: "destroyOpt" */ './destroyOpt').catch(err => console.log(err));
+  import(/* webpackChunkName: "contact" */ './contact').catch(err => console.log(err));
+} else {
+  const observer = new IntersectionObserver(IOcallback, IOoptions);
+  [...opts, canvas].forEach(el => observer.observe(el));
+}

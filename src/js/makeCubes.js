@@ -66,7 +66,7 @@ const panelData = [
   },
   {
     aria: 'web app dashboard; pwa vue-cli vuex ajax chart.js',
-    href: 'https://jamessouth.github.io/Project-9/',
+    href: 'https://jamessouth.github.io/Vue-Project-9/',
     pic: Project9,
     gif: Project9GIF,
   },
