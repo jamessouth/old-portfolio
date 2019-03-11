@@ -72,7 +72,7 @@ const panelData = [
   },
   {
     aria: 'employee directory; pwa react a11y tdd ajax',
-    href: 'https://github.com/jamessouth/React-Project-10',
+    href: 'https://jamessouth.github.io/React-Project-10/',
     pic: Project10,
     gif: Project10GIF,
   },
