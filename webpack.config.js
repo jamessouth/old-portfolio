@@ -99,7 +99,7 @@ module.exports = {
       swSrc: './src/sw.js',
       swDest: 'service-worker.js',
       importWorkboxFrom: 'disabled',
-      precacheManifestFilename: 'precache-manifest-v2.[manifestHash].js',
+      precacheManifestFilename: 'precache-manifest-v3.[manifestHash].js',
       exclude: [/\.(?:png|jpg|jpeg|svg|gif)$/, /\.map$/, /^manifest.*\.js(?:on)?$/, /(animPaint|contact|destroyOpt|gifOpt|sizeOpt|useCubes|anim_polyfill)/],
     }),
   ],

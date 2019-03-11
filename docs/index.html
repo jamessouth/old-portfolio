@@ -28,12 +28,12 @@
       btnAdd.className = 'installbtn';
       btnBg.className = 'installdiv';
       if ('serviceWorker' in navigator) window.addEventListener('load', e => {
+        navigator.serviceWorker.addEventListener('updatefound', e => {
+          navigator.serviceWorker.addEventListener('controllerchange', e => !refreshing && window.location.reload() && (refreshing = true));
+        });
         document.body.appendChild(btnAdd);
         document.body.appendChild(btnBg);
         navigator.serviceWorker.register('./service-worker.js');
-      });
-      navigator.serviceWorker.addEventListener('updatefound', e => {
-        navigator.serviceWorker.addEventListener('controllerchange', e => !refreshing && window.location.reload() && (refreshing = true));
       });
       window.addEventListener('beforeinstallprompt', handleInstall);
       window.addEventListener('appinstalled', e => {
