@@ -83,7 +83,7 @@ const panelData = [
     gif: Project11GIF,
   },
   {
-    aria: 'portfolio; webpack babel a11y sass components worker paint',
+    aria: 'portfolio; pwa webpack a11y sass components worker paint',
     href: '',
     pic: Project12,
   },
