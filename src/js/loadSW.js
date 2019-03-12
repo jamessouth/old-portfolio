@@ -9,7 +9,7 @@ const relBtn = document.createElement('button');
 btnAdd.textContent = 'install me!';
 btnAdd.className = 'installbtn';
 btnBg.className = 'installdiv';
-relBtn.textContent = 'new content - reload!';
+relBtn.textContent = 'new content: reload!';
 relBtn.className = 'reloadbtn';
 relBtnBg.className = 'reloaddiv';
 
@@ -52,7 +52,7 @@ if ('serviceWorker' in navigator) {
     setTimeout(() => {
       relBtn.style.display = 'block';
       relBtnBg.style.display = 'block';
-    }, 7132);
+    }, 1132);
   });
   window.addEventListener('beforeinstallprompt', handleInstall);
   window.addEventListener('appinstalled', e => {
