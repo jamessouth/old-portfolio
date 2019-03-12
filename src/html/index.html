@@ -18,51 +18,6 @@
     <link rel="mask-icon" href="./images/icons/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#2d89ef">
     <meta name="msapplication-TileImage" content="./images/icons/mstile-144x144.png">
-    <script>
-      let deferredPrompt;
-      let refreshing;
-      function handleInstall(e) {
-        e.preventDefault();
-        deferredPrompt = e;
-        setTimeout(() => {
-          btnAdd.style.display = 'block';
-          btnBg.style.display = 'block';
-          btnAdd.addEventListener('click', handleInstallClick);
-        }, 7132);
-      }
-      async function handleInstallClick(e) {
-        btnAdd.style.display = 'none';
-        btnBg.style.display = 'none';
-        try {
-          await deferredPrompt.prompt();
-          const choice = await deferredPrompt.userChoice;
-          if (choice.outcome !== 'accepted') window.removeEventListener('beforeinstallprompt', handleInstall);
-          deferredPrompt = null;
-        } catch (e) {
-          console.error(e);
-          window.removeEventListener('beforeinstallprompt', handleInstall);
-        }
-      }
-      const btnBg = document.createElement('div');
-      const btnAdd = document.createElement('button');
-      btnAdd.textContent = 'install me!';
-      btnAdd.className = 'installbtn';
-      btnBg.className = 'installdiv';
-      if ('serviceWorker' in navigator) window.addEventListener('load', e => {
-        navigator.serviceWorker.addEventListener('updatefound', e => {
-          navigator.serviceWorker.addEventListener('controllerchange', e => !refreshing && window.location.reload() && (refreshing = true));
-        });
-        document.body.appendChild(btnAdd);
-        document.body.appendChild(btnBg);
-        navigator.serviceWorker.register('./service-worker.js');
-      });
-      window.addEventListener('beforeinstallprompt', handleInstall);
-      window.addEventListener('appinstalled', e => {
-        const hl = document.querySelector('h1:first-of-type');
-        hl.textContent = 'Thank you!';
-        setTimeout(() => hl.textContent = 'James South Portfolio', 6500);
-      });
-    </script>
   </head>
   <body ondragstart="return false;">
     <main>

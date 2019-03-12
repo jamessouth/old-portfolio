@@ -1,4 +1,5 @@
 import '../css/main.scss';
+import './loadSW';
 import './makeCubes';
 
 const opts = document.querySelectorAll('li');

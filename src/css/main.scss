@@ -98,7 +98,7 @@ button:hover, button:focus{
   51% { opacity: 1; }
   100% { opacity: 0; }
 }
-button.installbtn{
+button.installbtn, button.reloadbtn{
   display: none;
   position: fixed;
   bottom: 23px;
@@ -111,7 +111,12 @@ button.installbtn{
   width: 80px;
   z-index: 7;
 }
-div.installdiv{
+button.reloadbtn{
+  left: auto;
+  right: 33px;
+  width: 100px;
+}
+div.installdiv, div.reloaddiv{
   display: none;
   background-color: #fbe2a4;
   position: fixed;
@@ -120,6 +125,11 @@ div.installdiv{
   height: 60px;
   width: 100px;
   animation: 1.6s flash ease-in 20;
+}
+div.reloaddiv{
+  left: auto;
+  right: 23px;
+  width: 120px;
 }
 #apply{
   margin-top: 1em;

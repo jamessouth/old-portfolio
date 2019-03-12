@@ -1,7 +1,5 @@
 /* eslint-disable no-undef, no-restricted-globals, no-underscore-dangle */
-import { clientsClaim } from 'workbox-core/clientsClaim.mjs';
 import { setCacheNameDetails } from 'workbox-core/setCacheNameDetails.mjs';
-import { skipWaiting } from 'workbox-core/skipWaiting.mjs';
 import { Plugin as ExpirationPlugin } from 'workbox-expiration/Plugin.mjs';
 import { cleanupOutdatedCaches } from 'workbox-precaching/cleanupOutdatedCaches.mjs';
 import { precacheAndRoute } from 'workbox-precaching/precacheAndRoute.mjs';
@@ -17,12 +15,14 @@ const FALLBACK_IMAGE_9_URL = '/images/project9.fef701d08faf6c81fe7b50e9c45f79ad.
 const FALLBACK_IMAGE_10_URL = '/images/project10.38128e3e605efa9c9dc9aecec6ffe3f7.jpg';
 const FALLBACK_IMAGE_11_URL = '/images/project11.f50561f0701ba64315826deee4556c17.jpg';
 
-skipWaiting();
 setCacheNameDetails({ prefix });
 self.__precacheManifest = [].concat(self.__precacheManifest || []);
 precacheAndRoute(self.__precacheManifest, {});
 cleanupOutdatedCaches();
-clientsClaim();
+
+addEventListener('message', e => {
+  if (e.data && e.data.type === 'SKIP_WAITING') skipWaiting();
+});
 
 registerRoute(
   /\.(?:js)$/,
