@@ -1,4 +1,4 @@
-/* eslint-disable no-param-reassign, no-return-assign */
+/* eslint-disable no-param-reassign */
 import Explosion from '../images/explosion.gif';
 
 const hold = document.querySelector('.hold');
@@ -24,7 +24,7 @@ check.addEventListener('change', (e) => {
       expl.classList.add('explode');
       expl.onload = () => {
         hold.insertBefore(expl, pb[ind].parentNode);
-        [seconds, secondsLabel, secondsDiv].forEach(el => el.style.display = 'block');
+        [seconds, secondsLabel, secondsDiv].forEach((el) => { el.style.display = 'block'; });
       };
       expl.src = Explosion;
     });
@@ -32,7 +32,7 @@ check.addEventListener('change', (e) => {
     seconds.removeAttribute('disabled');
   } else {
     checkLabel.textContent = 'do not destroy';
-    [seconds, secondsLabel, secondsDiv].forEach(el => el.style.display = 'none');
+    [seconds, secondsLabel, secondsDiv].forEach((el) => { el.style.display = 'none'; });
     seconds.setAttribute('disabled', '');
   }
 });
@@ -58,7 +58,7 @@ function destroyCube(cube) {
   });
   cube.classList.add('blowup');
   setTimeout(() => {
-    [expl1, expl2].forEach(el => el.style.display = 'none');
+    [expl1, expl2].forEach((el) => { el.style.display = 'none'; });
   }, (seconds.value * 1000) + 5490);
 }
 destroyBtn.addEventListener('click', () => {

@@ -22,7 +22,7 @@ function handleInstall(e) {
     btnAdd.addEventListener('click', handleInstallClick);
   }, 9732);
 }
-async function handleInstallClick(e) {
+async function handleInstallClick() {
   btnAdd.style.display = 'none';
   btnBg.style.display = 'none';
   try {
@@ -40,13 +40,13 @@ if ('serviceWorker' in navigator) {
   const wb = new Workbox('./service-worker.js');
   document.body.appendChild(btnAdd);
   document.body.appendChild(btnBg);
-  relBtn.addEventListener('click', e => {
-    wb.addEventListener('controlling', e => {
+  relBtn.addEventListener('click', () => {
+    wb.addEventListener('controlling', () => {
       window.location.reload();
     });
-    wb.messageSW({type: 'SKIP_WAITING'});
+    wb.messageSW({ type: 'SKIP_WAITING' });
   });
-  wb.addEventListener('waiting', e => {
+  wb.addEventListener('waiting', () => {
     document.body.appendChild(relBtn);
     document.body.appendChild(relBtnBg);
     setTimeout(() => {
@@ -55,10 +55,10 @@ if ('serviceWorker' in navigator) {
     }, 1132);
   });
   window.addEventListener('beforeinstallprompt', handleInstall);
-  window.addEventListener('appinstalled', e => {
+  window.addEventListener('appinstalled', () => {
     const hl = document.querySelector('h1:first-of-type');
     hl.textContent = 'Thank you!';
-    setTimeout(() => hl.textContent = 'James South Portfolio', 6500);
+    setTimeout(() => { hl.textContent = 'James South Portfolio'; }, 6500);
   });
   wb.register();
 }

@@ -8,7 +8,7 @@ const ScriptExtHTMLWebpackPlugin = require('script-ext-html-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const { InjectManifest } = require('workbox-webpack-plugin');
 
-const swVol = 'v3';
+const swVol = 'v4';
 
 module.exports = {
   mode: 'production', // development
@@ -102,7 +102,7 @@ module.exports = {
       swDest: 'service-worker.js',
       importWorkboxFrom: 'disabled',
       precacheManifestFilename: `precache-manifest-${swVol}.[manifestHash].js`,
-      exclude: [/\.(?:png|jpg|jpeg|svg|gif)$/, /\.map$/, /^manifest.*\.js(?:on)?$/, /(animPaint|contact|destroyOpt|gifOpt|sizeOpt|useCubes|anim_polyfill)/],
+      exclude: [/\.(?:png|jpg|jpeg|svg|gif)$/, /\.map$/, /(animPaint|contact|destroyOpt|gifOpt|sizeOpt|useCubes|anim_polyfill)/],
     }),
   ],
   devServer: {
