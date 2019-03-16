@@ -8,7 +8,7 @@ const ScriptExtHTMLWebpackPlugin = require('script-ext-html-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const { InjectManifest } = require('workbox-webpack-plugin');
 
-const swVol = 'v8';
+const swVol = 'v9';
 
 module.exports = {
   mode: 'production', // development
