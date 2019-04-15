@@ -10,6 +10,7 @@ import Project9 from '../images/project9.jpg';
 import Project10 from '../images/project10.jpg';
 import Project11 from '../images/project11.jpg';
 import Project12 from '../images/project12.jpg';
+import Project4GIF from '../images/p4.gif';
 import Project7GIF from '../images/p7.gif';
 import Project9GIF from '../images/p9.gif';
 import Project10GIF from '../images/p10.gif';
@@ -39,9 +40,10 @@ const panelData = [
     pic: Project3,
   },
   {
-    aria: '15 puzzle generator; vue ajax webcam routing geolocation',
-    href: 'https://jamessouth.github.io/fifteenpuzzlegenerator/',
+    aria: '15 puzzle generator; angular-cli typescript',
+    href: 'https://jamessouth.github.io/fifteen-puzzle-generator/home',
     pic: Project4,
+    gif: Project4GIF,
   },
   {
     aria: 'node web scraper; ',
@@ -77,7 +79,7 @@ const panelData = [
     gif: Project10GIF,
   },
   {
-    aria: 'flickr gallery; react routing ajax',
+    aria: 'flickr gallery; create-react-app ajax',
     href: 'https://github.com/jamessouth/Project-11/',
     pic: Project11,
     gif: Project11GIF,
@@ -179,7 +181,10 @@ class Panel extends HTMLElement {
     this.anchor.setAttribute('aria-label', this.aria);
     this.anchor.setAttribute('href', this.href);
     this.div.style.backgroundImage = `url(${this.pic})`;
-    if ([6, 8, 9, 10].includes(num)) {
+
+
+
+    if ([3, 6, 8, 9, 10].includes(num)) {
       this.setAttribute('gif', false);
       this.setAttribute('gif-name', this.gif);
     }
