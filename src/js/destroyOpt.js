@@ -1,6 +1,40 @@
 /* eslint-disable no-param-reassign */
 import Explosion from '../images/explosion.gif';
 
+
+
+
+const theul = document.querySelector('ul');
+
+const temp = document.createElement('template');
+temp.innerHTML = `<p>Destroy Cubes</p>
+<input tabindex="0" class="check" type="checkbox" id="destroy" name="destroy" value="destroy"/>
+<label for="destroy">do not destroy</label>
+<label for="sec">wait</label>
+<select tabindex="0" disabled="" id="sec" name="delay" data-sizing="s">
+  <option disabled="">0</option>
+  <option>1</option>
+  <option>2</option>
+  <option>3</option>
+  <option>4</option>
+  <option>5</option>
+  <option>6</option>
+  <option>7</option>
+  <option>8</option>
+  <option>9</option>
+</select>
+<div>
+  <p>seconds after </p>
+  <button type="button" tabindex="0">click</button>
+</div>`.trim();
+
+theul.children[2].appendChild(temp.content);
+
+
+
+
+
+
 const hold = document.querySelector('.hold');
 const sizeInput = document.querySelector('.slider input');
 const check = document.querySelector('#destroy');

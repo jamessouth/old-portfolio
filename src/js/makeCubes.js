@@ -43,7 +43,7 @@ const panelData = [
     aria: '15 puzzle generator; angular-cli typescript',
     href: 'https://jamessouth.github.io/fifteen-puzzle-generator/home',
     pic: Project4,
-    gif: Project4GIF,
+    gifURL: Project4GIF,
   },
   {
     aria: 'node web scraper; ',
@@ -59,7 +59,7 @@ const panelData = [
     aria: 'face scramble!; angular typescript nativescript',
     href: 'https://github.com/jamessouth/face-scramble',
     pic: Project7,
-    gif: Project7GIF,
+    gifURL: Project7GIF,
   },
   {
     aria: 'vue-style-lint; node es6 fp ci tdd npm|v1.0.3',
@@ -70,19 +70,19 @@ const panelData = [
     aria: 'web app dashboard; pwa vue-cli vuex ajax chart.js',
     href: 'https://jamessouth.github.io/Vue-Project-9/',
     pic: Project9,
-    gif: Project9GIF,
+    gifURL: Project9GIF,
   },
   {
     aria: 'employee directory; pwa react a11y tdd ajax',
     href: 'https://jamessouth.github.io/React-Project-10/',
     pic: Project10,
-    gif: Project10GIF,
+    gifURL: Project10GIF,
   },
   {
     aria: 'flickr gallery; create-react-app ajax',
     href: 'https://github.com/jamessouth/Project-11/',
     pic: Project11,
-    gif: Project11GIF,
+    gifURL: Project11GIF,
   },
   {
     aria: 'portfolio; pwa webpack a11y sass components worker paint',
@@ -169,7 +169,7 @@ div{
 `;
 class Panel extends HTMLElement {
   static get observedAttributes() {
-    return ['gif'];
+    return ['gifURL'];
   }
 
   constructor(config, num) {
@@ -184,9 +184,9 @@ class Panel extends HTMLElement {
 
 
 
-    if ([3, 6, 8, 9, 10].includes(num)) {
-      this.setAttribute('gif', false);
-      this.setAttribute('gif-name', this.gif);
+    if (this.gifURL) {
+      this.setAttribute('gif-on', false);
+      this.setAttribute('gif-name', this.gifURL);
     }
     ['mouseover', 'focus', 'touchstart'].forEach((evt) => {
       this.addEventListener(evt, () => {
@@ -239,7 +239,10 @@ if (window.customElements && HTMLElement.prototype.attachShadow) {
   if (!document.body.animate) {
     import(/* webpackChunkName: "anim_polyfill" */ 'web-animations-js').then(animCubes).then(hoverCubes).catch(err => console.log(err));
   } else {
-    animCubes().then(hoverCubes);
+    animCubes().then(() => {
+      hoverCubes;
+
+    });
   }
 } else {
   const info = document.createElement('p');

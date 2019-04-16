@@ -1,7 +1,25 @@
+
+const theul = document.querySelector('ul');
+
+const temp = document.createElement('template');
+temp.innerHTML = `<p>Cube Size</p>
+<div class="slider">
+  <div class="track"></div>
+  <label for="size">side:</label>
+  <input tabindex="0" id="size" type="range" name="size" min="220" max="440" value="220" data-sizing="px">
+  <p>&lt;&nbsp;&nbsp;&nbsp;220px&nbsp;&nbsp;&nbsp;&gt;</p>
+  <button id="apply" type="button" tabindex="0">apply</button>
+</div>`;
+
+theul.children[0].appendChild(temp.content);
+
+
+
 const sizeInput = document.querySelector('.slider input');
 const sizeInputP = document.querySelector('.slider p');
 const sizeTrack = document.querySelector('.track');
 const applyButton = document.querySelector('#apply');
+
 sizeInput.value = 220;
 sizeInput.addEventListener('focus', () => {
   sizeInput.parentNode.style.border = '3px white solid';

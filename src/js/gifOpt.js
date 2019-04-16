@@ -1,3 +1,13 @@
+const theul = document.querySelector('ul');
+
+const temp = document.createElement('template');
+temp.innerHTML = `<p>GIFs on/off</p>
+<input tabindex="0" class="check" type="checkbox" id="gifs" name="gifs" value="gif"/>
+<label for="gifs">no GIFs</label>`.trim();
+
+theul.children[1].appendChild(temp.content);
+
+
 const check = document.querySelector('#gifs');
 const checkLabel = document.querySelector('label[for="gifs"]');
 const pb = document.querySelector('.cube-container:last-of-type .photo-cube');
