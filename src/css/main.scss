@@ -269,6 +269,7 @@ input[type=checkbox]:focus{
 }
 input[id=gifs] {
   @include text(70px, $ht: 85px);
+  cursor: not-allowed;
 }
 input[id=gifs]:after{
   @include inputAfter(70px, -29px);

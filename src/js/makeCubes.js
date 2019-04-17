@@ -239,10 +239,7 @@ if (window.customElements && HTMLElement.prototype.attachShadow) {
   if (!document.body.animate) {
     import(/* webpackChunkName: "anim_polyfill" */ 'web-animations-js').then(animCubes).then(hoverCubes).catch(err => console.log(err));
   } else {
-    animCubes().then(() => {
-      hoverCubes;
-
-    });
+    animCubes().then(hoverCubes);
   }
 } else {
   const info = document.createElement('p');
