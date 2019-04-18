@@ -109,15 +109,11 @@ const KEYFRAMES2 = [
   { transform: 'translateY(10px)' },
 ];
 const KEYTIMING2 = { duration: 1000, iterations: 20, direction: 'alternate' };
-
 const ev = new CustomEvent('panelsLoaded');
-
-
 function hoverCubes() {
   document.dispatchEvent(ev);
   cc[0].animate(KEYFRAMES2, KEYTIMING2);
   cc[1].animate(KEYFRAMES2, KEYTIMING2);
-  console.log('hoverCubes');
 }
 const classes = [
   `  transform: translateZ(calc(var(--size) / 2));
@@ -187,9 +183,6 @@ class Panel extends HTMLElement {
     this.anchor.setAttribute('aria-label', this.aria);
     this.anchor.setAttribute('href', this.href);
     this.div.style.backgroundImage = `url(${this.pic})`;
-
-
-
     if (this.gifURL) {
       this.setAttribute('gif-on', false);
       this.setAttribute('gif-name', this.gifURL);
@@ -235,7 +228,6 @@ function buildCubes(time) {
   }
 }
 function animCubes() {
-
   if (document.body.animate) { // polyfill for animation.finished promise at https://gist.github.com/simevidas/2e721c8e6d67f04b5e1a0083c542a767
     if (typeof Animation === 'undefined') {
       window.Animation = document.body.animate({}).constructor;
@@ -256,10 +248,6 @@ function animCubes() {
       });
     }
   }
-
-
-
-
   const spin = pb[0].animate(KEYFRAMES(), KEYTIMING);
   const spin2 = pb[1].animate(KEYFRAMES(), KEYTIMING);
   buildCubes();

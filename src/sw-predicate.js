@@ -10,6 +10,7 @@ import { CacheFirst } from 'workbox-strategies/CacheFirst.mjs';
 import { StaleWhileRevalidate } from 'workbox-strategies/StaleWhileRevalidate.mjs';
 
 const prefix = 'james south portfolio';
+const FALLBACK_IMAGE_4_URL = '/images/project4.785e5e8664eac7ac2bb48e711822e8db.jpg';
 const FALLBACK_IMAGE_7_URL = '/images/project7.0d460c6cd15e9ed3f683a05d1a282fbb.jpg';
 const FALLBACK_IMAGE_9_URL = '/images/project9.fef701d08faf6c81fe7b50e9c45f79ad.jpg';
 const FALLBACK_IMAGE_10_URL = '/images/project10.38128e3e605efa9c9dc9aecec6ffe3f7.jpg';
@@ -93,6 +94,8 @@ setDefaultHandler(
 setCatchHandler(({ event }) => {
   if (event.request.destination === 'image' && /\.gif$/.test(event.request.url) && !event.request.url.includes('explosion')) {
     switch (event.request.url.match(/\d{1,2}(?=\.\w{32})/)[0]) {
+      case '4':
+        return caches.match(FALLBACK_IMAGE_4_URL);
       case '7':
         return caches.match(FALLBACK_IMAGE_7_URL);
       case '9':

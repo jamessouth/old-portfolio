@@ -8,7 +8,7 @@ const ScriptExtHTMLWebpackPlugin = require('script-ext-html-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const { InjectManifest } = require('workbox-webpack-plugin');
 
-const swVol = 'v10';
+const swVol = 'v11';
 
 module.exports = {
   mode: 'production', // development
@@ -62,7 +62,7 @@ module.exports = {
               outputPath: 'images/',
               publicPath: 'images/',
               name(file) {
-                return /((7|9|10|11|explosion)\.(gif|jpg))$/.test(file) ? '[name].[hash].[ext]' : '[hash].[ext]';
+                return /((4|7|9|10|11|explosion)\.(gif|jpg))$/.test(file) ? '[name].[hash].[ext]' : '[hash].[ext]';
               },
             },
           },

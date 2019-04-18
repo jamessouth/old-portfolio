@@ -6,7 +6,7 @@ const opts = document.querySelectorAll('li');
 const canvas = document.querySelector('#board');
 const IOoptions = {
   root: null,
-  rootMargin: '0px 0px -240px 0px',
+  rootMargin: '0px 0px 40px 0px',
   threshold: 0.1,
 };
 

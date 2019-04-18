@@ -1,4 +1,4 @@
-import { Workbox } from 'workbox-window/Workbox.mjs';
+import { Workbox } from 'workbox-window/Workbox.mjs'; // eslint-disable-line
 
 let deferredPrompt;
 const btnBg = document.createElement('div');
@@ -19,7 +19,7 @@ function handleInstall(e) {
   setTimeout(() => {
     btnAdd.style.display = 'block';
     btnBg.style.display = 'block';
-    btnAdd.addEventListener('click', handleInstallClick);
+    btnAdd.addEventListener('click', handleInstallClick); // eslint-disable-line
   }, 9732);
 }
 async function handleInstallClick() {

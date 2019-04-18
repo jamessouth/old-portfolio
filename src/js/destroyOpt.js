@@ -1,11 +1,7 @@
 /* eslint-disable no-param-reassign */
 import Explosion from '../images/explosion.gif';
 
-
-
-
 const theul = document.querySelector('ul');
-
 const temp = document.createElement('template');
 temp.innerHTML = `<p>Destroy Cubes</p>
 <input tabindex="0" class="check" type="checkbox" id="destroy" name="destroy" value="destroy"/>
@@ -27,13 +23,7 @@ temp.innerHTML = `<p>Destroy Cubes</p>
   <p>seconds after </p>
   <button type="button" tabindex="0">click</button>
 </div>`;
-
 theul.children[2].appendChild(temp.content);
-
-
-
-
-
 
 const hold = document.querySelector('.hold');
 const sizeInput = document.querySelector('.slider input');

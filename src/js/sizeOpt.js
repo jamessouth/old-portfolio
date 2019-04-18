@@ -1,6 +1,5 @@
 
 const theul = document.querySelector('ul');
-
 const temp = document.createElement('template');
 temp.innerHTML = `<p>Cube Size</p>
 <div class="slider">
@@ -10,10 +9,7 @@ temp.innerHTML = `<p>Cube Size</p>
   <p>&lt;&nbsp;&nbsp;&nbsp;220px&nbsp;&nbsp;&nbsp;&gt;</p>
   <button id="apply" type="button" tabindex="0">apply</button>
 </div>`;
-
 theul.children[0].appendChild(temp.content);
-
-
 
 const sizeInput = document.querySelector('.slider input');
 const sizeInputP = document.querySelector('.slider p');
