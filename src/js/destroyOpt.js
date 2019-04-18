@@ -26,7 +26,7 @@ temp.innerHTML = `<p>Destroy Cubes</p>
 <div>
   <p>seconds after </p>
   <button type="button" tabindex="0">click</button>
-</div>`.trim();
+</div>`;
 
 theul.children[2].appendChild(temp.content);
 

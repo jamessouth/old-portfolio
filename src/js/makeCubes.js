@@ -109,9 +109,15 @@ const KEYFRAMES2 = [
   { transform: 'translateY(10px)' },
 ];
 const KEYTIMING2 = { duration: 1000, iterations: 20, direction: 'alternate' };
+
+const ev = new CustomEvent('panelsLoaded');
+
+
 function hoverCubes() {
+  document.dispatchEvent(ev);
   cc[0].animate(KEYFRAMES2, KEYTIMING2);
   cc[1].animate(KEYFRAMES2, KEYTIMING2);
+  console.log('hoverCubes');
 }
 const classes = [
   `  transform: translateZ(calc(var(--size) / 2));
@@ -169,7 +175,7 @@ div{
 `;
 class Panel extends HTMLElement {
   static get observedAttributes() {
-    return ['gifURL'];
+    return ['gif-on'];
   }
 
   constructor(config, num) {
@@ -229,6 +235,31 @@ function buildCubes(time) {
   }
 }
 function animCubes() {
+
+  if (document.body.animate) { // polyfill for animation.finished promise at https://gist.github.com/simevidas/2e721c8e6d67f04b5e1a0083c542a767
+    if (typeof Animation === 'undefined') {
+      window.Animation = document.body.animate({}).constructor;
+    }
+    if (Animation.prototype.finished === undefined) {
+      Object.defineProperty(Animation.prototype, 'finished', {
+        get() {
+          if (!this._finished) {
+            this._finished = this.playState === 'finished' ?
+              Promise.resolve() :
+              new Promise((resolve, reject) => {
+                this.addEventListener('finish', resolve, {once: true});
+                this.addEventListener('cancel', reject, {once: true});
+              });
+          }
+          return this._finished;
+        }
+      });
+    }
+  }
+
+
+
+
   const spin = pb[0].animate(KEYFRAMES(), KEYTIMING);
   const spin2 = pb[1].animate(KEYFRAMES(), KEYTIMING);
   buildCubes();
