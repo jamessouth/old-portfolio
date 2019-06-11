@@ -8,7 +8,7 @@ const ScriptExtHTMLWebpackPlugin = require('script-ext-html-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const { InjectManifest } = require('workbox-webpack-plugin');
 
-const swVol = 'v14';
+const swVol = 'v3';
 
 module.exports = {
   mode: 'production', // development
@@ -37,7 +37,7 @@ module.exports = {
                 '@babel/preset-env',
                 {
                   'useBuiltIns': 'usage',
-                  'modules': false,
+                  'corejs': '3.1.3',
                 },
               ],
             ],
@@ -84,7 +84,7 @@ module.exports = {
     },
   },
   plugins: [
-    new CleanWebpackPlugin({ cleanOnceBeforeBuildPatterns: ['!burst.min.js', '!worker.min.js'] }),
+    new CleanWebpackPlugin({ cleanOnceBeforeBuildPatterns: ['**/*', '!burst.min.js', '!worker.min.js'] }),
     new MiniCssExtractPlugin({
       filename: '[name].css',
       chunkFilename: '[id].css',

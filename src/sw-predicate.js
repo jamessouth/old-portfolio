@@ -10,11 +10,11 @@ import { CacheFirst } from 'workbox-strategies/CacheFirst.mjs';
 import { StaleWhileRevalidate } from 'workbox-strategies/StaleWhileRevalidate.mjs';
 
 const prefix = 'james south portfolio';
-const FALLBACK_IMAGE_4_URL = '/Project-12/images/project4.785e5e8664eac7ac2bb48e711822e8db.jpg';
-const FALLBACK_IMAGE_7_URL = '/Project-12/images/project7.0d460c6cd15e9ed3f683a05d1a282fbb.jpg';
-const FALLBACK_IMAGE_9_URL = '/Project-12/images/project9.fef701d08faf6c81fe7b50e9c45f79ad.jpg';
-const FALLBACK_IMAGE_10_URL = '/Project-12/images/project10.38128e3e605efa9c9dc9aecec6ffe3f7.jpg';
-const FALLBACK_IMAGE_11_URL = '/Project-12/images/project11.f50561f0701ba64315826deee4556c17.jpg';
+const FALLBACK_IMAGE_4_URL = '/portfolio/images/project4.785e5e8664eac7ac2bb48e711822e8db.jpg';
+const FALLBACK_IMAGE_7_URL = '/portfolio/images/project7.0d460c6cd15e9ed3f683a05d1a282fbb.jpg';
+const FALLBACK_IMAGE_9_URL = '/portfolio/images/project9.fef701d08faf6c81fe7b50e9c45f79ad.jpg';
+const FALLBACK_IMAGE_10_URL = '/portfolio/images/project10.38128e3e605efa9c9dc9aecec6ffe3f7.jpg';
+const FALLBACK_IMAGE_11_URL = '/portfolio/images/project11.f50561f0701ba64315826deee4556c17.jpg';
 
 setCacheNameDetails({ prefix });
 self.__precacheManifest = [].concat(self.__precacheManifest || []);
