@@ -84,7 +84,7 @@ module.exports = {
     },
   },
   plugins: [
-    new CleanWebpackPlugin(['docs'], { exclude: ['burst.min.js', 'worker.min.js'] }),
+    new CleanWebpackPlugin({ cleanAfterEveryBuildPatterns: ['!burst.min.js', '!worker.min.js'] }),
     new MiniCssExtractPlugin({
       filename: '[name].css',
       chunkFilename: '[id].css',
