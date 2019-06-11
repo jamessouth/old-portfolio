@@ -1,6 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
@@ -8,7 +8,7 @@ const ScriptExtHTMLWebpackPlugin = require('script-ext-html-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const { InjectManifest } = require('workbox-webpack-plugin');
 
-const swVol = 'v13';
+const swVol = 'v14';
 
 module.exports = {
   mode: 'production', // development
@@ -84,7 +84,7 @@ module.exports = {
     },
   },
   plugins: [
-    new CleanWebpackPlugin(['docs'], { exclude: ['burst.min.js', 'worker.min.js'] }),
+    new CleanWebpackPlugin({ cleanAfterEveryBuildPatterns: ['!burst.min.js', '!worker.min.js'] }),
     new MiniCssExtractPlugin({
       filename: '[name].css',
       chunkFilename: '[id].css',

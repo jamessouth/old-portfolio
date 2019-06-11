@@ -30,8 +30,8 @@ const panelData = [
     pic: Project1,
   },
   {
-    aria: 'interactive form; ',
-    href: 'https://jamessouth.github.io/JS-Project-3/',
+    aria: 'timezones; node mongodb react graphql',
+    href: 'https://github.com/jamessouth/timezones',
     pic: Project2,
   },
   {
