@@ -8,11 +8,11 @@ const ScriptExtHTMLWebpackPlugin = require('script-ext-html-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const { InjectManifest } = require('workbox-webpack-plugin');
 
-const swVol = 'v4';
+const swVol = 'v5';
 
 module.exports = {
-  mode: 'production', // development
-  devtool: 'source-map', // inline-
+  mode: 'development', // production
+  devtool: 'inline-source-map', //
   entry: {
     main: './src/js/index.js',
   },
@@ -97,13 +97,13 @@ module.exports = {
       defaultAttribute: 'async',
     }),
     new webpack.HashedModuleIdsPlugin(),
-    new InjectManifest({
-      swSrc: './src/sw.js',
-      swDest: 'service-worker.js',
-      importWorkboxFrom: 'disabled',
-      precacheManifestFilename: `precache-manifest-${swVol}.[manifestHash].js`,
-      exclude: [/\.(?:png|jpg|jpeg|svg|gif)$/, /\.map$/, /(animPaint|contact|destroyOpt|gifOpt|sizeOpt|useCubes|anim_polyfill)/],
-    }),
+    // new InjectManifest({
+    //   swSrc: './src/sw.js',
+    //   swDest: 'service-worker.js',
+    //   importWorkboxFrom: 'disabled',
+    //   precacheManifestFilename: `precache-manifest-${swVol}.[manifestHash].js`,
+    //   exclude: [/\.(?:png|jpg|jpeg|svg|gif)$/, /\.map$/, /(animPaint|contact|destroyOpt|gifOpt|sizeOpt|useCubes|anim_polyfill)/],
+    // }),
   ],
   devServer: {
     port: 3000,

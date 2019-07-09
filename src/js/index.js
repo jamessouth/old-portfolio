@@ -1,32 +1,25 @@
 import '../css/main.scss';
-import './loadSW';
-import './makeCubes';
+import { projects } from './projects';
+// import './loadSW';
+import panelFactory from './panelFactory';
 
-const opts = document.querySelectorAll('li');
-const canvas = document.querySelector('#board');
+// const pdiv = document.querySelector('.projects');
+const divs = document.querySelectorAll('.projects div');
+// const canvas = document.querySelector('#board');
 const IOoptions = {
   root: null,
-  rootMargin: '0px 0px 40px 0px',
-  threshold: 0.1,
+  rootMargin: '0px 0px 0px 0px',
+  threshold: 0.5,
 };
 
 function IOcallback(entries, observer) {
   entries.filter(entry => entry.isIntersecting).forEach((x) => {
-    switch (x.target.id) {
-      case 'sizeOpt':
-        import(/* webpackChunkName: "sizeOpt" */ './sizeOpt').catch(err => console.log(err));
-        break;
-      case 'gifOpt':
-        import(/* webpackChunkName: "gifOpt" */ './gifOpt').catch(err => console.log(err));
-        break;
-      case 'destroyOpt':
-        import(/* webpackChunkName: "destroyOpt" */ './destroyOpt').catch(err => console.log(err));
-        break;
-      case 'board':
-        import(/* webpackChunkName: "contact" */ './contact').catch(err => console.log(err));
-        break;
-    }
+    console.log(x, x.target.id);
+    panelFactory(x.target, projects[x.target.id]);
+
+
     observer.unobserve(x.target);
+    // x.target.remove();
   });
 };
 
@@ -37,5 +30,5 @@ if (!window.IntersectionObserver) {
   import(/* webpackChunkName: "contact" */ './contact').catch(err => console.log(err));
 } else {
   const observer = new IntersectionObserver(IOcallback, IOoptions);
-  [...opts, canvas].forEach(el => observer.observe(el));
+  [...divs].forEach(el => observer.observe(el));
 }
