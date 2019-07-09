@@ -32,7 +32,6 @@ const pb = document.querySelectorAll('.projects div');
 //   { transform: 'translateY(10px)' },
 // ];
 // const KEYTIMING2 = { duration: 1000, iterations: 20, direction: 'alternate' };
-// const ev = new CustomEvent('panelsLoaded');
 // function hoverCubes() {
 //   document.dispatchEvent(ev);
 //   cc[0].animate(KEYFRAMES2, KEYTIMING2);
@@ -71,22 +70,27 @@ const pb = document.querySelectorAll('.projects div');
 const panelTemplate = document.createElement('template');
 const htmlStr = `
 <div>
-  <a tabindex="0"></a>
+  <img/>
+  <a rel="noopener noreferrer" target="_blank">code</a>
+  <a rel="noopener noreferrer" target="_blank">live</a>
 </div>
 <style>
 div:focus,
 a:focus{
   outline: none;
 }
+img{
+  width: 80%;
+  height: 80%;
+}
 a{
-  width: 100%;
-  height: 100%;
-  display: inline-block;
+  width: 75px;
+  height: 45px;
 }
 div{
+  backgroundColor: #a55b10;
   width: 288px;
   height: 288px;
-
 `;
 class Panel extends HTMLElement {
   // static get observedAttributes() {

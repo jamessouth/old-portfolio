@@ -9,7 +9,7 @@ const divs = document.querySelectorAll('.projects div');
 const IOoptions = {
   root: null,
   rootMargin: '0px 0px 0px 0px',
-  threshold: 0.5,
+  threshold: 0.1,
 };
 
 function IOcallback(entries, observer) {

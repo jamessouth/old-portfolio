@@ -64,11 +64,7 @@ html{
 .projects{
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(288px, 1fr));
-  // flex-direction: column;
-  // align-items: center;
-  // justify-content: space-around;
-  // height: 32rem;
-  // list-style: none;
+
   width: 90%;
   margin: 0 auto;
   // background-color: red;
@@ -85,7 +81,7 @@ html{
 // }
 
 h1{
-  margin: 1.5rem 0 2.5rem;
+  margin: 1.5rem 0 4.5rem;
   text-align: center;
   font-size: 2rem;
   // @extend %user_select;
