@@ -23,12 +23,12 @@ function IOcallback(entries, observer) {
   });
 };
 
-if (!window.IntersectionObserver) {
-  import(/* webpackChunkName: "sizeOpt" */ './sizeOpt').catch(err => console.log(err));
-  import(/* webpackChunkName: "gifOpt" */ './gifOpt').catch(err => console.log(err));
-  import(/* webpackChunkName: "destroyOpt" */ './destroyOpt').catch(err => console.log(err));
-  import(/* webpackChunkName: "contact" */ './contact').catch(err => console.log(err));
-} else {
+// if (!window.IntersectionObserver) {
+//   import(/* webpackChunkName: "sizeOpt" */ './sizeOpt').catch(err => console.log(err));
+//   import(/* webpackChunkName: "gifOpt" */ './gifOpt').catch(err => console.log(err));
+//   import(/* webpackChunkName: "destroyOpt" */ './destroyOpt').catch(err => console.log(err));
+//   import(/* webpackChunkName: "contact" */ './contact').catch(err => console.log(err));
+// } else {
   const observer = new IntersectionObserver(IOcallback, IOoptions);
   [...divs].forEach(el => observer.observe(el));
-}
+// }

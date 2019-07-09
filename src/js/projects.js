@@ -22,7 +22,6 @@ export const projects = [
   {
     aria: 'timezones',
     tech: 'node mongodb react graphql',
-    live: null,
     code: 'https://github.com/jamessouth/timezones',
     alt: 'a graphql query string and response',
     src: Project1,
@@ -44,7 +43,6 @@ export const projects = [
   },
   {
     aria: 'node web scraper',
-    live: null,
     code: 'https://github.com/jamessouth/JS-Project-6',
     alt: 'a stuffed frog',
     src: Project4,
@@ -52,7 +50,6 @@ export const projects = [
   {
     aria: 'twitter interface',
     tech: 'node express pug es6 ajax',
-    live: null,
     code: 'https://github.com/jamessouth/JS-Project-7',
     alt: 'twitter sign up and login buttons',
     src: Project5,
@@ -100,7 +97,7 @@ export const projects = [
     tech: 'pwa webpack a11y sass components worker paint',
     live: '',
     code: 'https://github.com/jamessouth/portfolio',
-    alt: 'hovering cubes with images of websites on each side',
+    alt: 'hovering cubes with images of my websites on each side',
     src: Project11,
   },
 ];

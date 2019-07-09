@@ -68,12 +68,20 @@ const pb = document.querySelectorAll('.projects div');
 //   }</style>`,
 // ];
 const panelTemplate = document.createElement('template');
-const htmlStr = `
+const oneAnchor = `
+<div>
+  <img/>
+  <a rel="noopener noreferrer" target="_blank">code</a>
+</div>
+`;
+const twoAnchors = `
 <div>
   <img/>
   <a rel="noopener noreferrer" target="_blank">code</a>
   <a rel="noopener noreferrer" target="_blank">live</a>
 </div>
+`;
+const htmlStr = `
 <style>
 div:focus,
 a:focus{
@@ -88,7 +96,7 @@ a{
   height: 45px;
 }
 div{
-  backgroundColor: #a55b10;
+  background-color: #a55b10;
   width: 288px;
   height: 288px;
 `;
@@ -103,15 +111,17 @@ class Panel extends HTMLElement {
 //   height: 288px;
 //   height: 100%;
 
-  constructor({ aria, href, background }) {
+  constructor({ aria, tech, live, code, alt, src }) {
     super();
     // Object.assign(this, config);
     const shadowRoot = this.attachShadow({ mode: 'open' });
-    panelTemplate.innerHTML = htmlStr;
+    panelTemplate.innerHTML = live ? `${twoAnchors}${htmlStr}` : `${oneAnchor}${htmlStr}`;
     shadowRoot.appendChild(panelTemplate.content.cloneNode(true));
-    this.anchor.setAttribute('aria-label', aria);
-    this.anchor.setAttribute('href', href);
-    this.div.style.background = background;
+    this.div.setAttribute('aria-label', aria);
+    this.anchors[0].setAttribute('href', code);
+    live && this.anchors[1].setAttribute('href', live);
+    this.img.setAttribute('src', src);
+    this.img.setAttribute('alt', alt);
     // if (this.gifURL) {
     //   this.setAttribute('gif-on', false);
     //   this.setAttribute('gif-name', this.gifURL);
@@ -133,12 +143,16 @@ class Panel extends HTMLElement {
   //   }
   // }
 
-  get anchor() {
-    return this.shadowRoot.querySelector('a');
+  get anchors() {
+    return this.shadowRoot.querySelectorAll('a');
   }
 
   get div() {
     return this.shadowRoot.querySelector('div');
+  }
+
+  get img() {
+    return this.shadowRoot.querySelector('img');
   }
 }
 // function getUseCubesJS() {
