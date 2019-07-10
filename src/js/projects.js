@@ -17,6 +17,7 @@ export const projects = [
     live: 'https://jamessouth.github.io/JS-Project-1/',
     code: 'https://github.com/jamessouth/JS-Project-1',
     alt: 'part of a famous quote',
+    tech: 'javascript',
     src: Project0,
   },
   {
@@ -31,6 +32,7 @@ export const projects = [
     live: 'https://jamessouth.github.io/JS-Project-4/',
     code: 'https://github.com/jamessouth/JS-Project-4',
     alt: 'a tic tac toe game',
+    tech: 'javascript',
     src: Project2,
   },
   {
@@ -42,9 +44,10 @@ export const projects = [
     src: Project3,
   },
   {
-    aria: 'node web scraper',
+    aria: 'node.js web scraper',
     code: 'https://github.com/jamessouth/JS-Project-6',
     alt: 'a stuffed frog',
+    tech: 'javascript',
     src: Project4,
   },
   {

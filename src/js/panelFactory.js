@@ -69,12 +69,16 @@ const pb = document.querySelectorAll('.projects div');
 // ];
 const panelTemplate = document.createElement('template');
 const oneAnchorMarkup = `
+<h3></h3>
+<p></p>
 <div>
   <img/>
   <a rel="noopener noreferrer" target="_blank">code</a>
 </div>
 `;
 const twoAnchorsMarkup = `
+<h3></h3>
+<p></p>
 <div>
   <img/>
   <a rel="noopener noreferrer" target="_blank">code</a>
@@ -91,6 +95,23 @@ img{
   width: 100%;
   height: 100%;
   grid-area: top;
+}
+h3{
+  text-align: center;
+  font-size: 2em;
+  line-height: 1.5;
+  color: #30511d;
+  margin: 0;
+  background-color: #eff4f8;
+}
+p{
+  margin: 0;
+  text-align: center;
+  font-size: 1.5em;
+  line-height: 1;
+  padding-bottom: .5rem;
+  color: #8b0000;
+  background-color: #eff4f8;
 }
 a{
   width: calc(100% - 1px);
@@ -145,10 +166,12 @@ class Panel extends HTMLElement {
     panelTemplate.innerHTML = live ? `${twoAnchorsMarkup}${htmlStr}${twoAnchorsStyle}` : `${oneAnchorMarkup}${htmlStr}${oneAnchorStyle}`;
     shadowRoot.appendChild(panelTemplate.content.cloneNode(true));
     this.div.setAttribute('aria-label', aria);
+    this.h3.textContent = aria;
     this.anchors[0].setAttribute('href', code);
     live && this.anchors[1].setAttribute('href', live);
     this.img.setAttribute('src', src);
     this.img.setAttribute('alt', alt);
+    this.p.textContent = tech;
     // if (this.gifURL) {
     //   this.setAttribute('gif-on', false);
     //   this.setAttribute('gif-name', this.gifURL);
@@ -180,6 +203,14 @@ class Panel extends HTMLElement {
 
   get img() {
     return this.shadowRoot.querySelector('img');
+  }
+
+  get h3() {
+    return this.shadowRoot.querySelector('h3');
+  }
+
+  get p() {
+    return this.shadowRoot.querySelector('p');
   }
 }
 // function getUseCubesJS() {
