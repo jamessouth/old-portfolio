@@ -68,13 +68,13 @@ const pb = document.querySelectorAll('.projects div');
 //   }</style>`,
 // ];
 const panelTemplate = document.createElement('template');
-const oneAnchor = `
+const oneAnchorMarkup = `
 <div>
   <img/>
   <a rel="noopener noreferrer" target="_blank">code</a>
 </div>
 `;
-const twoAnchors = `
+const twoAnchorsMarkup = `
 <div>
   <img/>
   <a rel="noopener noreferrer" target="_blank">code</a>
@@ -103,23 +103,30 @@ a{
   color: #30511d;
   font-size: 2em;
 }
-a:last-of-type{
-  grid-area: rbot;
-  border-left: 1px solid white;
-}
-a:first-of-type{
-  grid-area: lbot;
-  border-right: 1px solid black;
-  border-left: none;
-}
 div{
   display: grid;
   grid: "top top" 90% "lbot rbot" 10% / 1fr 1fr;
   justify-items: center;
-  background-color: #efefef;
   width: 288px;
   height: 320px;
+}
 `;
+const oneAnchorStyle = `
+a{
+  width: 100%;
+  grid-column: 1 / -1;
+`;
+const twoAnchorsStyle = `
+a:first-of-type{
+  grid-area: lbot;
+  border-right: 1px solid #30511d;
+}
+a:last-of-type{
+  grid-area: rbot;
+  border-left: 1px solid #30511d;
+`;
+
+
 class Panel extends HTMLElement {
   // static get observedAttributes() {
   //   return ['gif-on'];
@@ -135,7 +142,7 @@ class Panel extends HTMLElement {
     super();
     // Object.assign(this, config);
     const shadowRoot = this.attachShadow({ mode: 'open' });
-    panelTemplate.innerHTML = live ? `${twoAnchors}${htmlStr}` : `${oneAnchor}${htmlStr}`;
+    panelTemplate.innerHTML = live ? `${twoAnchorsMarkup}${htmlStr}${twoAnchorsStyle}` : `${oneAnchorMarkup}${htmlStr}${oneAnchorStyle}`;
     shadowRoot.appendChild(panelTemplate.content.cloneNode(true));
     this.div.setAttribute('aria-label', aria);
     this.anchors[0].setAttribute('href', code);
