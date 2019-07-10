@@ -71,6 +71,7 @@ const panelTemplate = document.createElement('template');
 const oneAnchorMarkup = `
 <h3></h3>
 <p></p>
+<p></p>
 <div>
   <img/>
   <a rel="noopener noreferrer" target="_blank">code</a>
@@ -78,6 +79,7 @@ const oneAnchorMarkup = `
 `;
 const twoAnchorsMarkup = `
 <h3></h3>
+<p></p>
 <p></p>
 <div>
   <img/>
@@ -109,9 +111,14 @@ p{
   text-align: center;
   font-size: 1.5em;
   line-height: 1;
-  padding-bottom: .5rem;
-  color: #8b0000;
+  height: 24px;
+  color: #30511d;
+  font-weight: bold;
   background-color: #eff4f8;
+}
+p:last-of-type{
+  border-bottom: 1px solid #30511d;
+  padding-bottom: .5rem;
 }
 a{
   width: calc(100% - 1px);
@@ -121,6 +128,7 @@ a{
   text-decoration: none;
   cursor: pointer;
   background-color: #eff4f8;
+  border-top: 1px solid #30511d;
   color: #30511d;
   font-size: 2em;
 }
@@ -159,7 +167,7 @@ class Panel extends HTMLElement {
 
 
 
-  constructor({ aria, tech, live, code, alt, src }) {
+  constructor({ aria, tech1, tech2, live, code, alt, src }) {
     super();
     // Object.assign(this, config);
     const shadowRoot = this.attachShadow({ mode: 'open' });
@@ -171,7 +179,8 @@ class Panel extends HTMLElement {
     live && this.anchors[1].setAttribute('href', live);
     this.img.setAttribute('src', src);
     this.img.setAttribute('alt', alt);
-    this.p.textContent = tech;
+    this.ps[0].textContent = tech1;
+    this.ps[1].textContent = tech2;
     // if (this.gifURL) {
     //   this.setAttribute('gif-on', false);
     //   this.setAttribute('gif-name', this.gifURL);
@@ -209,8 +218,8 @@ class Panel extends HTMLElement {
     return this.shadowRoot.querySelector('h3');
   }
 
-  get p() {
-    return this.shadowRoot.querySelector('p');
+  get ps() {
+    return this.shadowRoot.querySelectorAll('p');
   }
 }
 // function getUseCubesJS() {
