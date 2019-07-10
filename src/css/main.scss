@@ -72,7 +72,7 @@ html{
 .projects div{
   margin: 0 auto 12rem;
   width: 288px;
-  height: 288px;
+  height: 320px;
   background-color: transparent;
 }
 // .projects li::before{
@@ -83,7 +83,7 @@ html{
 h1{
   margin: 1.5rem 0 4.5rem;
   text-align: center;
-  font-size: 2rem;
+  font-size: 2em;
   // @extend %user_select;
   // @media #{$mobile2} {
   //   font-size: 2em;

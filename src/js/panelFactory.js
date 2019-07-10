@@ -88,17 +88,36 @@ a:focus{
   outline: none;
 }
 img{
-  width: 80%;
-  height: 80%;
+  width: 100%;
+  height: 100%;
+  grid-area: top;
 }
 a{
-  width: 75px;
-  height: 45px;
+  width: calc(100% - 1px);
+  height: 32px;
+  text-align: center;
+  line-height: 0.9;
+  text-decoration: none;
+  cursor: pointer;
+  background-color: #eff4f8;
+  color: #30511d;
+  font-size: 2em;
+}
+a:first-of-type{
+  grid-area: lbot;
+  border-right: 1px solid white;
+}
+a:last-of-type{
+  grid-area: rbot;
+  border-left: 1px solid white;
 }
 div{
-  background-color: #a55b10;
+  display: grid;
+  grid: "top top" 90% "lbot rbot" 10% / 1fr 1fr;
+  justify-items: center;
+  background-color: #efefef;
   width: 288px;
-  height: 288px;
+  height: 320px;
 `;
 class Panel extends HTMLElement {
   // static get observedAttributes() {
@@ -107,9 +126,9 @@ class Panel extends HTMLElement {
 
 // }
 // :host{
-//   width: 288px;
-//   height: 288px;
-//   height: 100%;
+//   display: grid;
+
+
 
   constructor({ aria, tech, live, code, alt, src }) {
     super();
