@@ -95,7 +95,6 @@ export const projects = [
   {
     aria: 'portfolio',
     tech: 'pwa webpack a11y sass components worker paint',
-    live: '',
     code: 'https://github.com/jamessouth/portfolio',
     alt: 'hovering cubes with images of my websites on each side',
     src: Project11,

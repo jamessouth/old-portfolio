@@ -103,13 +103,14 @@ a{
   color: #30511d;
   font-size: 2em;
 }
-a:first-of-type{
-  grid-area: lbot;
-  border-right: 1px solid white;
-}
 a:last-of-type{
   grid-area: rbot;
   border-left: 1px solid white;
+}
+a:first-of-type{
+  grid-area: lbot;
+  border-right: 1px solid black;
+  border-left: none;
 }
 div{
   display: grid;
