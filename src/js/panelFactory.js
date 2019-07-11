@@ -92,6 +92,8 @@ const htmlStr = `
 div:focus,
 a:focus{
   outline: none;
+  -webkit-filter: invert(1);
+  filter: invert(1);
 }
 img{
   width: 100%;
@@ -122,7 +124,7 @@ p:last-of-type{
 }
 a{
   width: calc(100% - 1px);
-  height: 32px;
+  height: 31px;
   text-align: center;
   line-height: 0.9;
   text-decoration: none;
@@ -167,14 +169,13 @@ class Panel extends HTMLElement {
 
 
 
-  constructor({ aria, tech1, tech2, live, code, alt, src }) {
+  constructor({ title, tech1, tech2, live, code, alt, src }) {
     super();
     // Object.assign(this, config);
     const shadowRoot = this.attachShadow({ mode: 'open' });
     panelTemplate.innerHTML = live ? `${twoAnchorsMarkup}${htmlStr}${twoAnchorsStyle}` : `${oneAnchorMarkup}${htmlStr}${oneAnchorStyle}`;
     shadowRoot.appendChild(panelTemplate.content.cloneNode(true));
-    this.div.setAttribute('aria-label', aria);
-    this.h3.textContent = aria;
+    this.h3.textContent = title;
     this.anchors[0].setAttribute('href', code);
     live && this.anchors[1].setAttribute('href', live);
     this.img.setAttribute('src', src);
