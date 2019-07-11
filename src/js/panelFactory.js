@@ -67,6 +67,27 @@ const pb = document.querySelectorAll('.projects div');
 //   transform-origin: bottom;
 //   }</style>`,
 // ];
+function anchorMarkupTag(strings, ...anchors) {
+  let str = [...anchors].map(anc => `<a rel="noopener noreferrer" target="_blank">${anc}</a>`).join('');
+
+  return `
+    <h3></h3>
+    <p></p>
+    <p></p>
+    <div>
+      <img/>
+      ${str}
+    </div>
+    `;
+}
+
+let one = anchorMarkupTag`${`code`}`;
+console.log(one);
+let two = anchorMarkupTag`${`code`}${`live`}`;
+console.log(two);
+
+
+
 const panelTemplate = document.createElement('template');
 const oneAnchorMarkup = `
 <h3></h3>
