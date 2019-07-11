@@ -126,7 +126,7 @@ a{
   width: calc(100% - 1px);
   height: 31px;
   text-align: center;
-  line-height: 0.9;
+  line-height: 0.8;
   text-decoration: none;
   cursor: pointer;
   background-color: #eff4f8;
