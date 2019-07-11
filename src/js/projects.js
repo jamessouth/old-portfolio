@@ -10,6 +10,7 @@ import dash from '../images/dash.jpg';
 import emp from '../images/emp.jpg';
 import flickr from '../images/flickr.jpg';
 import port from '../images/port.jpg';
+import wdk from '../images/wdk.jpg';
 
 export const projects = [
   {
@@ -19,6 +20,15 @@ export const projects = [
     alt: 'part of a famous quote',
     tech1: 'javascript',
     src: rando,
+  },
+  {
+    title: 'web dev kit',
+    live: 'https://chrome.google.com/webstore/detail/web-dev-kit/geedfiohcopjhgancckdfanhobhfbgmm',
+    code: 'https://github.com/jamessouth/webdevkit',
+    alt: 'a laptop on a desk',
+    tech1: 'javascript',
+    tech2: 'chrome extension',
+    src: wdk,
   },
   {
     title: 'timezones',

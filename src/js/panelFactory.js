@@ -133,6 +133,7 @@ a{
   border-top: 1px solid #30511d;
   color: #30511d;
   font-size: 2em;
+  font-weight: bold;
 }
 div{
   display: grid;
