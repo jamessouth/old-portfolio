@@ -191,7 +191,7 @@ class Panel extends HTMLElement {
 
 
 
-  constructor({ title, tech1, tech2, live, code, alt, src }) {
+  constructor({ title, tech1, tech2, live, code, alt, src, live_aria, code_aria }) {
     super();
     // Object.assign(this, config);
     const shadowRoot = this.attachShadow({ mode: 'open' });
@@ -199,7 +199,9 @@ class Panel extends HTMLElement {
     shadowRoot.appendChild(panelTemplate.content.cloneNode(true));
     this.h3.textContent = title;
     this.anchors[0].setAttribute('href', code);
+    this.anchors[0].setAttribute('aria-label', code_aria);
     live && this.anchors[1].setAttribute('href', live);
+    live_aria && this.anchors[1].setAttribute('aria-label', live_aria);
     this.img.setAttribute('src', src);
     this.img.setAttribute('alt', alt);
     this.ps[0].textContent = tech1;
