@@ -42,7 +42,7 @@ export const projects = [
     tech2: 'typescript',
     live: 'https://jamessouth.github.io/fifteen-puzzle-generator/home',
     code: 'https://github.com/jamessouth/fifteen-puzzle-generator',
-    alt: 'the web form for the 15 puzzle generator',
+    alt: 'a web form',
     src: Project3,
   },
   {
@@ -65,7 +65,7 @@ export const projects = [
     tech1: 'angular typescript',
     tech2: 'nativescript',
     code: 'https://github.com/jamessouth/face-scramble',
-    alt: 'screenshot from a smartphone showing a 15 puzzle being solved along with moves and elapsed time',
+    alt: 'a 15 puzzle being solved along with moves and elapsed time',
     src: Project6,
   },
   {
@@ -74,7 +74,7 @@ export const projects = [
     tech2: 'npm|v1.0.3',
     live: 'https://www.npmjs.com/package/vue-style-lint',
     code: 'https://github.com/jamessouth/vue-style-lint',
-    alt: 'text in a computer terminal program',
+    alt: 'output of a computer terminal',
     src: Project7,
   },
   {
