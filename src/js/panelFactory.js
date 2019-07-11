@@ -67,8 +67,8 @@ const pb = document.querySelectorAll('.projects div');
 //   transform-origin: bottom;
 //   }</style>`,
 // ];
-function anchorMarkupTag(strings, ...anchors) {
-  let str = [...anchors].map(anc => `<a rel="noopener noreferrer" target="_blank">${anc}</a>`).join('');
+function panelMarkupTag(strings, ...anchors) {
+  const str = [...anchors].map(anc => `<a rel="noopener noreferrer" target="_blank">${anc}</a>`).join('\n      ');
 
   return `
     <h3></h3>
@@ -81,34 +81,10 @@ function anchorMarkupTag(strings, ...anchors) {
     `;
 }
 
-let one = anchorMarkupTag`${`code`}`;
-console.log(one);
-let two = anchorMarkupTag`${`code`}${`live`}`;
-console.log(two);
-
-
 
 const panelTemplate = document.createElement('template');
-const oneAnchorMarkup = `
-<h3></h3>
-<p></p>
-<p></p>
-<div>
-  <img/>
-  <a rel="noopener noreferrer" target="_blank">code</a>
-</div>
-`;
-const twoAnchorsMarkup = `
-<h3></h3>
-<p></p>
-<p></p>
-<div>
-  <img/>
-  <a rel="noopener noreferrer" target="_blank">code</a>
-  <a rel="noopener noreferrer" target="_blank">live</a>
-</div>
-`;
-const htmlStr = `
+
+const styleTag = `
 <style>
 div:focus,
 a:focus{
@@ -121,23 +97,22 @@ img{
   height: 100%;
   grid-area: top;
 }
-h3{
+h3, p, a{
   text-align: center;
+  background-color: #eff4f8;
+  color: #30511d;
+}
+h3{
   font-size: 2em;
   line-height: 1.5;
-  color: #30511d;
   margin: 0;
-  background-color: #eff4f8;
 }
 p{
   margin: 0;
-  text-align: center;
   font-size: 1.5em;
   line-height: 1;
   height: 24px;
-  color: #30511d;
   font-weight: bold;
-  background-color: #eff4f8;
 }
 p:last-of-type{
   border-bottom: 1px solid #30511d;
@@ -146,14 +121,11 @@ p:last-of-type{
 a{
   width: calc(100% - 1px);
   height: 31px;
-  text-align: center;
   line-height: 0.8;
+  font-size: 2em;
   text-decoration: none;
   cursor: pointer;
-  background-color: #eff4f8;
   border-top: 1px solid #30511d;
-  color: #30511d;
-  font-size: 2em;
   font-weight: bold;
 }
 div{
@@ -195,7 +167,7 @@ class Panel extends HTMLElement {
     super();
     // Object.assign(this, config);
     const shadowRoot = this.attachShadow({ mode: 'open' });
-    panelTemplate.innerHTML = live ? `${twoAnchorsMarkup}${htmlStr}${twoAnchorsStyle}` : `${oneAnchorMarkup}${htmlStr}${oneAnchorStyle}`;
+    panelTemplate.innerHTML = live ? `${panelMarkupTag`${`code`}${`live`}`}${styleTag}${twoAnchorsStyle}` : `${panelMarkupTag`${`code`}`}${styleTag}${oneAnchorStyle}`;
     shadowRoot.appendChild(panelTemplate.content.cloneNode(true));
     this.h3.textContent = title;
     this.anchors[0].setAttribute('href', code);
