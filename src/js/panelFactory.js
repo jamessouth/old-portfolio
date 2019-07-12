@@ -89,8 +89,8 @@ const styleTag = `
 div:focus,
 a:focus{
   outline: none;
-  -webkit-filter: invert(1);
-  filter: invert(1);
+  background-color: #1a2845;
+  color: #e5d7ba;
 }
 img{
   width: 100%;
@@ -118,13 +118,13 @@ p:last-of-type{
   padding-bottom: .5rem;
 }
 a{
-  width: calc(100% - 1px);
-  height: 31px;
+  width: calc(100% - 2px);
+  height: 30px;
   line-height: 0.8;
   font-size: 2em;
   text-decoration: none;
   cursor: pointer;
-  border-top: 1px solid #30511d;
+  border: 1px solid #30511d;
   font-weight: bold;
 }
 div{
@@ -137,19 +137,16 @@ div{
 `;
 const oneAnchorStyle = `
 a{
-  width: 100%;
   grid-column: 1 / -1;
 `;
 const twoAnchorsStyle = `
 a:first-of-type{
   grid-area: lbot;
-  border-right: 1px solid #30511d;
 }
 a:last-of-type{
   grid-area: rbot;
-  border-left: 1px solid #30511d;
 `;
-  // background-color: #eff4f8;
+
 
 class Panel extends HTMLElement {
   // static get observedAttributes() {

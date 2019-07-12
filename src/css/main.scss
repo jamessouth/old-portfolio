@@ -72,15 +72,15 @@ html{
   // background-color: red;
 }
 .projects div{
-  margin: 0 auto 8rem;
+  margin: 0 auto 7rem;
   width: 288px;
-  height: 430px;
+  height: 435px;
   background-color: transparent;
 }
 .projects div:focus{
   outline: none;
   // border-top: 2px solid #2323c5;
-  border-bottom: 5px solid #2323c5;
+  border-bottom: 10px solid #2323c5;
 }
 // .projects li::before{
 //   content: "\200B";
@@ -90,7 +90,7 @@ html{
 h1{
   // --a: 0;
   // background-image: paint(b);
-  margin: 1.5rem 0 4.5rem;
+  margin: 1.5rem 0 6rem;
   text-align: center;
   font-size: 2em;
 
@@ -102,7 +102,7 @@ h1{
 h2{
   text-align: center;
   font-size: 1.75em;
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
 }
 
 
