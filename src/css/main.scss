@@ -13,51 +13,53 @@
 }
 body{
   // height: 10000px;
-  position: relative;
+  // position: relative;
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
+  background: linear-gradient(90deg, #ffff00 -55%, #eed6aade 10%, 70%, #bfc1c0de 110%);
 }
-body:after{
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 100vh;
-  z-index: -3;
-  @include bodybg('../images/sky-mob.jpg');
-  @media #{$retina} {
-    @include bodybg('../images/sky-mob@2x.jpg');
-  }
-  @media #{$mobile2} {
-    @include bodybg('../images/sky-mob2.jpg');
-    @media #{$retina} {
-      @include bodybg('../images/sky-mob2@2x.jpg');
-    }
-  }
-  @media #{$tablet} {
-    @include bodybg('../images/sky-tab.jpg');
-    @media #{$retina} {
-      @include bodybg('../images/sky-tab@2x.jpg');
-    }
-  }
-  @media #{$medium} {
-    @include bodybg('../images/sky-med.jpg');
-    @media #{$retina} {
-      @include bodybg('../images/sky-med@2x.jpg');
-    }
-  }
-  @media #{$big} {
-    @include bodybg('../images/sky-big.jpg');
-    @media #{$retina} {
-      @include bodybg('../images/sky-big@2x.jpg');
-    }
-  }
-}
+// body:after{
+//   content: "";
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   right: 0;
+//   height: 100vh;
+//   z-index: -3;
+//   @include bodybg('../images/sky-mob.jpg');
+//   @media #{$retina} {
+//     @include bodybg('../images/sky-mob@2x.jpg');
+//   }
+//   @media #{$mobile2} {
+//     @include bodybg('../images/sky-mob2.jpg');
+//     @media #{$retina} {
+//       @include bodybg('../images/sky-mob2@2x.jpg');
+//     }
+//   }
+//   @media #{$tablet} {
+//     @include bodybg('../images/sky-tab.jpg');
+//     @media #{$retina} {
+//       @include bodybg('../images/sky-tab@2x.jpg');
+//     }
+//   }
+//   @media #{$medium} {
+//     @include bodybg('../images/sky-med.jpg');
+//     @media #{$retina} {
+//       @include bodybg('../images/sky-med@2x.jpg');
+//     }
+//   }
+//   @media #{$big} {
+//     @include bodybg('../images/sky-big.jpg');
+//     @media #{$retina} {
+//       @include bodybg('../images/sky-big@2x.jpg');
+//     }
+//   }
+// }
 html{
-  overflow-x: hidden;
+  // overflow-x: hidden;
   // font-size: 18px;
+
 }
 
 
@@ -86,9 +88,12 @@ html{
 // }
 
 h1{
+  // --a: 0;
+  // background-image: paint(b);
   margin: 1.5rem 0 4.5rem;
   text-align: center;
   font-size: 2em;
+
   // @extend %user_select;
   // @media #{$mobile2} {
   //   font-size: 2em;

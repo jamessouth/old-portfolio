@@ -99,7 +99,6 @@ img{
 }
 h3, p, a{
   text-align: center;
-  background-color: #eff4f8;
   color: #30511d;
 }
 h3{
@@ -150,7 +149,7 @@ a:last-of-type{
   grid-area: rbot;
   border-left: 1px solid #30511d;
 `;
-
+  // background-color: #eff4f8;
 
 class Panel extends HTMLElement {
   // static get observedAttributes() {
