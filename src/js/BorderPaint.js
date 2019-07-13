@@ -1,17 +1,51 @@
 class BorderPaint {
-  static get inputProperties() { return ['--time']; }
+
+  pipe(...fns) {
+    return function inner(start) {
+      return fns.reduce((val, fn) => fn(val), start);
+    };
+  }
+
+  getHue() {
+    return Math.floor(Math.random() * 101) + 190;
+  }
+
+  getDirectionInRadians() {
+    return Math.random() * Math.PI;
+  }
+
+  getHypoLength(ang) {
+    return 10 / Math.cos(ang);
+  }
+
+  getCoord(hypo) {
+    const dir = hypo < 0 ? -1 : 1;
+    const opSide = Math.sqrt((hypo * hypo) - 100);
+    return opSide * dir;
+  }
+
+  getWidth() {
+    return Math.floor(Math.random() * 10) + 2;
+  }
 
   paint(ctx, geom, props) {
-    const tick = parseFloat(props.get('--time').toString());
-    if (tick < 300) {
-      ctx.fillStyle = `hsl(${tick + 30}deg, 85%, 49%)`;
-      ctx.fillRect(0, 0, tick / 2, geom.height);
-      ctx.fillRect(geom.width - tick / 2, 0, geom.width, geom.height);
-    } else {
-      ctx.fillStyle = `hsl(${(tick % 30) + 15}deg, 85%, 49%)`;
-      ctx.arc(geom.width / 2, geom.height / 2, 19 * Math.log(tick - 300) + 5, 0, Math.PI * 2);
+
+    for (let i = 0; i < 49; i++) {
+      const dir = this.getDirectionInRadians();
+
+      const opLen = this.pipe(
+        this.getHypoLength,
+        this.getCoord,
+        Math.round)(dir);
+
+      const stPt = i * 6;
+      ctx.beginPath();
+      ctx.moveTo(stPt, 425);
+      ctx.lineTo(stPt + opLen, 435);
+      ctx.lineWidth = this.getWidth();
+      ctx.strokeStyle = `hsl(${this.getHue()}deg, 85%, 49%)`;
+      ctx.stroke();
     }
-    ctx.fill();
   }
 }
 registerPaint('borderPaint', BorderPaint);
