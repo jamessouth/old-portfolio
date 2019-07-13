@@ -2,9 +2,21 @@ import '../css/main.scss';
 import { projects } from './projects';
 // import './loadSW';
 import panelFactory from './panelFactory';
+// import animatePaint from './animatePaint';
 
+
+
+
+
+CSS.paintWorklet.addModule('./BorderPaint.js');
 // const pdiv = document.querySelector('.projects');
 const divs = document.querySelectorAll('.projects div');
+
+
+
+// divs.forEach((div) => {
+//   div.addEventListener('focus', animatePaint);
+// })
 // const canvas = document.querySelector('#board');
 const IOoptions = {
   root: null,
@@ -12,22 +24,22 @@ const IOoptions = {
   threshold: 0.1,
 };
 
-let animatePaint;
+// let animatePaint;
 
 function IOcallback(entries, observer) {
   entries.filter(entry => entry.isIntersecting).forEach((x) => {
     console.log(x, x.target.id);
 
-    // if (x.target.id === '0') {
-    //   console.log('here');
-    //   import(/* webpackChunkName: "animPaint" */ './animPaint').then(mod => {
-    //     animatePaint = mod.default;
-    //     CSS.paintWorklet.addModule('./burst.min.js');
-    //     animatePaint();
-    //   }).catch(err => console.log(err));
-    //
-    //
-    // }
+
+
+
+        // animatePaint = mod.default;
+
+
+
+
+
+
 
 
     panelFactory(x.target, projects[x.target.id]);

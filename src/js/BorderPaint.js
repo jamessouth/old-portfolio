@@ -1,8 +1,8 @@
-class B {
-  static get inputProperties() { return ['--a']; }
+class BorderPaint {
+  static get inputProperties() { return ['--time']; }
 
   paint(ctx, geom, props) {
-    const tick = parseFloat(props.get('--a').toString());
+    const tick = parseFloat(props.get('--time').toString());
     if (tick < 300) {
       ctx.fillStyle = `hsl(${tick + 30}deg, 85%, 49%)`;
       ctx.fillRect(0, 0, tick / 2, geom.height);
@@ -14,4 +14,4 @@ class B {
     ctx.fill();
   }
 }
-registerPaint('b', B);
+registerPaint('borderPaint', BorderPaint);
