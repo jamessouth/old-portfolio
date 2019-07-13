@@ -29,14 +29,12 @@ class BorderPaint {
   }
 
   paint(ctx, geom, props) {
-
     for (let i = 0; i < 49; i++) {
-      const dir = this.getDirectionInRadians();
 
       const opLen = this.pipe(
         this.getHypoLength,
         this.getCoord,
-        Math.round)(dir);
+        Math.round)(this.getDirectionInRadians());
 
       const stPt = i * 6;
       ctx.beginPath();
