@@ -1,5 +1,5 @@
 import '../css/main.scss';
-import { projects } from './projects';
+
 // import './loadSW';
 import panelFactory from './panelFactory';
 // import animatePaint from './animatePaint';
@@ -31,18 +31,7 @@ function IOcallback(entries, observer) {
     console.log(x, x.target.id);
 
 
-
-
-        // animatePaint = mod.default;
-
-
-
-
-
-
-
-
-    panelFactory(x.target, projects[x.target.id]);
+    panelFactory(x);
 
 
     observer.unobserve(x.target);

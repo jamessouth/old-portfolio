@@ -1,72 +1,17 @@
-
+import { projects } from './projects';
 // import Project4GIF from '../images/p4.gif';
 // import Project7GIF from '../images/p7.gif';
 // import Project9GIF from '../images/p9.gif';
 // import Project10GIF from '../images/p10.gif';
 // import Project11GIF from '../images/p11.gif';
+const myWorker = new Worker('./worker.js');
 
-const pb = document.querySelectorAll('.projects div');
-// const cc = document.querySelectorAll('.cube-container');
-// const hold = document.querySelector('.hold');
-// const perf = performance.now();
-// let interval = 1000;
-// const subhead = hold.querySelectorAll('.subhead:nth-of-type(odd)');
-// const desc = hold.querySelectorAll('.subhead:nth-of-type(even)');
 
-// const rando = () => Math.floor(Math.random() * 360) - 180;
-// const KEYFRAMES = () => ([
-//   { transform: 'rotateX(0deg) rotateY(0deg)' },
-//   { transform: `rotateX(${rando()}deg) rotateY(${rando()}deg)` },
-//   { transform: `rotateX(${rando()}deg) rotateY(${rando()}deg)` },
-//   { transform: `rotateX(${rando()}deg) rotateY(${rando()}deg)` },
-//   { transform: `rotateX(${rando()}deg) rotateY(${rando()}deg)` },
-//   { transform: `rotateX(${rando()}deg) rotateY(${rando()}deg)` },
-//   { transform: 'rotateX(0deg) rotateY(0deg)' },
-// ]);
-// const KEYTIMING = {
-//   duration: 6000, iterations: 1, delay: 900, easing: 'linear',
-// };
-// let no = 0;
-// const KEYFRAMES2 = [
-//   { transform: 'translateY(0px)' },
-//   { transform: 'translateY(10px)' },
-// ];
-// const KEYTIMING2 = { duration: 1000, iterations: 20, direction: 'alternate' };
-// function hoverCubes() {
-//   document.dispatchEvent(ev);
-//   cc[0].animate(KEYFRAMES2, KEYTIMING2);
-//   cc[1].animate(KEYFRAMES2, KEYTIMING2);
-// }
-// const classes = [
-//   `  transform: translateZ(calc(var(--size) / 2));
-//   }</style>`,
-//   `  transform: rotateY(270deg) translateX(calc(var(--size) / -2));
-//   -webkit-transform-origin: bottom left;
-//   -moz-transform-origin: bottom left;
-//   -o-transform-origin: bottom left;
-//   transform-origin: bottom left;
-//   }</style>`,
-//   `  transform: rotateY(-270deg) translateX(calc(var(--size) / 2));
-//   -webkit-transform-origin: bottom right;
-//   -moz-transform-origin: bottom right;
-//   -o-transform-origin: bottom right;
-//   transform-origin: bottom right;
-//   }</style>`,
-//   `  transform: translateZ(calc(var(--size) / -2)) rotateY(180deg);
-//   }</style>`,
-//   `  transform: translateZ(calc(var(--size) / -2)) rotateX(90deg);
-//   -webkit-transform-origin: top;
-//   -moz-transform-origin: top;
-//   -o-transform-origin: top;
-//   transform-origin: top;
-//   }</style>`,
-//   `  transform: translateZ(calc(var(--size) / -2)) rotateX(-90deg);
-//   -webkit-transform-origin: bottom;
-//   -moz-transform-origin: bottom;
-//   -o-transform-origin: bottom;
-//   transform-origin: bottom;
-//   }</style>`,
-// ];
+
+
+const divs = document.querySelectorAll('.projects div');
+
+
 function panelMarkupTag(strings, ...anchors) {
   const str = [...anchors].map(anc => `<a rel="noopener noreferrer" target="_blank">${anc}</a>`).join('\n      ');
 
@@ -148,6 +93,9 @@ a:last-of-type{
 `;
 
 
+
+
+
 class Panel extends HTMLElement {
   // static get observedAttributes() {
   //   return ['gif-on'];
@@ -159,7 +107,7 @@ class Panel extends HTMLElement {
 
 
 
-  constructor({ title, tech1, tech2, live, code, alt, src, live_aria, code_aria }) {
+  constructor({ title, tech1, tech2, live, code, alt, src, live_aria, code_aria }, no) {
     super();
     // Object.assign(this, config);
     const shadowRoot = this.attachShadow({ mode: 'open' });
@@ -174,26 +122,13 @@ class Panel extends HTMLElement {
     this.img.setAttribute('alt', alt);
     this.ps[0].textContent = tech1;
     this.ps[1].textContent = tech2;
-    // if (this.gifURL) {
-    //   this.setAttribute('gif-on', false);
-    //   this.setAttribute('gif-name', this.gifURL);
-    // }
-    // ['mouseover', 'focus', 'touchstart'].forEach((evt) => {
-    //   this.addEventListener(evt, () => {
-    //     const projData = this.anchor.getAttribute('aria-label').split('; ');
-    //     [subhead[Math.floor(num / 6)].textContent,
-    //       desc[Math.floor(num / 6)].textContent] = projData;
-    //   }, { capture: true, passive: true });
-    // });
+    // console.log(new Date());
+
+
   }
 
-  // attributeChangedCallback(attrName, oldVal, newVal) {
-  //   if (newVal === 'true') {
-  //     this.div.style.backgroundImage = `url(${this.getAttribute('gif-name')})`;
-  //   } else {
-  //     this.div.style.backgroundImage = `url(${this.pic})`;
-  //   }
-  // }
+
+
 
   get anchors() {
     return this.shadowRoot.querySelectorAll('a');
@@ -218,12 +153,24 @@ class Panel extends HTMLElement {
 // function getUseCubesJS() {
 //   return import(/* webpackChunkName: "useCubes" */ './useCubes').catch(err => console.log(err));
 // }
-export default function panelFactory(div, project) {
+myWorker.addEventListener('message', e => {
+  // console.log(e);
+  // console.log(divs);
+  const panel = new Panel(projects[e.data], e.data);
+  divs[e.data].appendChild(panel);
+
+});
+
+export default function panelFactory({ target: { id } }) {
+  // console.log('kkkkk');
+  myWorker.postMessage(id);
+
+
+
+
+
   // if (no < 6) requestAnimationFrame(buildCubes);
   // if ((Math.floor(time || perf) - perf) > interval) {
-    const panel = new Panel(project);
-    // const panel2 = new Panel({ ...panelData[no + 6] }, no + 6);
-    div.appendChild(panel);
     // pb[1].appendChild(panel2);
     // no += 1;
     // interval += 1000;
