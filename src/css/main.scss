@@ -45,6 +45,9 @@ html{
   @media #{$six_cols} {
     grid-template-columns: repeat(6, 1fr);
   }
+  @media #{$big} {
+    width: 80%;
+  }
 }
 .projects > div{
   margin: 0 auto;
@@ -79,7 +82,14 @@ h1{
   margin: 1.5rem 0 6rem;
   text-align: center;
   font-size: 2em;
-
+  @media #{$upsize_text} {
+    font-size: 3em;
+    margin-bottom: 8rem;
+  }
+  @media #{$big} {
+    font-size: 4em;
+    margin-bottom: 10rem;
+  }
   // @extend %user_select;
   // @media #{$mobile2} {
   //   font-size: 2em;
@@ -89,6 +99,14 @@ h2{
   text-align: center;
   font-size: 1.75em;
   margin-bottom: 3rem;
+  @media #{$upsize_text} {
+    font-size: 2.75em;
+    margin-bottom: 5rem;
+  }
+  @media #{$big} {
+    font-size: 3.75em;
+    margin-bottom: 7rem;
+  }
 }
 .projects > div:last-child{
   @media #{$two_col} {
