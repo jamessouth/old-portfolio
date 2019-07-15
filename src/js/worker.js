@@ -1,8 +1,6 @@
+import { projects } from './projects';
 
-onmessage = e => {
+addEventListener('message', e => {
   console.log(e);
-  let h = `hello ${new Date().getMilliseconds()}`;
-  postMessage({
-    h
-  });
-}
+  postMessage(e.data);
+});

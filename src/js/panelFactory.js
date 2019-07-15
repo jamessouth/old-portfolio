@@ -1,11 +1,11 @@
+
 import { projects } from './projects';
-import 
 // import Project4GIF from '../images/p4.gif';
 // import Project7GIF from '../images/p7.gif';
 // import Project9GIF from '../images/p9.gif';
 // import Project10GIF from '../images/p10.gif';
 // import Project11GIF from '../images/p11.gif';
-const myWorker = new Worker('./worker.js');
+const myWorker = new Worker('./worker.js', { type: 'module' });
 
 
 
