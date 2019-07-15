@@ -1,8 +1,12 @@
 $cor : 'Cormorant SC', serif;
-$mobile2 : 'screen and (min-width: 460px)';
-$li_expand : 'screen and (min-width: 484px)';
-$ul_expand : 'screen and (min-width: 729px)';
-$tablet : 'screen and (min-width: 768px)';
+$two_col : 'screen and (min-width: 674px)';
+
+$col_gap_expand : 'screen and (min-width: 960px)';
+
+$four_cols : 'screen and (min-width: 1823px)';
+
+$six_cols : 'screen and (min-width: 2198px)';
+
 $medium : 'screen and (min-width: 1050px)';
 $big : 'screen and (min-width: 1900px)';
 $retina : 'screen and (-webkit-min-device-pixel-ratio: 1.5), screen and (min--moz-device-pixel-ratio: 1.5), screen and (-o-min-device-pixel-ratio: 3/2), screen and (min-device-pixel-ratio: 1.5), screen and (min-resolution: 192dpi)';

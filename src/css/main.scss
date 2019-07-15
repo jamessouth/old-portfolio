@@ -31,13 +31,23 @@ html{
   // --time: 0;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(288px, 1fr));
-
+  grid-column-gap: 30px;
+  grid-row-gap: 100px;
   width: 90%;
   margin: 0 auto;
   // background-color: red;
+  @media #{$col_gap_expand} {
+    grid-column-gap: 50px;
+  }
+  @media #{$four_cols} {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  @media #{$six_cols} {
+    grid-template-columns: repeat(6, 1fr);
+  }
 }
 .projects > div{
-  margin: 0 auto 7rem;
+  margin: 0 auto;
   width: 288px;
   height: 435px;
   background-color: transparent;
@@ -80,7 +90,11 @@ h2{
   font-size: 1.75em;
   margin-bottom: 3rem;
 }
-
+.projects > div:last-child{
+  @media #{$two_col} {
+    grid-column: 1 / -1;
+  }
+}
 
 
 // .hold{
