@@ -1,4 +1,5 @@
 import { projects } from './projects';
+import 
 // import Project4GIF from '../images/p4.gif';
 // import Project7GIF from '../images/p7.gif';
 // import Project9GIF from '../images/p9.gif';
@@ -9,7 +10,7 @@ const myWorker = new Worker('./worker.js');
 
 
 
-const divs = document.querySelectorAll('.projects div');
+// const divs = document.querySelectorAll('.projects div');
 
 
 function panelMarkupTag(strings, ...anchors) {
@@ -121,7 +122,7 @@ class Panel extends HTMLElement {
     this.img.setAttribute('src', src);
     this.img.setAttribute('alt', alt);
     this.ps[0].textContent = tech1;
-    this.ps[1].textContent = tech2;
+    this.ps[1].textContent = no;
     // console.log(new Date());
 
 
@@ -154,15 +155,17 @@ class Panel extends HTMLElement {
 //   return import(/* webpackChunkName: "useCubes" */ './useCubes').catch(err => console.log(err));
 // }
 myWorker.addEventListener('message', e => {
-  // console.log(e);
+  console.log(e);
   // console.log(divs);
-  const panel = new Panel(projects[e.data], e.data);
-  divs[e.data].appendChild(panel);
+
 
 });
 
-export default function panelFactory({ target: { id } }) {
+export default function panelFactory({ target, target: { id } }) {
   // console.log('kkkkk');
+
+  const panel = new Panel(projects[id]);
+  target.appendChild(panel);
   myWorker.postMessage(id);
 
 

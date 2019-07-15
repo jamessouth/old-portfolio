@@ -84,7 +84,7 @@ module.exports = {
     },
   },
   plugins: [
-    new CleanWebpackPlugin({ cleanOnceBeforeBuildPatterns: ['**/*', '!burst.min.js', '!worker.min.js'] }),
+    new CleanWebpackPlugin({ cleanOnceBeforeBuildPatterns: ['**/*', '!burst.min.js', '!service-worker.js', '!BorderPaint.js'] }),
     new MiniCssExtractPlugin({
       filename: '[name].css',
       chunkFilename: '[id].css',
