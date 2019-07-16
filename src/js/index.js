@@ -5,13 +5,16 @@ import panelFactory from './panelFactory';
 import linkFactory from './linkFactory';
 // import animatePaint from './animatePaint';
 
+
+
+
+
 CSS.paintWorklet.addModule('./BorderPaint.js');
 // const pdiv = document.querySelector('.projects');
-const divs = document.querySelectorAll('.projects div');
-// divs.forEach((div) => {
-//   div.addEventListener('focus', animatePaint);
-// })
-// const canvas = document.querySelector('#board');
+const projectDivs = document.querySelectorAll('.projects div');
+const contactDivs = document.querySelectorAll('.contact div');
+
+
 const IOoptions = {
   root: null,
   rootMargin: '0px 0px 0px 0px',
@@ -35,7 +38,7 @@ function IOcallback2(entries, observer) {
   entries.filter(entry => entry.isIntersecting).forEach((x) => {
     console.log(x, x.target.id);
 
-
+    linkFactory(x);
 
     observer2.unobserve(x.target);
     // x.target.remove();
@@ -51,7 +54,8 @@ function IOcallback2(entries, observer) {
 //   import(/* webpackChunkName: "contact" */ './contact').catch(err => console.log(err));
 // } else {
   const observer = new IntersectionObserver(IOcallback, IOoptions);
-  [...divs].forEach(el => observer.observe(el));
+  [...projectDivs].forEach(el => observer.observe(el));
 // }
 
 const observer2 = new IntersectionObserver(IOcallback2, IOoptions);
+[...contactDivs].forEach(el => observer2.observe(el));
