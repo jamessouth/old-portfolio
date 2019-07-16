@@ -2,6 +2,7 @@ import '../css/main.scss';
 
 // import './loadSW';
 import panelFactory from './panelFactory';
+import linkFactory from './linkFactory';
 // import animatePaint from './animatePaint';
 
 CSS.paintWorklet.addModule('./BorderPaint.js');

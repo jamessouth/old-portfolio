@@ -1,96 +1,33 @@
-import gmail from '../images/gmail.svg';
-import github from '../images/gh64.png';
-import twit from '../images/twit.svg';
+import gmail from '../images/gmail.png';
+import github from '../images/github.png';
+import twit from '../images/twit.png';
 
 
-
-
-
-function panelMarkupTag(strings, ...anchors) {
-  const str = [...anchors].map(anc => `<a rel="noopener noreferrer" target="_blank">${anc}</a>`).join('\n      ');
-
-  return `
-    <h3></h3>
-    <p></p>
-    <p></p>
-    <div>
-      <img/>
-      ${str}
-    </div>
-    `;
-}
 
 
 const linkTemplate = document.createElement('template');
 
 const styleTag = `
+<a rel="noopener noreferrer" target="_blank">
+  <img/>
+</a>
 <style>
-div:focus,
 a:focus{
   outline: none;
-  background-color: #1a2845;
-  color: #e5d7ba;
+  border: 2px solid #1a2845;
 }
 img{
   width: 100%;
   height: 100%;
-  grid-area: top;
-}
-h3, p, a{
-  text-align: center;
-  color: #30511d;
-}
-h3{
-  font-size: 2em;
-  line-height: 1.5;
-  margin: 0;
-}
-p{
-  margin: 0;
-  font-size: 1.5em;
-  line-height: 1;
-  height: 24px;
-  font-weight: bold;
-}
-p:last-of-type{
-  border-bottom: 1px solid #30511d;
-  padding-bottom: .5rem;
 }
 a{
-  width: calc(100% - 2px);
-  height: 30px;
-  line-height: 0.8;
-  font-size: 2em;
-  text-decoration: none;
   cursor: pointer;
-  border: 1px solid #30511d;
-  font-weight: bold;
-}
-div{
-  display: grid;
-  grid: "top top" 90% "lbot rbot" 10% / 1fr 1fr;
-  justify-items: center;
-  width: 288px;
-  height: 320px;
-}
-`;
-const oneAnchorStyle = `
-a{
-  grid-column: 1 / -1;
-`;
-const twoAnchorsStyle = `
-a:first-of-type{
-  grid-area: lbot;
-}
-a:last-of-type{
-  grid-area: rbot;
 `;
 
 
 
 
-
-class Panel extends HTMLElement {
+class Link extends HTMLElement {
   // static get observedAttributes() {
   //   return ['gif-on'];
   // }
