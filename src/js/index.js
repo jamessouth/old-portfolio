@@ -4,16 +4,9 @@ import '../css/main.scss';
 import panelFactory from './panelFactory';
 // import animatePaint from './animatePaint';
 
-
-
-
-
 CSS.paintWorklet.addModule('./BorderPaint.js');
 // const pdiv = document.querySelector('.projects');
 const divs = document.querySelectorAll('.projects div');
-
-
-
 // divs.forEach((div) => {
 //   div.addEventListener('focus', animatePaint);
 // })
@@ -30,14 +23,25 @@ function IOcallback(entries, observer) {
   entries.filter(entry => entry.isIntersecting).forEach((x) => {
     console.log(x, x.target.id);
 
-
     panelFactory(x);
-
 
     observer.unobserve(x.target);
     // x.target.remove();
   });
 };
+
+function IOcallback2(entries, observer) {
+  entries.filter(entry => entry.isIntersecting).forEach((x) => {
+    console.log(x, x.target.id);
+
+
+
+    observer2.unobserve(x.target);
+    // x.target.remove();
+  });
+};
+
+
 
 // if (!window.IntersectionObserver) {
 //   import(/* webpackChunkName: "sizeOpt" */ './sizeOpt').catch(err => console.log(err));
@@ -48,3 +52,5 @@ function IOcallback(entries, observer) {
   const observer = new IntersectionObserver(IOcallback, IOoptions);
   [...divs].forEach(el => observer.observe(el));
 // }
+
+const observer2 = new IntersectionObserver(IOcallback2, IOoptions);

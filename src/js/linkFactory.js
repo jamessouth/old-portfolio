@@ -1,16 +1,9 @@
-
-import { projects } from './projects';
-// import Project4GIF from '../images/p4.gif';
-// import Project7GIF from '../images/p7.gif';
-// import Project9GIF from '../images/p9.gif';
-// import Project10GIF from '../images/p10.gif';
-// import Project11GIF from '../images/p11.gif';
-const myWorker = new Worker('./worker.js', { type: 'module' });
+import gmail from '../images/gmail.svg';
+import github from '../images/gh64.png';
+import twit from '../images/twit.svg';
 
 
 
-
-// const divs = document.querySelectorAll('.projects div');
 
 
 function panelMarkupTag(strings, ...anchors) {
@@ -28,7 +21,7 @@ function panelMarkupTag(strings, ...anchors) {
 }
 
 
-const panelTemplate = document.createElement('template');
+const linkTemplate = document.createElement('template');
 
 const styleTag = `
 <style>
