@@ -26,6 +26,37 @@ html{
 
 }
 
+header{
+  position: fixed;
+  top: 0;
+  height: 3rem;
+  width: 100%;
+  background-color: #fafad2;
+  left: 50%;
+  transform: translateX(-50%);
+}
+nav{
+  margin: 0 .5rem;
+  height: 100%;
+}
+ul{
+  display: flex;
+  height: 100%;
+  align-items: center;
+  list-style: none;
+  justify-content: space-around;
+}
+li{
+  font-size: 1.3em;
+  @media #{$two_col} {
+    font-size: 1.7em;
+  }
+}
+li:before {
+  content: "\200B";
+  position: absolute;
+}
+
 
 .projects{
   // --time: 0;
@@ -79,9 +110,13 @@ html{
 // }
 
 h1{
-  margin: 3rem 0 6rem;
+  margin: 9rem 0 6rem;
   text-align: center;
   font-size: 2em;
+  @media #{$two_col} {
+    font-size: 2.5em;
+    margin-bottom: 7rem;
+  }
   @media #{$upsize_text} {
     font-size: 3em;
     margin-bottom: 8rem;
@@ -99,6 +134,10 @@ h2{
   text-align: center;
   font-size: 1.75em;
   margin-bottom: 3rem;
+  @media #{$two_col} {
+    font-size: 2.25em;
+    margin-bottom: 4rem;
+  }
   @media #{$upsize_text} {
     font-size: 2.75em;
     margin-bottom: 5rem;
