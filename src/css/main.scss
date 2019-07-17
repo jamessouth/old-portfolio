@@ -124,10 +124,10 @@ section{
   align-items: center;
   margin: 0 auto;
   width: 90%;
-  height: 300px;
+  height: 400px;
   @media #{$two_col} {
     flex-direction: row;
-    width: 50%;
+    width: 70%;
     height: 150px;
   }
   @media #{$upsize_text} {
@@ -137,15 +137,18 @@ section{
 
 .contact > div{
   // margin: 0 auto;
-  max-width: 100px;
-  max-height: 100px;
+  // max-width: 100px;
+  // max-height: 100px;
   // background-color: green;
+  border: 2px solid transparent;
 }
 
 
 
 
-
+.contact div:focus{
+  border: 2px solid #2323c5;
+}
 
 
 

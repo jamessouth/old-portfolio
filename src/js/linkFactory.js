@@ -7,6 +7,11 @@ const htmlTag = `
   <img/>
 </a>
 <style>
+a{
+  display: block;
+  border: 2px solid transparent;
+  padding: 4px;
+}
 a:focus{
   outline: none;
   border: 2px solid #1a2845;
@@ -30,7 +35,7 @@ class Link extends HTMLElement {
 
 
 
-  constructor({ link, alt, src, link_aria}) {
+  constructor({ link, alt, src }) {
     super();
     // Object.assign(this, config);
     const shadowRoot = this.attachShadow({ mode: 'open' });
@@ -38,7 +43,6 @@ class Link extends HTMLElement {
     shadowRoot.appendChild(linkTemplate.content.cloneNode(true));
 
     this.anchor.setAttribute('href', link);
-    this.anchor.setAttribute('aria-label', link_aria);
     this.img.setAttribute('src', src);
     this.img.setAttribute('alt', alt);
   }
