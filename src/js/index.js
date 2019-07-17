@@ -39,7 +39,8 @@ function IOcallback2(entries, observer) {
     console.log(x, x.target.id);
 
     linkFactory(x);
-
+    // console.log(x.target.getAttribute('tabindex'));
+    x.target.removeAttribute('tabindex');
     observer2.unobserve(x.target);
     // x.target.remove();
   });

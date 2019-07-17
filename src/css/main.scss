@@ -52,9 +52,26 @@ li{
     font-size: 1.7em;
   }
 }
+li a{
+  text-decoration: none;
+}
+li a:focus{
+  outline: none;
+  border: 2px solid #2323c5;
+}
+li a:visited{
+  color: initial;
+}
+li a:hover{
+  text-decoration: underline;
+}
 li:before {
   content: "\200B";
   position: absolute;
+}
+#port:target,
+#cont:target{
+  padding-top: 2.75rem;
 }
 
 
@@ -180,13 +197,6 @@ section{
   // max-height: 100px;
   // background-color: green;
   border: 2px solid transparent;
-}
-
-
-
-
-.contact div:focus{
-  border: 2px solid #2323c5;
 }
 
 
