@@ -14,7 +14,7 @@ const myWorker = new Worker('./worker.js', { type: 'module' });
 
 
 function panelMarkupTag(strings, ...anchors) {
-  const str = [...anchors].map(anc => `<a rel="noopener noreferrer" target="_blank">${anc}</a>`).join('\n      ');
+  const str = [...anchors].map(anc => `<a rel="noopener noreferrer">${anc}</a>`).join('\n      ');
 
   return `
     <h3></h3>
@@ -69,7 +69,6 @@ a{
   line-height: 0.8;
   font-size: 2em;
   text-decoration: none;
-  cursor: pointer;
   border: 1px solid #30511d;
   font-weight: bold;
 }
@@ -122,7 +121,7 @@ class Panel extends HTMLElement {
     this.img.setAttribute('src', src);
     this.img.setAttribute('alt', alt);
     this.ps[0].textContent = tech1;
-    this.ps[1].textContent = no;
+    this.ps[1].textContent = tech2;
     // console.log(new Date());
 
 
