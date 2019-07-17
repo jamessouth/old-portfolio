@@ -6,8 +6,17 @@ import linkFactory from './linkFactory';
 // import animatePaint from './animatePaint';
 
 
+const openResumeBtn = document.querySelector('li button');
+const closeResumeBtn = document.querySelector('aside button');
+const modal = document.querySelector('aside');
 
+openResumeBtn.addEventListener('click', function (e) {
+  modal.style.display = 'block';
+});
 
+closeResumeBtn.addEventListener('click', function (e) {
+  modal.style.display = 'none';
+});
 
 CSS.paintWorklet.addModule('./BorderPaint.js');
 // const pdiv = document.querySelector('.projects');

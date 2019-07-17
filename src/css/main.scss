@@ -54,6 +54,7 @@ li{
 }
 li a{
   text-decoration: none;
+  border: 2px solid transparent;
 }
 li a:focus{
   outline: none;
@@ -73,6 +74,40 @@ li:before {
 #cont:target{
   padding-top: 2.75rem;
 }
+
+
+aside{
+  display: none;
+  position: fixed;
+  top: 60px;
+  z-index: 19;
+  width: 100%;
+  height: 80px;
+  background-color: red;
+}
+
+li button{
+  background: none;
+  font-size: 1em;
+  border: 2px solid transparent;
+}
+li button:focus{
+  outline: none;
+  border: 2px solid #2323c5;
+}
+
+
+
+aside button{
+  width: 25px;
+  height: 36px;
+  font-size: 2em;
+  line-height: 0;
+  position: absolute;
+  right: 0;
+  border: none;
+}
+
 
 
 .projects{
