@@ -1,5 +1,6 @@
 import '../css/main.scss';
-
+import resumePDF from '../images/resume.pdf';
+import resumeJPG from '../images/resume.jpg';
 // import './loadSW';
 import panelFactory from './panelFactory';
 import linkFactory from './linkFactory';
@@ -9,7 +10,10 @@ import linkFactory from './linkFactory';
 const openModalBtn = document.querySelector('li button');
 const closeModalBtn = document.querySelector('aside button');
 const modal = document.querySelector('aside');
-
+const modlink = document.querySelector('aside object');
+const modlinkFB = document.querySelector('aside object img');
+modlink.setAttribute('data', resumePDF);
+modlinkFB.setAttribute('src', resumeJPG);
 
 openModalBtn.addEventListener('click', function (e) {
   modal.style.display = 'block';

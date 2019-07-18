@@ -80,13 +80,22 @@ li:before {
 aside{
   display: none;
   position: fixed;
-  top: 50%;
+  top: 48%;
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
   z-index: 19;
   width: 93vw;
   height: 93vh;
-  background-color: red;
+  background-color: #696969;
+}
+
+object{
+  width: 100%;
+  height: 100%;
+}
+object img{
+  display: block;
+  margin: auto;
 }
 
 li button{
@@ -103,17 +112,19 @@ li button:focus{
 
 
 aside button{
-  width: 25px;
-  height: 36px;
-  font-size: 2em;
+  width: 35px;
+  height: 50px;
+  font-size: 2.5em;
+  background-color: #f8f8ff;
   line-height: 0;
   position: absolute;
   right: 0;
-  border: 2px solid transparent;
+  top: 0;
+  border: 3px solid transparent;
 }
 aside button:focus{
   outline: none;
-  border: 2px solid #2323c5;
+  border: 5px solid #ff7f50;
 }
 
 
