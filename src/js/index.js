@@ -6,17 +6,21 @@ import linkFactory from './linkFactory';
 // import animatePaint from './animatePaint';
 
 
-const openResumeBtn = document.querySelector('li button');
-const closeResumeBtn = document.querySelector('aside button');
+const openModalBtn = document.querySelector('li button');
+const closeModalBtn = document.querySelector('aside button');
 const modal = document.querySelector('aside');
 
-openResumeBtn.addEventListener('click', function (e) {
+
+openModalBtn.addEventListener('click', function (e) {
   modal.style.display = 'block';
+  closeModalBtn.focus();
 });
 
-closeResumeBtn.addEventListener('click', function (e) {
+closeModalBtn.addEventListener('click', function (e) {
   modal.style.display = 'none';
+  openModalBtn.focus();
 });
+
 
 CSS.paintWorklet.addModule('./BorderPaint.js');
 // const pdiv = document.querySelector('.projects');
