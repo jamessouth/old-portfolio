@@ -86,7 +86,6 @@ aside{
   left: 3%;
   z-index: 19;
   background-color: #696969;
-  overflow-y: scroll;
 }
 
 object{
@@ -99,6 +98,10 @@ object img{
   @media #{$por} {
     margin: 1em 0;
   }
+}
+object div{
+  overflow-y: scroll;
+  height: 100%;
 }
 
 li button{
