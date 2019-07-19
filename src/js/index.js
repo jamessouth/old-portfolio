@@ -13,7 +13,9 @@ const closeModalBtn = document.querySelector('aside button');
 const modal = document.querySelector('aside');
 const modlink = document.querySelector('aside object');
 const modlinkFallBack = document.querySelector('aside object img');
-
+const allAnchors = document.querySelectorAll('li a');
+const projectDivs = document.querySelectorAll('.projects div');
+const contactDivs = document.querySelectorAll('.contact div');
 
 
 openModalBtn.addEventListener('click', function (e) {
@@ -25,18 +27,19 @@ openModalBtn.addEventListener('click', function (e) {
 
   modal.style.display = 'block';
   closeModalBtn.focus();
+  [openModalBtn, ...allAnchors, ...projectDivs].forEach((anc) => anc.setAttribute('tabindex', '-1'));
 });
 
 closeModalBtn.addEventListener('click', function (e) {
   modal.style.display = 'none';
   openModalBtn.focus();
+  [openModalBtn, ...allAnchors, ...projectDivs].forEach((anc) => anc.setAttribute('tabindex', '0'));
 });
 
 
 CSS.paintWorklet.addModule('./BorderPaint.js');
 // const pdiv = document.querySelector('.projects');
-const projectDivs = document.querySelectorAll('.projects div');
-const contactDivs = document.querySelectorAll('.contact div');
+
 
 
 const IOoptions = {
