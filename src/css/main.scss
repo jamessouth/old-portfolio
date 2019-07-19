@@ -80,13 +80,13 @@ li:before {
 aside{
   display: none;
   position: fixed;
-  top: 48%;
-  left: 50%;
-  transform: translateX(-50%) translateY(-50%);
+  top: 3%;
+  bottom: 3%;
+  right: 3%;
+  left: 3%;
   z-index: 19;
-  width: 93vw;
-  height: 93vh;
   background-color: #696969;
+  overflow-y: scroll;
 }
 
 object{
@@ -95,7 +95,10 @@ object{
 }
 object img{
   display: block;
-  margin: auto;
+  width: 100%;
+  @media #{$por} {
+    margin: 1em 0;
+  }
 }
 
 li button{
@@ -117,9 +120,9 @@ aside button{
   font-size: 2.5em;
   background-color: #f8f8ff;
   line-height: 0;
-  position: absolute;
-  right: 0;
-  top: 0;
+  position: fixed;
+  right: 3%;
+  top: 3%;
   border: 3px solid transparent;
 }
 aside button:focus{
