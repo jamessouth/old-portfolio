@@ -7,15 +7,22 @@ import linkFactory from './linkFactory';
 // import animatePaint from './animatePaint';
 
 
+
 const openModalBtn = document.querySelector('li button');
 const closeModalBtn = document.querySelector('aside button');
 const modal = document.querySelector('aside');
 const modlink = document.querySelector('aside object');
-const modlinkFB = document.querySelector('aside object img');
-modlink.setAttribute('data', resumePDF);
-modlinkFB.setAttribute('src', resumeJPG);
+const modlinkFallBack = document.querySelector('aside object img');
+
+
 
 openModalBtn.addEventListener('click', function (e) {
+  if (!!navigator.mimeTypes.namedItem('application/pdf')) {
+    modlink.setAttribute('data', resumePDF);
+  } else {
+    modlinkFallBack.setAttribute('src', resumeJPG);
+  }
+
   modal.style.display = 'block';
   closeModalBtn.focus();
 });
