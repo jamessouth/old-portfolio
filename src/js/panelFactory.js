@@ -109,22 +109,25 @@ class Panel extends HTMLElement {
 
   constructor({ title, tech1, tech2, live, code, alt, src, live_aria, code_aria }, no) {
     super();
-    // Object.assign(this, config);
+    Object.assign(this, { title, tech1, tech2, live, code, alt, src, live_aria, code_aria }, no);
+    // console.log(this.title);
     const shadowRoot = this.attachShadow({ mode: 'open' });
     panelTemplate.innerHTML = live ? `${panelMarkupTag`${`code`}${`live`}`}${styleTag}${twoAnchorsStyle}` : `${panelMarkupTag`${`code`}`}${styleTag}${oneAnchorStyle}`;
     shadowRoot.appendChild(panelTemplate.content.cloneNode(true));
-    this.h3.textContent = title;
-    this.anchors[0].setAttribute('href', code);
-    this.anchors[0].setAttribute('aria-label', code_aria);
-    live && this.anchors[1].setAttribute('href', live);
-    live_aria && this.anchors[1].setAttribute('aria-label', live_aria);
-    this.img.setAttribute('src', src);
-    this.img.setAttribute('alt', alt);
-    this.ps[0].textContent = tech1;
-    this.ps[1].textContent = tech2;
-    // console.log(new Date());
 
+  }
 
+  connectedCallback() {
+
+    this.h3.textContent = this.title;
+    this.anchors[0].setAttribute('href', this.code);
+    this.anchors[0].setAttribute('aria-label', this.code_aria);
+    this.live && this.anchors[1].setAttribute('href', this.live);
+    this.live_aria && this.anchors[1].setAttribute('aria-label', this.live_aria);
+    this.img.setAttribute('src', this.src);
+    this.img.setAttribute('alt', this.alt);
+    this.ps[0].textContent = this.tech1;
+    this.ps[1].textContent = this.tech2;
   }
 
 

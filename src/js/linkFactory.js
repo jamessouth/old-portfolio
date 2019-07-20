@@ -37,14 +37,18 @@ class Link extends HTMLElement {
 
   constructor({ link, alt, src }) {
     super();
-    // Object.assign(this, config);
+    Object.assign(this, { link, alt, src });
+    // console.log(this.link);
     const shadowRoot = this.attachShadow({ mode: 'open' });
     linkTemplate.innerHTML = htmlTag;
     shadowRoot.appendChild(linkTemplate.content.cloneNode(true));
 
-    this.anchor.setAttribute('href', link);
-    this.img.setAttribute('src', src);
-    this.img.setAttribute('alt', alt);
+  }
+
+  connectedCallback() {
+    this.anchor.setAttribute('href', this.link);
+    this.img.setAttribute('src', this.src);
+    this.img.setAttribute('alt', this.alt);
   }
 
   get anchor() {

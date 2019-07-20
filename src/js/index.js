@@ -12,28 +12,49 @@ const openModalBtn = document.querySelector('li button');
 const closeModalBtn = document.querySelector('aside button');
 const modal = document.querySelector('aside');
 const modlink = document.querySelector('aside object');
+
 const modlinkFallBack = document.querySelector('aside object img');
-const allAnchors = document.querySelectorAll('li a');
+const headerAnchors = document.querySelectorAll('li a');
 const projectDivs = document.querySelectorAll('.projects div');
 const contactDivs = document.querySelectorAll('.contact div');
-
+let projectPanels, contactLinks;
 
 openModalBtn.addEventListener('click', function (e) {
+  modal.style.display = 'block';
   if (!!navigator.mimeTypes.namedItem('application/pdf')) {
     modlink.setAttribute('data', resumePDF);
+
   } else {
     modlinkFallBack.setAttribute('src', resumeJPG);
+    openModalBtn.blur();
+    // console.log(fff);
+    // fff.focus();
   }
 
-  modal.style.display = 'block';
-  closeModalBtn.focus();
-  [openModalBtn, ...allAnchors, ...projectDivs].forEach((anc) => anc.setAttribute('tabindex', '-1'));
+
+
+  modlink.focus();
+
+  // document.body.style.overflow = 'hidden';
+  // console.log(projectPanels);
+
+  [openModalBtn, ...headerAnchors].forEach((item) => item.setAttribute('tabindex', '-1'));
+  //
+  // [...projectDivs, ...contactDivs].forEach((item) => item.removeAttribute('tabindex'));
+
+
 });
 
 closeModalBtn.addEventListener('click', function (e) {
   modal.style.display = 'none';
   openModalBtn.focus();
-  [openModalBtn, ...allAnchors, ...projectDivs].forEach((anc) => anc.setAttribute('tabindex', '0'));
+
+  // document.body.style.overflow = 'visible';
+
+  [openModalBtn, ...headerAnchors].forEach((item) => item.removeAttribute('tabindex'));
+  //
+  // [...projectDivs, ...contactDivs].forEach((item) => item.setAttribute('tabindex', '0'));
+
 });
 
 
