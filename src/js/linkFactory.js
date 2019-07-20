@@ -73,4 +73,7 @@ export default function linkFactory({ target, target: { id } }) {
 }
 
 
-window.customElements.define('contact-link', Link);
+if (window.customElements && HTMLElement.prototype.attachShadow) {
+
+  window.customElements.define('contact-link', Link);
+}

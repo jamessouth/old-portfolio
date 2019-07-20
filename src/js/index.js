@@ -57,8 +57,9 @@ closeModalBtn.addEventListener('click', function (e) {
 
 });
 
-
-CSS.paintWorklet.addModule('./BorderPaint.js');
+if (CSS.paintWorklet) {
+  CSS.paintWorklet.addModule('./BorderPaint.js');
+}
 // const pdiv = document.querySelector('.projects');
 
 
