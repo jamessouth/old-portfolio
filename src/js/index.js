@@ -3,6 +3,7 @@ import resumePDF from '../images/resume.pdf';
 import resumeJPG from '../images/resume.jpg';
 // import './loadSW';
 import panelFactory from './panelFactory';
+import contentLoader from './contentLoader';
 import linkFactory from './linkFactory';
 // import animatePaint from './animatePaint';
 
@@ -23,25 +24,15 @@ openModalBtn.addEventListener('click', function (e) {
   modal.style.display = 'block';
   if (!!navigator.mimeTypes.namedItem('application/pdf')) {
     modlink.setAttribute('data', resumePDF);
-
   } else {
     modlinkFallBack.setAttribute('src', resumeJPG);
     openModalBtn.blur();
     // console.log(fff);
     // fff.focus();
   }
-
-
-
   modlink.focus();
 
-  // document.body.style.overflow = 'hidden';
-  // console.log(projectPanels);
-
   [openModalBtn, ...headerAnchors].forEach((item) => item.setAttribute('tabindex', '-1'));
-  //
-  // [...projectDivs, ...contactDivs].forEach((item) => item.removeAttribute('tabindex'));
-
 
 });
 
@@ -49,19 +40,13 @@ closeModalBtn.addEventListener('click', function (e) {
   modal.style.display = 'none';
   openModalBtn.focus();
 
-  // document.body.style.overflow = 'visible';
-
   [openModalBtn, ...headerAnchors].forEach((item) => item.removeAttribute('tabindex'));
-  //
-  // [...projectDivs, ...contactDivs].forEach((item) => item.setAttribute('tabindex', '0'));
 
 });
 
 if (CSS.paintWorklet) {
   CSS.paintWorklet.addModule('./BorderPaint.js');
 }
-// const pdiv = document.querySelector('.projects');
-
 
 
 const IOoptions = {
@@ -70,8 +55,6 @@ const IOoptions = {
   threshold: 0.1,
 };
 
-// let animatePaint;
-
 function IOcallback(entries, observer) {
   entries.filter(entry => entry.isIntersecting).forEach((x) => {
     console.log(x, x.target.id);
@@ -79,7 +62,7 @@ function IOcallback(entries, observer) {
     panelFactory(x);
 
     observer.unobserve(x.target);
-    // x.target.remove();
+
   });
 };
 
@@ -97,15 +80,23 @@ function IOcallback2(entries, observer) {
 
 
 
-// if (!window.IntersectionObserver) {
-//   import(/* webpackChunkName: "sizeOpt" */ './sizeOpt').catch(err => console.log(err));
-//   import(/* webpackChunkName: "gifOpt" */ './gifOpt').catch(err => console.log(err));
-//   import(/* webpackChunkName: "destroyOpt" */ './destroyOpt').catch(err => console.log(err));
-//   import(/* webpackChunkName: "contact" */ './contact').catch(err => console.log(err));
-// } else {
-  const observer = new IntersectionObserver(IOcallback, IOoptions);
-  [...projectDivs].forEach(el => observer.observe(el));
-// }
+if (!window.IntersectionObserver) {
 
-const observer2 = new IntersectionObserver(IOcallback2, IOoptions);
-[...contactDivs].forEach(el => observer2.observe(el));
+
+} else {
+  if (window.customElements && HTMLElement.prototype.attachShadow) {
+
+    const observer = new IntersectionObserver(IOcallback, IOoptions);
+    [...projectDivs].forEach(el => observer.observe(el));
+    
+    const observer2 = new IntersectionObserver(IOcallback2, IOoptions);
+    [...contactDivs].forEach(el => observer2.observe(el));
+
+  } else {
+
+    contentLoader(projectDivs);
+
+
+  }
+
+}

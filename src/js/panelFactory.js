@@ -97,15 +97,6 @@ a:last-of-type{
 
 
 class Panel extends HTMLElement {
-  // static get observedAttributes() {
-  //   return ['gif-on'];
-  // }
-
-// }
-// :host{
-//   display: grid;
-
-
 
   constructor({ title, tech1, tech2, live, code, alt, src, live_aria, code_aria }, no) {
     super();
