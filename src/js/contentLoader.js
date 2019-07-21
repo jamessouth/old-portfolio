@@ -1,123 +1,66 @@
 import { projects } from './projects';
 
 
-const styleTag = `
-<style>
-div:focus,
-.anch:focus{
-  outline: none;
-  background-color: #1a2845;
-  color: #e5d7ba;
-}
-img{
-  width: 100%;
-  height: 100%;
-  grid-area: top;
-}
-h3, p, .anch{
-  text-align: center;
-  color: #30511d;
-}
-h3{
-  font-size: 2em;
-  line-height: 1.5;
-  margin: 0;
-}
-p{
-  margin: 0;
-  font-size: 1.5em;
-  line-height: 1;
-  height: 24px;
-  font-weight: bold;
-}
-p:last-of-type{
-  border-bottom: 1px solid #30511d;
-  padding-bottom: .5rem;
-}
-.anch{
-  width: calc(100% - 2px);
-  height: 30px;
-  line-height: 0.8;
-  font-size: 2em;
-  text-decoration: none;
-  border: 1px solid #30511d;
-  font-weight: bold;
-}
-div{
-  display: grid;
-  grid: "top top" 90% "lbot rbot" 10% / 1fr 1fr;
-  justify-items: center;
-  width: 288px;
-  height: 320px;
-}
-`;
-const oneAnchorStyle = `
-.anch{
-  grid-column: 1 / -1;
-`;
-const twoAnchorsStyle = `
-.anch:first-of-type{
-  grid-area: lbot;
-}
-.anch:last-of-type{
-  grid-area: rbot;
-`;
 
-
-function panelMarkupTag(strings, ...anchors) {
-  const str = [...anchors].map(anc => `<a class="anch" rel="noopener noreferrer">${anc}</a>`).join('\n      ');
-
-  return `
-    <h3></h3>
-    <p></p>
-    <p></p>
-    <div>
-      <img/>
-      ${str}
-    </div>
-    `;
-}
-
-let fff = `
-  <h3></h3>
-  <p></p>
-  <p></p>
-  <div>
-    <img/>
-    <a></a>
-  </div>
-  `;
 
 export default function contentLoader(divs) {
   divs.forEach((div, i) => {
+    const { title, tech1, tech2, live, code, alt, src, live_aria, code_aria } = projects[i];
+
 
     const panelFragment = document.createDocumentFragment();
 
     let h3 = document.createElement('h3');
+    h3.className = 'panH3';
+    h3.textContent = title;
     panelFragment.appendChild(h3);
 
 
     let p1 = document.createElement('p');
+    p1.className = 'panP';
+    p1.textContent = tech1;
     panelFragment.appendChild(p1);
 
     let p2 = document.createElement('p');
+    p2.className = 'panP';
+    p2.textContent = tech2 || '';
     panelFragment.appendChild(p2);
 
     let divi = document.createElement('div');
-    divi.innerHTML = `<img/><a></a>`;
+    divi.className = 'panDiv';
+    let image = document.createElement('img');
+    image.className = 'panImg';
+    let a1 = document.createElement('a');
+    a1.textContent = 'code';
+    let a2 = document.createElement('a');
+    a2.textContent = 'live';
+    image.setAttribute('src', src);
+    image.setAttribute('alt', alt);
+    a1.setAttribute('href', code);
+    a1.className = 'panA';
+    a1.setAttribute('rel', "noopener noreferrer");
+    a1.setAttribute('aria-label', code_aria);
+    !live && a1.classList.add('panAGrid');
+    a2.setAttribute('href', live);
+    a2.className = 'panA';
+    live && a1.classList.add('panAGrids');
+    live && a2.classList.add('panAGrids');
+    a2.setAttribute('rel', "noopener noreferrer");
+    a2.setAttribute('aria-label', live_aria);
+    divi.appendChild(image);
+    divi.appendChild(a1);
+    live && divi.appendChild(a2);
+
+
     panelFragment.appendChild(divi);
 
-
-
-
+    // let styles = document.createElement('style');
+    // styles.textContent = styleTag;
+    // panelFragment.appendChild(styles);
 
     div.appendChild(panelFragment);
 
 
 
-
-
-    // image.setAttribute('src', projects[i].src);
-    // div.appendChild(image);
   });
 }
