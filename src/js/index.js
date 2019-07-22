@@ -96,6 +96,7 @@ if (!window.IntersectionObserver) {
   } else {
 
     projectLoader(projectDivs);
+    contactDivs.forEach((div) => div.removeAttribute('tabindex'));
     linkLoader(contactDivs);
 
 
