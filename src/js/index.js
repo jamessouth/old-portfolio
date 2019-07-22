@@ -1,9 +1,10 @@
 import '../css/main.scss';
 import resumePDF from '../images/resume.pdf';
-import resumeJPG from '../images/resume.jpg';
+// import resumeJPG from '../images/resume.jpg';
 // import './loadSW';
 import panelFactory from './panelFactory';
 import projectLoader from './projectLoader';
+import createAside from './createAside';
 import linkLoader from './linkLoader';
 import linkFactory from './linkFactory';
 // import animatePaint from './animatePaint';
@@ -14,24 +15,37 @@ const openModalBtn = document.querySelector('li button');
 const closeModalBtn = document.querySelector('aside button');
 const modal = document.querySelector('aside');
 const modlink = document.querySelector('aside object');
+let asideBuilt = false;
 
-const modlinkFallBack = document.querySelector('aside object img');
+const modlinkFallBack = document.querySelector('aside object iframe');
 const headerAnchors = document.querySelectorAll('li a');
 const projectDivs = document.querySelectorAll('.projects div');
 const contactDivs = document.querySelectorAll('.contact div');
 let projectPanels, contactLinks;
 
 openModalBtn.addEventListener('click', function (e) {
-  modal.style.display = 'block';
-  if (!!navigator.mimeTypes.namedItem('application/pdf')) {
-    modlink.setAttribute('data', resumePDF);
+
+  if (asideBuilt) {
+
   } else {
-    modlinkFallBack.setAttribute('src', resumeJPG);
-    openModalBtn.blur();
+    const asideTree = createAside(resumePDF);
+    modal.insertBefore(asideTree, closeModalBtn);
+    asideBuilt = true;
+  }
+
+
+
+
+  modal.style.display = 'block';
+  // if (!!navigator.mimeTypes.namedItem('application/pdf').enabledPlugin.filename) {
+    // modlink.setAttribute('data', resumePDF);
+  // } else {
+    // modlinkFallBack.setAttribute('src', resumePDF);
+    // openModalBtn.blur();
     // console.log(fff);
     // fff.focus();
-  }
-  modlink.focus();
+  // }
+  // modlink.focus();
 
   [openModalBtn, ...headerAnchors].forEach((item) => item.setAttribute('tabindex', '-1'));
 

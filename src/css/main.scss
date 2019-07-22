@@ -166,15 +166,9 @@ object{
   width: 100%;
   height: 100%;
 }
-object img{
-  display: block;
+
+iframe{
   width: 100%;
-  @media #{$por} {
-    margin: 1em 0;
-  }
-}
-object div{
-  overflow-y: scroll;
   height: 100%;
 }
 
@@ -184,7 +178,8 @@ li button{
   font-size: 1em;
   font-weight: bold;
 }
-li button:focus{
+li button:focus,
+li button:hover{
   outline: none;
   border: 2px solid #2323c5;
 }
@@ -198,12 +193,12 @@ aside button{
   background-color: #f8f8ff;
   line-height: 0;
   position: fixed;
-  right: 3%;
-  top: 3%;
+  left: 3%;
+  top: 10%;
   border: 3px solid transparent;
 }
 aside button:focus,
-object div:focus{
+aside button:hover{
   outline: none;
   border: 5px solid #ff7f50;
 }
