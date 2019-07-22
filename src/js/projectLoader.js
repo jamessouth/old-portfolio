@@ -3,7 +3,7 @@ import { projects } from './projects';
 
 
 
-export default function contentLoader(divs) {
+export default function projectLoader(divs) {
   divs.forEach((div, i) => {
     const { title, tech1, tech2, live, code, alt, src, live_aria, code_aria } = projects[i];
 

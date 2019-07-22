@@ -3,7 +3,8 @@ import resumePDF from '../images/resume.pdf';
 import resumeJPG from '../images/resume.jpg';
 // import './loadSW';
 import panelFactory from './panelFactory';
-import contentLoader from './contentLoader';
+import projectLoader from './projectLoader';
+import linkLoader from './linkLoader';
 import linkFactory from './linkFactory';
 // import animatePaint from './animatePaint';
 
@@ -88,13 +89,14 @@ if (!window.IntersectionObserver) {
 
     const observer = new IntersectionObserver(IOcallback, IOoptions);
     [...projectDivs].forEach(el => observer.observe(el));
-    
+
     const observer2 = new IntersectionObserver(IOcallback2, IOoptions);
     [...contactDivs].forEach(el => observer2.observe(el));
 
   } else {
 
-    contentLoader(projectDivs);
+    projectLoader(projectDivs);
+    linkLoader(contactDivs);
 
 
   }

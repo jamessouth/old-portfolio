@@ -62,6 +62,7 @@ li a:focus{
   outline: none;
   border: 2px solid #2323c5;
 }
+li a:link,
 li a:visited{
   color: initial;
 }
@@ -136,7 +137,15 @@ li:before {
 .panAGrids:last-of-type{
   grid-area: rbot;
 }
-
+.linkA{
+  display: block;
+  border: 2px solid transparent;
+  padding: 4px;
+}
+.linkA:focus{
+  outline: none;
+  border: 2px solid #1a2845;
+}
 
 
 
