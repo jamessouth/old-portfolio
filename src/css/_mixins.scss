@@ -22,14 +22,8 @@
   justify-content: $just;
   align-items: $align;
 }
-@mixin three($dist: null, $pers: null) {
-  -webkit-perspective: $dist;
-  -moz-perspective: $dist;
-  perspective: $dist;
-  -webkit-transform-style: $pers;
-  -moz-transform-style: $pers;
-  transform-style: $pers;
-}
+
+
 @mixin position($rt: null, $lt: null, $tp: null, $bm: null) {
   position: absolute;
   right: $rt;

@@ -15,7 +15,7 @@ const openModalBtn = document.querySelector('li button');
 const closeModalBtn = document.querySelector('aside button');
 const modal = document.querySelector('aside');
 const modlink = document.querySelector('aside object');
-let asideBuilt = false;
+let asideNotBuilt = true;
 
 const modlinkFallBack = document.querySelector('aside object iframe');
 const headerAnchors = document.querySelectorAll('li a');
@@ -25,27 +25,15 @@ let projectPanels, contactLinks;
 
 openModalBtn.addEventListener('click', function (e) {
 
-  if (asideBuilt) {
-
-  } else {
+  if (asideNotBuilt) {
     const asideTree = createAside(resumePDF);
     modal.insertBefore(asideTree, closeModalBtn);
-    asideBuilt = true;
+    asideNotBuilt = false;
   }
 
-
-
-
   modal.style.display = 'block';
-  // if (!!navigator.mimeTypes.namedItem('application/pdf').enabledPlugin.filename) {
-    // modlink.setAttribute('data', resumePDF);
-  // } else {
-    // modlinkFallBack.setAttribute('src', resumePDF);
-    // openModalBtn.blur();
-    // console.log(fff);
-    // fff.focus();
-  // }
-  // modlink.focus();
+
+  openModalBtn.blur();
 
   [openModalBtn, ...headerAnchors].forEach((item) => item.setAttribute('tabindex', '-1'));
 
@@ -97,8 +85,12 @@ function IOcallback2(entries, observer) {
 
 if (!window.IntersectionObserver) {
 
+  projectLoader(projectDivs);
+  contactDivs.forEach((div) => div.removeAttribute('tabindex'));
+  linkLoader(contactDivs);
 
 } else {
+
   if (window.customElements && HTMLElement.prototype.attachShadow) {
 
     const observer = new IntersectionObserver(IOcallback, IOoptions);

@@ -7,26 +7,13 @@
   box-sizing: border-box;
   font-family: $cor;
 }
-:root {
-  --size: 220px;
-  --delay: 0s;
-}
 body{
-  // height: 10000px;
-  // position: relative;
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   background: linear-gradient(90deg, #eed6aa -2%, #bfc1c0 124%); // edge fallback
   background: linear-gradient(90deg, #ffff00 -55%, #eed6aade 10%, 70%, #bfc1c0de 110%);
 }
-
-html{
-  // overflow-x: hidden;
-  // font-size: 18px;
-
-}
-
 header{
   position: fixed;
   top: 0;
@@ -54,6 +41,10 @@ li{
     font-size: 1.7em;
   }
 }
+li:before {
+  content: "\200B";
+  position: absolute;
+}
 li a{
   text-decoration: none;
   border: 2px solid transparent;
@@ -69,10 +60,7 @@ li a:visited{
 li a:hover{
   text-decoration: underline;
 }
-li:before {
-  content: "\200B";
-  position: absolute;
-}
+
 #port:target,
 #cont:target{
   padding-top: 3rem;
@@ -154,10 +142,10 @@ li:before {
 aside{
   display: none;
   position: fixed;
-  top: 3%;
-  bottom: 3%;
-  right: 3%;
-  left: 3%;
+  top: 2%;
+  bottom: 2%;
+  right: 2%;
+  left: 2%;
   z-index: 19;
   background-color: #696969;
 }
@@ -193,8 +181,8 @@ aside button{
   background-color: #f8f8ff;
   line-height: 0;
   position: fixed;
-  left: 3%;
-  top: 10%;
+  left: 2%;
+  top: 9%;
   border: 3px solid transparent;
 }
 aside button:focus,
@@ -205,14 +193,14 @@ aside button:hover{
 
 
 .projects{
-  // --time: 0;
+
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(288px, 1fr));
   grid-column-gap: 30px;
   grid-row-gap: 100px;
   width: 90%;
   margin: 0 auto;
-  // background-color: red;
+
   @media #{$col_gap_expand} {
     grid-column-gap: 50px;
   }
@@ -233,23 +221,14 @@ aside button:hover{
   background-color: transparent;
 }
 .projects div:focus{
-
   outline: none;
-
-
-
   border-image-slice: 10;
   border-image-width: 0 0 10px 0;
   border-image-outset: 0;
   border-image-source: linear-gradient(blue, blue);
   border-image-source: paint(borderPaint);
-
-
   border-bottom-style: solid;
-
 }
-
-
 
 h1{
   margin: 9rem 0 6rem;
@@ -267,10 +246,6 @@ h1{
     font-size: 4em;
     margin-bottom: 10rem;
   }
-  // @extend %user_select;
-  // @media #{$mobile2} {
-  //   font-size: 2em;
-  // }
 }
 h2{
   text-align: center;
@@ -317,10 +292,6 @@ section{
 }
 
 .contact > div{
-  // margin: 0 auto;
-  // max-width: 100px;
-  // max-height: 100px;
-  // background-color: green;
   border: 2px solid transparent;
 }
 
