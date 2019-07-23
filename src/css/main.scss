@@ -60,80 +60,13 @@ li a:visited{
 li a:hover{
   text-decoration: underline;
 }
-
+// 14.41
 #port:target,
 #cont:target{
   padding-top: 3rem;
 }
 
-.panH3,
-.panP,
-.panA{
-  text-align: center;
-  color: #30511d;
-}
-.panH3{
-  font-size: 1.9em;
-  line-height: 1.5;
-  margin: 0;
-}
-.panP{
-  margin: 0;
-  font-size: 1.5em;
-  line-height: 1;
-  height: 24px;
-  font-weight: bold;
-}
-.panP:last-of-type{
-  height: 2rem;
-  border-bottom: 1px solid #30511d;
-  padding-bottom: .5rem;
-}
-.panDiv{
-  display: grid;
-  grid: "top top" 90% "lbot rbot" 10% / 1fr 1fr;
-  justify-items: center;
-  width: 288px;
-  height: 320px;
-}
-.panImg{
-  width: 100%;
-  height: 100%;
-  grid-area: top;
-}
-.panA{
-  width: calc(100% - 2px);
-  height: 30px;
-  line-height: 0.8;
-  font-size: 2em;
-  text-decoration: none;
-  border: 1px solid #30511d;
-  font-weight: bold;
-}
-.panAGrid{
-  grid-column: 1 / -1;
-}
-.panDiv:focus,
-.panA:focus{
-  outline: none;
-  background-color: #1a2845;
-  color: #e5d7ba;
-}
-.panAGrids:first-of-type{
-  grid-area: lbot;
-}
-.panAGrids:last-of-type{
-  grid-area: rbot;
-}
-.linkA{
-  display: block;
-  border: 2px solid transparent;
-  padding: 4px;
-}
-.linkA:focus{
-  outline: none;
-  border: 2px solid #1a2845;
-}
+
 
 
 

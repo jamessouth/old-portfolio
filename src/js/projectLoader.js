@@ -1,5 +1,5 @@
 import { projects } from './projects';
-
+import '../css/fallback.scss';
 
 
 
