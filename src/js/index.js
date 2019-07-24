@@ -83,34 +83,22 @@ function IOcallback2(entries, observer) {
 
 
 
-if (!window.IntersectionObserver) {
+if (window.IntersectionObserver && window.customElements && HTMLElement.prototype.attachShadow) {
 
-  projectLoader(projectDivs);
-  contactDivs.forEach((div) => div.removeAttribute('tabindex'));
-  linkLoader(contactDivs);
+  const observer = new IntersectionObserver(IOcallback, IOoptions);
+  const observer2 = new IntersectionObserver(IOcallback2, IOoptions);
+  [...projectDivs].forEach(el => observer.observe(el));
+  [...contactDivs].forEach(el => observer2.observe(el));
 
 } else {
 
-  if (window.customElements && HTMLElement.prototype.attachShadow) {
-
-    const observer = new IntersectionObserver(IOcallback, IOoptions);
-    [...projectDivs].forEach(el => observer.observe(el));
-
-    const observer2 = new IntersectionObserver(IOcallback2, IOoptions);
-    [...contactDivs].forEach(el => observer2.observe(el));
-
-  } else {
-
-    import(/* webpackChunkName: "fallback" */ '../css/fallback.scss').then(() => {
+  import(/* webpackChunkName: "fallback" */ '../css/fallback.scss')
+    .catch(err => console.log('Error loading styles: ', err))
+    .then(() => {
       projectLoader(projectDivs);
       contactDivs.forEach((div) => div.removeAttribute('tabindex'));
       linkLoader(contactDivs);
-    }).catch(err => console.log(err));
-
-
-
-
-
-  }
+    })
+    .catch(err => console.log(err));
 
 }
