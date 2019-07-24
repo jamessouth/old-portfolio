@@ -12,6 +12,7 @@
   "scripts": {
     "lint": "eslint ./src/js",
     "analyze": "webpack --profile --json > stats.json",
+    "report": "webpack-bundle-analyzer stats.json",
     "dev": "webpack-dev-server",
     "build:prod": "webpack && cp src/favicon.ico docs/favicon.ico && cp src/manifest.json docs/manifest.json && cp -r src/images/icons/ docs/images/icons && cp src/sw.js.map docs/sw.js.map",
     "prebuild:prod": "rm -f docs/burst.min.js docs/worker.min.js && npx minify src/js/burst.js --out-file docs/burst.min.js && npx babel src/js/worker.js --presets=@babel/preset-env | npx uglifyjs -m toplevel -c toplevel,unsafe -o docs/worker.min.js && webpack --config sw-webpack.config.js"
@@ -49,6 +50,7 @@
     "style-loader": "^0.23.1",
     "uglify-js": "^3.6.0",
     "webpack": "^4.34.0",
+    "webpack-bundle-analyzer": "^3.3.2",
     "webpack-cli": "^3.3.4",
     "webpack-dev-server": "^3.7.1",
     "workbox-webpack-plugin": "^4.3.1",

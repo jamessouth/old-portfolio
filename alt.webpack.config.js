@@ -19,7 +19,7 @@ module.exports = {
   },
   output: {
     filename: '[name].[contenthash].js',
-    chunkFilename: '[name].[contenthash].js',
+    chunkFilename: '[name].farrrrt.js',
     path: path.resolve(__dirname, 'docs'),
   },
   module: {
@@ -81,7 +81,22 @@ module.exports = {
     ],
     runtimeChunk: 'single',
     splitChunks: {
+      cacheGroups: {
+        main_css: {
+          test: m => m.identifier().includes('main.scss'),
+          name: 'main_css',
+          chunks: 'all',
+          enforce: true,
+        },
+        fallback_css: {
+          test: m => m.identifier().includes('fallback.scss'),
+          name: 'fallback_css',
+          chunks: 'all',
+          enforce: true,
+        },
+      },
       chunks: 'all',
+
     },
   },
   plugins: [
@@ -93,6 +108,7 @@ module.exports = {
     new HTMLWebpackPlugin({
       template: './src/html/index.html',
       title: 'James South - Portfolio',
+      excludeChunks: ['fallback_css.farrrrt.js'],
     }),
     new ScriptExtHTMLWebpackPlugin({
       defaultAttribute: 'async',
