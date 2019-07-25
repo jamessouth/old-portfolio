@@ -25,7 +25,7 @@
 
 
 @mixin position($rt: null, $lt: null, $tp: null, $bm: null) {
-  position: absolute;
+  position: fixed;
   right: $rt;
   left: $lt;
   top: $tp;

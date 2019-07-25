@@ -15,11 +15,11 @@
   line-height: 1;
   height: 24px;
   font-weight: bold;
-}
-.panP:last-of-type{
-  height: 2rem;
-  border-bottom: 1px solid #30511d;
-  padding-bottom: .5rem;
+  &:last-of-type{
+    height: 2rem;
+    border-bottom: 1px solid #30511d;
+    padding-bottom: .5rem;
+  }
 }
 .panDiv{
   display: grid;
@@ -61,8 +61,8 @@
   display: block;
   border: 2px solid transparent;
   padding: 4px;
-}
-.linkA:focus{
-  outline: none;
-  border: 2px solid #1a2845;
+  &:focus{
+    outline: none;
+    border: 2px solid #1a2845;
+  }
 }
