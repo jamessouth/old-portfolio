@@ -1,17 +1,6 @@
-
 import { projects } from './projects';
-// import Project4GIF from '../images/p4.gif';
-// import Project7GIF from '../images/p7.gif';
-// import Project9GIF from '../images/p9.gif';
-// import Project10GIF from '../images/p10.gif';
-// import Project11GIF from '../images/p11.gif';
+
 const myWorker = new Worker('./worker.js', { type: 'module' });
-
-
-
-
-// const divs = document.querySelectorAll('.projects div');
-
 
 function panelMarkupTag(strings, ...anchors) {
   const str = [...anchors].map(anc => `<a rel="noopener noreferrer">${anc}</a>`).join('\n      ');
@@ -26,7 +15,6 @@ function panelMarkupTag(strings, ...anchors) {
     </div>
     `;
 }
-
 
 const panelTemplate = document.createElement('template');
 
@@ -80,10 +68,12 @@ div{
   height: 320px;
 }
 `;
+
 const oneAnchorStyle = `
 a{
   grid-column: 1 / -1;
 `;
+
 const twoAnchorsStyle = `
 a:first-of-type{
   grid-area: lbot;
@@ -92,24 +82,17 @@ a:last-of-type{
   grid-area: rbot;
 `;
 
-
-
-
-
 class Panel extends HTMLElement {
 
   constructor({ title, tech1, tech2, live, code, alt, src, live_aria, code_aria }, no) {
     super();
     Object.assign(this, { title, tech1, tech2, live, code, alt, src, live_aria, code_aria }, no);
-    // console.log(this.title);
     const shadowRoot = this.attachShadow({ mode: 'open' });
     panelTemplate.innerHTML = live ? `${panelMarkupTag`${`code`}${`live`}`}${styleTag}${twoAnchorsStyle}` : `${panelMarkupTag`${`code`}`}${styleTag}${oneAnchorStyle}`;
     shadowRoot.appendChild(panelTemplate.content.cloneNode(true));
-
   }
 
   connectedCallback() {
-
     this.h3.textContent = this.title;
     this.anchors[0].setAttribute('href', this.code);
     this.anchors[0].setAttribute('aria-label', this.code_aria);
@@ -120,9 +103,6 @@ class Panel extends HTMLElement {
     this.ps[0].textContent = this.tech1;
     this.ps[1].textContent = this.tech2;
   }
-
-
-
 
   get anchors() {
     return this.shadowRoot.querySelectorAll('a');
@@ -144,13 +124,9 @@ class Panel extends HTMLElement {
     return this.shadowRoot.querySelectorAll('p');
   }
 }
-// function getUseCubesJS() {
-//   return import(/* webpackChunkName: "useCubes" */ './useCubes').catch(err => console.log(err));
-// }
+
 myWorker.addEventListener('message', e => {
   console.log(e);
-  // console.log(divs);
-
 
 });
 

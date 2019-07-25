@@ -17,32 +17,14 @@ a:focus{
   border: 2px solid #1a2845;
 `;
 
-
-// }
-// img{
-//   width: 100%;
-//   height: 100%;
-
-
 class Link extends HTMLElement {
-  // static get observedAttributes() {
-  //   return ['gif-on'];
-  // }
-
-// }
-// :host{
-//   display: grid;
-
-
 
   constructor({ link, alt, src }) {
     super();
     Object.assign(this, { link, alt, src });
-    // console.log(this.link);
     const shadowRoot = this.attachShadow({ mode: 'open' });
     linkTemplate.innerHTML = htmlTag;
     shadowRoot.appendChild(linkTemplate.content.cloneNode(true));
-
   }
 
   connectedCallback() {
@@ -59,13 +41,8 @@ class Link extends HTMLElement {
     return this.shadowRoot.querySelector('img');
   }
 }
-// function getUseCubesJS() {
-//   return import(/* webpackChunkName: "useCubes" */ './useCubes').catch(err => console.log(err));
-// }
-
 
 export default function linkFactory({ target, target: { id } }) {
-  // console.log('kkkkk');
 
   const link = new Link(links[parseInt(id, 10)]);
   target.appendChild(link);
