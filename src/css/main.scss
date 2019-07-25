@@ -40,38 +40,39 @@ li{
   @media #{$two_col} {
     font-size: 1.7em;
   }
+  &:before {
+    content: "\200B";
+    position: absolute;
+  }
+  & a{
+    text-decoration: none;
+    border: 2px solid transparent;
+  }
+  & a:focus{
+    outline: none;
+    border: 2px solid #2323c5;
+  }
+  & a:link,
+  & a:visited{
+    color: initial;
+  }
+  & a:hover{
+    text-decoration: underline;
+  }
+  & button{
+    font-size: 1em;
+    font-weight: bold;
+  }
+  & button:focus,
+  & button:hover{
+    outline: none;
+    border: 2px solid #2323c5;
+  }
 }
-li:before {
-  content: "\200B";
-  position: absolute;
-}
-li a{
-  text-decoration: none;
-  border: 2px solid transparent;
-}
-li a:focus{
-  outline: none;
-  border: 2px solid #2323c5;
-}
-li a:link,
-li a:visited{
-  color: initial;
-}
-li a:hover{
-  text-decoration: underline;
-}
-// 14.41
 #port:target,
 #cont:target{
   padding-top: 3rem;
 }
-
-
-
-
-
-
-
 aside{
   display: none;
   position: fixed;
@@ -81,88 +82,28 @@ aside{
   left: 2%;
   z-index: 19;
   background-color: #696969;
+  & button{
+    width: 35px;
+    height: 50px;
+    font-size: 2.5em;
+    background-color: #f8f8ff;
+    line-height: 0;
+    position: fixed;
+    left: 2%;
+    top: 9%;
+    border: 3px solid transparent;
+  }
+  & button:focus,
+  & button:hover{
+    outline: none;
+    border: 5px solid #ff7f50;
+  }
 }
-
-object{
-  width: 100%;
-  height: 100%;
-}
-
+object,
 iframe{
   width: 100%;
   height: 100%;
 }
-
-
-
-li button{
-  font-size: 1em;
-  font-weight: bold;
-}
-li button:focus,
-li button:hover{
-  outline: none;
-  border: 2px solid #2323c5;
-}
-
-
-
-aside button{
-  width: 35px;
-  height: 50px;
-  font-size: 2.5em;
-  background-color: #f8f8ff;
-  line-height: 0;
-  position: fixed;
-  left: 2%;
-  top: 9%;
-  border: 3px solid transparent;
-}
-aside button:focus,
-aside button:hover{
-  outline: none;
-  border: 5px solid #ff7f50;
-}
-
-
-.projects{
-
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(288px, 1fr));
-  grid-column-gap: 30px;
-  grid-row-gap: 100px;
-  width: 90%;
-  margin: 0 auto;
-
-  @media #{$col_gap_expand} {
-    grid-column-gap: 50px;
-  }
-  @media #{$four_cols} {
-    grid-template-columns: repeat(4, 1fr);
-  }
-  @media #{$six_cols} {
-    grid-template-columns: repeat(6, 1fr);
-  }
-  @media #{$big} {
-    width: 80%;
-  }
-}
-.projects > div{
-  margin: 0 auto;
-  width: 288px;
-  height: 435px;
-  background-color: transparent;
-}
-.projects div:focus{
-  outline: none;
-  border-image-slice: 10;
-  border-image-width: 0 0 10px 0;
-  border-image-outset: 0;
-  border-image-source: linear-gradient(blue, blue);
-  border-image-source: paint(borderPaint);
-  border-bottom-style: solid;
-}
-
 h1{
   margin: 9rem 0 6rem;
   text-align: center;
@@ -197,15 +138,49 @@ h2{
     margin-bottom: 7rem;
   }
 }
-.projects > div:last-child{
-  @media #{$two_col} {
-    grid-column: 1 / -1;
-  }
-}
 section{
   margin-bottom: 8rem;
 }
-
+.projects{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(288px, 1fr));
+  grid-column-gap: 30px;
+  grid-row-gap: 100px;
+  width: 90%;
+  margin: 0 auto;
+  @media #{$col_gap_expand} {
+    grid-column-gap: 50px;
+  }
+  @media #{$four_cols} {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  @media #{$six_cols} {
+    grid-template-columns: repeat(6, 1fr);
+  }
+  @media #{$big} {
+    width: 80%;
+  }
+  & > div{
+    margin: 0 auto;
+    width: 288px;
+    height: 435px;
+    background-color: transparent;
+  }
+  & > div:focus{
+    outline: none;
+    border-image-slice: 10;
+    border-image-width: 0 0 10px 0;
+    border-image-outset: 0;
+    border-image-source: linear-gradient(blue, blue);
+    border-image-source: paint(borderPaint);
+    border-bottom-style: solid;
+  }
+  & > div:last-child{
+    @media #{$two_col} {
+      grid-column: 1 / -1;
+    }
+  }
+}
 .contact{
   display: flex;
   flex-direction: column;
@@ -222,23 +197,7 @@ section{
   @media #{$upsize_text} {
     width: 724px;
   }
+  & > div{
+    border: 2px solid transparent;
+  }
 }
-
-.contact > div{
-  border: 2px solid transparent;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// l

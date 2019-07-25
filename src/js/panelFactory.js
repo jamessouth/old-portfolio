@@ -139,7 +139,5 @@ export default function panelFactory({ target, target: { id } }) {
 
 
 }
-if (window.customElements && HTMLElement.prototype.attachShadow) {
 
-  window.customElements.define('project-panel', Panel);
-}
+window.customElements.define('project-panel', Panel);
