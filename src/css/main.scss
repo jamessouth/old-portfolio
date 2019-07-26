@@ -1,5 +1,4 @@
 @import 'variables';
-@import 'extends';
 @import 'mixins';
 *{
   margin: 0;
@@ -16,8 +15,7 @@ body{
 }
 header{
   @include position($tp: 0);
-  height: 3rem;
-  width: 100%;
+  @include wh(100%, 3rem);
   background-color: #fafad2;
 }
 nav{
@@ -25,15 +23,12 @@ nav{
   height: 100%;
 }
 ul{
-  display: flex;
+  @include flex(row, space-around, center);
   height: 100%;
-  align-items: center;
   list-style: none;
-  justify-content: space-around;
 }
 li{
-  font-size: 1.3em;
-  font-weight: bold;
+  @include fonty(1.3em, bold);
   @media #{$two_col} {
     font-size: 1.7em;
   }
@@ -46,8 +41,7 @@ li{
     border: 2px solid transparent;
   }
   & a:focus{
-    outline: none;
-    border: 2px solid #2323c5;
+    @include focus(#2323c5, 2px);
   }
   & a:link,
   & a:visited{
@@ -57,13 +51,11 @@ li{
     text-decoration: underline;
   }
   & button{
-    font-size: 1em;
-    font-weight: bold;
+    @include fonty(1em, bold);
   }
   & button:focus,
   & button:hover{
-    outline: none;
-    border: 2px solid #2323c5;
+    @include focus(#2323c5, 2px);
   }
 }
 #port:target,
@@ -76,57 +68,46 @@ aside{
   z-index: 19;
   background-color: #696969;
   & button{
-    width: 35px;
-    height: 50px;
-    font-size: 2.5em;
+    @include wh(35px, 50px);
+    @include fonty(2.5em, $lh: 0);
     background-color: #f8f8ff;
-    line-height: 0;
     @include position($lt: 2%, $tp: 9%);
     border: 3px solid transparent;
   }
   & button:focus,
   & button:hover{
-    outline: none;
-    border: 5px solid #ff7f50;
+    @include focus(#ff7f50, 5px);
   }
 }
 object,
 iframe{
-  width: 100%;
-  height: 100%;
+  @include wh(100%, 100%);
 }
 h1{
   margin: 9rem 0 6rem;
   text-align: center;
   font-size: 2em;
   @media #{$two_col} {
-    font-size: 2.5em;
-    margin-bottom: 7rem;
+    @include fontMarg(2.5em, 7rem);
   }
   @media #{$upsize_text} {
-    font-size: 3em;
-    margin-bottom: 8rem;
+    @include fontMarg(3em, 8rem);
   }
   @media #{$big} {
-    font-size: 4em;
-    margin-bottom: 10rem;
+    @include fontMarg(4em, 10rem);
   }
 }
 h2{
   text-align: center;
-  font-size: 1.75em;
-  margin-bottom: 3rem;
+  @include fontMarg(1.75em, 3rem);
   @media #{$two_col} {
-    font-size: 2.25em;
-    margin-bottom: 4rem;
+    @include fontMarg(2.25em, 4rem);
   }
   @media #{$upsize_text} {
-    font-size: 2.75em;
-    margin-bottom: 5rem;
+    @include fontMarg(2.75em, 5rem);
   }
   @media #{$big} {
-    font-size: 3.75em;
-    margin-bottom: 7rem;
+    @include fontMarg(3.75em, 7rem);
   }
 }
 section{
@@ -153,16 +134,13 @@ section{
   }
   & > div{
     margin: 0 auto;
-    width: 288px;
-    height: 435px;
+    @include wh(288px, 435px);
     background-color: transparent;
   }
   & > div:focus{
     outline: none;
-    border-image-slice: 10;
-    border-image-width: 0 0 10px 0;
-    border-image-outset: 0;
-    border-image-source: linear-gradient(blue, blue);
+    border-image: 10 / 0 0 10px 0 / 0;
+    border-image-source: linear-gradient(blue, blue); // fallback
     border-image-source: paint(borderPaint);
     border-bottom-style: solid;
   }
@@ -173,17 +151,12 @@ section{
   }
 }
 .contact{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+  @include flex(column, space-between, center);
   margin: 0 auto;
-  width: 90%;
-  height: 400px;
+  @include wh(90%, 400px);
   @media #{$two_col} {
     flex-direction: row;
-    width: 70%;
-    height: 150px;
+    @include wh(70%, 150px);
   }
   @media #{$upsize_text} {
     width: 724px;

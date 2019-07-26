@@ -1,20 +1,10 @@
-@mixin bodybg($url) {
-  background: center center/cover no-repeat url($url) #555;
+@mixin wh($w, $h) {
+  width: $w;
+  height: $h;
 }
-@mixin inputAfter($width, $marginTop) {
-  position: relative;
-  transform: translateX(-50%);
-  left: 50%;
-  width: $width;
-  margin-top: $marginTop;
-}
-@mixin text($size: null, $width: null, $color: null, $lh: null, $wt: null, $ht: null) {
+@mixin fontMarg($size, $mb) {
 	font-size: $size;
-  width: $width;
-	color: $color;
-	line-height: $lh;
-  font-weight: $wt;
-  height: $ht;
+  margin-bottom: $mb;
 }
 @mixin flex($dir, $just, $align: null) {
   display: flex;
@@ -22,12 +12,19 @@
   justify-content: $just;
   align-items: $align;
 }
-
-
-@mixin position($rt: null, $lt: null, $tp: null, $bm: null) {
+@mixin position($rt: null, $lt: null, $tp, $bm: null) {
   position: fixed;
   right: $rt;
   left: $lt;
   top: $tp;
   bottom: $bm;
+}
+@mixin fonty($sz, $wt: null, $lh: null) {
+  font-size: $sz;
+  font-weight: $wt;
+  line-height: $lh;
+}
+@mixin focus($col, $wd) {
+  outline: none;
+  border: $wd solid $col;
 }
