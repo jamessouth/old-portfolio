@@ -12,7 +12,7 @@
   justify-content: $just;
   align-items: $align;
 }
-@mixin position($rt: null, $lt: null, $tp, $bm: null) {
+@mixin position($rt: null, $lt: null, $tp: null, $bm: null) {
   position: fixed;
   right: $rt;
   left: $lt;

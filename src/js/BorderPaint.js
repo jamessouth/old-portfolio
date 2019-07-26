@@ -1,42 +1,41 @@
 class BorderPaint {
-
-  pipe(...fns) {
+  static pipe(...fns) {
     return function inner(start) {
       return fns.reduce((val, fn) => fn(val), start);
     };
   }
 
-  getHue() {
+  static getHue() {
     return Math.floor(Math.random() * 101) + 190;
   }
 
-  getDirectionInRadians() {
+  static getDirectionInRadians() {
     return Math.random() * Math.PI;
   }
 
-  getHypoLength(ang) {
+  static getHypoLength(ang) {
     return 10 / Math.cos(ang);
   }
 
-  getCoord(hypo) {
+  static getCoord(hypo) {
     const dir = hypo < 0 ? -1 : 1;
     const opSide = Math.sqrt((hypo * hypo) - 100);
     return opSide * dir;
   }
 
-  getWidth() {
+  static getWidth() {
     return Math.floor(Math.random() * 10) + 2;
   }
 
   paint(ctx, geom, props) {
-
-    for (let i = 0; i < 49; i++) {
+    for (let i = 0; i < 49; i += 1) {
       const dir = this.getDirectionInRadians();
 
       const opLen = this.pipe(
         this.getHypoLength,
         this.getCoord,
-        Math.round)(dir);
+        Math.round,
+      )(dir);
 
       const stPt = i * 6;
       ctx.beginPath();

@@ -18,7 +18,6 @@ a:focus{
 `;
 
 class Link extends HTMLElement {
-
   constructor({ link, alt, src }) {
     super();
     Object.assign(this, { link, alt, src });
@@ -43,10 +42,8 @@ class Link extends HTMLElement {
 }
 
 export default function linkFactory({ target, target: { id } }) {
-
   const link = new Link(links[parseInt(id, 10)]);
   target.appendChild(link);
-
 }
 
 window.customElements.define('contact-link', Link);

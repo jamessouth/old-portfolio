@@ -8,7 +8,7 @@ export default function linkLoader(divs) {
 
     const a1 = document.createElement('a');
     a1.className = 'linkA';
-    a1.setAttribute('rel', "noopener noreferrer");
+    a1.setAttribute('rel', 'noopener noreferrer');
     a1.setAttribute('href', link);
 
     const image = document.createElement('img');
@@ -19,6 +19,5 @@ export default function linkLoader(divs) {
     linkFragment.appendChild(a1);
 
     div.appendChild(linkFragment);
-
   });
 }

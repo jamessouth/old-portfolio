@@ -83,10 +83,13 @@ a:last-of-type{
 `;
 
 class Panel extends HTMLElement {
-
-  constructor({ title, tech1, tech2, live, code, alt, src, live_aria, code_aria }, no) {
+  constructor({
+    title, tech1, tech2, live, code, alt, src, liveAria, codeAria,
+  }, no) {
     super();
-    Object.assign(this, { title, tech1, tech2, live, code, alt, src, live_aria, code_aria }, no);
+    Object.assign(this, {
+      title, tech1, tech2, live, code, alt, src, liveAria, codeAria,
+    }, no);
     const shadowRoot = this.attachShadow({ mode: 'open' });
     panelTemplate.innerHTML = live ? `${panelMarkupTag`${`code`}${`live`}`}${styleTag}${twoAnchorsStyle}` : `${panelMarkupTag`${`code`}`}${styleTag}${oneAnchorStyle}`;
     shadowRoot.appendChild(panelTemplate.content.cloneNode(true));
@@ -95,9 +98,9 @@ class Panel extends HTMLElement {
   connectedCallback() {
     this.h3.textContent = this.title;
     this.anchors[0].setAttribute('href', this.code);
-    this.anchors[0].setAttribute('aria-label', this.code_aria);
+    this.anchors[0].setAttribute('aria-label', this.codeAria);
     this.live && this.anchors[1].setAttribute('href', this.live);
-    this.live_aria && this.anchors[1].setAttribute('aria-label', this.live_aria);
+    this.liveAria && this.anchors[1].setAttribute('aria-label', this.liveAria);
     this.img.setAttribute('src', this.src);
     this.img.setAttribute('alt', this.alt);
     this.ps[0].textContent = this.tech1;
@@ -125,19 +128,14 @@ class Panel extends HTMLElement {
   }
 }
 
-myWorker.addEventListener('message', e => {
+myWorker.addEventListener('message', (e) => {
   console.log(e);
-
 });
 
 export default function panelFactory({ target, target: { id } }) {
-  // console.log('kkkkk');
-
   const panel = new Panel(projects[id]);
   target.appendChild(panel);
   myWorker.postMessage(id);
-
-
 }
 
 window.customElements.define('project-panel', Panel);
