@@ -27,7 +27,7 @@ class BorderPaint {
     return Math.floor(Math.random() * 10) + 2;
   }
 
-  paint(ctx, geom, props) {
+  paint(ctx, geom, props) { // eslint-disable-line
     for (let i = 0; i < 49; i += 1) {
       const dir = this.getDirectionInRadians();
 

@@ -1,4 +1,4 @@
-import { links } from './links';
+import links from './links';
 
 export default function linkLoader(divs) {
   divs.forEach((div, i) => {

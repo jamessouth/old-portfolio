@@ -1,9 +1,17 @@
-import { projects } from './projects';
+import projects from './projects';
 
 export default function projectLoader(divs) {
   divs.forEach((div, i) => {
     const {
-      title, tech1, tech2, live, code, alt, src, liveAria, codeAria
+      title,
+      tech1,
+      tech2,
+      live,
+      code,
+      alt,
+      src,
+      liveAria,
+      codeAria,
     } = projects[i];
 
     const panelFragment = document.createDocumentFragment();

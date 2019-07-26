@@ -1,4 +1,4 @@
-import { projects } from './projects';
+import projects from './projects';
 
 const myWorker = new Worker('./worker.js', { type: 'module' });
 

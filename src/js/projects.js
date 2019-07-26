@@ -12,7 +12,7 @@ import flickr from '../images/flickr.jpg';
 import port from '../images/port.jpg';
 import wdk from '../images/wdk.jpg';
 
-export const projects = [
+const projects = [
   {
     title: 'random quotes',
     live: 'https://jamessouth.github.io/JS-Project-1/',
@@ -142,3 +142,5 @@ export const projects = [
     codeAria: 'code for portfolio project',
   },
 ];
+
+export default projects;

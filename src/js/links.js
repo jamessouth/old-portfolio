@@ -3,7 +3,7 @@ import github from '../images/github.png';
 import twit from '../images/twit.png';
 import so from '../images/so.png';
 
-export const links = [
+const links = [
   {
     link: 'mailto:jamesdanielsouth@gmail.com',
     alt: 'open your email client to email me',
@@ -25,3 +25,5 @@ export const links = [
     src: so,
   },
 ];
+
+export default links;
