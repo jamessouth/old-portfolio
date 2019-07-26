@@ -1,4 +1,4 @@
-/* eslint-disable no-undef, no-restricted-globals, no-underscore-dangle */
+
 import { setCacheNameDetails } from 'workbox-core/setCacheNameDetails.mjs';
 import { Plugin as ExpirationPlugin } from 'workbox-expiration/Plugin.mjs';
 import { cleanupOutdatedCaches } from 'workbox-precaching/cleanupOutdatedCaches.mjs';

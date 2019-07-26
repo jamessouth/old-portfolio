@@ -47,4 +47,4 @@ class BorderPaint {
     }
   }
 }
-registerPaint('borderPaint', BorderPaint);
+registerPaint('borderPaint', BorderPaint); // eslint-disable-line
