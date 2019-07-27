@@ -16,7 +16,7 @@ body{
 header{
   @include position($tp: 0);
   @include wh(100%, 3rem);
-  background-color: #fafad2;
+  background-color: $yellow;
 }
 nav{
   margin: 0 .5rem;
@@ -38,10 +38,10 @@ li{
   }
   & a{
     text-decoration: none;
-    border: 2px solid transparent;
+    border: $bord;
   }
   & a:focus{
-    @include focus(#2323c5, 2px);
+    @include focus($blue, 2px);
   }
   & a:link,
   & a:visited{
@@ -55,7 +55,7 @@ li{
   }
   & button:focus,
   & button:hover{
-    @include focus(#2323c5, 2px);
+    @include focus($blue, 2px);
   }
 }
 #port:target,
@@ -121,14 +121,29 @@ section{
   width: 90%;
   &:first-letter{
     font-family: 'Permanent Marker', cursive;
-    font-size: 3.2em;
-    line-height: 1;
+    @include fonty(3.2em, bold, 1);
     margin: 0 .5rem;
     border: .35rem double black;
     padding: .15rem 1.15rem 1.15rem .45rem;
     text-shadow: 4px 6px 1px black;
     float: left;
-    color: #554dff;
+    color: $blue;
+    background-color: $yellow;
+  }
+  & a{
+    font-family: inherit;
+    border: $bord;
+  }
+  & a:link,
+  & a:visited{
+    color: $blue;
+  }
+  & a:hover{
+    background-color: $blue;
+    color: $yellow;
+  }
+  & a:focus{
+    @include focus($blue, 2px);
   }
 }
 .projects{
@@ -158,7 +173,7 @@ section{
   & > div:focus{
     outline: none;
     border-image: 10 / 0 0 10px 0 / 0;
-    border-image-source: linear-gradient(blue, blue); // fallback
+    border-image-source: linear-gradient($blue, $blue); // fallback
     border-image-source: paint(borderPaint);
     border-bottom-style: solid;
   }
@@ -180,6 +195,6 @@ section{
     width: 724px;
   }
   & > div{
-    border: 2px solid transparent;
+    border: $bord;
   }
 }
