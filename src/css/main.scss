@@ -120,8 +120,15 @@ section{
   margin: auto;
   width: 90%;
   &:first-letter{
-    font-family: $cor;
-    font-size: 2em;
+    font-family: 'Permanent Marker', cursive;
+    font-size: 3.2em;
+    line-height: 1;
+    margin: 0 .5rem;
+    border: .35rem double black;
+    padding: .15rem 1.15rem 1.15rem .45rem;
+    text-shadow: 4px 6px 1px black;
+    float: left;
+    color: #554dff;
   }
 }
 .projects{
