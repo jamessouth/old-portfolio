@@ -59,6 +59,7 @@ li{
   }
 }
 #port:target,
+#about:target,
 #cont:target{
   padding-top: 3rem;
 }
@@ -112,6 +113,16 @@ h2{
 }
 section{
   margin-bottom: 8rem;
+}
+#about p{
+  font-family: serif;
+  font-size: 1.5em;
+  margin: auto;
+  width: 90%;
+  &:first-letter{
+    font-family: $cor;
+    font-size: 2em;
+  }
 }
 .projects{
   display: grid;
