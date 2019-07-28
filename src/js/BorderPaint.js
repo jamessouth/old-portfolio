@@ -14,7 +14,7 @@ class BorderPaint {
   }
 
   static getHypoLength(ang) {
-    return 10 / Math.cos(ang);
+    return 10 / Math.cos(ang); // 10 is the height of the border area
   }
 
   static getCoord(hypo) {
@@ -29,11 +29,11 @@ class BorderPaint {
 
   paint(ctx, geom, props) { // eslint-disable-line
     for (let i = 0; i < 49; i += 1) {
-      const dir = this.getDirectionInRadians();
+      const dir = BorderPaint.getDirectionInRadians();
 
-      const opLen = this.pipe(
-        this.getHypoLength,
-        this.getCoord,
+      const opLen = BorderPaint.pipe(
+        BorderPaint.getHypoLength,
+        BorderPaint.getCoord,
         Math.round,
       )(dir);
 
@@ -41,8 +41,8 @@ class BorderPaint {
       ctx.beginPath();
       ctx.moveTo(stPt, 425);
       ctx.lineTo(stPt + opLen, 435);
-      ctx.lineWidth = this.getWidth();
-      ctx.strokeStyle = `hsl(${this.getHue()}deg, 85%, 49%)`;
+      ctx.lineWidth = BorderPaint.getWidth();
+      ctx.strokeStyle = `hsl(${BorderPaint.getHue()}deg, 85%, 49%)`;
       ctx.stroke();
     }
   }

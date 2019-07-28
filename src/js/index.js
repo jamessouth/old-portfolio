@@ -3,6 +3,7 @@ import resumePDF from '../images/resume.pdf';
 // import './loadSW';
 import createAside from './createAside';
 
+
 const openModalBtn = document.querySelector('li button');
 const closeModalBtn = document.querySelector('aside button');
 const modal = document.querySelector('aside');

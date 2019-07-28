@@ -9,7 +9,7 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const { InjectManifest } = require('workbox-webpack-plugin');
 const WorkerPlugin = require('worker-plugin');
 
-const swVol = 'v5';
+const swVol = 'v1';
 
 module.exports = {
   mode: 'development', // production
@@ -62,9 +62,6 @@ module.exports = {
             options: {
               outputPath: 'images/',
               publicPath: 'images/',
-              name(file) {
-                return /((4|7|9|10|11|explosion)\.(gif|jpg))$/.test(file) ? '[name].[hash].[ext]' : '[hash].[ext]';
-              },
             },
           },
         ],
@@ -85,7 +82,7 @@ module.exports = {
     },
   },
   plugins: [
-    new CleanWebpackPlugin({ cleanOnceBeforeBuildPatterns: ['**/*', '!burst.min.js', '!service-worker.js', '!BorderPaint.js'] }),
+    new CleanWebpackPlugin({ cleanOnceBeforeBuildPatterns: ['**/*', '!BorderPaint.min.js', '!service-worker.js'] }),
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css',
       chunkFilename: '[name].[contenthash].css',
@@ -99,13 +96,13 @@ module.exports = {
     }),
     new WorkerPlugin(),
     new webpack.HashedModuleIdsPlugin(),
-    // new InjectManifest({
-    //   swSrc: './src/sw.js',
-    //   swDest: 'service-worker.js',
-    //   importWorkboxFrom: 'disabled',
-    //   precacheManifestFilename: `precache-manifest-${swVol}.[manifestHash].js`,
-    //   exclude: [/\.(?:png|jpg|jpeg|svg|gif)$/, /\.map$/, /(animPaint|contact|destroyOpt|gifOpt|sizeOpt|useCubes|anim_polyfill)/],
-    // }),
+    new InjectManifest({
+      swSrc: './src/sw.js',
+      swDest: 'service-worker.js',
+      importWorkboxFrom: 'disabled',
+      precacheManifestFilename: `precache-manifest-${swVol}.[manifestHash].js`,
+      exclude: [/\.(?:png|jpg|jpeg|svg|gif)$/, /\.map$/, /(animPaint|contact|destroyOpt|gifOpt|sizeOpt|useCubes|anim_polyfill)/],
+    }),
   ],
   devServer: {
     port: 3000,
