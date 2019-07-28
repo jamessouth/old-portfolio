@@ -7,9 +7,10 @@ export default function createAside(pdf) {
   ifrm.setAttribute('title', 'pdf of my résumé');
   ifrm.setAttribute('src', pdf);
   const para = document.createElement('p');
-  para.textContent = 'Your browser does not support PDFs.';
+  para.textContent = 'Your browser does not support PDFs. ';
   const anc = document.createElement('a');
   anc.setAttribute('href', pdf);
+  anc.setAttribute('download', 'james south resume');
   anc.textContent = 'Download PDF';
   para.appendChild(anc);
   ifrm.appendChild(para);

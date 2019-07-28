@@ -79,6 +79,15 @@ aside{
   & button:hover{
     @include focus(#ff7f50, 5px);
   }
+  & p,
+  & a{
+    font-family: serif;
+    color: white;
+  }
+  & p{
+    margin-top: 5em;
+    font-size: 24px;
+  }
 }
 object,
 iframe{
