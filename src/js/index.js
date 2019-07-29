@@ -1,6 +1,6 @@
 import '../css/main.scss';
 import resumePDF from '../images/resume.pdf';
-// import './loadSW';
+import './loadSW';
 import createAside from './createAside';
 
 
@@ -30,7 +30,8 @@ closeModalBtn.addEventListener('click', () => {
 });
 
 if (CSS.paintWorklet) {
-  CSS.paintWorklet.addModule('./BorderPaint.js');
+  CSS.paintWorklet.addModule('./BorderPaint.min.js');
+  CSS.paintWorklet.addModule('./ButtonBG.js');
 }
 
 if (window.IntersectionObserver && window.customElements && HTMLElement.prototype.attachShadow) {

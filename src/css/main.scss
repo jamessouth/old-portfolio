@@ -207,3 +207,46 @@ section{
     border: $bord;
   }
 }
+.installbtn,
+.reloadbtn{
+  // display: none;
+  @include position($lt: 29px, $bm: 40px);
+  box-shadow: none;
+  border-radius: 0;
+  border: none;
+  color: $yellow;
+  font-size: 1.5em;
+  font-weight: bold;
+  line-height: 1;
+  background-color: transparent;
+  cursor: pointer;
+  @include wh(90px, 60px);
+  z-index: 8;
+}
+.reloadbtn{
+  @include position($rt: 32px, $lt: auto, $bm: 52px);
+  // left: auto;
+  // right: 23px;
+  // width: 100px;
+}
+
+
+.installdiv,
+.reloaddiv{
+  // display: none;
+  background-color: $blue;
+  @include position($lt: 15px, $bm: 1px);
+  @include wh(120px, 120px);
+  -webkit-mask-image: paint(buttonBG);
+  animation: 1.6s flash ease-in 10;
+}
+.reloaddiv{
+  left: auto;
+  right: 15px;
+  // width: 120px;
+}
+@keyframes flash{
+  0% { opacity: 0; }
+  51% { opacity: 1; }
+  100% { opacity: 0; }
+}

@@ -1,14 +1,14 @@
 import { Workbox } from 'workbox-window/Workbox.mjs'; // eslint-disable-line
 
 let deferredPrompt;
-const btnBg = document.createElement('div');
-const btnAdd = document.createElement('button');
+const addBtnBg = document.createElement('div');
+const addBtn = document.createElement('button');
 const relBtnBg = document.createElement('div');
 const relBtn = document.createElement('button');
 
-btnAdd.textContent = 'install me!';
-btnAdd.className = 'installbtn';
-btnBg.className = 'installdiv';
+addBtn.textContent = 'install me!';
+addBtn.className = 'installbtn';
+addBtnBg.className = 'installdiv';
 relBtn.textContent = 'new content: reload!';
 relBtn.className = 'reloadbtn';
 relBtnBg.className = 'reloaddiv';
@@ -16,15 +16,13 @@ relBtnBg.className = 'reloaddiv';
 function handleInstall(e) {
   e.preventDefault();
   deferredPrompt = e;
-  setTimeout(() => {
-    btnAdd.style.display = 'block';
-    btnBg.style.display = 'block';
-    btnAdd.addEventListener('click', handleInstallClick); // eslint-disable-line
-  }, 9732);
+  addBtn.style.display = 'block';
+  addBtnBg.style.display = 'block';
+  addBtn.addEventListener('click', handleInstallClick); // eslint-disable-line
 }
 async function handleInstallClick() {
-  btnAdd.style.display = 'none';
-  btnBg.style.display = 'none';
+  addBtn.style.display = 'none';
+  addBtnBg.style.display = 'none';
   try {
     await deferredPrompt.prompt();
     const choice = await deferredPrompt.userChoice;
@@ -38,8 +36,8 @@ async function handleInstallClick() {
 
 if ('serviceWorker' in navigator) {
   const wb = new Workbox('./service-worker.js');
-  document.body.appendChild(btnAdd);
-  document.body.appendChild(btnBg);
+  document.body.appendChild(addBtn);
+  document.body.appendChild(addBtnBg);
   relBtn.addEventListener('click', () => {
     wb.addEventListener('controlling', () => {
       window.location.reload();
@@ -56,9 +54,9 @@ if ('serviceWorker' in navigator) {
   });
   window.addEventListener('beforeinstallprompt', handleInstall);
   window.addEventListener('appinstalled', () => {
-    const hl = document.querySelector('h1:first-of-type');
+    const hl = document.querySelector('h1');
     hl.textContent = 'Thank you!';
-    setTimeout(() => { hl.textContent = 'James South Portfolio'; }, 6500);
+    setTimeout(() => { hl.textContent = 'James South'; }, 6500);
   });
   wb.register();
 }

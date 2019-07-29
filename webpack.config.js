@@ -12,8 +12,10 @@ const WorkerPlugin = require('worker-plugin');
 const swVol = 'v1';
 
 module.exports = {
-  mode: 'development', // production
-  devtool: 'inline-source-map', //
+  // mode: 'production',
+  mode: 'development',
+  // devtool: 'source-map',
+  devtool: 'inline-source-map',
   entry: {
     main: './src/js/index.js',
   },
@@ -82,7 +84,10 @@ module.exports = {
     },
   },
   plugins: [
-    new CleanWebpackPlugin({ cleanOnceBeforeBuildPatterns: ['**/*', '!BorderPaint.min.js', '!service-worker.js'] }),
+    new CleanWebpackPlugin({ cleanOnceBeforeBuildPatterns: [
+      '**/*',
+      '!BorderPaint.min.js',
+    ] }),
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css',
       chunkFilename: '[name].[contenthash].css',
@@ -101,7 +106,10 @@ module.exports = {
       swDest: 'service-worker.js',
       importWorkboxFrom: 'disabled',
       precacheManifestFilename: `precache-manifest-${swVol}.[manifestHash].js`,
-      exclude: [/\.(?:png|jpg|jpeg|svg|gif)$/, /\.map$/, /(animPaint|contact|destroyOpt|gifOpt|sizeOpt|useCubes|anim_polyfill)/],
+      exclude: [ //  from precache
+        /\.(?:png|jpg|pdf|jpeg|svg|gif)$/,
+        /\.map$/,
+      ],
     }),
   ],
   devServer: {
