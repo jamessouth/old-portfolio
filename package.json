@@ -12,10 +12,10 @@
   "scripts": {
     "lint": "eslint ./src/js",
     "analyze": "webpack --profile --json > stats.json",
-    "report": "webpack-bundle-analyzer stats.json",
+    "report": "webpack-bundle-analyzer stats.json docs/",
     "dev": "webpack-dev-server",
     "build:prod": "webpack && cp src/favicon.ico docs/favicon.ico && cp src/manifest.json docs/manifest.json && cp -r src/images/icons/ docs/images/icons && cp src/sw.js.map docs/sw.js.map",
-    "prebuild:prod": "rm -f docs/BorderPaint.min.js && npx minify src/js/BorderPaint.js --out-file docs/BorderPaint.min.js && webpack --config sw-webpack.config.js"
+    "prebuild:prod": "rm -f docs/BorderPaint.min.js docs/ButtonBG.min.js && npx minify src/js/BorderPaint.js --out-file docs/BorderPaint.min.js && npx minify src/js/ButtonBG.js --out-file docs/ButtonBG.min.js && webpack --config sw-webpack.config.js"
   },
   "repository": {
     "type": "git",

@@ -87,6 +87,7 @@ module.exports = {
     new CleanWebpackPlugin({ cleanOnceBeforeBuildPatterns: [
       '**/*',
       '!BorderPaint.min.js',
+      '!ButtonBG.min.js',
     ] }),
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css',
@@ -107,7 +108,7 @@ module.exports = {
       importWorkboxFrom: 'disabled',
       precacheManifestFilename: `precache-manifest-${swVol}.[manifestHash].js`,
       exclude: [ //  from precache
-        /\.(?:png|jpg|pdf|jpeg|svg|gif)$/,
+        /\.(?:png|pdf|jpe?g|svg|gif)$/,
         /\.map$/,
       ],
     }),

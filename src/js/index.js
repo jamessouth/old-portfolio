@@ -1,8 +1,9 @@
 import '../css/main.scss';
-import resumePDF from '../images/resume.pdf';
 import './loadSW';
+import resumePDF from '../images/resume.pdf';
 import createAside from './createAside';
-
+import projects from './projects';
+import links from './links';
 
 const openModalBtn = document.querySelector('li button');
 const closeModalBtn = document.querySelector('aside button');
@@ -31,7 +32,7 @@ closeModalBtn.addEventListener('click', () => {
 
 if (CSS.paintWorklet) {
   CSS.paintWorklet.addModule('./BorderPaint.min.js');
-  CSS.paintWorklet.addModule('./ButtonBG.js');
+  CSS.paintWorklet.addModule('./ButtonBG.min.js');
 }
 
 if (window.IntersectionObserver && window.customElements && HTMLElement.prototype.attachShadow) {
@@ -43,11 +44,14 @@ if (window.IntersectionObserver && window.customElements && HTMLElement.prototyp
 
   const IOcallback = function IOcallback(panFact, linkFact) {
     return function innerIOCB(entries, observer) {
-      entries.filter(entry => entry.isIntersecting).forEach((x) => {
-        !x.target.id.includes('x') && panFact(x);
-        x.target.id.includes('x') && linkFact(x);
-        x.target.id.includes('x') && x.target.removeAttribute('tabindex');
-        observer.unobserve(x.target);
+      entries.filter(entry => entry.isIntersecting).forEach(({ target, target: { id } }) => {
+        if (id.includes('x')) {
+          linkFact(target, links[parseInt(id, 10)]);
+          target.removeAttribute('tabindex');
+        } else {
+          panFact(target, projects[id]);
+        }
+        observer.unobserve(target);
       });
     };
   };
@@ -71,9 +75,9 @@ if (window.IntersectionObserver && window.customElements && HTMLElement.prototyp
     import(/* webpackChunkName: "fallback" */ '../css/fallback.scss'),
   ])
     .then(([projLoad, linkLoad]) => {
-      projLoad.default(projectDivs);
+      projLoad.default(projectDivs, projects);
       contactDivs.forEach(div => div.removeAttribute('tabindex'));
-      linkLoad.default(contactDivs);
+      linkLoad.default(contactDivs, links);
     })
     .catch(err => console.log(err));
 }

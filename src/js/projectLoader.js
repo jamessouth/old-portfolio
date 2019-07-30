@@ -1,6 +1,4 @@
-import projects from './projects';
-
-export default function projectLoader(divs) {
+export default function projectLoader(divs, projects) {
   divs.forEach((div, i) => {
     const {
       title,

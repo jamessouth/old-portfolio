@@ -1,5 +1,3 @@
-import links from './links';
-
 const linkTemplate = document.createElement('template');
 
 const htmlTag = `
@@ -41,9 +39,9 @@ class Link extends HTMLElement {
   }
 }
 
-export default function linkFactory({ target, target: { id } }) {
-  const link = new Link(links[parseInt(id, 10)]);
-  target.appendChild(link);
+export default function linkFactory(div, aLink) {
+  const link = new Link(aLink);
+  div.appendChild(link);
 }
 
 window.customElements.define('contact-link', Link);

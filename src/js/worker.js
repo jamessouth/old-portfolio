@@ -1,7 +1,4 @@
-
-import projects from './projects';
-
 addEventListener('message', (e) => { // eslint-disable-line
-  console.log(e, projects[0]);
+  console.log(e);
   postMessage(e.data);
 });

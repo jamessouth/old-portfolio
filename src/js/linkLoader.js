@@ -1,6 +1,4 @@
-import links from './links';
-
-export default function linkLoader(divs) {
+export default function linkLoader(divs, links) {
   divs.forEach((div, i) => {
     const { link, alt, src } = links[i];
 

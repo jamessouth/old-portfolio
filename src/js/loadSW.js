@@ -20,6 +20,7 @@ function handleInstall(e) {
   addBtnBg.style.display = 'block';
   addBtn.addEventListener('click', handleInstallClick); // eslint-disable-line
 }
+
 async function handleInstallClick() {
   addBtn.style.display = 'none';
   addBtnBg.style.display = 'none';
@@ -47,10 +48,8 @@ if ('serviceWorker' in navigator) {
   wb.addEventListener('waiting', () => {
     document.body.appendChild(relBtn);
     document.body.appendChild(relBtnBg);
-    setTimeout(() => {
-      relBtn.style.display = 'block';
-      relBtnBg.style.display = 'block';
-    }, 1132);
+    relBtn.style.display = 'block';
+    relBtnBg.style.display = 'block';
   });
   window.addEventListener('beforeinstallprompt', handleInstall);
   window.addEventListener('appinstalled', () => {

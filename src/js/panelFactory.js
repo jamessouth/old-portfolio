@@ -1,5 +1,3 @@
-import projects from './projects';
-
 const myWorker = new Worker('./worker.js', { type: 'module' });
 
 function panelMarkupTag(strings, ...anchors) {
@@ -132,10 +130,10 @@ myWorker.addEventListener('message', (e) => {
   console.log(e);
 });
 
-export default function panelFactory({ target, target: { id } }) {
-  const panel = new Panel(projects[id]);
-  target.appendChild(panel);
-  myWorker.postMessage(id);
+export default function panelFactory(div, project) {
+  const panel = new Panel(project);
+  div.appendChild(panel);
+  myWorker.postMessage(div.id);
 }
 
 window.customElements.define('project-panel', Panel);
