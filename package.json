@@ -1,6 +1,6 @@
 {
   "name": "portfolio",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "portfolio",
   "private": "true",
   "browserslist": [
@@ -12,9 +12,10 @@
   "scripts": {
     "lint": "eslint ./src/js",
     "analyze": "webpack --profile --json > stats.json",
+    "report": "webpack-bundle-analyzer stats.json docs/",
     "dev": "webpack-dev-server",
     "build:prod": "webpack && cp src/favicon.ico docs/favicon.ico && cp src/manifest.json docs/manifest.json && cp -r src/images/icons/ docs/images/icons && cp src/sw.js.map docs/sw.js.map",
-    "prebuild:prod": "rm -f docs/burst.min.js docs/worker.min.js && npx minify src/js/burst.js --out-file docs/burst.min.js && npx babel src/js/worker.js --presets=@babel/preset-env | npx uglifyjs -m toplevel -c toplevel,unsafe -o docs/worker.min.js && webpack --config sw-webpack.config.js"
+    "prebuild:prod": "rm -f docs/BorderPaint.min.js docs/ButtonBG.min.js && npx minify src/js/BorderPaint.js --out-file docs/BorderPaint.min.js && npx minify src/js/ButtonBG.js --out-file docs/ButtonBG.min.js && webpack --config sw-webpack.config.js"
   },
   "repository": {
     "type": "git",
@@ -27,36 +28,37 @@
   },
   "homepage": "https://github.com/jamessouth/portfolio#readme",
   "devDependencies": {
-    "@babel/cli": "^7.4.4",
-    "@babel/core": "^7.4.5",
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
-    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-env": "^7.5.5",
+    "babel-eslint": "^10.0.2",
     "babel-loader": "^8.0.6",
     "babel-minify": "^0.5.0",
     "clean-webpack-plugin": "^3.0.0",
-    "css-loader": "^3.0.0",
-    "eslint": "^5.16.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.17.3",
-    "file-loader": "^4.0.0",
+    "css-loader": "^3.1.0",
+    "eslint": "^6.1.0",
+    "eslint-config-airbnb-base": "^13.2.0",
+    "eslint-plugin-import": "^2.18.2",
+    "file-loader": "^4.1.0",
     "html-loader": "^0.5.5",
-    "html-webpack-plugin": "^4.0.0-beta.5",
-    "mini-css-extract-plugin": "^0.7.0",
+    "html-webpack-plugin": "^4.0.0-beta.8",
+    "mini-css-extract-plugin": "^0.8.0",
     "node-sass": "^4.12.0",
-    "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
     "sass-loader": "^7.1.0",
-    "script-ext-html-webpack-plugin": "^2.1.3",
+    "script-ext-html-webpack-plugin": "^2.1.4",
     "style-loader": "^0.23.1",
-    "uglify-js": "^3.6.0",
-    "webpack": "^4.34.0",
-    "webpack-cli": "^3.3.4",
-    "webpack-dev-server": "^3.7.1",
-    "workbox-webpack-plugin": "^4.3.1"
+    "webpack": "^4.37.0",
+    "webpack-bundle-analyzer": "^3.3.2",
+    "webpack-cli": "^3.3.6",
+    "webpack-dev-server": "^3.7.2",
+    "workbox-webpack-plugin": "^4.3.1",
+    "worker-plugin": "^3.1.0"
   },
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
-    "core-js": "^3.1.3",
-    "web-animations-js": "^2.3.1",
+    "core-js": "^3.1.4",
     "workbox-window": "^4.3.1"
   }
 }

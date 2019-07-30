@@ -7,12 +7,15 @@ const TerserWebpackPlugin = require('terser-webpack-plugin');
 const ScriptExtHTMLWebpackPlugin = require('script-ext-html-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const { InjectManifest } = require('workbox-webpack-plugin');
+const WorkerPlugin = require('worker-plugin');
 
-const swVol = 'v4';
+const swVol = 'v1';
 
 module.exports = {
-  mode: 'production', // development
-  devtool: 'source-map', // inline-
+  mode: 'production',
+  // mode: 'development',
+  devtool: 'source-map',
+  // devtool: 'inline-source-map',
   entry: {
     main: './src/js/index.js',
   },
@@ -54,16 +57,13 @@ module.exports = {
         ],
       },
       {
-        test: /\.(png|svg|jpg|jpeg|gif)$/,
+        test: /\.(pdf|png|svg|jpe?g|gif)$/,
         use: [
           {
             loader: 'file-loader',
             options: {
               outputPath: 'images/',
               publicPath: 'images/',
-              name(file) {
-                return /((4|7|9|10|11|explosion)\.(gif|jpg))$/.test(file) ? '[name].[hash].[ext]' : '[hash].[ext]';
-              },
             },
           },
         ],
@@ -84,10 +84,14 @@ module.exports = {
     },
   },
   plugins: [
-    new CleanWebpackPlugin({ cleanOnceBeforeBuildPatterns: ['**/*', '!burst.min.js', '!worker.min.js'] }),
+    new CleanWebpackPlugin({ cleanOnceBeforeBuildPatterns: [
+      '**/*',
+      '!BorderPaint.min.js',
+      '!ButtonBG.min.js',
+    ] }),
     new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[id].css',
+      filename: '[name].[contenthash].css',
+      chunkFilename: '[name].[contenthash].css',
     }),
     new HTMLWebpackPlugin({
       template: './src/html/index.html',
@@ -96,13 +100,19 @@ module.exports = {
     new ScriptExtHTMLWebpackPlugin({
       defaultAttribute: 'async',
     }),
+    new WorkerPlugin(),
     new webpack.HashedModuleIdsPlugin(),
     new InjectManifest({
       swSrc: './src/sw.js',
       swDest: 'service-worker.js',
       importWorkboxFrom: 'disabled',
       precacheManifestFilename: `precache-manifest-${swVol}.[manifestHash].js`,
-      exclude: [/\.(?:png|jpg|jpeg|svg|gif)$/, /\.map$/, /(animPaint|contact|destroyOpt|gifOpt|sizeOpt|useCubes|anim_polyfill)/],
+      exclude: [ //  from precache
+        /\.(?:png|pdf|jpe?g|svg|gif)$/,
+        /\.map$/,
+        /^fallback|linkFactory|linkLoader|panelFactory|projectLoader/,
+        /\.worker\.js$/
+      ],
     }),
   ],
   devServer: {

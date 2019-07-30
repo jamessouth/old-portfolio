@@ -1,5 +1,4 @@
 @import 'variables';
-@import 'extends';
 @import 'mixins';
 *{
   margin: 0;
@@ -7,317 +6,245 @@
   box-sizing: border-box;
   font-family: $cor;
 }
-:root {
-  --size: 220px;
-  --delay: 0s;
-}
 body{
-  position: relative;
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
+  background: linear-gradient(90deg, #eed6aa -2%, #bfc1c0 124%); // edge fallback
+  background: linear-gradient(90deg, #ffff00 -55%, #eed6aade 10%, 70%, #bfc1c0de 110%);
 }
-body:after{
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 100vh;
-  z-index: -3;
-  @include bodybg('../images/sky-mob.jpg');
-  @media #{$retina} {
-    @include bodybg('../images/sky-mob@2x.jpg');
+header{
+  @include position($tp: 0);
+  @include wh(100%, 3rem);
+  background-color: $yellow;
+}
+nav{
+  margin: 0 .5rem;
+  height: 100%;
+}
+ul{
+  @include flex(row, space-around, center);
+  height: 100%;
+  list-style: none;
+}
+li{
+  @include fonty(1.3em, bold);
+  @media #{$two_col}{
+    font-size: 1.7em;
   }
-  @media #{$mobile2} {
-    @include bodybg('../images/sky-mob2.jpg');
-    @media #{$retina} {
-      @include bodybg('../images/sky-mob2@2x.jpg');
-    }
+  &:before{
+    content: "\200B";
+    position: absolute;
   }
-  @media #{$tablet} {
-    @include bodybg('../images/sky-tab.jpg');
-    @media #{$retina} {
-      @include bodybg('../images/sky-tab@2x.jpg');
-    }
+  & a{
+    text-decoration: none;
+    border: $bord;
   }
-  @media #{$medium} {
-    @include bodybg('../images/sky-med.jpg');
-    @media #{$retina} {
-      @include bodybg('../images/sky-med@2x.jpg');
-    }
+  & a:focus{
+    @include focus($blue, 2px);
   }
-  @media #{$big} {
-    @include bodybg('../images/sky-big.jpg');
-    @media #{$retina} {
-      @include bodybg('../images/sky-big@2x.jpg');
+  & a:link,
+  & a:visited{
+    color: initial;
+  }
+  & a:hover{
+    text-decoration: underline;
+  }
+  & button{
+    @include fonty(1em, bold);
+  }
+  & button:focus,
+  & button:hover{
+    @include focus($blue, 2px);
+  }
+}
+#port:target,
+#about:target,
+#cont:target{
+  padding-top: 3rem;
+}
+aside{
+  @include position($rt: 2%, $lt: 2%, $tp: 2%, $bm: 2%);
+  display: none;
+  z-index: 19;
+  background-color: #696969;
+  & button{
+    @include wh(35px, 50px);
+    @include fonty(2.5em, $lh: 0);
+    background-color: #f8f8ff;
+    @include position($lt: 2%, $tp: 9%);
+    border: 3px solid transparent;
+  }
+  & button:focus,
+  & button:hover{
+    @include focus(#ff7f50, 5px);
+  }
+  & p,
+  & a{
+    font-family: serif;
+    color: white;
+  }
+  & p{
+    margin-top: 5em;
+    font-size: 24px;
+  }
+}
+object,
+iframe{
+  @include wh(100%, 100%);
+}
+h1{
+  margin: 9rem 0 6rem;
+  text-align: center;
+  font-size: 2em;
+  @media #{$two_col}{
+    @include fontMarg(2.5em, 7rem);
+  }
+  @media #{$upsize_text}{
+    @include fontMarg(3em, 8rem);
+  }
+  @media #{$big}{
+    @include fontMarg(4em, 10rem);
+  }
+}
+h2{
+  text-align: center;
+  @include fontMarg(1.75em, 3rem);
+  @media #{$two_col}{
+    @include fontMarg(2.25em, 4rem);
+  }
+  @media #{$upsize_text}{
+    @include fontMarg(2.75em, 5rem);
+  }
+  @media #{$big}{
+    @include fontMarg(3.75em, 7rem);
+  }
+}
+section{
+  margin-bottom: 8rem;
+}
+#about p{
+  font-family: serif;
+  font-size: 1.5em;
+  margin: auto;
+  width: 90%;
+  &:first-letter{
+    font-family: 'Permanent Marker', cursive;
+    @include fonty(3.2em, bold, 1);
+    margin: 0 .5rem;
+    border: .35rem double black;
+    padding: .15rem 1.15rem 1.15rem .45rem;
+    text-shadow: 4px 6px 1px black;
+    float: left;
+    color: $blue;
+    background-color: $yellow;
+  }
+  & a{
+    font-family: inherit;
+    border: $bord;
+  }
+  & a:link,
+  & a:visited{
+    color: $blue;
+  }
+  & a:hover{
+    background-color: $blue;
+    color: $yellow;
+  }
+  & a:focus{
+    @include focus($blue, 2px);
+  }
+}
+.projects{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(288px, 1fr));
+  grid-column-gap: 30px;
+  grid-row-gap: 100px;
+  width: 90%;
+  margin: 0 auto;
+  @media #{$col_gap_expand}{
+    grid-column-gap: 50px;
+  }
+  @media #{$four_cols}{
+    grid-template-columns: repeat(4, 1fr);
+  }
+  @media #{$six_cols}{
+    grid-template-columns: repeat(6, 1fr);
+  }
+  @media #{$big}{
+    width: 80%;
+  }
+  & > div{
+    margin: 0 auto;
+    @include wh(288px, 435px);
+    background-color: transparent;
+  }
+  & > div:focus{
+    outline: none;
+    border-image: 10 / 0 0 10px 0 / 0;
+    border-image-source: linear-gradient($blue, $blue); // fallback
+    border-image-source: paint(borderPaint);
+    border-bottom-style: solid;
+  }
+  & > div:last-child{
+    @media #{$two_col}{
+      grid-column: 1 / -1;
     }
   }
 }
-html{
-  overflow-x: hidden;
-}
-.hold{
-  padding-top: 96px;
-  @include flex(column, space-around, center);
-  & > p:not(.subhead){
-    @include text(22px, 90%, #372f16, 32px);
-    padding: 10px;
-    background: linear-gradient(#bfc1c0de 0%, #eed6aade 100%);
-    background: linear-gradient(#bfc1c0 0%, #eed6aa 100%);
-    & span{
-      font-family: cursive;
-      background-color: #efebe3;
-    }
-    @media #{$tablet} {
-      @include position($tp: 115px);
-    }
-  }
-  @media #{$tablet} {
-    padding-top: 192px;
+.contact{
+  @include flex(column, space-between, center);
+  margin: 0 auto;
+  @include wh(90%, 400px);
+  @media #{$two_col}{
     flex-direction: row;
+    @include wh(70%, 150px);
+  }
+  @media #{$upsize_text}{
+    width: 724px;
+  }
+  & > div{
+    border: $bord;
   }
 }
-button{
-  @include text(16px, 58px, whitesmoke, $ht: 30px);
-  box-shadow: 8px 5px 15px 0px #382123;
-  background: linear-gradient(to right, #505b1c, #7ac670);
-  border: 2px solid #fbe2a4;
-  border-radius: 20px;
+.installbtn,
+.reloadbtn{
+  display: none;
+  @include position($lt: 29px, $bm: 40px);
+  box-shadow: none;
+  border-radius: 0;
+  border: none;
+  color: $yellow;
+  font-size: 1.5em;
+  font-weight: bold;
+  line-height: 1;
+  background-color: transparent;
+  cursor: pointer;
+  @include wh(90px, 60px);
+  z-index: 8;
+  animation: 1.6s flash ease-in 4.5;
+  &:focus{
+    @include focus($yellow, 3px);
+  }
 }
-button::-moz-focus-inner,
-input[type="range"]::-moz-focus-outer{
-  border: 0;
+.reloadbtn{
+  @include wh(104px, 80px);
+  @include position($rt: 23px, $lt: auto, $bm: 37px);
 }
-button:hover, button:focus{
-  -webkit-filter: invert(100%);
-  filter: invert(100%);
-  border: 3px #000 solid;
-  color: #000;
-  outline: none;
+.installdiv,
+.reloaddiv{
+  display: none;
+  background-color: $blue;
+  @include position($lt: 15px, $bm: 1px);
+  @include wh(120px, 120px);
+  -webkit-mask-image: paint(buttonBG);
+  mask-image: paint(buttonBG);
+}
+.reloaddiv{
+  @include position($rt: 15px, $lt: auto);
 }
 @keyframes flash{
   0% { opacity: 0; }
   51% { opacity: 1; }
   100% { opacity: 0; }
 }
-button.installbtn, button.reloadbtn{
-  display: none;
-  position: fixed;
-  bottom: 23px;
-  left: 33px;
-  box-shadow: none;
-  border-radius: 0;
-  border: none;
-  cursor: pointer;
-  height: 40px;
-  width: 80px;
-  z-index: 7;
-}
-button.reloadbtn{
-  left: auto;
-  right: 33px;
-  width: 100px;
-}
-div.installdiv, div.reloaddiv{
-  display: none;
-  background-color: #fbe2a4;
-  position: fixed;
-  bottom: 13px;
-  left: 23px;
-  height: 60px;
-  width: 100px;
-  animation: 1.6s flash ease-in 20;
-}
-div.reloaddiv{
-  left: auto;
-  right: 23px;
-  width: 120px;
-}
-#apply{
-  margin-top: 1em;
-}
-h1{
-  padding: 1em 0 0;
-  font-size: 28px;
-  @extend %user_select;
-  @media #{$mobile2} {
-    font-size: 2em;
-  }
-}
-.subhead{
-  @include text(30px, 90%, #fff);
-  @include position($lt: 50%);
-  transform: translateX(-50%);
-  text-shadow: 0px 0px 7px white;
-  &:nth-of-type(1){
-    top: 73px;
-  }
-  &:nth-of-type(2),
-  &:nth-of-type(4){
-    top: 105px;
-    @include text(24px, 86%);
-    @media #{$tablet} {
-      @include text($width: 48%);
-    }
-  }
-  &:nth-of-type(3){
-    top: calc((var(--size) * 1.2) + 160px);
-    width: 90%;
-    @media #{$tablet} {
-      left: 75%;
-    }
-  }
-  &:nth-of-type(4){
-    top: calc((var(--size) * 1.2) + 192px);
-    @media #{$tablet} {
-      left: 75%;
-    }
-  }
-  &:nth-of-type(odd){
-    @media #{$tablet} {
-      top: 73px;
-    }
-  }
-  &:nth-of-type(even){
-    @media #{$tablet} {
-      top: 105px;
-    }
-  }
-  @extend %user_select;
-  @media #{$tablet} {
-    left: 25%;
-    font-size: 32px;
-  }
-}
-.menu-hold{
-  padding-top: 30px;
-  width: 100%;
-}
-ul{
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  grid-gap: 20px;
-  margin: 3em auto;
-  width: 90%;
-  @media #{$ul_expand} {
-    @include flex(row, space-around);
-  }
-}
-li{
-  @extend %user_select;
-  @include text(20px, $color: #000);
-  @include flex(column, center, center);
-  min-width: 200px;
-  min-height: 250px;
-  border: 10px solid #56400b;
-  background: linear-gradient(#f0d2ac 0%, #2f3905 200%);
-  outline: none;
-  &:first-of-type{
-    z-index: 0;
-  }
-  &:last-of-type{
-    @media #{$li_expand} {
-      grid-column-end: span 2;
-    }
-  }
-  @media #{$medium} {
-    min-width: 250px;
-  }
-}
-.slider{
-  position: relative;
-  border-radius: 12px;
-  & input{
-    @extend %appearance;
-    width: 85%;
-    cursor: ew-resize;
-    &:focus{
-      outline: none;
-      outline-offset: 0;
-    }
-  }
-}
-.track{
-  @include position($lt: 15px, $tp: 26px);
-  @include text($width: 0px, $ht: 16px);
-  min-width: 0px;
-  max-width: 138px;
-  z-index: -1;
-}
-input[type=checkbox] {
-  @extend %appearance;
-  border: 3px solid transparent;
-}
-input[type=checkbox]:after {
-  content: 'x';
-  background-color: transparent;
-  display: inline-block;
-  @include text($color: #fff, $ht: 70px);
-  text-shadow: 4px 6px 13px #444;
-  text-align: center;
-}
-input[type=checkbox]:checked:after {
-  content: "\2713";
-  background-color: transparent;
-  @include text(1em, $lh: 1, $wt: 600);
-  text-shadow: 4px 6px 13px #444;
-}
-input[type=checkbox]:focus{
-  outline: none;
-  border: 3px solid white;
-}
-input[id=gifs] {
-  @include text(70px, $ht: 85px);
-}
-input[id=gifs]:after{
-  @include inputAfter(70px, -29px);
-}
-input[id=gifs]:checked:after{
-  padding: 6px 1px 1px 10px;
-  left: 46%;
-}
-input[id=destroy] {
-  @include text(50px, $ht: 82px);
-}
-input[id=destroy]:after{
-  @include inputAfter(136px, 15px);
-}
-input[id=destroy]:checked:after{
-  padding: 9px 0px 0px 3px;
-  height: 50px;
-}
-select{
-  @include text(20px, 60px);
-  padding-left: 5px;
-  border: none;
-  background-color: white;
-  margin-top: -3px;
-}
-label[for="sec"],
-select,
-select + div{
-  display: none;
-}
-select:-moz-focusring{
-  color: transparent;
-  text-shadow: 0 0 0 #000;
-}
-select:focus{
-  border: 3px solid #f81b14;
-  outline: none;
-}
-select + div p{
-  display: inline-block;
-}
-@keyframes flyAway {
-  100% { transform: rotateX(179deg) rotateY(-328deg) scale3d(.01, .01, .01); }
-}
-.explode{
-  display: none;
-}
-.blowup{
-  animation: 3s var(--delay) cubic-bezier(0, .53, 0, .96) forwards flyAway;
-}
-@import 'cubeStyles';
-@import 'contactStyles';

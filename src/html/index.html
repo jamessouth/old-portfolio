@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="user-scalable=yes, width=device-width, initial-scale=1">
     <title><%= htmlWebpackPlugin.options.title %></title>
-    <link href="https://fonts.googleapis.com/css?family=Cormorant+SC&text=abcdefghijklmnopqrstuvwxyz0123456789!CDEFGIJOPRSTY" rel="preload stylesheet" as="style">
+    <link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap&text=I" rel="preload stylesheet" as="style">
+    <link href="https://fonts.googleapis.com/css?family=Cormorant+SC&display=swap&text=abcdefghijklmnopqrstuvwxyzé01356!ACJMPRS" rel="preload stylesheet" as="style">
     <link rel="icon" type="image/png" sizes="16x16" href="./images/icons/favicon-16x16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./images/icons/favicon-32x32.png">
     <link rel="manifest" href="./manifest.json">
@@ -18,53 +19,52 @@
     <meta name="msapplication-TileColor" content="#2d89ef">
     <meta name="msapplication-TileImage" content="./images/icons/mstile-144x144.png">
   </head>
-  <body ondragstart="return false;">
-    <main>
-      <h1>James South Portfolio</h1>
-      <section class="hold">
-        <p class="subhead"></p>
-        <p class="subhead"></p>
-        <div class="cube-container">
-          <div class="photo-cube">
-          </div>
-        </div>
-        <p class="subhead"></p>
-        <p class="subhead"></p>
-        <div class="cube-container">
-          <div class="photo-cube">
-          </div>
-        </div>
-      </section>
-      <h1 aria-hidden="true">Options</h1>
-      <section aria-hidden="true" class="menu-hold">
-        <ul role="menu">
-          <li id="sizeOpt"></li>
-          <li id="gifOpt"></li>
-          <li id="destroyOpt"></li>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#port">Port</a></li>
+          <li><a href="#cont">Contact</a></li>
+          <li><button>Résumé</button></li>
         </ul>
+      </nav>
+    </header>
+    <aside>
+      <button>x</button>
+    </aside>
+    <main>
+      <h1>James South</h1>
+      <section id="about">
+        <h2>About Me</h2>
+        <p>I am a self-taught developer and bootcamp grad and I'm changing careers to become a full-stack engineer! Front-end, back-end, either way it's fun and I can do it. Scroll down to see my portfolio or go straight to <a rel="noopener noreferrer" href="https://github.com/jamessouth">my GitHub overview</a>. I love learning new things, solving problems, and building awesome web apps. Before learning to code I passed the <a rel="noopener noreferrer" href="https://www.cfainstitute.org/en/programs/cfa/exam">CFA exam</a> and I also have an accounting degree. I have been active in <a rel="noopener noreferrer" href="https://www.us.mensa.org/">American Mensa</a> for many years and I like to play guitar, lift weights, and play basketball..... and, of course, CODE!!!</p>
       </section>
-      <h1>Contact</h1>
-      <section class="canvasholder">
-        <canvas aria-hidden="true" id="board" width="300" height="300">Your browser does not support canvas.</canvas>
-        <address id="contactinfolinks">
-          <a aria-describedby="twitterexplain" title="contact me via twitter" tabindex="-1" href="https://twitter.com/dsouthbot"></a>
-          <a title="my github repos" tabindex="-1" href="https://github.com/jamessouth?tab=repositories"></a>
-          <a aria-describedby="emailexplain" title="email me" tabindex="-1" href="mailto:jamesdanielsouth@gmail.com"></a>
-        </address>
-        <div aria-hidden="true" class="canvasbutton">
-          <div class="clickCounter">
-            <p>Clicks:</p>
-            <p>0</p>
-          </div>
-          <button tabindex="0">reveal</button>
-          <canvas id="fader" width="75" height="75">Your browser does not support canvas.</canvas>
-          <div class="help">
-            <p>^</p>
-            <p>&lt;&nbsp;&nbsp;click to solve</p>
-          </div>
+      <section id="port">
+        <h2>Portfolio</h2>
+        <div class="projects">
+          <div tabindex="0" id="0"></div>
+          <div tabindex="0" id="1"></div>
+          <div tabindex="0" id="2"></div>
+          <div tabindex="0" id="3"></div>
+          <div tabindex="0" id="4"></div>
+          <div tabindex="0" id="5"></div>
+          <div tabindex="0" id="6"></div>
+          <div tabindex="0" id="7"></div>
+          <div tabindex="0" id="8"></div>
+          <div tabindex="0" id="9"></div>
+          <div tabindex="0" id="10"></div>
+          <div tabindex="0" id="11"></div>
+          <div tabindex="0" id="12"></div>
         </div>
-        <p aria-hidden="true" id="twitterexplain">i can be reached on twitter @ d s o u t h b o t</p>
-        <p aria-hidden="true" id="emailexplain">my email address is james daniel south at gmail dot com.</p>
+      </section>
+      <section id="cont">
+        <h2>Contact</h2>
+        <div class="contact">
+          <div tabindex="0" id="0x"></div>
+          <div tabindex="0" id="1x"></div>
+          <div tabindex="0" id="2x"></div>
+          <div tabindex="0" id="3x"></div>
+        </div>
       </section>
     </main>
   </body>
