@@ -1,4 +1,3 @@
-
 import { setCacheNameDetails } from 'workbox-core/setCacheNameDetails.mjs';
 import { Plugin as ExpirationPlugin } from 'workbox-expiration/Plugin.mjs';
 import { cleanupOutdatedCaches } from 'workbox-precaching/cleanupOutdatedCaches.mjs';
@@ -10,8 +9,6 @@ import { CacheFirst } from 'workbox-strategies/CacheFirst.mjs';
 import { StaleWhileRevalidate } from 'workbox-strategies/StaleWhileRevalidate.mjs';
 
 const prefix = 'james south portfolio';
-
-
 
 setCacheNameDetails({ prefix });
 self.__precacheManifest = [].concat(self.__precacheManifest || []);
@@ -25,7 +22,7 @@ addEventListener('message', e => {
 registerRoute(
   /\.(?:js)$/,
   new CacheFirst({
-    cacheName: `${prefix}-lazy-js`,
+    cacheName: `${prefix}-js`,
     plugins: [
       new ExpirationPlugin({
         maxAgeSeconds: 60 * 60 * 24 * 365,
@@ -36,7 +33,7 @@ registerRoute(
 );
 
 registerRoute(
-  /\.(?:png|jpg|pdf|jpeg|svg|gif)$/,
+  /\.(?:png|pdf|jpe?g|svg|gif)$/,
   new CacheFirst({
     cacheName: `${prefix}-images`,
     plugins: [

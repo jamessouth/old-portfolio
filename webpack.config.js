@@ -12,10 +12,10 @@ const WorkerPlugin = require('worker-plugin');
 const swVol = 'v1';
 
 module.exports = {
-  // mode: 'production',
-  mode: 'development',
-  // devtool: 'source-map',
-  devtool: 'inline-source-map',
+  mode: 'production',
+  // mode: 'development',
+  devtool: 'source-map',
+  // devtool: 'inline-source-map',
   entry: {
     main: './src/js/index.js',
   },
@@ -110,6 +110,8 @@ module.exports = {
       exclude: [ //  from precache
         /\.(?:png|pdf|jpe?g|svg|gif)$/,
         /\.map$/,
+        /^fallback|linkFactory|linkLoader|panelFactory|projectLoader/,
+        /\.worker\.js$/
       ],
     }),
   ],

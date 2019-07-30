@@ -29,10 +29,10 @@ ul{
 }
 li{
   @include fonty(1.3em, bold);
-  @media #{$two_col} {
+  @media #{$two_col}{
     font-size: 1.7em;
   }
-  &:before {
+  &:before{
     content: "\200B";
     position: absolute;
   }
@@ -97,26 +97,26 @@ h1{
   margin: 9rem 0 6rem;
   text-align: center;
   font-size: 2em;
-  @media #{$two_col} {
+  @media #{$two_col}{
     @include fontMarg(2.5em, 7rem);
   }
-  @media #{$upsize_text} {
+  @media #{$upsize_text}{
     @include fontMarg(3em, 8rem);
   }
-  @media #{$big} {
+  @media #{$big}{
     @include fontMarg(4em, 10rem);
   }
 }
 h2{
   text-align: center;
   @include fontMarg(1.75em, 3rem);
-  @media #{$two_col} {
+  @media #{$two_col}{
     @include fontMarg(2.25em, 4rem);
   }
-  @media #{$upsize_text} {
+  @media #{$upsize_text}{
     @include fontMarg(2.75em, 5rem);
   }
-  @media #{$big} {
+  @media #{$big}{
     @include fontMarg(3.75em, 7rem);
   }
 }
@@ -162,16 +162,16 @@ section{
   grid-row-gap: 100px;
   width: 90%;
   margin: 0 auto;
-  @media #{$col_gap_expand} {
+  @media #{$col_gap_expand}{
     grid-column-gap: 50px;
   }
-  @media #{$four_cols} {
+  @media #{$four_cols}{
     grid-template-columns: repeat(4, 1fr);
   }
-  @media #{$six_cols} {
+  @media #{$six_cols}{
     grid-template-columns: repeat(6, 1fr);
   }
-  @media #{$big} {
+  @media #{$big}{
     width: 80%;
   }
   & > div{
@@ -187,7 +187,7 @@ section{
     border-bottom-style: solid;
   }
   & > div:last-child{
-    @media #{$two_col} {
+    @media #{$two_col}{
       grid-column: 1 / -1;
     }
   }
@@ -196,11 +196,11 @@ section{
   @include flex(column, space-between, center);
   margin: 0 auto;
   @include wh(90%, 400px);
-  @media #{$two_col} {
+  @media #{$two_col}{
     flex-direction: row;
     @include wh(70%, 150px);
   }
-  @media #{$upsize_text} {
+  @media #{$upsize_text}{
     width: 724px;
   }
   & > div{
@@ -222,10 +222,14 @@ section{
   cursor: pointer;
   @include wh(90px, 60px);
   z-index: 8;
-  animation: 1.6s flash ease-in 5.5;
+  animation: 1.6s flash ease-in 4.5;
+  &:focus{
+    @include focus($yellow, 3px);
+  }
 }
 .reloadbtn{
-  @include position($rt: 32px, $lt: auto, $bm: 52px);
+  @include wh(104px, 80px);
+  @include position($rt: 23px, $lt: auto, $bm: 37px);
 }
 .installdiv,
 .reloaddiv{

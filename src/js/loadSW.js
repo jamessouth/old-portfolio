@@ -1,6 +1,7 @@
 import { Workbox } from 'workbox-window/Workbox.mjs'; // eslint-disable-line
 
 let deferredPrompt;
+const main = document.querySelector('main');
 const addBtnBg = document.createElement('div');
 const addBtn = document.createElement('button');
 const relBtnBg = document.createElement('div');
@@ -37,8 +38,8 @@ async function handleInstallClick() {
 
 if ('serviceWorker' in navigator) {
   const wb = new Workbox('./service-worker.js');
-  document.body.appendChild(addBtn);
-  document.body.appendChild(addBtnBg);
+  document.body.insertBefore(addBtn, main);
+  document.body.insertBefore(addBtnBg, main);
   relBtn.addEventListener('click', () => {
     wb.addEventListener('controlling', () => {
       window.location.reload();
@@ -46,8 +47,8 @@ if ('serviceWorker' in navigator) {
     wb.messageSW({ type: 'SKIP_WAITING' });
   });
   wb.addEventListener('waiting', () => {
-    document.body.appendChild(relBtn);
-    document.body.appendChild(relBtnBg);
+    document.body.insertBefore(relBtn, main);
+    document.body.insertBefore(relBtnBg, main);
     relBtn.style.display = 'block';
     relBtnBg.style.display = 'block';
   });
