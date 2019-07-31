@@ -35,7 +35,7 @@ h3, p, a{
 }
 h3{
   font-size: 1.9em;
-  line-height: 1.5;
+  line-height: 1.6;
   margin: 0;
 }
 p{
