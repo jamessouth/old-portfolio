@@ -34,7 +34,7 @@ h3, p, a{
   color: #30511d;
 }
 h3{
-  font-size: 28px;
+  font-size: 1.9em;
   height: 48px;
   margin: 0;
 }
@@ -95,6 +95,9 @@ class Panel extends HTMLElement {
 
   connectedCallback() {
     this.h3.textContent = this.title;
+    if (this.title.includes('puzzle') || this.title.includes('scraper')) {
+      this.h3.style.fontSize = '1.7em';
+    }
     this.anchors[0].setAttribute('href', this.code);
     this.anchors[0].setAttribute('aria-label', this.codeAria);
     this.live && this.anchors[1].setAttribute('href', this.live);

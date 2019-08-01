@@ -52,6 +52,8 @@ li{
   }
   & button{
     @include fonty(1em, bold);
+    height: 37px;
+    border-radius: 0;
   }
   & button:focus,
   & button:hover{
