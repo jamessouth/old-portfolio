@@ -34,8 +34,7 @@ h3, p, a{
   color: #30511d;
 }
 h3{
-  font-size: 1.9em;
-  line-height: 1.6;
+  font-size: 30px;
   height: 48px;
   margin: 0;
 }
