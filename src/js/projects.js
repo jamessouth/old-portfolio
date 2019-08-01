@@ -54,7 +54,7 @@ const projects = [
     codeAria: 'code for tic tac toe project',
   },
   {
-    title: '15 puzzle generator',
+    title: 'puzzle generator',
     tech1: 'angular',
     tech2: 'typescript',
     live: 'https://jamessouth.github.io/fifteen-puzzle-generator/home',
@@ -65,10 +65,11 @@ const projects = [
     codeAria: 'code for 15 puzzle generator project',
   },
   {
-    title: 'node.js web scraper',
+    title: 'web scraper',
     code: 'https://github.com/jamessouth/JS-Project-6',
     alt: 'a stuffed frog',
-    tech1: 'javascript',
+    tech2: 'node.js',
+    tech2: 'javascript',
     src: scrape,
     codeAria: 'code for node.js web scraper project',
   },
@@ -102,7 +103,7 @@ const projects = [
     codeAria: 'code for vue-style-lint project',
   },
   {
-    title: 'web app dashboard',
+    title: 'dashboard',
     tech1: 'pwa vue vuex',
     tech2: 'ajax chart.js fp',
     live: 'https://jamessouth.github.io/dashboard/',
@@ -113,7 +114,7 @@ const projects = [
     codeAria: 'code for web app dashboard project',
   },
   {
-    title: 'employee directory',
+    title: 'directory',
     tech1: 'pwa react a11y',
     tech2: 'tdd ajax fp',
     live: 'https://jamessouth.github.io/directory/',
