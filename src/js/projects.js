@@ -68,7 +68,7 @@ const projects = [
     title: 'web scraper',
     code: 'https://github.com/jamessouth/JS-Project-6',
     alt: 'a stuffed frog',
-    tech2: 'node.js',
+    tech1: 'node',
     tech2: 'javascript',
     src: scrape,
     codeAria: 'code for node.js web scraper project',
