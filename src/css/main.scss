@@ -186,6 +186,7 @@ section{
     border-image-source: paint(borderPaint);
     border-bottom-style: solid;
     border-left-width: 0;
+    border-top-width: 0;
     border-right-width: 0;
   }
   & > div:last-child{
