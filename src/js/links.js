@@ -1,13 +1,13 @@
-import gmail from '../images/gmail.png';
+import email from '../images/email.png';
 import github from '../images/github.png';
 import twit from '../images/twit.png';
 import so from '../images/so.png';
 
 const links = [
   {
-    link: 'mailto:jamesdanielsouth@gmail.com',
+    link: 'mailto:jamesdanielsouth@outlook.com',
     alt: 'open your email client to email me',
-    src: gmail,
+    src: email,
   },
   {
     link: 'https://github.com/jamessouth?tab=repositories',
