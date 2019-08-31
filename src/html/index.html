@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><%= htmlWebpackPlugin.options.title %></title>
     <link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap&text=I" rel="preload stylesheet" as="style">
-    <link href="https://fonts.googleapis.com/css?family=Cormorant+SC&display=swap&text=abcdefghijklmnopqrstuvwxyzé01356!ACJMPRST" rel="preload stylesheet" as="style">
+    <link href="https://fonts.googleapis.com/css?family=Cormorant+SC&display=swap&text=abcdefghijklmnopqrstuvwxyzé0123456!ACJMPRST" rel="preload stylesheet" as="style">
     <link rel="icon" type="image/png" sizes="16x16" href="./images/icons/favicon-16x16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./images/icons/favicon-32x32.png">
     <link rel="manifest" href="./manifest.webmanifest">
@@ -56,14 +56,16 @@
           <div tabindex="0" id="11"></div>
           <div tabindex="0" id="12"></div>
         </div>
-        <p id="demo">demos from my css paint article</p>
-        <map name="paint_article">
-          <area shape="rect" coords="0,0,150,150" href="https://jamessouth.github.io/paint-demo/demo1.html" alt="demo 1">
-          <area shape="rect" coords="150,0,300,150" href="https://jamessouth.github.io/paint-demo/demo2.html" alt="demo 2">
-          <area shape="rect" coords="0,150,150,300" href="https://jamessouth.github.io/paint-demo/demo3.html" alt="demo 3">
-          <area shape="rect" coords="150,150,300,300" href="https://jamessouth.github.io/paint-demo/demo4.html" alt="demo 4">
-        </map>
-        <img usemap="#paint_article" alt="4 patterns">
+        <div class="map">
+          <p>demos from my css paint article</p>
+          <map name="paint_article">
+            <area shape="rect" coords="0,0,150,150" href="https://jamessouth.github.io/paint-demo/demo1.html" alt="demo 1">
+            <area shape="rect" coords="150,0,300,150" href="https://jamessouth.github.io/paint-demo/demo2.html" alt="demo 2">
+            <area shape="rect" coords="0,150,150,300" href="https://jamessouth.github.io/paint-demo/demo3.html" alt="demo 3">
+            <area shape="rect" coords="150,150,300,300" href="https://jamessouth.github.io/paint-demo/demo4.html" alt="demo 4">
+          </map>
+          <img usemap="#paint_article" alt="4 patterns">
+        </div>
       </section>
       <section id="cont">
         <h2>Contact</h2>
