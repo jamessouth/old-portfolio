@@ -5,6 +5,8 @@ import createAside from './createAside';
 import projects from './projects';
 import links from './links';
 
+import dem from '../images/paint_demos.jpg';
+
 const openModalBtn = document.querySelector('li button');
 const closeModalBtn = document.querySelector('aside button');
 const modal = document.querySelector('aside');
@@ -12,6 +14,9 @@ const headerAnchors = document.querySelectorAll('li a');
 const projectDivs = document.querySelectorAll('.projects div');
 const contactDivs = document.querySelectorAll('.contact div');
 let asideNotBuilt = true;
+
+const demoImg = document.querySelector('img[alt="4 patterns"]');
+demoImg.src = dem;
 
 openModalBtn.addEventListener('click', () => {
   if (asideNotBuilt) {
