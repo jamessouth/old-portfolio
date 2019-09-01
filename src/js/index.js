@@ -5,8 +5,6 @@ import createAside from './createAside';
 import projects from './projects';
 import links from './links';
 
-// import dem from '../images/paint_demos.jpg';
-
 const openModalBtn = document.querySelector('li button');
 const closeModalBtn = document.querySelector('aside button');
 const modal = document.querySelector('aside');
@@ -15,8 +13,6 @@ const projectDivs = document.querySelectorAll('.projects div');
 const contactDivs = document.querySelectorAll('.contact div');
 const demoDiv = document.querySelector('#map');
 let asideNotBuilt = true;
-
-// demoImg.src = dem;
 
 openModalBtn.addEventListener('click', () => {
   if (asideNotBuilt) {
@@ -79,12 +75,14 @@ if (window.IntersectionObserver && window.customElements && HTMLElement.prototyp
   Promise.all([
     import(/* webpackChunkName: "projectLoader" */ './projectLoader'),
     import(/* webpackChunkName: "linkLoader" */ './linkLoader'),
+    import('../images/paint_demos.jpg'),
     import(/* webpackChunkName: "fallback" */ '../css/fallback.scss'),
   ])
-    .then(([projLoad, linkLoad]) => {
+    .then(([projLoad, linkLoad, demosImg]) => {
       projLoad.default(projectDivs, projects);
       contactDivs.forEach(div => div.removeAttribute('tabindex'));
       linkLoad.default(contactDivs, links);
+      demoDiv.children[2].src = demosImg.default;
     })
     .catch(err => console.log(err));
 }
