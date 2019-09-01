@@ -233,6 +233,19 @@ area:focus:nth-child(2)::after{
     right: -116px;
   }
 }
+area:focus:nth-child(3)::before{
+  position: absolute;
+  color: #30511d;
+  font-size: 1em;
+  width: 100px;
+  top: 425px;
+  left: 30px;
+  content: 'chrome only';
+  @media #{$two_col}{
+    top: 400px;
+    left: 30px;
+  }
+}
 area:focus:nth-child(3)::after{
   top: 396px;
   left: 37px;
