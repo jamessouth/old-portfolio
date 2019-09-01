@@ -17,6 +17,7 @@ header{
   @include position($tp: 0);
   @include wh(100%, 3rem);
   background-color: $yellow;
+  z-index: 2;
 }
 nav{
   margin: 0 .5rem;
@@ -195,13 +196,13 @@ section{
     }
   }
 }
-.map{
+#map{
   position: relative;
   width: 300px;
   margin: auto;
   font-weight: bold;
 }
-.map p{
+#map p{
   color: #30511d;
   @include fontMarg(1.7em, 2rem);
   text-align: center;
@@ -217,20 +218,36 @@ area:focus::after{
   width: 100px;
 }
 area:focus:nth-child(1)::after{
-  top: 150px;
-  left: -92px;
+  top: 63px;
+  left: 37px;
+  @media #{$two_col}{
+    top: 150px;
+    left: -92px;
+  }
 }
 area:focus:nth-child(2)::after{
-  top: 150px;
-  right: -116px;
+  top: 63px;
+  right: 12px;
+  @media #{$two_col}{
+    top: 150px;
+    right: -116px;
+  }
 }
 area:focus:nth-child(3)::after{
-  top: 300px;
-  left: -92px;
+  top: 396px;
+  left: 37px;
+  @media #{$two_col}{
+    top: 300px;
+    left: -92px;
+  }
 }
 area:focus:nth-child(4)::after{
-  top: 300px;
-  right: -116px;
+  top: 396px;
+  right: 12px;
+  @media #{$two_col}{
+    top: 300px;
+    right: -116px;
+  }
 }
 .contact{
   @include flex(column, space-between, center);
@@ -274,6 +291,7 @@ area:focus:nth-child(4)::after{
 .installdiv,
 .reloaddiv{
   display: none;
+  z-index: 7;
   background-color: $blue;
   @include position($lt: 15px, $bm: 1px);
   @include wh(120px, 120px);

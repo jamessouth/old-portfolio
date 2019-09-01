@@ -5,7 +5,7 @@ import createAside from './createAside';
 import projects from './projects';
 import links from './links';
 
-import dem from '../images/paint_demos.jpg';
+// import dem from '../images/paint_demos.jpg';
 
 const openModalBtn = document.querySelector('li button');
 const closeModalBtn = document.querySelector('aside button');
@@ -13,10 +13,10 @@ const modal = document.querySelector('aside');
 const headerAnchors = document.querySelectorAll('li a');
 const projectDivs = document.querySelectorAll('.projects div');
 const contactDivs = document.querySelectorAll('.contact div');
+const demoDiv = document.querySelector('#map');
 let asideNotBuilt = true;
 
-const demoImg = document.querySelector('img[alt="4 patterns"]');
-demoImg.src = dem;
+// demoImg.src = dem;
 
 openModalBtn.addEventListener('click', () => {
   if (asideNotBuilt) {
@@ -53,6 +53,8 @@ if (window.IntersectionObserver && window.customElements && HTMLElement.prototyp
         if (id.includes('x')) {
           linkFact(target, links[parseInt(id, 10)]);
           target.removeAttribute('tabindex');
+        } else if (id == 'map') {
+          import('../images/paint_demos.jpg').then(x => target.children[2].src = x.default);
         } else {
           panFact(target, projects[id]);
         }
@@ -70,7 +72,7 @@ if (window.IntersectionObserver && window.customElements && HTMLElement.prototyp
         panFact.default,
         linkFact.default,
       ), IOoptions);
-      [...projectDivs, ...contactDivs].forEach(el => observer.observe(el));
+      [...projectDivs, ...contactDivs, demoDiv].forEach(el => observer.observe(el));
     })
     .catch(err => console.log(err));
 } else {
