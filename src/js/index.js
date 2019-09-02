@@ -11,6 +11,7 @@ const modal = document.querySelector('aside');
 const headerAnchors = document.querySelectorAll('li a');
 const projectDivs = document.querySelectorAll('.projects div');
 const contactDivs = document.querySelectorAll('.contact div');
+const demoDiv = document.querySelector('#map');
 let asideNotBuilt = true;
 
 openModalBtn.addEventListener('click', () => {
@@ -48,6 +49,8 @@ if (window.IntersectionObserver && window.customElements && HTMLElement.prototyp
         if (id.includes('x')) {
           linkFact(target, links[parseInt(id, 10)]);
           target.removeAttribute('tabindex');
+        } else if (id == 'map') {
+          import('../images/paint_demos.jpg').then(x => target.children[2].src = x.default);
         } else {
           panFact(target, projects[id]);
         }
@@ -65,19 +68,21 @@ if (window.IntersectionObserver && window.customElements && HTMLElement.prototyp
         panFact.default,
         linkFact.default,
       ), IOoptions);
-      [...projectDivs, ...contactDivs].forEach(el => observer.observe(el));
+      [...projectDivs, ...contactDivs, demoDiv].forEach(el => observer.observe(el));
     })
     .catch(err => console.log(err));
 } else {
   Promise.all([
     import(/* webpackChunkName: "projectLoader" */ './projectLoader'),
     import(/* webpackChunkName: "linkLoader" */ './linkLoader'),
+    import('../images/paint_demos.jpg'),
     import(/* webpackChunkName: "fallback" */ '../css/fallback.scss'),
   ])
-    .then(([projLoad, linkLoad]) => {
+    .then(([projLoad, linkLoad, demosImg]) => {
       projLoad.default(projectDivs, projects);
       contactDivs.forEach(div => div.removeAttribute('tabindex'));
       linkLoad.default(contactDivs, links);
+      demoDiv.children[2].src = demosImg.default;
     })
     .catch(err => console.log(err));
 }

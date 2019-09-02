@@ -9,12 +9,12 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const { InjectManifest } = require('workbox-webpack-plugin');
 const WorkerPlugin = require('worker-plugin');
 
-const swVol = 'v16';
+const swVol = 'v17';
 
 module.exports = {
   mode: 'production',
-  // mode: 'development',
   devtool: 'source-map',
+  // mode: 'development',
   // devtool: 'inline-source-map',
   entry: {
     main: './src/js/index.js',
