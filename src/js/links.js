@@ -21,13 +21,13 @@ const links = [
     src: twit,
   },
   {
-    link: 'https://stackoverflow.com/story/jamesdsouth',
-    alt: 'go to my Stack Overflow story page',
+    link: 'https://stackoverflow.com/users/9996080/james-south?tab=profile',
+    alt: 'go to my stack overflow profile',
     src: so,
   },
   {
     link: 'https://dev.to/jamessouth',
-    alt: 'go to my dev.to profile',
+    alt: 'go to my dev community profile',
     src: dev,
   },
 ];
