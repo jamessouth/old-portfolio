@@ -2,6 +2,7 @@ import email from '../images/email.png';
 import github from '../images/github.png';
 import twit from '../images/twit.png';
 import so from '../images/so.png';
+import dev from '../images/dev.png';
 
 const links = [
   {
@@ -23,6 +24,11 @@ const links = [
     link: 'https://stackoverflow.com/story/jamesdsouth',
     alt: 'go to my Stack Overflow story page',
     src: so,
+  },
+  {
+    link: 'https://dev.to/jamessouth',
+    alt: 'go to my dev.to profile',
+    src: dev,
   },
 ];
 

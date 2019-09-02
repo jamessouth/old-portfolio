@@ -140,21 +140,6 @@ section{
     color: $blue;
     background-color: $yellow;
   }
-  & a{
-    font-family: inherit;
-    border: $bord;
-  }
-  & a:link,
-  & a:visited{
-    color: $blue;
-  }
-  & a:hover{
-    background-color: $blue;
-    color: $yellow;
-  }
-  & a:focus{
-    @include focus($blue, 2px);
-  }
 }
 .projects{
   display: grid;
@@ -201,11 +186,29 @@ section{
   width: 300px;
   margin: auto;
   font-weight: bold;
+  & p{
+    color: #30511d;
+    @include fontMarg(1.7em, 2rem);
+    text-align: center;
+  }
 }
-#map p{
-  color: #30511d;
-  @include fontMarg(1.7em, 2rem);
-  text-align: center;
+#map,
+#about p{
+  & a{
+    font-family: inherit;
+    border: $bord;
+  }
+  & a:link,
+  & a:visited{
+    color: $blue;
+  }
+  & a:hover{
+    background-color: $blue;
+    color: $yellow;
+  }
+  & a:focus{
+    @include focus($blue, 2px);
+  }
 }
 area{
   outline: none;
@@ -265,10 +268,10 @@ area:focus:nth-child(4)::after{
 .contact{
   @include flex(column, space-between, center);
   margin: 0 auto;
-  @include wh(90%, 400px);
+  @include wh(100%, 500px);
   @media #{$two_col}{
     flex-direction: row;
-    @include wh(70%, 150px);
+    @include wh(80%, 150px);
   }
   @media #{$upsize_text}{
     width: 724px;
