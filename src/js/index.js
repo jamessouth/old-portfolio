@@ -22,13 +22,13 @@ openModalBtn.addEventListener('click', () => {
   }
   modal.style.display = 'block';
   openModalBtn.blur();
-  [openModalBtn, ...headerAnchors].forEach(item => item.setAttribute('tabindex', '-1'));
+  [openModalBtn, ...headerAnchors].forEach((item) => item.setAttribute('tabindex', '-1'));
 });
 
 closeModalBtn.addEventListener('click', () => {
   modal.style.display = 'none';
   openModalBtn.focus();
-  [openModalBtn, ...headerAnchors].forEach(item => item.removeAttribute('tabindex'));
+  [openModalBtn, ...headerAnchors].forEach((item) => item.removeAttribute('tabindex'));
 });
 
 if (CSS.paintWorklet) {
@@ -45,12 +45,14 @@ if (window.IntersectionObserver && window.customElements && HTMLElement.prototyp
 
   const IOcallback = function IOcallback(panFact, linkFact) {
     return function innerIOCB(entries, observer) {
-      entries.filter(entry => entry.isIntersecting).forEach(({ target, target: { id } }) => {
+      entries.filter((entry) => entry.isIntersecting).forEach(({ target, target: { id } }) => {
         if (id.includes('x')) {
           linkFact(target, links[parseInt(id, 10)]);
           target.removeAttribute('tabindex');
-        } else if (id == 'map') {
-          import('../images/paint_demos.jpg').then(x => target.children[2].src = x.default);
+        } else if (id === 'map') {
+          import('../images/paint_demos.jpg').then((x) => {
+            target.children[2].src = x.default; // eslint-disable-line no-param-reassign
+          });
         } else {
           panFact(target, projects[id]);
         }
@@ -68,9 +70,9 @@ if (window.IntersectionObserver && window.customElements && HTMLElement.prototyp
         panFact.default,
         linkFact.default,
       ), IOoptions);
-      [...projectDivs, ...contactDivs, demoDiv].forEach(el => observer.observe(el));
+      [...projectDivs, ...contactDivs, demoDiv].forEach((el) => observer.observe(el));
     })
-    .catch(err => console.log(err));
+    .catch((err) => console.log(err));
 } else {
   Promise.all([
     import(/* webpackChunkName: "projectLoader" */ './projectLoader'),
@@ -80,9 +82,9 @@ if (window.IntersectionObserver && window.customElements && HTMLElement.prototyp
   ])
     .then(([projLoad, linkLoad, demosImg]) => {
       projLoad.default(projectDivs, projects);
-      contactDivs.forEach(div => div.removeAttribute('tabindex'));
+      contactDivs.forEach((div) => div.removeAttribute('tabindex'));
       linkLoad.default(contactDivs, links);
       demoDiv.children[2].src = demosImg.default;
     })
-    .catch(err => console.log(err));
+    .catch((err) => console.log(err));
 }

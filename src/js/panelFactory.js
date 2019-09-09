@@ -1,7 +1,7 @@
 const myWorker = new Worker('./worker.js', { type: 'module' });
 
 function panelMarkupTag(strings, ...anchors) {
-  const str = [...anchors].map(anc => `<a rel="noopener noreferrer">${anc}</a>`).join('\n      ');
+  const str = [...anchors].map((anc) => `<a rel="noopener noreferrer">${anc}</a>`).join('\n      ');
 
   return `
     <h3></h3>

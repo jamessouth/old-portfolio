@@ -143,6 +143,7 @@ section{
 }
 .projects{
   display: grid;
+  place-items: center;
   grid-template-columns: repeat(auto-fill, minmax(288px, 1fr));
   grid-column-gap: 30px;
   grid-row-gap: 100px;
@@ -161,7 +162,6 @@ section{
     width: 80%;
   }
   & > div{
-    margin: 0 auto;
     @include wh(288px, 435px);
     background-color: transparent;
   }
@@ -179,6 +179,11 @@ section{
     @media #{$two_col}{
       grid-column: 1 / -1;
     }
+  }
+}
+@supports not (place-items: center) {//edge
+  .projects > div{
+    margin: 0 auto;
   }
 }
 #map{
