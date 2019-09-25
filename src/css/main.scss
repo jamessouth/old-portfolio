@@ -69,6 +69,7 @@ li{
 }
 #port:target,
 #about:target,
+#articles:target,
 #cont:target{
   padding-top: 3rem;
 }
@@ -201,8 +202,8 @@ section{
   font-weight: bold;
   & p{
     color: #30511d;
-    @include fontMarg(1.7em, 2rem);
-    text-align: center;
+    @include fontMarg(1.2em, 2rem);
+    line-height: 26px;
   }
 }
 #map,
@@ -226,35 +227,39 @@ section{
 area{
   outline: none;
 }
-area:focus::after{
+area:focus::after,
+area:hover::after{
   position: absolute;
   content: attr(alt);
   color: #30511d;
   font-size: 1.6em;
   width: 100px;
 }
-area:focus:nth-child(1)::after{
-  top: 63px;
+area:focus:nth-child(1)::after,
+area:hover:nth-child(1)::after{
+  top: 48px;
   left: 37px;
   @media #{$two_col}{
     top: 150px;
     left: -92px;
   }
 }
-area:focus:nth-child(2)::after{
-  top: 63px;
+area:focus:nth-child(2)::after,
+area:hover:nth-child(2)::after{
+  top: 48px;
   right: 12px;
   @media #{$two_col}{
     top: 150px;
     right: -116px;
   }
 }
-area:focus:nth-child(3)::before{
+area:focus:nth-child(3)::before,
+area:hover:nth-child(3)::before{
   position: absolute;
   color: #30511d;
   font-size: 1em;
   width: 100px;
-  top: 425px;
+  top: 410px;
   left: 30px;
   content: 'chrome only';
   @media #{$two_col}{
@@ -262,16 +267,18 @@ area:focus:nth-child(3)::before{
     left: 30px;
   }
 }
-area:focus:nth-child(3)::after{
-  top: 396px;
+area:focus:nth-child(3)::after,
+area:hover:nth-child(3)::after{
+  top: 381px;
   left: 37px;
   @media #{$two_col}{
     top: 300px;
     left: -92px;
   }
 }
-area:focus:nth-child(4)::after{
-  top: 396px;
+area:focus:nth-child(4)::after,
+area:hover:nth-child(4)::after{
+  top: 381px;
   right: 12px;
   @media #{$two_col}{
     top: 300px;
