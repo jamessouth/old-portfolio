@@ -15,9 +15,12 @@ body{
 }
 header{
   @include position($tp: 0);
-  @include wh(100%, 3rem);
+  @include wh(100%, 6rem);
   background-color: $yellow;
   z-index: 2;
+  @media #{$head_expand}{
+    @include wh(100%, 3rem);
+  }
 }
 nav{
   margin: 0 .5rem;
@@ -25,11 +28,16 @@ nav{
 }
 ul{
   @include flex(row, space-around, center);
+  flex-wrap: wrap;
   height: 100%;
   list-style: none;
 }
 li{
   @include fonty(1.3em, bold);
+  margin: 0 .5rem;
+  @media #{$head_expand}{
+    margin: 0;
+  }
   @media #{$two_col}{
     font-size: 1.7em;
   }
