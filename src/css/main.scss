@@ -202,7 +202,7 @@ section{
   font-weight: bold;
   & p{
     color: #30511d;
-    @include fontMarg(1.2em, 2rem);
+    @include fontMarg(1.2em, 2.5rem);
     line-height: 26px;
   }
 }
@@ -237,7 +237,7 @@ area:hover::after{
 }
 area:focus:nth-child(1)::after,
 area:hover:nth-child(1)::after{
-  top: 48px;
+  top: 58px;
   left: 37px;
   @media #{$two_col}{
     top: 150px;
@@ -246,7 +246,7 @@ area:hover:nth-child(1)::after{
 }
 area:focus:nth-child(2)::after,
 area:hover:nth-child(2)::after{
-  top: 48px;
+  top: 58px;
   right: 12px;
   @media #{$two_col}{
     top: 150px;
@@ -259,17 +259,17 @@ area:hover:nth-child(3)::before{
   color: #30511d;
   font-size: 1em;
   width: 100px;
-  top: 410px;
+  top: 414px;
   left: 30px;
   content: 'chrome only';
   @media #{$two_col}{
-    top: 400px;
+    top: 392px;
     left: 30px;
   }
 }
 area:focus:nth-child(3)::after,
 area:hover:nth-child(3)::after{
-  top: 381px;
+  top: 388px;
   left: 37px;
   @media #{$two_col}{
     top: 300px;
@@ -278,7 +278,7 @@ area:hover:nth-child(3)::after{
 }
 area:focus:nth-child(4)::after,
 area:hover:nth-child(4)::after{
-  top: 381px;
+  top: 388px;
   right: 12px;
   @media #{$two_col}{
     top: 300px;
