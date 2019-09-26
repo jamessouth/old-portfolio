@@ -198,7 +198,7 @@ section{
     margin: 0 auto;
   }
 }
-#map{
+.arts > div{
   position: relative;
   width: 300px;
   margin: auto;
@@ -209,7 +209,7 @@ section{
     line-height: 26px;
   }
 }
-#map,
+.arts > div,
 #about p{
   & a{
     font-family: inherit;
