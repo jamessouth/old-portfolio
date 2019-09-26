@@ -71,7 +71,10 @@ li{
 #about:target,
 #articles:target,
 #cont:target{
-  padding-top: 3rem;
+  padding-top: 6rem;
+  @media #{$head_expand}{
+    padding-top: 3rem;
+  }
 }
 aside{
   @include position($rt: 2%, $lt: 2%, $tp: 2%, $bm: 2%);
