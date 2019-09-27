@@ -51,7 +51,7 @@ if (window.IntersectionObserver && window.customElements && HTMLElement.prototyp
           target.removeAttribute('tabindex');
         } else if (id.startsWith('art')) {
           import(`../images/${id}.jpg`).then((x) => {
-            target.children[target.children.length - 1].src = x.default; // eslint-disable-line no-param-reassign
+            target.lastElementChild.src = x.default; // eslint-disable-line no-param-reassign
           });
         } else {
           panFact(target, projects[id]);
@@ -81,16 +81,18 @@ if (window.IntersectionObserver && window.customElements && HTMLElement.prototyp
     import('../images/art_paint_two.jpg'),
     import(/* webpackChunkName: "fallback" */ '../css/fallback.scss'),
   ])
-    .then(([projLoad, linkLoad, art_paint_one, art_paint_two]) => {
+    .then(([
+      projLoad,
+      linkLoad,
+      art_paint_one,
+      art_paint_two
+    ]) => {
       projLoad.default(projectDivs, projects);
       contactDivs.forEach((div) => div.removeAttribute('tabindex'));
       linkLoad.default(contactDivs, links);
-
       [art_paint_one, art_paint_two].forEach((img, i) => {
         articles[i].lastElementChild.src = img.default;
       });
-
-
     })
     .catch((err) => console.log(err));
 }

@@ -201,13 +201,8 @@ section{
 .arts > div{
   position: relative;
   width: 300px;
-  margin: auto;
+  margin: 0 auto 4rem;
   font-weight: bold;
-  & p{
-    color: #30511d;
-    @include fontMarg(1.2em, 2.5rem);
-    line-height: 26px;
-  }
 }
 .arts > div,
 #about p{
@@ -227,6 +222,28 @@ section{
     @include focus($blue, 2px);
   }
 }
+.arts > div a{
+  display: block;
+  text-align: center;
+  font-family: 'Scheherazade', serif;
+  @include fontMarg(1.7em, 2.5rem);
+  line-height: 41px;
+  &:before,
+  &:after{
+    content: '"';
+    font-family: $cor;
+    color: #30511d;
+    position: absolute;
+    font-size: 48px;
+  }
+  &:before{
+    left: -22px;
+  }
+  &:after{
+    right: -22px;
+    top: 2px;
+  }
+}
 area{
   outline: none;
 }
@@ -240,19 +257,19 @@ area:hover::after{
 }
 area:focus:nth-child(1)::after,
 area:hover:nth-child(1)::after{
-  top: 58px;
+  top: 98px;
   left: 37px;
   @media #{$two_col}{
-    top: 150px;
+    top: 185px;
     left: -92px;
   }
 }
 area:focus:nth-child(2)::after,
 area:hover:nth-child(2)::after{
-  top: 58px;
+  top: 98px;
   right: 12px;
   @media #{$two_col}{
-    top: 150px;
+    top: 185px;
     right: -116px;
   }
 }
@@ -262,29 +279,29 @@ area:hover:nth-child(3)::before{
   color: #30511d;
   font-size: 1em;
   width: 100px;
-  top: 414px;
+  top: 454px;
   left: 30px;
   content: 'chrome only';
   @media #{$two_col}{
-    top: 394px;
+    top: 432px;
     left: 30px;
   }
 }
 area:focus:nth-child(3)::after,
 area:hover:nth-child(3)::after{
-  top: 388px;
+  top: 428px;
   left: 37px;
   @media #{$two_col}{
-    top: 300px;
+    top: 335px;
     left: -92px;
   }
 }
 area:focus:nth-child(4)::after,
 area:hover:nth-child(4)::after{
-  top: 388px;
+  top: 428px;
   right: 12px;
   @media #{$two_col}{
-    top: 300px;
+    top: 335px;
     right: -116px;
   }
 }
