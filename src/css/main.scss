@@ -198,11 +198,30 @@ section{
     margin: 0 auto;
   }
 }
+.arts{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  @media #{$col_gap_expand}{
+    flex-direction: row;
+  }
+  @media #{$upsize_text}{
+    width: 1000px;
+    margin: 0 auto;
+  }
+}
 .arts > div{
   position: relative;
   width: 300px;
-  margin: 0 auto 4rem;
+  margin-bottom: 4rem;
   font-weight: bold;
+  @media #{$col_gap_expand}{
+    margin-bottom: 0;
+  }
+}
+.arts > div:last-of-type{
+  margin-bottom: 0;
 }
 .arts > div,
 #about p{
