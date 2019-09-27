@@ -274,8 +274,8 @@ area:hover::after{
   font-size: 1.6em;
   width: 100px;
 }
-area:focus:nth-child(1)::after,
-area:hover:nth-child(1)::after{
+map[name="shapes_images"] area:focus:nth-child(1)::after,
+map[name="shapes_images"] area:hover:nth-child(1)::after{
   top: 98px;
   left: 37px;
   @media #{$two_col}{
@@ -298,7 +298,7 @@ area:hover:nth-child(3)::before{
   color: #30511d;
   font-size: 1em;
   width: 100px;
-  top: 454px;
+  top: 449px;
   left: 30px;
   content: 'chrome only';
   @media #{$two_col}{
@@ -308,7 +308,7 @@ area:hover:nth-child(3)::before{
 }
 area:focus:nth-child(3)::after,
 area:hover:nth-child(3)::after{
-  top: 428px;
+  top: 423px;
   left: 37px;
   @media #{$two_col}{
     top: 335px;
@@ -317,12 +317,26 @@ area:hover:nth-child(3)::after{
 }
 area:focus:nth-child(4)::after,
 area:hover:nth-child(4)::after{
-  top: 428px;
+  top: 423px;
   right: 12px;
   @media #{$two_col}{
     top: 335px;
     right: -116px;
   }
+}
+map[name="knockout"] area:focus::after,
+map[name="knockout"] area:hover::after{
+  width: 100%;
+  text-align: center;
+  bottom: -20px;
+}
+map[name="knockout"] area:focus::before,
+map[name="knockout"] area:hover::before{
+  width: 100%;
+  position: absolute;
+  content: 'chrome only';
+  text-align: center;
+  bottom: -35px;
 }
 .contact{
   @include flex(column, space-between, center);
