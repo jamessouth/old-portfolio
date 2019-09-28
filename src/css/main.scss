@@ -122,6 +122,7 @@ h1{
 }
 h2{
   text-align: center;
+  position: relative;
   @include fontMarg(1.75em, 3rem);
   @media #{$two_col}{
     @include fontMarg(2.25em, 4rem);
@@ -133,6 +134,25 @@ h2{
     @include fontMarg(3.75em, 7rem);
   }
 }
+h2::before{
+  content: '';
+  position: absolute;
+  background-image: url('../images/divider.png');
+  // transform: rotateY(180deg);
+  width: 206px;
+  height: 63px;
+  left: 27%;
+  top: -10px;
+}
+// h2::after{
+//   content: '';
+//   position: absolute;
+//   background-image: url('../images/look.png');
+//   width: 206px;
+//   height: 63px;
+//   right: 27%;
+//   top: -10px;
+// }
 section{
   margin-bottom: 8rem;
 }
@@ -334,6 +354,7 @@ map[name="knockout"] area:focus::before,
 map[name="knockout"] area:hover::before{
   width: 100%;
   position: absolute;
+  color: #30511d;
   content: 'chrome only';
   text-align: center;
   bottom: -35px;
