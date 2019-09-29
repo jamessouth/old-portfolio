@@ -134,7 +134,7 @@ h2{
     @include fontMarg(3.75em, 7rem);
   }
 }
-h2::before{
+section + section h2::before{
   content: '';
   position: absolute;
   background: url('../images/divider.png') center/contain no-repeat;// Image by user GDJ from Pixabay
