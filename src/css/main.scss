@@ -108,6 +108,7 @@ iframe{
 }
 h1{
   margin: 9rem 0 7rem;
+  position: relative;
   text-align: center;
   font-size: 2em;
   @media #{$two_col}{
@@ -120,9 +121,20 @@ h1{
     @include fontMarg(4em, 12rem);
   }
 }
+h1::after{
+  content: '';
+  position: absolute;
+  background: url('../images/topdiv.png') center/contain no-repeat;
+
+  // transform: rotateY(180deg);
+  width: 50%;
+  height: 55px;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -90px;
+}
 h2{
   text-align: center;
-  position: relative;
   @include fontMarg(1.75em, 3rem);
   @media #{$two_col}{
     @include fontMarg(2.25em, 4rem);
@@ -134,7 +146,7 @@ h2{
     @include fontMarg(3.75em, 7rem);
   }
 }
-section + section h2::before{
+section:not(:last-of-type)::after{
   content: '';
   position: absolute;
   background: url('../images/divider.png') center/contain no-repeat;// Image by user GDJ from Pixabay
@@ -146,7 +158,7 @@ section + section h2::before{
   height: 55px;
   left: 50%;
   transform: translateX(-50%);
-  top: -72px;
+  bottom: -100px;
 }
 // h2::after{
 //   content: '';
@@ -158,6 +170,7 @@ section + section h2::before{
 //   top: -10px;
 // }
 section{
+  position: relative;
   margin-bottom: 8rem;
 }
 #about p{
