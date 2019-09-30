@@ -107,18 +107,18 @@ iframe{
   @include wh(100%, 100%);
 }
 h1{
-  margin: 9rem 0 7rem;
+  margin: 9rem 0 9rem;
   position: relative;
   text-align: center;
   font-size: 2em;
   @media #{$two_col}{
-    @include fontMarg(2.5em, 9rem);
+    @include fontMarg(2.5em, 11rem);
   }
   @media #{$upsize_text}{
-    @include fontMarg(3em, 10rem);
+    @include fontMarg(3em, 12rem);
   }
   @media #{$big}{
-    @include fontMarg(4em, 12rem);
+    @include fontMarg(4em, 14rem);
   }
 }
 h1::after{
@@ -127,11 +127,11 @@ h1::after{
   background: url('../images/topdiv.png') center/contain no-repeat;
 
   // transform: rotateY(180deg);
-  width: 50%;
+  width: 80%;
   height: 55px;
   left: 50%;
   transform: translateX(-50%);
-  bottom: -90px;
+  bottom: -100px;
 }
 h2{
   text-align: center;
@@ -155,10 +155,10 @@ section:not(:last-of-type)::after{
 
   // transform: rotateY(180deg);
   width: 50%;
-  height: 55px;
+  height: 25px;
   left: 50%;
   transform: translateX(-50%);
-  bottom: -100px;
+  bottom: -130px;
 }
 // h2::after{
 //   content: '';
@@ -171,7 +171,7 @@ section:not(:last-of-type)::after{
 // }
 section{
   position: relative;
-  margin-bottom: 8rem;
+  margin-bottom: 12rem;
 }
 #about p{
   font-family: serif;
