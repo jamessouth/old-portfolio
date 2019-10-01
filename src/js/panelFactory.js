@@ -18,7 +18,7 @@ const panelTemplate = document.createElement('template');
 
 const styleTag = `
 <style>
-div:focus,
+a:hover,
 a:focus{
   outline: none;
   background-color: #1a2845;

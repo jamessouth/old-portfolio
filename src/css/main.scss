@@ -111,6 +111,16 @@ h1{
   position: relative;
   text-align: center;
   font-size: 2em;
+  &::after{
+    content: '';
+    position: absolute;
+    background: url('../images/topdiv.png') center/contain no-repeat;
+    width: 80%;
+    height: 55px;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -100px;
+  }
   @media #{$two_col}{
     @include fontMarg(2.5em, 11rem);
   }
@@ -120,18 +130,6 @@ h1{
   @media #{$big}{
     @include fontMarg(4em, 14rem);
   }
-}
-h1::after{
-  content: '';
-  position: absolute;
-  background: url('../images/topdiv.png') center/contain no-repeat;
-
-  // transform: rotateY(180deg);
-  width: 80%;
-  height: 55px;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: -100px;
 }
 h2{
   text-align: center;
@@ -146,32 +144,22 @@ h2{
     @include fontMarg(3.75em, 7rem);
   }
 }
-section:not(:last-of-type)::after{
-  content: '';
-  position: absolute;
-  background: url('../images/divider.png') center/contain no-repeat;// Image by user GDJ from Pixabay
-
-
-
-  // transform: rotateY(180deg);
-  width: 50%;
-  height: 25px;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: -130px;
-}
-// h2::after{
-//   content: '';
-//   position: absolute;
-//   background-image: url('../images/look.png');
-//   width: 206px;
-//   height: 63px;
-//   right: 27%;
-//   top: -10px;
-// }
 section{
   position: relative;
-  margin-bottom: 12rem;
+  margin-bottom: 14rem;
+  &:last-of-type{
+    margin-bottom: 6rem;
+  }
+  &:not(:last-of-type)::after{
+    content: '';
+    position: absolute;
+    background: url('../images/divider.png') center/contain no-repeat;// Image by user GDJ from Pixabay
+    width: 50%;
+    height: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -130px;
+  }
 }
 #about p{
   font-family: serif;
@@ -235,31 +223,6 @@ section{
     margin: 0 auto;
   }
 }
-.arts{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  @media #{$col_gap_expand}{
-    flex-direction: row;
-  }
-  @media #{$upsize_text}{
-    width: 1000px;
-    margin: 0 auto;
-  }
-}
-.arts > div{
-  position: relative;
-  width: 300px;
-  margin-bottom: 4rem;
-  font-weight: bold;
-  @media #{$col_gap_expand}{
-    margin-bottom: 0;
-  }
-}
-.arts > div:last-of-type{
-  margin-bottom: 0;
-}
 .arts > div,
 #about p{
   & a{
@@ -278,42 +241,108 @@ section{
     @include focus($blue, 2px);
   }
 }
-.arts > div a{
-  display: block;
-  text-align: center;
-  font-family: 'Scheherazade', serif;
-  @include fontMarg(1.7em, 2.5rem);
-  line-height: 41px;
-  &:before,
-  &:after{
-    display: none;
-    content: '"';
-    font-family: $cor;
-    color: #30511d;
-    position: absolute;
-    font-size: 48px;
-    @media #{$quotes}{
-      display: block;
+.arts{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  & > div{
+    position: relative;
+    width: 300px;
+    margin-bottom: 4rem;
+    font-weight: bold;
+    @media #{$col_gap_expand}{
+      margin-bottom: 0;
     }
   }
-  &:before{
-    left: -22px;
+  & > div:last-of-type{
+    margin-bottom: 0;
   }
-  &:after{
-    right: -22px;
-    top: 2px;
+  & > div a{
+    display: block;
+    text-align: center;
+    font-family: 'Scheherazade', serif;
+    @include fontMarg(1.7em, 2.5rem);
+    line-height: 41px;
+    &:before,
+    &:after{
+      display: none;
+      content: '"';
+      font-family: $cor;
+      color: #30511d;
+      position: absolute;
+      font-size: 48px;
+      @media #{$quotes}{
+        display: block;
+      }
+    }
+    &:before{
+      left: -22px;
+    }
+    &:after{
+      right: -22px;
+      top: 2px;
+    }
+  }
+  @media #{$col_gap_expand}{
+    flex-direction: row;
+  }
+  @media #{$upsize_text}{
+    width: 1000px;
+    margin: 0 auto;
   }
 }
 area{
   outline: none;
-}
-area:focus::after,
-area:hover::after{
-  position: absolute;
-  content: attr(alt);
-  color: #30511d;
-  font-size: 1.6em;
-  width: 100px;
+  &:focus::after,
+  &:hover::after{
+    position: absolute;
+    content: attr(alt);
+    color: #30511d;
+    font-size: 1.6em;
+    width: 100px;
+  }
+  &:focus:nth-child(2)::after,
+  &:hover:nth-child(2)::after{
+    top: 98px;
+    right: 12px;
+    @media #{$two_col}{
+      top: 185px;
+      right: -116px;
+    }
+  }
+  &:focus:nth-child(3)::before,
+  &:hover:nth-child(3)::before{
+    position: absolute;
+    color: #30511d;
+    font-size: 1em;
+    width: 100px;
+    top: 449px;
+    left: 30px;
+    content: 'chrome only';
+    @media #{$two_col}{
+      top: 432px;
+      left: 30px;
+    }
+  }
+  &:focus:nth-child(3)::after,
+  &:hover:nth-child(3)::after{
+    top: 423px;
+    left: 37px;
+    @media #{$two_col}{
+      top: 335px;
+      left: -92px;
+    }
+  }
+  &:focus:nth-child(4)::after,
+  &:hover:nth-child(4)::after{
+    top: 423px;
+    right: 12px;
+    @media #{$two_col}{
+      top: 335px;
+      right: -116px;
+    }
+  }
 }
 map[name="shapes_images"] area:focus:nth-child(1)::after,
 map[name="shapes_images"] area:hover:nth-child(1)::after{
@@ -322,47 +351,6 @@ map[name="shapes_images"] area:hover:nth-child(1)::after{
   @media #{$two_col}{
     top: 185px;
     left: -92px;
-  }
-}
-area:focus:nth-child(2)::after,
-area:hover:nth-child(2)::after{
-  top: 98px;
-  right: 12px;
-  @media #{$two_col}{
-    top: 185px;
-    right: -116px;
-  }
-}
-area:focus:nth-child(3)::before,
-area:hover:nth-child(3)::before{
-  position: absolute;
-  color: #30511d;
-  font-size: 1em;
-  width: 100px;
-  top: 449px;
-  left: 30px;
-  content: 'chrome only';
-  @media #{$two_col}{
-    top: 432px;
-    left: 30px;
-  }
-}
-area:focus:nth-child(3)::after,
-area:hover:nth-child(3)::after{
-  top: 423px;
-  left: 37px;
-  @media #{$two_col}{
-    top: 335px;
-    left: -92px;
-  }
-}
-area:focus:nth-child(4)::after,
-area:hover:nth-child(4)::after{
-  top: 423px;
-  right: 12px;
-  @media #{$two_col}{
-    top: 335px;
-    right: -116px;
   }
 }
 map[name="knockout"] area:focus::after,
