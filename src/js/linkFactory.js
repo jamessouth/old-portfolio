@@ -10,7 +10,8 @@ a{
   border: 2px solid transparent;
   padding: 4px;
 }
-a:focus{
+a:focus,
+a:hover{
   outline: none;
   border: 2px solid #1a2845;
 `;
