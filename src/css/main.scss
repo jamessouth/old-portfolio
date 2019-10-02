@@ -302,6 +302,13 @@ section{
       display: none;
     }
   }
+  map + img{
+    border: $bord;
+    &:hover,
+    &:focus{
+      border: 2px solid blue;
+    }
+  }
 }
 area{
   outline: none;
