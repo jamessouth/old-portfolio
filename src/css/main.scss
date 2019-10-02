@@ -222,6 +222,9 @@ section{
   .projects > div{
     margin: 0 auto;
   }
+  h1::after{
+    width: 50%;
+  }
 }
 .arts > div,
 #about p{
