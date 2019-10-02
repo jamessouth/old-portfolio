@@ -262,7 +262,6 @@ section{
     &:before,
     &:after{
       display: none;
-      content: '"';
       font-family: $cor;
       color: #30511d;
       position: absolute;
@@ -272,9 +271,11 @@ section{
       }
     }
     &:before{
+      content: open-quote;
       left: -22px;
     }
     &:after{
+      content: close-quote;
       right: -22px;
       top: 2px;
     }
