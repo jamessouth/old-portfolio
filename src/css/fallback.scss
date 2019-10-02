@@ -34,15 +34,15 @@
   @include fonty(2em, bold, .8);
   text-decoration: none;
   border: 1px solid #30511d;
+  &:focus,
+  &:hover{
+    outline: none;
+    background-color: #1a2845;
+    color: #e5d7ba;
+  }
 }
 .panAGrid{
   grid-column: 1 / -1;
-}
-.panDiv:focus,
-.panA:focus{
-  outline: none;
-  background-color: #1a2845;
-  color: #e5d7ba;
 }
 .panAGrids:first-of-type{
   grid-area: lbot;
@@ -54,7 +54,48 @@
   display: block;
   border: 2px solid transparent;
   padding: 4px;
-  &:focus{
+  &:focus,
+  &:hover{
     @include focus(#1a2845, 2px);
+  }
+}
+@supports not (place-items: center) {//edge
+  .projects > div{
+    margin: 0 auto;
+  }
+  h1::after{
+    width: 50%;
+  }
+  .arts > div a{
+    letter-spacing: -1px;
+    &::before,
+    &::after{
+      display: none;
+    }
+  }
+  map[name="shapes_images"]::before{
+    content: 'demo 3 is chrome only';
+    font-family: 'Scheherazade', serif;
+    width: 100%;
+    font-size: 20px;
+    position: absolute;
+    text-align: center;
+    top: 88px;
+  }
+  map[name="knockout"]::before{
+    content: 'chrome only';
+    font-family: 'Scheherazade', serif;
+    width: 100%;
+    font-size: 20px;
+    position: absolute;
+    text-align: center;
+    top: 88px;
+  }
+  map + img{
+    border: 2px solid transparent;
+    &:hover,
+    &:focus{
+      border: 2px solid blue;
+    }
   }
 }
