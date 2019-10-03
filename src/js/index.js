@@ -100,8 +100,6 @@ if (window.IntersectionObserver && window.customElements && HTMLElement.prototyp
 
       });
 
-
-
     })
     .catch((err) => console.log(err));
 }
