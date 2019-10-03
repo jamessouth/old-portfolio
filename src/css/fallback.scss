@@ -70,26 +70,8 @@
     letter-spacing: -1px;
     &::before,
     &::after{
-      display: none;
+      display: none;// hide quotes in edge because it underlines them
     }
-  }
-  map[name="shapes_images"]::before{
-    content: 'demo 3 is chrome only';
-    font-family: 'Scheherazade', serif;
-    width: 100%;
-    font-size: 20px;
-    position: absolute;
-    text-align: center;
-    top: 88px;
-  }
-  map[name="knockout"]::before{
-    content: 'chrome only';
-    font-family: 'Scheherazade', serif;
-    width: 100%;
-    font-size: 20px;
-    position: absolute;
-    text-align: center;
-    top: 88px;
   }
   map + img{
     border: 2px solid transparent;

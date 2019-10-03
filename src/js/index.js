@@ -12,7 +12,28 @@ const headerAnchors = document.querySelectorAll('li a');
 const projectDivs = document.querySelectorAll('.projects div');
 const contactDivs = document.querySelectorAll('.contact div');
 const articles = document.querySelectorAll('.arts > div');
+const firstArtDemos = document.querySelectorAll('map[name="shapes_images"] area');
 let asideNotBuilt = true;
+
+// console.log(firstArtDemos);
+
+
+firstArtDemos.forEach((area) => {
+  // console.log(area);
+  area.addEventListener('focus', function (e) {
+    // console.log(this);
+    const demo = parseInt(this.getAttribute('alt').match(/\d/)[0], 10) - 1;
+    document.documentElement.style.setProperty('--rotation', `${demo * 90}deg`);
+  });
+});
+
+
+
+
+
+
+
+
 
 openModalBtn.addEventListener('click', () => {
   if (asideNotBuilt) {
