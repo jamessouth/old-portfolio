@@ -12,28 +12,8 @@ const headerAnchors = document.querySelectorAll('li a');
 const projectDivs = document.querySelectorAll('.projects div');
 const contactDivs = document.querySelectorAll('.contact div');
 const articles = document.querySelectorAll('.arts > div');
-const firstArtDemos = document.querySelectorAll('map[name="shapes_images"] area');
+const firstArtImgs = document.querySelectorAll('.art1');
 let asideNotBuilt = true;
-
-// console.log(firstArtDemos);
-
-
-firstArtDemos.forEach((area) => {
-  // console.log(area);
-  area.addEventListener('focus', function (e) {
-    // console.log(this);
-    const demo = parseInt(this.getAttribute('alt').match(/\d/)[0], 10) - 1;
-    document.documentElement.style.setProperty('--rotation', `${demo * 90}deg`);
-  });
-});
-
-
-
-
-
-
-
-
 
 openModalBtn.addEventListener('click', () => {
   if (asideNotBuilt) {
@@ -99,21 +79,29 @@ if (window.IntersectionObserver && window.customElements && HTMLElement.prototyp
     import(/* webpackChunkName: "projectLoader" */ './projectLoader'),
     import(/* webpackChunkName: "linkLoader" */ './linkLoader'),
     import('../images/art_paint_one.jpg'),
-    import('../images/art_paint_two.jpg'),
+    // import('../images/art_paint_two.jpg'),
     import(/* webpackChunkName: "fallback" */ '../css/fallback.scss'),
   ])
     .then(([
       projLoad,
       linkLoad,
       art_paint_one,
-      art_paint_two
+      // art_paint_two
     ]) => {
       projLoad.default(projectDivs, projects);
       contactDivs.forEach((div) => div.removeAttribute('tabindex'));
       linkLoad.default(contactDivs, links);
-      [art_paint_one, art_paint_two].forEach((img, i) => {
-        articles[i].lastElementChild.src = img.default;
+      // [art_paint_one, art_paint_two].forEach((img, i) => {
+      //   articles[i].lastElementChild.src = img.default;
+      // });
+      firstArtImgs.forEach((img, i) => {
+        img.src = art_paint_one.default;
+        img.style.objectPosition = `${i * 150}px 0%`;
+
       });
+
+
+
     })
     .catch((err) => console.log(err));
 }
