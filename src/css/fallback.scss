@@ -66,18 +66,11 @@
   h1::after{
     width: 50%;
   }
-  .arts > div a{
+  .arts > div > a{
     letter-spacing: -1px;
     &::before,
     &::after{
       display: none;// hide quotes in edge because it underlines them
-    }
-  }
-  map + img{
-    border: 2px solid transparent;
-    &:hover,
-    &:focus{
-      border: 2px solid blue;
     }
   }
 }

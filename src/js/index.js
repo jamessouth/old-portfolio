@@ -96,7 +96,7 @@ if (window.IntersectionObserver && window.customElements && HTMLElement.prototyp
       // });
       firstArtImgs.forEach((img, i) => {
         img.src = art_paint_one.default;
-        img.style.objectPosition = `${i * 150}px 0%`;
+        img.style.objectPosition = `${i * -150}px 0%`;
 
       });
 

@@ -220,19 +220,19 @@ section{
 }
 .arts > div,
 #about p{
-  & a{
+  & > a{
     font-family: inherit;
     border: $bord;
   }
-  & a:link,
-  & a:visited{
+  & > a:link,
+  & > a:visited{
     color: $blue;
   }
-  & a:hover{
+  & > a:hover{
     background-color: $blue;
     color: $yellow;
   }
-  & a:focus{
+  & > a:focus{
     @include focus($blue, 2px);
   }
 }
@@ -289,9 +289,21 @@ section{
   }
 }
 
+#art_paint_one div{
+  display: flex;
+  flex-wrap: wrap;
+  width: 300px;
+  height: 300px;
+  & a{
+    height: 150px;
+    width: 150px;
+  }
+}
 
 .art1{
   object-fit: none;
+  width: 150px;
+  height: 150px;
 }
 
 
