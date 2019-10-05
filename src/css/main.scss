@@ -245,7 +245,6 @@ section{
     position: relative;
     width: 300px;
     margin-bottom: 4rem;
-    font-weight: bold;
     @media #{$col_gap_expand}{
       margin-bottom: 0;
     }
@@ -256,6 +255,7 @@ section{
   & > div > a{
     display: block;
     text-align: center;
+    font-weight: bold;
     font-family: 'Scheherazade', serif;
     @include fontMarg(1.7em, 2.5rem);
     line-height: 41px;
@@ -299,20 +299,12 @@ section{
     height: 150px;
     width: 150px;
     transition: .1s ease-in transform;
-    // &:not(:focus),
-    // &:not(:hover){
-    //   filter: opacity(88%) blur(3px);
-    //
-    // }
-
     &:focus,
     &:hover{
       transform: scale(1.5);
-
     }
     &:first-of-type{
       transform-origin: left top;
-
     }
     &:nth-of-type(2){
       transform-origin: right top;
@@ -322,9 +314,7 @@ section{
     }
     &:last-of-type{
       transform-origin: right bottom;
-
     }
-
   }
 }
 

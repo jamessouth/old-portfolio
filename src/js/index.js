@@ -13,6 +13,7 @@ const projectDivs = document.querySelectorAll('.projects div');
 const contactDivs = document.querySelectorAll('.contact div');
 const articles = document.querySelectorAll('.arts > div');
 const firstArtImgs = document.querySelectorAll('.art1');
+const secondArtImg = document.querySelector('.art2');
 let asideNotBuilt = true;
 
 openModalBtn.addEventListener('click', () => {
@@ -79,14 +80,14 @@ if (window.IntersectionObserver && window.customElements && HTMLElement.prototyp
     import(/* webpackChunkName: "projectLoader" */ './projectLoader'),
     import(/* webpackChunkName: "linkLoader" */ './linkLoader'),
     import('../images/art_paint_one.jpg'),
-    // import('../images/art_paint_two.jpg'),
+    import('../images/art_paint_two.jpg'),
     import(/* webpackChunkName: "fallback" */ '../css/fallback.scss'),
   ])
     .then(([
       projLoad,
       linkLoad,
       art_paint_one,
-      // art_paint_two
+      art_paint_two
     ]) => {
       projLoad.default(projectDivs, projects);
       contactDivs.forEach((div) => div.removeAttribute('tabindex'));
@@ -99,6 +100,9 @@ if (window.IntersectionObserver && window.customElements && HTMLElement.prototyp
         img.style.objectPosition = `${i * -150}px 0%`;
 
       });
+
+      secondArtImg.src = art_paint_two.default;
+      
 
     })
     .catch((err) => console.log(err));
