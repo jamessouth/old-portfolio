@@ -12,8 +12,8 @@ const headerAnchors = document.querySelectorAll('li a');
 const projectDivs = document.querySelectorAll('.projects div');
 const contactDivs = document.querySelectorAll('.contact div');
 const articles = document.querySelectorAll('.arts > div');
-const firstArtImgs = document.querySelectorAll('.art1');
-const secondArtImg = document.querySelector('.art2');
+const firstArtImgs = document.querySelectorAll('.art_paint_one');
+const secondArtImg = document.querySelector('.art_paint_two');
 let asideNotBuilt = true;
 
 openModalBtn.addEventListener('click', () => {
@@ -52,8 +52,22 @@ if (window.IntersectionObserver && window.customElements && HTMLElement.prototyp
           linkFact(target, links[parseInt(id, 10)]);
           target.removeAttribute('tabindex');
         } else if (id.startsWith('art')) {
-          import(`../images/${id}.jpg`).then((x) => {
-            target.lastElementChild.src = x.default; // eslint-disable-line no-param-reassign
+          import(`../images/${id}.jpg`).then((image) => {
+
+            switch (id) {
+              case 'art_paint_one':
+                firstArtImgs.forEach((img, i) => {
+                  img.src = image.default;// eslint-disable-line no-param-reassign
+                  img.style.objectPosition = `${i * -150}px 0%`;
+                });
+                break;
+              case 'art_paint_two':
+                secondArtImg.src = image.default;// eslint-disable-line no-param-reassign
+                break;
+            }
+
+
+
           });
         } else {
           panFact(target, projects[id]);
@@ -102,7 +116,7 @@ if (window.IntersectionObserver && window.customElements && HTMLElement.prototyp
       });
 
       secondArtImg.src = art_paint_two.default;
-      
+
 
     })
     .catch((err) => console.log(err));
