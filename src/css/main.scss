@@ -289,32 +289,40 @@ section{
   }
 }
 
-#art_paint_one div{
-  display: flex;
-  flex-wrap: wrap;
+#art_paint_one div,
+#art_paint_two div{
   width: 300px;
   height: 300px;
   & a{
-    outline: none;
-    height: 150px;
-    width: 150px;
-    transition: .1s ease-in transform;
+    // outline: none;
+    transition: .01s ease-in transform;
     &:focus,
     &:hover{
-      transform: scale(1.5);
+      transform: scale(1.01);
+      @include focus($yellow, 3px);
     }
-    &:first-of-type{
-      transform-origin: left top;
-    }
-    &:nth-of-type(2){
-      transform-origin: right top;
-    }
-    &:nth-of-type(3){
-      transform-origin: left bottom;
-    }
-    &:last-of-type{
-      transform-origin: right bottom;
-    }
+
+  }
+}
+
+#art_paint_one div{
+  display: flex;
+  flex-wrap: wrap;
+  & a{
+    height: 150px;
+    width: 150px;
+    // &:first-of-type{
+    //   transform-origin: left top;
+    // }
+    // &:nth-of-type(2){
+    //   transform-origin: right top;
+    // }
+    // &:nth-of-type(3){
+    //   transform-origin: left bottom;
+    // }
+    // &:last-of-type{
+    //   transform-origin: right bottom;
+    // }
   }
 }
 
@@ -322,6 +330,16 @@ section{
   object-fit: none;
   width: 150px;
   height: 150px;
+}
+
+#art_paint_two div{
+  & a{
+    display: block;
+    // &:focus,
+    // &:hover{
+    //   @include focus($yellow, 3px);
+    // }
+  }
 }
 
 
