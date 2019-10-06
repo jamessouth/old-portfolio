@@ -59,18 +59,3 @@
     @include focus(#1a2845, 2px);
   }
 }
-@supports not (place-items: center) {//edge
-  .projects > div{
-    margin: 0 auto;
-  }
-  h1::after{
-    width: 50%;
-  }
-  .arts > div > a{
-    letter-spacing: -1px;
-    &::before,
-    &::after{
-      display: none;// hide quotes in edge because it underlines them
-    }
-  }
-}
