@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import '../css/main.scss';
 import './loadSW';
 import resumePDF from '../images/resume.pdf';
@@ -11,7 +12,6 @@ const modal = document.querySelector('aside');
 const headerAnchors = document.querySelectorAll('li a');
 const projectDivs = document.querySelectorAll('.projects div');
 const contactDivs = document.querySelectorAll('.contact div');
-const articles = document.querySelectorAll('.arts > div');
 const firstArtImgs = document.querySelectorAll('.art_paint_one');
 const secondArtImg = document.querySelector('.art_paint_two');
 let asideNotBuilt = true;
@@ -39,6 +39,8 @@ if (CSS.paintWorklet) {
 }
 
 if (window.IntersectionObserver && window.customElements && HTMLElement.prototype.attachShadow) {
+  const articles = document.querySelectorAll('.arts > div');
+
   const IOoptions = {
     root: null,
     rootMargin: '0px 0px 0px 0px',
@@ -53,21 +55,19 @@ if (window.IntersectionObserver && window.customElements && HTMLElement.prototyp
           target.removeAttribute('tabindex');
         } else if (id.startsWith('art')) {
           import(`../images/${id}.jpg`).then((image) => {
-
             switch (id) {
               case 'art_paint_one':
                 firstArtImgs.forEach((img, i) => {
-                  img.src = image.default;// eslint-disable-line no-param-reassign
+                  img.src = image.default;
                   img.style.objectPosition = `${i * -150}px 0%`;
                 });
                 break;
               case 'art_paint_two':
-                secondArtImg.src = image.default;// eslint-disable-line no-param-reassign
+                secondArtImg.src = image.default;
                 break;
+              default:
+                console.log('');
             }
-
-
-
           });
         } else {
           panFact(target, projects[id]);
@@ -86,7 +86,12 @@ if (window.IntersectionObserver && window.customElements && HTMLElement.prototyp
         panFact.default,
         linkFact.default,
       ), IOoptions);
-      [...projectDivs, ...contactDivs, ...articles].forEach((el) => observer.observe(el));
+      [
+        ...projectDivs,
+        ...contactDivs,
+        ...articles,
+      ]
+        .forEach((el) => observer.observe(el));
     })
     .catch((err) => console.log(err));
 } else {
@@ -101,23 +106,17 @@ if (window.IntersectionObserver && window.customElements && HTMLElement.prototyp
       projLoad,
       linkLoad,
       art_paint_one,
-      art_paint_two
+      art_paint_two,
     ]) => {
       projLoad.default(projectDivs, projects);
       contactDivs.forEach((div) => div.removeAttribute('tabindex'));
       linkLoad.default(contactDivs, links);
-      // [art_paint_one, art_paint_two].forEach((img, i) => {
-      //   articles[i].lastElementChild.src = img.default;
-      // });
       firstArtImgs.forEach((img, i) => {
         img.src = art_paint_one.default;
         img.style.objectPosition = `${i * -150}px 0%`;
-
       });
 
       secondArtImg.src = art_paint_two.default;
-
-
     })
     .catch((err) => console.log(err));
 }
