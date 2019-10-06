@@ -16,6 +16,29 @@ const firstArtImgs = document.querySelectorAll('.art_paint_one');
 const secondArtImg = document.querySelector('.art_paint_two');
 let asideNotBuilt = true;
 
+
+
+// let ggg = [...'Generating Shapes and Images with the CSS Paint (Houdini) API', ...'Generating Knockout Text with the CSS Paint (Houdini) API'].reduce((a,b) => {
+//       if(!a[b]){
+//         a[b] = 0;
+//       }
+//       a[b]++;
+//       return a;
+//     },{});
+//     console.log(ggg,Object.keys(ggg).sort((m,n) => {
+//       return m > n ? 1 : -1;
+//     }).join(''));
+
+
+
+// let g = [...new Set([...'Generating Shapes and Images with the CSS Paint (Houdini) API', ...'Generating Knockout Text with the CSS Paint (Houdini) API'])];
+// let h = g.sort((m,n) => {
+//       return m > n ? 1 : -1;
+//     }).join('');
+// console.log(h);
+
+
+
 openModalBtn.addEventListener('click', () => {
   if (asideNotBuilt) {
     const asideTree = createAside(resumePDF);
