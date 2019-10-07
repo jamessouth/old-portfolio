@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import '../css/main.scss';
 import './loadSW';
 import resumePDF from '../images/resume.pdf';
@@ -11,7 +12,8 @@ const modal = document.querySelector('aside');
 const headerAnchors = document.querySelectorAll('li a');
 const projectDivs = document.querySelectorAll('.projects div');
 const contactDivs = document.querySelectorAll('.contact div');
-const demoDiv = document.querySelector('#map');
+const firstArtImgs = document.querySelectorAll('.art_paint_one');
+const secondArtImg = document.querySelector('.art_paint_two');
 let asideNotBuilt = true;
 
 openModalBtn.addEventListener('click', () => {
@@ -37,6 +39,8 @@ if (CSS.paintWorklet) {
 }
 
 if (window.IntersectionObserver && window.customElements && HTMLElement.prototype.attachShadow) {
+  const articles = document.querySelectorAll('.arts > div');
+
   const IOoptions = {
     root: null,
     rootMargin: '0px 0px 0px 0px',
@@ -49,9 +53,21 @@ if (window.IntersectionObserver && window.customElements && HTMLElement.prototyp
         if (id.includes('x')) {
           linkFact(target, links[parseInt(id, 10)]);
           target.removeAttribute('tabindex');
-        } else if (id === 'map') {
-          import('../images/paint_demos.jpg').then((x) => {
-            target.children[2].src = x.default; // eslint-disable-line no-param-reassign
+        } else if (id.startsWith('art')) {
+          import(`../images/${id}.jpg`).then((image) => {
+            switch (id) {
+              case 'art_paint_one':
+                firstArtImgs.forEach((img, i) => {
+                  img.src = image.default;
+                  img.style.objectPosition = `${i * -150}px 0%`;
+                });
+                break;
+              case 'art_paint_two':
+                secondArtImg.src = image.default;
+                break;
+              default:
+                console.log('unable to load image');
+            }
           });
         } else {
           panFact(target, projects[id]);
@@ -70,21 +86,40 @@ if (window.IntersectionObserver && window.customElements && HTMLElement.prototyp
         panFact.default,
         linkFact.default,
       ), IOoptions);
-      [...projectDivs, ...contactDivs, demoDiv].forEach((el) => observer.observe(el));
+      [
+        ...projectDivs,
+        ...contactDivs,
+        ...articles,
+      ]
+        .forEach((el) => observer.observe(el));
     })
     .catch((err) => console.log(err));
 } else {
   Promise.all([
     import(/* webpackChunkName: "projectLoader" */ './projectLoader'),
     import(/* webpackChunkName: "linkLoader" */ './linkLoader'),
-    import('../images/paint_demos.jpg'),
+    import('../images/art_paint_one.jpg'),
+    import('../images/art_paint_two.jpg'),
     import(/* webpackChunkName: "fallback" */ '../css/fallback.scss'),
   ])
-    .then(([projLoad, linkLoad, demosImg]) => {
+    .then(([
+      projLoad,
+      linkLoad,
+      art_paint_one,
+      art_paint_two,
+    ]) => {
       projLoad.default(projectDivs, projects);
       contactDivs.forEach((div) => div.removeAttribute('tabindex'));
       linkLoad.default(contactDivs, links);
-      demoDiv.children[2].src = demosImg.default;
+      firstArtImgs.forEach((img, i) => {
+        img.src = art_paint_one.default;
+        img.style.objectPosition = `${i * -150}px 0%`;
+      });
+      secondArtImg.src = art_paint_two.default;
     })
     .catch((err) => console.log(err));
+}
+
+if (!CSS.supports('place-items', 'center')) {
+  import(/* webpackChunkName: "edgeStyles" */ '../css/edgeStyles.scss').catch((err) => console.log(err));
 }

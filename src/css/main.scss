@@ -15,9 +15,12 @@ body{
 }
 header{
   @include position($tp: 0);
-  @include wh(100%, 3rem);
+  @include wh(100%, 6rem);
   background-color: $yellow;
   z-index: 2;
+  @media #{$head_expand}{
+    @include wh(100%, 3rem);
+  }
 }
 nav{
   margin: 0 .5rem;
@@ -25,11 +28,16 @@ nav{
 }
 ul{
   @include flex(row, space-around, center);
+  flex-wrap: wrap;
   height: 100%;
   list-style: none;
 }
 li{
   @include fonty(1.3em, bold);
+  margin: 0 .5rem;
+  @media #{$head_expand}{
+    margin: 0;
+  }
   @media #{$two_col}{
     font-size: 1.7em;
   }
@@ -61,8 +69,12 @@ li{
 }
 #port:target,
 #about:target,
+#articles:target,
 #cont:target{
-  padding-top: 3rem;
+  padding-top: 6rem;
+  @media #{$head_expand}{
+    padding-top: 3rem;
+  }
 }
 aside{
   @include position($rt: 2%, $lt: 2%, $tp: 2%, $bm: 2%);
@@ -95,17 +107,27 @@ iframe{
   @include wh(100%, 100%);
 }
 h1{
-  margin: 9rem 0 6rem;
+  margin: 9rem 0 9rem;
+  position: relative;
   text-align: center;
   font-size: 2em;
+  &::after{
+    content: '';
+    position: absolute;
+    background: url('../images/topdiv.png') center/contain no-repeat;
+    @include wh(80%, 55px);
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -100px;
+  }
   @media #{$two_col}{
-    @include fontMarg(2.5em, 7rem);
+    @include fontMarg(2.5em, 11rem);
   }
   @media #{$upsize_text}{
-    @include fontMarg(3em, 8rem);
+    @include fontMarg(3em, 12rem);
   }
   @media #{$big}{
-    @include fontMarg(4em, 10rem);
+    @include fontMarg(4em, 14rem);
   }
 }
 h2{
@@ -122,7 +144,20 @@ h2{
   }
 }
 section{
-  margin-bottom: 8rem;
+  position: relative;
+  margin-bottom: 14rem;
+  &:last-of-type{
+    margin-bottom: 6rem;
+  }
+  &:not(:last-of-type)::after{
+    content: '';
+    position: absolute;
+    background: url('../images/divider.png') center/contain no-repeat;// Image by user GDJ from Pixabay
+    @include wh(50%, 25px);
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -130px;
+  }
 }
 #about p{
   font-family: serif;
@@ -181,93 +216,119 @@ section{
     }
   }
 }
-@supports not (place-items: center) {//edge
-  .projects > div{
-    margin: 0 auto;
-  }
-}
-#map{
-  position: relative;
-  width: 300px;
-  margin: auto;
-  font-weight: bold;
-  & p{
-    color: #30511d;
-    @include fontMarg(1.7em, 2rem);
-    text-align: center;
-  }
-}
-#map,
+.arts > div,
 #about p{
-  & a{
+  & > a{
     font-family: inherit;
     border: $bord;
   }
-  & a:link,
-  & a:visited{
+  & > a:link,
+  & > a:visited{
     color: $blue;
   }
-  & a:hover{
+  & > a:hover{
     background-color: $blue;
     color: $yellow;
   }
-  & a:focus{
+  & > a:focus{
     @include focus($blue, 2px);
   }
 }
-area{
-  outline: none;
-}
-area:focus::after{
-  position: absolute;
-  content: attr(alt);
-  color: #30511d;
-  font-size: 1.6em;
-  width: 100px;
-}
-area:focus:nth-child(1)::after{
-  top: 63px;
-  left: 37px;
-  @media #{$two_col}{
-    top: 150px;
-    left: -92px;
+.arts{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  & > div{
+    position: relative;
+    width: 300px;
+    margin-bottom: 4rem;
+    @media #{$col_gap_expand}{
+      margin-bottom: 0;
+    }
+  }
+  & > div:last-of-type{
+    margin-bottom: 0;
+  }
+  & > div > a{
+    display: block;
+    text-align: center;
+    font-weight: bold;
+    font-family: 'Scheherazade', serif;
+    @include fontMarg(1.7em, 2.5rem);
+    line-height: 41px;
+    &:before,
+    &:after{
+      display: none;// too wide for iphone 4 width so don't show
+      font-family: $cor;
+      color: #30511d;
+      position: absolute;
+      font-size: 48px;
+      @media #{$quotes}{
+        display: block;
+      }
+    }
+    &:before{
+      content: open-quote;
+      left: -22px;
+    }
+    &:after{
+      content: close-quote;
+      right: -22px;
+      top: 2px;
+    }
+  }
+  @media #{$col_gap_expand}{
+    flex-direction: row;
+  }
+  @media #{$upsize_text}{
+    width: 1000px;
+    margin: 0 auto;
   }
 }
-area:focus:nth-child(2)::after{
-  top: 63px;
-  right: 12px;
-  @media #{$two_col}{
-    top: 150px;
-    right: -116px;
+#art_paint_one div,
+#art_paint_two div{
+  @include wh(300px, 300px);
+  & a{
+    outline: none;
+    transition: .1s ease-in transform;
   }
 }
-area:focus:nth-child(3)::before{
-  position: absolute;
-  color: #30511d;
-  font-size: 1em;
-  width: 100px;
-  top: 425px;
-  left: 30px;
-  content: 'chrome only';
-  @media #{$two_col}{
-    top: 400px;
-    left: 30px;
+#art_paint_one div{
+  display: flex;
+  flex-wrap: wrap;
+  & a{
+    @include wh(150px, 150px);
+    &:focus,
+    &:hover{
+      transform: scale(1.3);
+    }
+    &:first-of-type{
+      transform-origin: left top;
+    }
+    &:nth-of-type(2){
+      transform-origin: right top;
+    }
+    &:nth-of-type(3){
+      transform-origin: left bottom;
+    }
+    &:last-of-type{
+      transform-origin: right bottom;
+    }
   }
 }
-area:focus:nth-child(3)::after{
-  top: 396px;
-  left: 37px;
-  @media #{$two_col}{
-    top: 300px;
-    left: -92px;
-  }
+.art_paint_one{
+  object-fit: none;
+  @include wh(150px, 150px);
 }
-area:focus:nth-child(4)::after{
-  top: 396px;
-  right: 12px;
-  @media #{$two_col}{
-    top: 300px;
-    right: -116px;
+#art_paint_two div{
+  & a{
+    @include wh(300px, 300px);
+    display: block;
+    &:focus,
+    &:hover{
+      box-shadow: 0px 12px 20px $blue;
+    }
   }
 }
 .contact{

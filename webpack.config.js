@@ -9,7 +9,7 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const { InjectManifest } = require('workbox-webpack-plugin');
 const WorkerPlugin = require('worker-plugin');
 
-const swVol = 'v19';
+const swVol = 'v20';
 
 module.exports = {
   mode: 'production',
@@ -110,7 +110,7 @@ module.exports = {
       exclude: [ //  from precache
         /\.(?:png|pdf|jpe?g|svg|gif)$/,
         /\.map$/,
-        /^fallback|linkFactory|linkLoader|panelFactory|projectLoader/,
+        /^fallback|linkFactory|edgeStyles|linkLoader|panelFactory|projectLoader/,
         /\.worker\.js$/
       ],
     }),

@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><%= htmlWebpackPlugin.options.title %></title>
     <link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap&text=I" rel="preload stylesheet" as="style">
-    <link href="https://fonts.googleapis.com/css?family=Cormorant+SC&display=swap&text=abcdefghijklmnopqrstuvwxyzé0123456!ACJMPRST" rel="preload stylesheet" as="style">
+    <link href="https://fonts.googleapis.com/css?family=Cormorant+SC&display=swap&text=abcdefghijklmnopqrstuvwxyzé 0123456!ACJMPRST" rel="preload stylesheet" as="style">
+    <link href="https://fonts.googleapis.com/css?family=Scheherazade&display=swap&text= ()ACGHIKPSTacdeghikmnoprstuwx" rel="preload stylesheet" as="style">
     <link rel="icon" type="image/png" sizes="16x16" href="./images/icons/favicon-16x16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./images/icons/favicon-32x32.png">
     <link rel="manifest" href="./manifest.webmanifest">
@@ -25,6 +26,7 @@
         <ul>
           <li><a href="#about">About</a></li>
           <li><a href="#port">Port</a></li>
+          <li><a href="#articles">Articles</a></li>
           <li><a href="#cont">Contact</a></li>
           <li><button>Résumé</button></li>
         </ul>
@@ -37,7 +39,7 @@
       <h1>James South</h1>
       <section id="about">
         <h2>About Me</h2>
-        <p>I am a self-taught developer and bootcamp grad and I'm changing careers to become a full-stack engineer! Please scroll down to see my portfolio or go straight to <a rel="noopener noreferrer" href="https://github.com/jamessouth">my GitHub overview</a>. I love learning new things, solving problems, and building awesome web apps. Before learning to code I passed the <a rel="noopener noreferrer" href="https://www.cfainstitute.org/en/programs/cfa/exam">CFA exam</a> and I also have an accounting degree. I have been active in <a rel="noopener noreferrer" href="https://www.us.mensa.org/">American Mensa</a> for many years and I like to play guitar, lift weights, and play basketball..... and, of course, CODE!!!</p>
+        <p>I am a self-taught developer and bootcamp grad and I'm changing careers to become a full-stack engineer! Please scroll down to see my portfolio or go straight to <a rel="noopener noreferrer" href="https://github.com/jamessouth">my GitHub overview</a>. I love learning new things, solving problems, and building awesome web apps. Before learning to code, I passed the <a rel="noopener noreferrer" href="https://www.cfainstitute.org/en/programs/cfa/exam">CFA exam</a> (first try on all three levels), and I also have an accounting degree. I have been active in <a rel="noopener noreferrer" href="https://www.us.mensa.org/">American Mensa</a> for many years and I like to play guitar, lift weights, and play basketball..... and, of course, CODE!!!</p>
       </section>
       <section id="port">
         <h2>Portfolio</h2>
@@ -56,15 +58,25 @@
           <div tabindex="0" id="11"></div>
           <div tabindex="0" id="12"></div>
         </div>
-        <div id="map">
-          <p>demos from my css paint <a rel="noopener noreferrer" href="https://dev.to/jamessouth/generating-shapes-and-images-with-the-css-paint-houdini-api-29c">article</a></p>
-          <map name="paint_article">
-            <area rel="noopener noreferrer" shape="rect" coords="0,0,150,150" href="https://jamessouth.github.io/paint-demo/demo1.html" alt="demo 1">
-            <area rel="noopener noreferrer" shape="rect" coords="150,0,300,150" href="https://jamessouth.github.io/paint-demo/demo2.html" alt="demo 2">
-            <area rel="noopener noreferrer" shape="rect" coords="0,150,150,300" href="https://jamessouth.github.io/paint-demo/demo3.html" alt="demo 3">
-            <area rel="noopener noreferrer" shape="rect" coords="150,150,300,300" href="https://jamessouth.github.io/paint-demo/demo4.html" alt="demo 4">
-          </map>
-          <img usemap="#paint_article" alt="4 colorful patterns">
+      </section>
+      <section id="articles">
+        <h2>Articles</h2>
+        <div class="arts">
+          <div id="art_paint_one">
+            <a rel="noopener noreferrer" href="https://dev.to/jamessouth/generating-shapes-and-images-with-the-css-paint-houdini-api-29c">Generating Shapes and Images with the CSS Paint (Houdini) API</a>
+            <div>
+              <a rel="noopener noreferrer" href="https://jamessouth.github.io/paint-demo/demo1.html"><img class="art_paint_one" alt="demo 1"/></a>
+              <a rel="noopener noreferrer" href="https://jamessouth.github.io/paint-demo/demo2.html"><img class="art_paint_one" alt="demo 2"/></a>
+              <a rel="noopener noreferrer" href="https://jamessouth.github.io/paint-demo/demo3.html"><img class="art_paint_one" alt="demo 3 - chrome only"/></a>
+              <a rel="noopener noreferrer" href="https://jamessouth.github.io/paint-demo/demo4.html"><img class="art_paint_one" alt="demo 4"/></a>
+            </div>
+          </div>
+          <div id="art_paint_two">
+            <a rel="noopener noreferrer" href="https://dev.to/jamessouth/generating-knockout-text-with-the-css-paint-houdini-api-2lac">Generating Knockout Text with the CSS Paint (Houdini) API</a>
+            <div>
+              <a rel="noopener noreferrer" href="https://jamessouth.github.io/knockout-demo/"><img class="art_paint_two" alt="knockout text demos - chrome only"/></a>
+            </div>
+          </div>
         </div>
       </section>
       <section id="cont">
