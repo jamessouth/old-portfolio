@@ -5,7 +5,6 @@ h1::after{
   width: 50%;// wider than this given the 50% translation makes it overflow in edge
 }
 .arts > div > a{
-  letter-spacing: -1px;
   &::before,
   &::after{
     display: none;// hide quotes in edge because it underlines them
