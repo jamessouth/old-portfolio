@@ -43,7 +43,7 @@ if (window.IntersectionObserver && window.customElements && HTMLElement.prototyp
 
   const IOoptions = {
     root: null,
-    rootMargin: '0px 0px 0px 0px',
+    rootMargin: '0px 0px 420px 0px',
     threshold: 0.1,
   };
 
@@ -52,7 +52,6 @@ if (window.IntersectionObserver && window.customElements && HTMLElement.prototyp
       entries.filter((entry) => entry.isIntersecting).forEach(({ target, target: { id } }) => {
         if (id.includes('x')) {
           linkFact(target, links[parseInt(id, 10)]);
-          target.removeAttribute('tabindex');
         } else if (id.startsWith('art')) {
           import(`../images/${id}.jpg`).then((image) => {
             switch (id) {
@@ -109,7 +108,6 @@ if (window.IntersectionObserver && window.customElements && HTMLElement.prototyp
       art_paint_two,
     ]) => {
       projLoad.default(projectDivs, projects);
-      contactDivs.forEach((div) => div.removeAttribute('tabindex'));
       linkLoad.default(contactDivs, links);
       firstArtImgs.forEach((img, i) => {
         img.src = art_paint_one.default;
