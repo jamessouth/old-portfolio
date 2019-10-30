@@ -12,10 +12,10 @@ const WorkerPlugin = require('worker-plugin');
 const swVol = 'v21';
 
 module.exports = {
-  mode: 'production',
-  devtool: 'source-map',
-  // mode: 'development',
-  // devtool: 'inline-source-map',
+  // mode: 'production',
+  // devtool: 'source-map',
+  mode: 'development',
+  devtool: 'inline-source-map',
   entry: {
     main: './src/js/index.js',
   },

@@ -200,7 +200,7 @@ section{
     @include wh(288px, 435px);
     background-color: transparent;
   }
-  & > div:focus{
+  & > div:focus-within{
     outline: none;
     border-image: 10 / 0 0 10px 0 / 0;
     border-image-source: linear-gradient($blue, $blue); // fallback
