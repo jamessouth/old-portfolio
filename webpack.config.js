@@ -9,13 +9,13 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const { InjectManifest } = require('workbox-webpack-plugin');
 const WorkerPlugin = require('worker-plugin');
 
-const swVol = 'v21';
+const swVol = 'v22';
 
 module.exports = {
-  // mode: 'production',
-  // devtool: 'source-map',
-  mode: 'development',
-  devtool: 'inline-source-map',
+  mode: 'production',
+  devtool: 'source-map',
+  // mode: 'development',
+  // devtool: 'inline-source-map',
   entry: {
     main: './src/js/index.js',
   },
@@ -40,7 +40,7 @@ module.exports = {
                 '@babel/preset-env',
                 {
                   'useBuiltIns': 'usage',
-                  'corejs': '3.1.3',
+                  'corejs': '3.3.5',
                 },
               ],
             ],

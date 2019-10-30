@@ -10,8 +10,7 @@ body{
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
-  background: linear-gradient(90deg, #eed6aa -2%, #bfc1c0 124%); // edge fallback
-  background: linear-gradient(90deg, #ffff00 -55%, #eed6aade 10%, 70%, #bfc1c0de 110%);
+  background: linear-gradient(-65deg, rgba(250, 250, 210, 1) 0%, rgba(26, 26, 255, .19) 41%, rgba(250, 250, 210, 1) 100%);
 }
 header{
   @include position($tp: 0);
