@@ -248,6 +248,9 @@ section{
     @media #{$col_gap_expand}{
       margin-bottom: 0;
     }
+    @media #{$upsize_text}{
+      width: 400px;
+    }
   }
   & > div:last-of-type{
     margin-bottom: 0;
@@ -280,12 +283,15 @@ section{
       right: -22px;
       top: 2px;
     }
+    @media #{$upsize_text}{
+      font-size: 2em;
+    }
   }
   @media #{$col_gap_expand}{
     flex-direction: row;
   }
   @media #{$upsize_text}{
-    width: 1000px;
+    width: 1200px;
     margin: 0 auto;
   }
 }
@@ -295,6 +301,9 @@ section{
   & a{
     outline: none;
     transition: .1s ease-in transform;
+  }
+  @media #{$upsize_text}{
+    margin: auto;
   }
 }
 #art_paint_one div{

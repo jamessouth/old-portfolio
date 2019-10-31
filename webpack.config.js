@@ -9,7 +9,7 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const { InjectManifest } = require('workbox-webpack-plugin');
 const WorkerPlugin = require('worker-plugin');
 
-const swVol = 'v23';
+const swVol = 'v24';
 
 module.exports = {
   mode: 'production',
