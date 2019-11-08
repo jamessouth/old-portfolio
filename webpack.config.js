@@ -9,7 +9,7 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const { InjectManifest } = require('workbox-webpack-plugin');
 const WorkerPlugin = require('worker-plugin');
 
-const swVol = 'v24';
+const swVol = 'v25';
 
 module.exports = {
   mode: 'production',
@@ -100,7 +100,9 @@ module.exports = {
     new ScriptExtHTMLWebpackPlugin({
       defaultAttribute: 'async',
     }),
-    new WorkerPlugin(),
+    new WorkerPlugin({
+      globalObject: false,//not using HMR so disable warning
+    }),
     new webpack.HashedModuleIdsPlugin(),
     new InjectManifest({
       swSrc: './src/sw.js',

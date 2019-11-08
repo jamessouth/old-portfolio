@@ -266,7 +266,6 @@ section{
     &:before,
     &:after{
       display: none;// too wide for iphone 4 width so don't show
-      font-family: $cor;
       color: #30511d;
       position: absolute;
       font-size: 48px;
