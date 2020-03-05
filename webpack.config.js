@@ -11,115 +11,124 @@ const WorkerPlugin = require('worker-plugin');
 
 const swVol = 'v25';
 
-module.exports = {
-  mode: 'production',
-  devtool: 'source-map',
-  // mode: 'development',
-  // devtool: 'inline-source-map',
-  entry: {
-    main: './src/js/index.js',
-  },
-  output: {
-    filename: '[name].[contenthash].js',
-    chunkFilename: '[name].[contenthash].js',
-    path: path.resolve(__dirname, 'docs'),
-  },
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        include: [
-          path.resolve(__dirname, 'src/js'),
-        ],
-        use: {
-          loader: 'babel-loader',
-          options: {
-            plugins: ['@babel/plugin-syntax-dynamic-import'],
-            presets: [
-              [
-                '@babel/preset-env',
-                {
-                  'useBuiltIns': 'usage',
-                  'corejs': '3.3.5',
-                },
-              ],
-            ],
-            cacheDirectory: true,
-          },
-        },
-      },
-      {
-        test: /\.(sa|sc|c)ss$/,
-        loaders: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-          'sass-loader',
-        ],
-      },
-      {
-        test: /\.(pdf|png|svg|jpe?g|gif)$/,
-        use: [
-          {
-            loader: 'file-loader',
+module.exports = env => {
+  const envObj = Object.keys(env)
+    .reduce((acc, val) => {
+      acc[`process.env.${val}`] = JSON.stringify(env[val]);
+      return acc;
+    }, {});
+
+  return {
+    mode: env.ENV == 'prod' ? 'production' : 'development',
+    devtool: env.ENV == 'prod' ? false : 'cheap-eval-source-map',
+    entry: {
+      main: './src/js/index.js',
+    },
+    output: {
+      filename: '[name].[contenthash].js',
+      chunkFilename: '[name].[contenthash].js',
+      path: path.resolve(__dirname, 'docs'),
+    },
+    module: {
+      rules: [
+        {
+          test: /\.js$/,
+          include: [
+            path.resolve(__dirname, 'src/js'),
+          ],
+          exclude: /(node_modules|\.test\.js$)/,
+          use: {
+            loader: 'babel-loader',
             options: {
-              outputPath: 'images/',
-              publicPath: 'images/',
+              plugins: ['@babel/plugin-syntax-dynamic-import'],
+              presets: [
+                [
+                  '@babel/preset-env',
+                  {
+                    'useBuiltIns': 'usage',
+                    'corejs': '3.6.4',
+                  },
+                ],
+              ],
+              cacheDirectory: true,
             },
           },
-        ],
-      },
-    ],
-  },
-  optimization: {
-    minimizer: [
-      new TerserWebpackPlugin({
-        parallel: true,
-        sourceMap: true,
-      }),
-      new OptimizeCSSAssetsPlugin({}),
-    ],
-    runtimeChunk: 'single',
-    splitChunks: {
-      chunks: 'all',
-    },
-  },
-  plugins: [
-    new CleanWebpackPlugin({ cleanOnceBeforeBuildPatterns: [
-      '**/*',
-      '!BorderPaint.min.js',
-      '!ButtonBG.min.js',
-    ] }),
-    new MiniCssExtractPlugin({
-      filename: '[name].[contenthash].css',
-      chunkFilename: '[name].[contenthash].css',
-    }),
-    new HTMLWebpackPlugin({
-      template: './src/html/index.html',
-      title: 'James South - Portfolio',
-    }),
-    new ScriptExtHTMLWebpackPlugin({
-      defaultAttribute: 'async',
-    }),
-    new WorkerPlugin({
-      globalObject: false,//not using HMR so disable warning
-    }),
-    new webpack.HashedModuleIdsPlugin(),
-    new InjectManifest({
-      swSrc: './src/sw.js',
-      swDest: 'service-worker.js',
-      importWorkboxFrom: 'disabled',
-      precacheManifestFilename: `precache-manifest-${swVol}.[manifestHash].js`,
-      exclude: [ //  from precache
-        /\.(?:png|pdf|jpe?g|svg|gif)$/,
-        /\.map$/,
-        /^fallback|linkFactory|edgeStyles|linkLoader|panelFactory|projectLoader/,
-        /\.worker\.js$/
+        },
+        {
+          test: /\.(sa|sc|c)ss$/,
+          loaders: [
+            MiniCssExtractPlugin.loader,
+            'css-loader',
+            'sass-loader',
+          ],
+        },
+        {
+          test: /\.(pdf|png|svg|jpe?g|gif)$/,
+          use: [
+            {
+              loader: 'file-loader',
+              options: {
+                outputPath: 'images/',
+                publicPath: 'images/',
+              },
+            },
+          ],
+        },
       ],
-    }),
-  ],
-  devServer: {
-    port: 3000,
-    contentBase: path.join(__dirname, 'docs'),
-    index: 'index.html',
-  },
+    },
+    optimization: {
+      minimizer: [
+        new TerserWebpackPlugin({
+          parallel: true,
+          sourceMap: env.ENV == "dev",
+        }),
+        new OptimizeCSSAssetsPlugin({}),
+      ],
+      runtimeChunk: 'single',
+      splitChunks: {
+        chunks: 'all',
+      },
+    },
+    plugins: [
+      new webpack.DefinePlugin(envObj),
+      new CleanWebpackPlugin({ cleanOnceBeforeBuildPatterns: [
+        '**/*',
+        '!BorderPaint.min.js',
+        '!ButtonBG.min.js',
+      ] }),
+      new MiniCssExtractPlugin({
+        filename: '[name].[contenthash].css',
+        chunkFilename: '[name].[contenthash].css',
+      }),
+      new HTMLWebpackPlugin({
+        template: './src/html/index.html',
+        title: 'James South - Portfolio',
+        favicon: './src/images/icons/favicon-16x16.png'
+      }),
+      new ScriptExtHTMLWebpackPlugin({
+        defaultAttribute: 'async',
+      }),
+      new WorkerPlugin({
+        globalObject: false,//not using HMR so disable warning
+      }),
+      new webpack.HashedModuleIdsPlugin(),
+      new InjectManifest({
+        swSrc: './src/sw.js',
+        swDest: 'service-worker.js',
+        importWorkboxFrom: 'disabled',
+        precacheManifestFilename: `precache-manifest-${swVol}.[manifestHash].js`,
+        exclude: [//from precache
+          /\.(?:png|pdf|jpe?g|svg|gif)$/,
+          /\.map$/,
+          /^fallback|linkFactory|edgeStyles|linkLoader|panelFactory|projectLoader/,
+          /\.worker\.js$/
+        ],
+      }),
+    ],
+    devServer: {
+      port: 3000,
+      contentBase: path.join(__dirname, 'docs'),
+      index: 'index.html',
+    },
+  }
 };
