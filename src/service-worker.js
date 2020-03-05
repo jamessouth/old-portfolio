@@ -1,18 +1,16 @@
-import { setCacheNameDetails } from 'workbox-core/setCacheNameDetails.mjs';
-import { Plugin as ExpirationPlugin } from 'workbox-expiration/Plugin.mjs';
-import { cleanupOutdatedCaches } from 'workbox-precaching/cleanupOutdatedCaches.mjs';
-import { precacheAndRoute } from 'workbox-precaching/precacheAndRoute.mjs';
-import { registerRoute } from 'workbox-routing/registerRoute.mjs';
-import { setCatchHandler } from 'workbox-routing/setCatchHandler.mjs';
-import { setDefaultHandler } from 'workbox-routing/setDefaultHandler.mjs';
-import { CacheFirst } from 'workbox-strategies/CacheFirst.mjs';
-import { StaleWhileRevalidate } from 'workbox-strategies/StaleWhileRevalidate.mjs';
+import {CacheFirst, StaleWhileRevalidate} from 'workbox-strategies';
+import {cleanupOutdatedCaches, matchPrecache, precacheAndRoute} from 'workbox-precaching';
+import {ExpirationPlugin} from 'workbox-expiration';
+import {registerRoute, setCatchHandler, setDefaultHandler} from 'workbox-routing';
+import {clientsClaim, setCacheNameDetails, skipWaiting} from 'workbox-core';
+
+
 
 const prefix = 'james south portfolio';
 
 setCacheNameDetails({ prefix });
 self.__precacheManifest = [].concat(self.__precacheManifest || []);
-precacheAndRoute(self.__precacheManifest, {});
+precacheAndRoute(self.__WB_MANIFEST);
 cleanupOutdatedCaches();
 
 addEventListener('message', e => {
