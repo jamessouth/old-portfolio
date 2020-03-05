@@ -4,8 +4,6 @@ import {ExpirationPlugin} from 'workbox-expiration';
 import {registerRoute, setCatchHandler, setDefaultHandler} from 'workbox-routing';
 import {clientsClaim, setCacheNameDetails, skipWaiting} from 'workbox-core';
 
-
-
 const prefix = 'james south portfolio';
 
 setCacheNameDetails({ prefix });
@@ -14,6 +12,7 @@ precacheAndRoute(self.__WB_MANIFEST);
 cleanupOutdatedCaches();
 
 addEventListener('message', e => {
+  if (e.data && e.data.type === 'v333') skipWaiting();
   if (e.data && e.data.type === 'SKIP_WAITING') skipWaiting();
 });
 

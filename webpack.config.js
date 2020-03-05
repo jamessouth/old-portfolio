@@ -9,8 +9,6 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const { InjectManifest } = require('workbox-webpack-plugin');
 const WorkerPlugin = require('worker-plugin');
 
-const swVol = 'v25';
-
 module.exports = env => {
   const envObj = Object.keys(env)
     .reduce((acc, val) => {
@@ -113,14 +111,11 @@ module.exports = env => {
       }),
       new webpack.HashedModuleIdsPlugin(),
       new InjectManifest({
-        swSrc: './src/sw.js',
-        swDest: 'service-worker.js',
-        importWorkboxFrom: 'disabled',
-        precacheManifestFilename: `precache-manifest-${swVol}.[manifestHash].js`,
+        swSrc: './service-worker.js',
         exclude: [//from precache
           /\.(?:png|pdf|jpe?g|svg|gif)$/,
           /\.map$/,
-          /^fallback|linkFactory|edgeStyles|linkLoader|panelFactory|projectLoader/,
+          /fallback|linkFactory|edgeStyles|linkLoader|panelFactory|projectLoader/,
           /\.worker\.js$/
         ],
       }),
