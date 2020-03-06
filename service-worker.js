@@ -1,8 +1,8 @@
-import {CacheFirst, StaleWhileRevalidate} from 'workbox-strategies';
-import {cleanupOutdatedCaches, matchPrecache, precacheAndRoute} from 'workbox-precaching';
-import {ExpirationPlugin} from 'workbox-expiration';
-import {registerRoute, setCatchHandler, setDefaultHandler} from 'workbox-routing';
-import {clientsClaim, setCacheNameDetails, skipWaiting} from 'workbox-core';
+import { CacheFirst, StaleWhileRevalidate } from 'workbox-strategies';
+import { cleanupOutdatedCaches, precacheAndRoute } from 'workbox-precaching';
+import { ExpirationPlugin } from 'workbox-expiration';
+import { registerRoute, setDefaultHandler } from 'workbox-routing';
+import { setCacheNameDetails, skipWaiting } from 'workbox-core';
 
 const prefix = 'portfolio';
 
@@ -11,7 +11,7 @@ precacheAndRoute(self.__WB_MANIFEST);
 cleanupOutdatedCaches();
 
 addEventListener('message', e => {
-  if (e.data && e.data.type === 'v333') skipWaiting();
+  if (e.data && e.data.type === 'VERSION_334') skipWaiting();
   if (e.data && e.data.type === 'SKIP_WAITING') skipWaiting();
 });
 
@@ -47,7 +47,7 @@ registerRoute(
     cacheName: `${prefix}-google-fonts-css`,
     plugins: [
       new ExpirationPlugin({
-        maxEntries: 1,
+        maxEntries: 3,
         maxAgeSeconds: 60 * 60 * 24 * 30,
         purgeOnQuotaError: true,
       }),
@@ -61,7 +61,7 @@ registerRoute(
     cacheName: `${prefix}-google-fonts`,
     plugins: [
       new ExpirationPlugin({
-        maxEntries: 1,
+        maxEntries: 3,
         maxAgeSeconds: 60 * 60 * 24 * 365,
         purgeOnQuotaError: true,
       }),
@@ -80,11 +80,3 @@ setDefaultHandler(
     ],
   })
 );
-
-// setCatchHandler(({ event }) => {
-//   if (event.request.destination === 'image' && /\.gif$/.test(event.request.url) && !event.request.url.includes('explosion')) {
-//
-//
-//   }
-//   return Response.error();
-// });
