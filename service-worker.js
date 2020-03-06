@@ -11,7 +11,6 @@ precacheAndRoute(self.__WB_MANIFEST);
 cleanupOutdatedCaches();
 
 addEventListener('message', e => {
-  if (e.data && e.data.type === 'VERSION_334') skipWaiting();
   if (e.data && e.data.type === 'SKIP_WAITING') skipWaiting();
 });
 
