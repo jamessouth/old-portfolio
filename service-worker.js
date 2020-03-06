@@ -1,13 +1,15 @@
-import { CacheFirst, StaleWhileRevalidate } from 'workbox-strategies';
 import { cleanupOutdatedCaches, precacheAndRoute } from 'workbox-precaching';
-import { ExpirationPlugin } from 'workbox-expiration';
+import { CacheFirst, StaleWhileRevalidate } from 'workbox-strategies';
 import { registerRoute, setDefaultHandler } from 'workbox-routing';
 import { setCacheNameDetails, skipWaiting } from 'workbox-core';
+import { ExpirationPlugin } from 'workbox-expiration';
+
+const pref = 'portfolio';
 
 setCacheNameDetails({
-  prefix: 'portfolio',
+  prefix: pref,
   suffix: '',
-  precache: 'portfolio-precache',
+  precache: pref + '-precache',
   runtime: '',
   googleAnalytics: 'ga'
 });
@@ -22,7 +24,7 @@ addEventListener('message', e => {
 registerRoute(
   /\.(?:js)$/,
   new CacheFirst({
-    cacheName: `${prefix}-js`,
+    cacheName: `${pref}-js`,
     plugins: [
       new ExpirationPlugin({
         maxAgeSeconds: 60 * 60 * 24 * 365,
@@ -35,7 +37,7 @@ registerRoute(
 registerRoute(
   /\.(?:png|pdf|jpe?g|svg|gif)$/,
   new CacheFirst({
-    cacheName: `${prefix}-images`,
+    cacheName: `${pref}-images`,
     plugins: [
       new ExpirationPlugin({
         maxAgeSeconds: 60 * 60 * 24 * 180,
@@ -48,7 +50,7 @@ registerRoute(
 registerRoute(
   /^https:\/\/fonts\.googleapis\.com/,
   new StaleWhileRevalidate({
-    cacheName: `${prefix}-google-fonts-css`,
+    cacheName: `${pref}-google-fonts-css`,
     plugins: [
       new ExpirationPlugin({
         maxEntries: 3,
@@ -62,7 +64,7 @@ registerRoute(
 registerRoute(
   /^https:\/\/fonts\.gstatic\.com/,
   new CacheFirst({
-    cacheName: `${prefix}-google-fonts`,
+    cacheName: `${pref}-google-fonts`,
     plugins: [
       new ExpirationPlugin({
         maxEntries: 3,
@@ -75,7 +77,7 @@ registerRoute(
 
 setDefaultHandler(
   new StaleWhileRevalidate({
-    cacheName: `${prefix}-default`,
+    cacheName: `${pref}-default`,
     plugins: [
       new ExpirationPlugin({
         maxAgeSeconds: 60 * 60 * 24 * 365,
