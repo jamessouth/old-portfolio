@@ -4,9 +4,14 @@ import { ExpirationPlugin } from 'workbox-expiration';
 import { registerRoute, setDefaultHandler } from 'workbox-routing';
 import { setCacheNameDetails, skipWaiting } from 'workbox-core';
 
-const prefix = 'portfolio';
+setCacheNameDetails({
+  prefix: 'portfolio',
+  suffix: '',
+  precache: 'portfolio-precache',
+  runtime: '',
+  googleAnalytics: 'ga'
+});
 
-setCacheNameDetails({ prefix });
 precacheAndRoute(self.__WB_MANIFEST);
 cleanupOutdatedCaches();
 
@@ -70,7 +75,7 @@ registerRoute(
 
 setDefaultHandler(
   new StaleWhileRevalidate({
-    cacheName: `${prefix}-default-handler`,
+    cacheName: `${prefix}-default`,
     plugins: [
       new ExpirationPlugin({
         maxAgeSeconds: 60 * 60 * 24 * 365,
