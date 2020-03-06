@@ -4,10 +4,9 @@ import {ExpirationPlugin} from 'workbox-expiration';
 import {registerRoute, setCatchHandler, setDefaultHandler} from 'workbox-routing';
 import {clientsClaim, setCacheNameDetails, skipWaiting} from 'workbox-core';
 
-const prefix = 'james south portfolio';
+const prefix = 'portfolio';
 
 setCacheNameDetails({ prefix });
-self.__precacheManifest = [].concat(self.__precacheManifest || []);
 precacheAndRoute(self.__WB_MANIFEST);
 cleanupOutdatedCaches();
 
