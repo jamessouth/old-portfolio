@@ -112,6 +112,8 @@ module.exports = env => {
       new webpack.HashedModuleIdsPlugin(),
       new InjectManifest({
         swSrc: './service-worker.js',
+        additionalManifestEntries: [{ url: 'manifestv1.webmanifest', revision: null }],
+        dontCacheBustURLsMatching: /\.[0-9a-f]{20}\./,
         exclude: [//from precache
           /\.(?:png|pdf|jpe?g|svg|gif)$/,
           /\.map$/,
