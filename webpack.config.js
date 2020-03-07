@@ -112,7 +112,11 @@ module.exports = env => {
       new webpack.HashedModuleIdsPlugin(),
       new InjectManifest({
         swSrc: './service-worker.js',
-        additionalManifestEntries: [{ url: 'manifestv1.webmanifest', revision: null }],
+        additionalManifestEntries: [
+          { url: 'manifest_v1.webmanifest', revision: null },
+          { url: 'BorderPaint_v1.min.js', revision: null },
+          { url: 'ButtonBG_v1.min.js', revision: null },
+        ],
         dontCacheBustURLsMatching: /\.[0-9a-f]{20}\./,
         exclude: [//from precache
           /\.(?:png|pdf|jpe?g|svg|gif)$/,
