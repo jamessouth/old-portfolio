@@ -11,7 +11,7 @@ setCacheNameDetails({
   suffix: '',
   precache: pref + '-precache',
   runtime: '',
-  googleAnalytics: 'ga'
+  googleAnalytics: 'gan'
 });
 
 precacheAndRoute(self.__WB_MANIFEST);
