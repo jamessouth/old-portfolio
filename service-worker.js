@@ -1,7 +1,7 @@
 import { cleanupOutdatedCaches, precacheAndRoute } from 'workbox-precaching';
 import { CacheFirst, StaleWhileRevalidate } from 'workbox-strategies';
 import { registerRoute, setDefaultHandler } from 'workbox-routing';
-import { setCacheNameDetails, skipWaiting } from 'workbox-core';
+import { setCacheNameDetails } from 'workbox-core';
 import { ExpirationPlugin } from 'workbox-expiration';
 
 const pref = 'portfolio';
@@ -11,7 +11,7 @@ setCacheNameDetails({
   suffix: '',
   precache: pref + '-precache',
   runtime: '',
-  googleAnalytics: 'gan'
+  googleAnalytics: 'ga'
 });
 
 precacheAndRoute(self.__WB_MANIFEST);
