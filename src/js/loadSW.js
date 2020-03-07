@@ -44,7 +44,7 @@ if ('serviceWorker' in navigator) {
     wb.addEventListener('controlling', () => {
       window.location.reload();
     });
-    wb.getSW().then(sw => messageSW(sw, { type: 'SKIP_WAITING' }));
+    wb.messageSW({ type: 'SKIP_WAITING' });
   });
   wb.addEventListener('waiting', () => {
     document.body.insertBefore(reloadBtn, main);
