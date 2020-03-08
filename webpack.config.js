@@ -101,7 +101,7 @@ module.exports = env => {
       new HTMLWebpackPlugin({
         template: './src/html/index.html',
         title: 'James South - Portfolio',
-        favicon: './src/images/icons/favicon-16x16.png'
+        favicon: './src/images/icons/favicon-16x16.png',
       }),
       new ScriptExtHTMLWebpackPlugin({
         defaultAttribute: 'async',
