@@ -34,8 +34,8 @@ closeModalBtn.addEventListener('click', () => {
 });
 
 if (CSS.paintWorklet) {
-  CSS.paintWorklet.addModule('./BorderPaint_v1.min.js');
-  CSS.paintWorklet.addModule('./ButtonBG_v1.min.js');
+  CSS.paintWorklet.addModule('./BorderPaint.min.js');
+  CSS.paintWorklet.addModule('./ButtonBG.min.js');
 }
 
 if (window.IntersectionObserver && window.customElements && HTMLElement.prototype.attachShadow) {
@@ -43,7 +43,7 @@ if (window.IntersectionObserver && window.customElements && HTMLElement.prototyp
 
   const IOoptions = {
     root: null,
-    rootMargin: '0px 0px -320px 0px',
+    rootMargin: '0px 0px 420px 0px',
     threshold: 0.1,
   };
 
@@ -53,28 +53,21 @@ if (window.IntersectionObserver && window.customElements && HTMLElement.prototyp
         if (id.includes('x')) {
           linkFact(target, links[parseInt(id, 10)]);
         } else if (id.startsWith('art')) {
-
-
-
-          // import(`../images/${id}.jpg`).then((image) => {
-            // switch (id) {
-            //   case 'art_paint_one':
-            //     firstArtImgs.forEach((img, i) => {
-            //       // img.src = image.default;
-            //       // img.style.objectPosition = `${i * -150}px 0%`;
-            //       // img.classList.add('apo');
-            //       // img.classList.add(`apo${i}`);
-            //     });
-            //     break;
-            //   case 'art_paint_two':
-            //     secondArtImg.src = image.default;
-            //     break;
-            //   default:
-            //     console.log('unable to load image');
-            // }
-          // });
-
-
+          import(`../images/${id}.jpg`).then((image) => {
+            switch (id) {
+              case 'art_paint_one':
+                firstArtImgs.forEach((img, i) => {
+                  img.src = image.default;
+                  img.style.objectPosition = `${i * -150}px 0%`;
+                });
+                break;
+              case 'art_paint_two':
+                secondArtImg.src = image.default;
+                break;
+              default:
+                console.log('unable to load image');
+            }
+          });
         } else {
           panFact(target, projects[id]);
         }

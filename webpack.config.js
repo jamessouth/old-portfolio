@@ -101,7 +101,7 @@ module.exports = env => {
       new HTMLWebpackPlugin({
         template: './src/html/index.html',
         title: 'James South - Portfolio',
-        favicon: './src/images/icons/favicon-16x16.png',
+        favicon: './src/images/icons/favicon-16x16.png'
       }),
       new ScriptExtHTMLWebpackPlugin({
         defaultAttribute: 'async',
@@ -112,17 +112,11 @@ module.exports = env => {
       new webpack.HashedModuleIdsPlugin(),
       new InjectManifest({
         swSrc: './service-worker.js',
-        additionalManifestEntries: [
-          { url: 'manifest_v1.webmanifest', revision: null },
-          { url: 'BorderPaint_v1.min.js', revision: null },
-          { url: 'ButtonBG_v1.min.js', revision: null },
-        ],
-        dontCacheBustURLsMatching: /\.[0-9a-f]{20}\./,
         exclude: [//from precache
           /\.(?:png|pdf|jpe?g|svg|gif)$/,
           /\.map$/,
           /fallback|linkFactory|edgeStyles|linkLoader|panelFactory|projectLoader/,
-          /\.worker\.js$/,
+          /\.worker\.js$/
         ],
       }),
     ],
