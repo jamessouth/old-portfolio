@@ -342,6 +342,24 @@ section{
     }
   }
 }
+.apo{
+  background-image: url('../images/art_paint_one.jpg');
+}
+.apo0{
+  object-position: 0px 0%;
+}
+.apo1{
+  object-position: -150px 0%;
+  
+}
+.apo2{
+  object-position: -300px 0%;
+  
+}
+.apo3{
+  object-position: -450px 0%;
+
+}
 .contact{
   @include flex(column, space-between, center);
   margin: 0 auto;

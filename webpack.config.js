@@ -122,7 +122,7 @@ module.exports = env => {
           /\.(?:png|pdf|jpe?g|svg|gif)$/,
           /\.map$/,
           /fallback|linkFactory|edgeStyles|linkLoader|panelFactory|projectLoader/,
-          /\.worker\.js$/
+          /\.worker\.js$/,
         ],
       }),
     ],
