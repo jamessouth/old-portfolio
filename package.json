@@ -4,7 +4,10 @@
   "description": "portfolio",
   "private": true,
   "scripts": {
-    "lint": "eslint --fix ./src/js && echo 'Linted!'"
+    "dev": "servor . ./src/html/index.html 3000 --reload",
+    "sass": "sass --no-source-map --watch ./src/css/main.scss ./src/css/index.css",
+    "lint": "eslint --fix ./src/js && echo 'Linted!'",
+    "prepare": "snowpack"
   },
   "repository": {
     "type": "git",
@@ -20,10 +23,9 @@
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.20.1",
+    "sass": "^1.26.2",
     "servor": "^3.2.0",
     "snowpack": "^1.5.2"
   },
-  "dependencies": {
-    "workbox-window": "^5.0.0"
-  }
+  "dependencies": {}
 }
