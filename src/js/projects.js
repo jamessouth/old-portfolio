@@ -1,5 +1,6 @@
 import rando from '../images/rando.jpg';
 import time from '../images/time.jpg';
+import clean from '../images/clean.jpg';
 import tictac from '../images/tictac.jpg';
 import puzz from '../images/puzz.jpg';
 import scrape from '../images/scrape.jpg';
@@ -14,14 +15,15 @@ import wdk from '../images/wdk.jpg';
 
 const projects = [
   {
-    title: 'random quotes',
-    live: 'https://jamessouth.github.io/random-quotes/',
-    code: 'https://github.com/jamessouth/random-quotes',
-    alt: 'part of a famous quote',
-    tech1: 'javascript',
-    src: rando,
-    liveAria: 'live site for random quotes project',
-    codeAria: 'code for random quotes project',
+    title: 'clean tablet',
+    live: 'http://clean-tablet.herokuapp.com/',
+    code: 'https://github.com/jamessouth/clean-tablet',
+    alt: 'names and scores from a game',
+    tech1: 'go websockets',
+    tech2: 'react heroku',
+    src: clean,
+    liveAria: 'live site for clean tablet game',
+    codeAria: 'code for clean tablet project',
   },
   {
     title: 'directory',
@@ -46,28 +48,6 @@ const projects = [
     codeAria: 'code for web app dashboard project',
   },
   {
-    title: 'vue-style-lint',
-    tech1: 'node es6 fp ci tdd',
-    tech2: 'npm|v1.0.3',
-    live: 'https://www.npmjs.com/package/vue-style-lint',
-    code: 'https://github.com/jamessouth/vue-style-lint',
-    alt: 'output of a computer terminal',
-    src: vuelint,
-    liveAria: 'live site for vue-style-lint project',
-    codeAria: 'code for vue-style-lint project',
-  },
-  {
-    title: 'web dev kit',
-    live: 'https://chrome.google.com/webstore/detail/web-dev-kit/geedfiohcopjhgancckdfanhobhfbgmm',
-    code: 'https://github.com/jamessouth/webdevkit',
-    alt: 'a laptop on a desk',
-    tech1: 'javascript',
-    tech2: 'chrome extension',
-    src: wdk,
-    liveAria: 'live site for web dev kit project',
-    codeAria: 'code for web dev kit project',
-  },
-  {
     title: 'puzzle generator',
     tech1: 'angular',
     tech2: 'typescript',
@@ -77,16 +57,6 @@ const projects = [
     src: puzz,
     liveAria: 'live site for 15 puzzle generator project',
     codeAria: 'code for 15 puzzle generator project',
-  },
-  {
-    title: 'tic tac toe',
-    live: 'https://jamessouth.github.io/tic-tac-toe/',
-    code: 'https://github.com/jamessouth/tic-tac-toe',
-    alt: 'a tic tac toe game',
-    tech1: 'javascript',
-    src: tictac,
-    liveAria: 'live site for tic tac toe project',
-    codeAria: 'code for tic tac toe project',
   },
   {
     title: 'timezones',
@@ -105,6 +75,37 @@ const projects = [
     alt: 'hovering cubes with images of my websites on each side',
     src: port,
     codeAria: 'code for portfolio project',
+  },
+  {
+    title: 'random quotes',
+    live: 'https://jamessouth.github.io/random-quotes/',
+    code: 'https://github.com/jamessouth/random-quotes',
+    alt: 'part of a famous quote',
+    tech1: 'javascript',
+    src: rando,
+    liveAria: 'live site for random quotes project',
+    codeAria: 'code for random quotes project',
+  },
+  {
+    title: 'tic tac toe',
+    live: 'https://jamessouth.github.io/tic-tac-toe/',
+    code: 'https://github.com/jamessouth/tic-tac-toe',
+    alt: 'a tic tac toe game',
+    tech1: 'javascript',
+    src: tictac,
+    liveAria: 'live site for tic tac toe project',
+    codeAria: 'code for tic tac toe project',
+  },
+  {
+    title: 'vue-style-lint',
+    tech1: 'node es6 fp ci tdd',
+    tech2: 'npm|v1.0.3',
+    live: 'https://www.npmjs.com/package/vue-style-lint',
+    code: 'https://github.com/jamessouth/vue-style-lint',
+    alt: 'output of a computer terminal',
+    src: vuelint,
+    liveAria: 'live site for vue-style-lint project',
+    codeAria: 'code for vue-style-lint project',
   },
   {
     title: 'face scramble!',
@@ -132,6 +133,17 @@ const projects = [
     tech2: 'javascript',
     src: scrape,
     codeAria: 'code for node.js web scraper project',
+  },
+  {
+    title: 'web dev kit',
+    live: 'https://chrome.google.com/webstore/detail/web-dev-kit/geedfiohcopjhgancckdfanhobhfbgmm',
+    code: 'https://github.com/jamessouth/webdevkit',
+    alt: 'a laptop on a desk',
+    tech1: 'javascript',
+    tech2: 'chrome extension',
+    src: wdk,
+    liveAria: 'live site for web dev kit project',
+    codeAria: 'code for web dev kit project',
   },
   {
     title: 'flickr gallery',
