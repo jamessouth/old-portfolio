@@ -3,19 +3,8 @@
   "version": "2.0.0",
   "description": "portfolio",
   "private": true,
-  "browserslist": [
-    "last 2 versions",
-    "> 1%",
-    "not dead",
-    "not ie < 12"
-  ],
   "scripts": {
-    "lint": "eslint --fix ./src/js && echo 'Linted!'",
-    "analyze": "webpack --profile --json > stats.json",
-    "report": "webpack-bundle-analyzer stats.json docs/",
-    "dev": "webpack-dev-server --env.ENV=dev",
-    "build": "webpack --env.ENV=prod && cp src/manifest_v1.webmanifest docs/manifest_v1.webmanifest && cp -r src/images/icons/ docs/images/icons",
-    "prebuild": "rm -f docs/BorderPaint_v1.min.js docs/ButtonBG_v1.min.js && npx minify src/js/BorderPaint_v1.js --out-file docs/BorderPaint_v1.min.js && npx minify src/js/ButtonBG_v1.js --out-file docs/ButtonBG_v1.min.js"
+    "lint": "eslint --fix ./src/js && echo 'Linted!'"
   },
   "repository": {
     "type": "git",
@@ -30,7 +19,9 @@
   "devDependencies": {
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-plugin-import": "^2.20.1"
+    "eslint-plugin-import": "^2.20.1",
+    "servor": "^3.2.0",
+    "snowpack": "^1.5.2"
   },
   "dependencies": {
     "workbox-window": "^5.0.0"
