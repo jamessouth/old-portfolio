@@ -212,9 +212,20 @@ section{
     border-top-width: 0;
     border-right-width: 0;
   }
+  & > div:nth-last-child(2){
+    @media #{$upsize_text}{
+      grid-column: 2 / 3;
+    }
+    @media #{$six_cols}{
+      grid-column: 3 / 4;
+    }
+  }
   & > div:last-child{
-    @media #{$two_col}{
-      grid-column: 1 / -1;
+    @media #{$three_col}{
+      grid-column: 3 / 4;
+    }
+    @media #{$six_cols}{
+      grid-column: 4 / 5;
     }
   }
 }
