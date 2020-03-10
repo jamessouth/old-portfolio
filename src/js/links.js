@@ -3,6 +3,7 @@ import github from '../images/github.png';
 import twit from '../images/twit.png';
 import so from '../images/so.png';
 import dev from '../images/dev.png';
+import exer from '../images/exer.png';
 
 const links = [
   {
@@ -29,6 +30,11 @@ const links = [
     link: 'https://dev.to/jamessouth',
     alt: 'go to my dev community profile',
     src: dev,
+  },
+  {
+    link: 'https://exercism.io/profiles/jamessouth',
+    alt: 'go to my exercism profile',
+    src: exer,
   },
 ];
 
