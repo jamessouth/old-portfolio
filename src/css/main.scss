@@ -177,6 +177,12 @@ section{
     color: $blue;
     background-color: $yellow;
   }
+  @media #{$three_col}{
+    max-width: 1300px;
+  }
+  @media #{$upsize_text}{
+    font-size: 1.75em;
+  }
 }
 .projects{
   display: grid;
