@@ -29,6 +29,8 @@ start removing webpack/bundler specific import that won't work in regular js mod
 
 first time using js modules due to using bundlers
 
+add former webpack entry point as script tag in html
 
+reform imports
 
 
