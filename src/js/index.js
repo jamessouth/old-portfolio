@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import '../css/main.scss';
+
 import './loadSW';
 import resumePDF from '../images/resume.pdf';
 import createAside from './createAside';

@@ -25,6 +25,10 @@ set up npm script to watch sass and compile, which is picked up by servor and th
 
 since we're just migrating from webpack and the site has already been designed, disable sass source maps
 
+start removing webpack/bundler specific import that won't work in regular js modules
+
+first time using js modules due to using bundlers
+
 
 
 
