@@ -33,4 +33,8 @@ add former webpack entry point as script tag in html
 
 reform imports
 
+change resume button to link, get rid of aside
+
+
+
 

@@ -1,40 +1,28 @@
 /* eslint-disable no-param-reassign */
 
 // import './loadSW';
-// import resumePDF from '../images/resume.pdf';
-import createAside from './createAside.mjs';
 // import projects from './projects';
 // import links from './links';
 
-const openModalBtn = document.querySelector('li button');
-const closeModalBtn = document.querySelector('aside button');
-const modal = document.querySelector('aside');
+
+
+
+fetch('./src/images/resume.pdf')
+.then(b => {
+  const resLink = document.querySelector('li:last-of-type a');
+  resLink.href = b.url;
+  resLink.download = 'james_south_resume.pdf';
+});
+
+
+
 const headerAnchors = document.querySelectorAll('li a');
 const projectDivs = document.querySelectorAll('.projects div');
 const contactDivs = document.querySelectorAll('.contact div');
 const firstArtImgs = document.querySelectorAll('.art_paint_one');
 const secondArtImg = document.querySelector('.art_paint_two');
-let asideNotBuilt = true;
 
-openModalBtn.addEventListener('click', async () => {
-  console.log('aside: ', asideNotBuilt);
-  if (asideNotBuilt) {
-    const res = await fetch('./src/images/resume.pdf');
-    const pdf = await res.status !== 200 ? console.log('there was a problem fetching the resource. Status Code and Text: ' + res.status, res.statusText) : res.file();
-    const asideTree = createAside(URL.createObjectURL(pdf));
-    modal.insertBefore(asideTree, closeModalBtn);
-    asideNotBuilt = false;
-  }
-  modal.style.display = 'block';
-  openModalBtn.blur();
-  [openModalBtn, ...headerAnchors].forEach((item) => item.setAttribute('tabindex', '-1'));
-});
 
-closeModalBtn.addEventListener('click', () => {
-  modal.style.display = 'none';
-  openModalBtn.focus();
-  [openModalBtn, ...headerAnchors].forEach((item) => item.removeAttribute('tabindex'));
-});
 
 // if (CSS.paintWorklet) {
 //   CSS.paintWorklet.addModule('./BorderPaint_v1.min.js');

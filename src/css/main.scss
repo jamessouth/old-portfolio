@@ -61,13 +61,6 @@ li{
   & a:hover{
     text-decoration: underline;
   }
-  & button{
-    @include fonty(1em, bold);
-  }
-  & button:focus,
-  & button:hover{
-    @include focus($blue, 2px);
-  }
 }
 #port:target,
 #about:target,
@@ -77,36 +70,6 @@ li{
   @media #{$head_expand}{
     padding-top: 3rem;
   }
-}
-aside{
-  @include position($rt: 2%, $lt: 2%, $tp: 2%, $bm: 2%);
-  display: none;
-  z-index: 19;
-  background-color: #696969;
-  & button{
-    @include wh(35px, 50px);
-    @include fonty(2.5em, $lh: 0);
-    background-color: #f8f8ff;
-    @include position($lt: 2%, $tp: 9%);
-    border: 3px solid transparent;
-  }
-  & button:focus,
-  & button:hover{
-    @include focus(#ff7f50, 5px);
-  }
-  & p,
-  & a{
-    font-family: serif;
-    color: white;
-  }
-  & p{
-    margin-top: 5em;
-    font-size: 24px;
-  }
-}
-object,
-iframe{
-  @include wh(100%, 100%);
 }
 h1{
   margin: 9rem 0 9rem;
