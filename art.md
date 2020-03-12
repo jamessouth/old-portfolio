@@ -35,6 +35,8 @@ reform imports
 
 change resume button to link, get rid of aside
 
+continue with former entry point, fixing paths and loading more and more...
+
 
 
 
