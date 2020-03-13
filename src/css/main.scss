@@ -328,22 +328,46 @@ section{
   object-position: -450px 0%;
 }
 .contact{
-  @include flex(column, space-between, center);
-  margin: 0 auto;
-  @include wh(100%, 700px);
-  @media #{$head_expand}{
-    flex-wrap: wrap;
-    @include wh(100%, 330px);
+  
+  display: grid;
+  place-items: center;
+  grid-template-columns: repeat(auto-fill, minmax(212px, 1fr));
+  // grid-column-gap: 30px;
+  grid-row-gap: 70px;
+  // margin: 0 auto;
+  // @include wh(100%, 900px);
+
+  
+  & > div:last-child{
+    @media screen and (min-width: 424px){
+      grid-column: 1 / -1;
+      // grid-row-gap: 80px;
+    }
+    // @media #{$six_cols}{
+    //   grid-column: 4 / 5;
+    // }
   }
-  @media #{$two_col}{
-    @include wh(100%, 230px);
-  }
-  @media #{$col_gap_expand}{
-    flex-direction: row;
-    @include wh(800px, 150px);
-  }
+    // flex-wrap: wrap;
+    // @include wh(100%, 330px);
+  
+
   & > div{
     border: $bord;
+  }
+}
+#cw{
+  background: url('https://www.codewars.com/users/jamessouth/badges/micro') no-repeat center/cover;
+  width: 256px;
+  height: 46px;
+  & a{
+    height: 100%;
+    display: block;
+    border: 2px solid transparent;
+  }
+  & a:focus,
+  a:hover{
+    outline: none;
+    border: 2px solid #1a2845;
   }
 }
 .installbtn,

@@ -17,7 +17,8 @@ fetch('./src/images/resume.pdf')
 
 
 const projectDivs = document.querySelectorAll('.projects div');
-const contactDivs = document.querySelectorAll('.contact div');
+const ldivs = document.querySelectorAll('.contact div');
+const contactDivs = [...ldivs].slice(0, ldivs.length - 1);
 
 
 
