@@ -175,9 +175,20 @@ section{
     border-top-width: 0;
     border-right-width: 0;
   }
+  & > div:nth-last-child(2){
+    @media #{$upsize_text}{
+      grid-column: 2 / 3;
+    }
+    @media #{$six_cols}{
+      grid-column: 3 / 4;
+    }
+  }
   & > div:last-child{
-    @media #{$two_col}{
-      grid-column: 1 / -1;
+    @media #{$three_col}{
+      grid-column: 3 / 4;
+    }
+    @media #{$six_cols}{
+      grid-column: 4 / 5;
     }
   }
 }
@@ -326,13 +337,17 @@ section{
 .contact{
   @include flex(column, space-between, center);
   margin: 0 auto;
-  @include wh(100%, 500px);
-  @media #{$two_col}{
-    flex-direction: row;
-    @include wh(80%, 150px);
+  @include wh(100%, 700px);
+  @media #{$head_expand}{
+    flex-wrap: wrap;
+    @include wh(100%, 330px);
   }
-  @media #{$upsize_text}{
-    width: 724px;
+  @media #{$two_col}{
+    @include wh(100%, 230px);
+  }
+  @media #{$col_gap_expand}{
+    flex-direction: row;
+    @include wh(800px, 150px);
   }
   & > div{
     border: $bord;
