@@ -2,7 +2,7 @@
 
 // import './loadSW';
 import projects from './projects.mjs';
-// import links from './links';
+import links from './links.mjs';
 
 
 
@@ -12,7 +12,8 @@ fetch('./src/images/resume.pdf')
   const resLink = document.querySelector('li:last-of-type a');
   resLink.href = b.url;
   resLink.download = 'james_south_resume.pdf';
-});
+})
+.catch(e => console.log('failed to fetch: ', e));
 
 
 const projectDivs = document.querySelectorAll('.projects div');

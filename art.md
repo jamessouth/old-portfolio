@@ -37,6 +37,6 @@ change resume button to link, get rid of aside
 
 continue with former entry point, fixing paths and loading more and more...
 
-
+fix projects and links custom elements image fetching
 
 

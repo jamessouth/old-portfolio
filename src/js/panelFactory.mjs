@@ -99,18 +99,12 @@ class Panel extends HTMLElement {
     this.anchors[0].setAttribute('aria-label', this.codeAria);
     this.live && this.anchors[1].setAttribute('href', this.live);
     this.liveAria && this.anchors[1].setAttribute('aria-label', this.liveAria);
-
-
     fetch(this.src)
     .then(i => {
       this.img.setAttribute('src', i.url);
-    });
+    })
+    .catch(e => console.log('failed to fetch: ', e));
     this.img.setAttribute('alt', this.alt);
-
-
-
-
-
     this.ps[0].textContent = this.tech1;
     this.ps[1].textContent = this.tech2;
   }
