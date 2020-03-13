@@ -394,8 +394,6 @@ section:not(:last-of-type)::after {
 
 .art_paint_one {
   object-fit: none;
-  width: 150px;
-  height: 150px;
 }
 
 #art_paint_two div a {
@@ -405,10 +403,6 @@ section:not(:last-of-type)::after {
 }
 #art_paint_two div a:focus, #art_paint_two div a:hover {
   box-shadow: 0px 12px 20px #1a1aff;
-}
-
-.apo {
-  background-image: url("../images/art_paint_one.jpg");
 }
 
 .apo0 {
