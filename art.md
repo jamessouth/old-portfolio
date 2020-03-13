@@ -39,4 +39,10 @@ continue with former entry point, fixing paths and loading more and more...
 
 fix projects and links custom elements image fetching
 
+fix articles, remove from IO
+
+since edge is now chromium based get rid of fallbacks, edge only styles and elements
+
+
+
 
