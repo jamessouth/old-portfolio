@@ -10,7 +10,10 @@ body {
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
-  background: linear-gradient(-65deg, rgba(250, 250, 210, 0.87) 25%, rgba(210, 210, 255, 0.88) 51%, rgba(250, 250, 210, 0.87) 75%), url("../images/cloud.jpg") top/contain repeat-y;
+  background: linear-gradient(-65deg, rgba(250, 250, 210, 0.77) 25%, rgba(210, 210, 255, 0.78) 51%, rgba(250, 250, 210, 0.77) 75%), url("../images/cloud.jpg") repeat-y;
+  background-position-y: 0%;
+  background-size: contain;
+  animation: bg 300s linear infinite;
 }
 @media screen and (min-width: 1447px) {
   body {
@@ -18,6 +21,14 @@ body {
   }
 }
 
+@keyframes bg {
+  0% {
+    background-position-y: 0%;
+  }
+  100% {
+    background-position-y: 100%;
+  }
+}
 header {
   position: fixed;
   top: 0;
@@ -401,12 +412,15 @@ section:not(:last-of-type)::after {
   object-fit: none;
 }
 
-#art_paint_two div a {
+#art_paint_two div a,
+#sp div a {
   width: 300px;
   height: 300px;
   display: block;
 }
-#art_paint_two div a:focus, #art_paint_two div a:hover {
+#art_paint_two div a:focus, #art_paint_two div a:hover,
+#sp div a:focus,
+#sp div a:hover {
   box-shadow: 0px 12px 20px #1a1aff;
 }
 
