@@ -218,18 +218,23 @@ section{
 }
 .arts{
   display: flex;
-  flex-direction: column;
+  // flex-direction: column;
+
+  flex-wrap: wrap;
+  width: 90%;
+  margin: 0 auto;
   justify-content: space-around;
   align-items: center;
   & > div{
     position: relative;
     width: 300px;
-    margin-bottom: 4rem;
-    @media #{$col_gap_expand}{
+    margin: 0 3rem 4rem;
+    @media screen and (min-width: 1320px){
       margin-bottom: 0;
     }
     @media #{$upsize_text}{
       width: 400px;
+      margin: 0;
     }
   }
   & > div:last-of-type{
@@ -266,16 +271,20 @@ section{
       font-size: 2em;
     }
   }
-  @media #{$col_gap_expand}{
-    flex-direction: row;
-  }
+
+
+  // @media #{$upsize_text}{
+  //   flex-direction: row;
+  // }
   @media #{$upsize_text}{
-    width: 1200px;
-    margin: 0 auto;
+    width: 98%;
+    max-width: 1800px;
+    // margin: 0 auto;
   }
 }
 #art_paint_one div,
-#art_paint_two div{
+#art_paint_two div,
+#sp div{
   @include wh(300px, 300px);
   & a{
     outline: none;

@@ -54,7 +54,7 @@ const projects = [
   },
   {
     title: 'portfolio',
-    tech1: 'pwa webpack a11y paint',
+    tech1: 'pwa snowpack a11y paint',
     tech2: 'components workers sass',
     code: 'https://github.com/jamessouth/portfolio',
     alt: 'hovering cubes with images of my websites on each side',

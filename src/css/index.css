@@ -292,16 +292,18 @@ section:not(:last-of-type)::after {
 
 .arts {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  width: 90%;
+  margin: 0 auto;
   justify-content: space-around;
   align-items: center;
 }
 .arts > div {
   position: relative;
   width: 300px;
-  margin-bottom: 4rem;
+  margin: 0 3rem 4rem;
 }
-@media screen and (min-width: 960px) {
+@media screen and (min-width: 1320px) {
   .arts > div {
     margin-bottom: 0;
   }
@@ -309,6 +311,7 @@ section:not(:last-of-type)::after {
 @media screen and (min-width: 1447px) {
   .arts > div {
     width: 400px;
+    margin: 0;
   }
 }
 .arts > div:last-of-type {
@@ -349,31 +352,29 @@ section:not(:last-of-type)::after {
     font-size: 2em;
   }
 }
-@media screen and (min-width: 960px) {
-  .arts {
-    flex-direction: row;
-  }
-}
 @media screen and (min-width: 1447px) {
   .arts {
-    width: 1200px;
-    margin: 0 auto;
+    width: 98%;
+    max-width: 1800px;
   }
 }
 
 #art_paint_one div,
-#art_paint_two div {
+#art_paint_two div,
+#sp div {
   width: 300px;
   height: 300px;
 }
 #art_paint_one div a,
-#art_paint_two div a {
+#art_paint_two div a,
+#sp div a {
   outline: none;
   transition: 0.1s ease-in transform;
 }
 @media screen and (min-width: 1447px) {
   #art_paint_one div,
-#art_paint_two div {
+#art_paint_two div,
+#sp div {
     margin: auto;
   }
 }
