@@ -140,6 +140,12 @@ section{
     color: $blue;
     background-color: $yellow;
   }
+  @media #{$three_col}{
+    max-width: 1300px;
+  }
+  @media #{$upsize_text}{
+    font-size: 1.75em;
+  }
 }
 .projects{
   display: grid;
@@ -336,6 +342,15 @@ section{
   grid-row-gap: 70px;
   // margin: 0 auto;
   // @include wh(100%, 900px);
+  @media screen and (min-width: 1272px){
+    // grid-column: 3 / 5;
+    grid-template-columns: repeat(6, 1fr);
+    // grid-row-gap: 80px;
+    max-width: 1440px;
+    margin: auto;
+
+  }
+
 
   
   & > div:last-child{
@@ -343,8 +358,31 @@ section{
       grid-column: 1 / -1;
       // grid-row-gap: 80px;
     }
+    @media screen and (min-width: 848px){
+      grid-column: 3 / 5;
+      // grid-row-gap: 80px;
+    }
+    @media screen and (min-width: 1060px){
+      grid-column: 4 / 6;
+      // grid-row-gap: 80px;
+    }
+    @media screen and (min-width: 1272px){
+      grid-column: 3 / 5;
+      // grid-row-gap: 80px;
+    }
     // @media #{$six_cols}{
     //   grid-column: 4 / 5;
+    // }
+  }
+  & > div:nth-last-child(2){
+    @media screen and (min-width: 1060px){
+      grid-column: 1 / 3;
+    }
+    @media screen and (min-width: 1272px){
+      grid-column: initial;
+    }
+    // @media #{$six_cols}{
+    //   grid-column: 3 / 4;
     // }
   }
     // flex-wrap: wrap;
@@ -357,8 +395,13 @@ section{
 }
 #cw{
   background: url('https://www.codewars.com/users/jamessouth/badges/micro') no-repeat center/cover;
-  width: 256px;
-  height: 46px;
+  width: 240px;
+  height: 40px;
+  @media screen and (min-width: 1272px){
+    background: url('https://www.codewars.com/users/jamessouth/badges/large') no-repeat center/cover;
+    width: 400px;
+    height: 40px;
+  }
   & a{
     height: 100%;
     display: block;
