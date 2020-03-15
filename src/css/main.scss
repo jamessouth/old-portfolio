@@ -16,11 +16,6 @@ body{
   @media #{$upsize_text}{
     background-size: cover;
   }
-  // animation: bg 300s linear infinite;
-}
-@keyframes bg{
-  0% { background-position-y: 0%; }
-  100% { background-position-y: 100%; }
 }
 header{
   @include position($tp: 0);
