@@ -31,11 +31,8 @@ class BorderPaint {
     for (let i = 0; i < 49; i += 1) {
       const dir = BorderPaint.getDirectionInRadians();
 
-      const opLen = BorderPaint.pipe(
-        BorderPaint.getHypoLength,
-        BorderPaint.getCoord,
-        Math.round,
-      )(dir);
+      const opLen = BorderPaint.pipe(BorderPaint.getHypoLength,
+        BorderPaint.getCoord, Math.round)(dir);
 
       const stPt = i * 6;
       ctx.beginPath();

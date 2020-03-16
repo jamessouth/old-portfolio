@@ -1,11 +1,10 @@
-/* eslint-disable no-param-reassign */
-
 // import './loadSW';
 import projects from './projects.mjs';
 import links from './links.mjs';
 
-
-
+const projectDivs = document.querySelectorAll('.projects div');
+const ldivs = document.querySelectorAll('.contact div');
+const contactDivs = [...ldivs].slice(0, ldivs.length - 1);
 
 fetch('./src/images/resume.pdf')
 .then(b => {
@@ -15,18 +14,10 @@ fetch('./src/images/resume.pdf')
 })
 .catch(e => console.log('failed to fetch: ', e));
 
-
-const projectDivs = document.querySelectorAll('.projects div');
-const ldivs = document.querySelectorAll('.contact div');
-const contactDivs = [...ldivs].slice(0, ldivs.length - 1);
-
-
-
 if (CSS.paintWorklet) {
   CSS.paintWorklet.addModule('./src/js/BorderPaint_v1.js');
   CSS.paintWorklet.addModule('./src/js/ButtonBG_v1.js');
 }
-
 
 const IOoptions = {
   root: null,
