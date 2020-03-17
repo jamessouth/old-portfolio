@@ -45,6 +45,19 @@ since edge is now chromium based get rid of fallbacks, edge only styles and elem
 
 ok now site is ready with contact and article added and grid adjusted, time to add a dep
 
+add sw with workbox cli
+
+optimize with snowpack
+
+snowpack only handles deps, not src code, but we can use npm for that
+
+⠼ snowpack installing... 
+× Nothing to install.
+
+make a simple build script
+
+want to consider now adding a bundler
+
 
 
 

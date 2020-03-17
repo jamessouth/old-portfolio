@@ -4,10 +4,11 @@
   "description": "portfolio",
   "private": true,
   "scripts": {
+    "build": "sass --no-source-map ./src/css/main.scss ./docs/css/index.css",
     "dev": "servor . ./src/html/index.html 3000 --reload",
-    "sass": "sass --no-source-map --watch ./src/css/main.scss ./src/css/index.css",
     "lint": "eslint --fix ./src/js && echo 'Linted!'",
-    "prepare": "snowpack"
+    "prepare": "snowpack",
+    "sass": "sass --no-source-map --watch ./src/css/main.scss ./src/css/index.css"
   },
   "repository": {
     "type": "git",
