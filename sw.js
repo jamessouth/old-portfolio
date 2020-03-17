@@ -1,8 +1,8 @@
-import { cleanupOutdatedCaches, precacheAndRoute } from 'workbox-precaching';
-import { CacheFirst, StaleWhileRevalidate } from 'workbox-strategies';
-import { registerRoute, setDefaultHandler } from 'workbox-routing';
-import { setCacheNameDetails } from 'workbox-core';
-import { ExpirationPlugin } from 'workbox-expiration';
+// import { cleanupOutdatedCaches, precacheAndRoute } from 'workbox-precaching';
+// import { CacheFirst, StaleWhileRevalidate } from 'workbox-strategies';
+// import { registerRoute, setDefaultHandler } from 'workbox-routing';
+// import { setCacheNameDetails } from 'workbox-core';
+// import { ExpirationPlugin } from 'workbox-expiration';
 
 const pref = 'portfolio';
 
