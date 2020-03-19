@@ -13,6 +13,6 @@ const fixpath = () => {
 
 for (const path of process.argv.slice(2)) {
     const file = fs.createReadStream(path);
-    const newfile = fs.createWriteStream(path.replace(/(s|x)(?=\.)/, '$&2'));
+    const newfile = fs.createWriteStream(path.replace(/\d/, ''));
     file.pipe(fixpath()).pipe(newfile);
 }
