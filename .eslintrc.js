@@ -11,6 +11,7 @@ module.exports = {
       worker: true,
     },
     "extends": "airbnb-base",
+    "ignorePatterns": ["index.js"], // so long as error thrown on template literals
     rules: {
       'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
       'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
