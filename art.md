@@ -7,14 +7,20 @@ There I was struggling with webpack recently and wasn't able to really resolve m
 
 remove babel, new features widely supported
 
-One of the biggest 
+One common part of a webpack build is of course to transpile source code with babel.  I have more than half a dozen babel ecosystem packages...are they still necessary?  Not really.  ES6 is widely supported now and I'm not using any of the latest features like nullish coalescing, plus with Edge based on Chromium now, it now supports several APIs that it didn't before.  
 
 
 step 1 remove webpack, plugins, babel, webpack config, everyting except dev deps eslint, might use later
 
+So if we're not gonna use babel anymore, we can remove...pretty much every dependency.  All the babel, webpack loaders and plugins, everything except eslint.  Finally, we can (sniff) delete our webpack config.
+
 remove npm scripts, add snowpack and servor
 
+Next, since we're dropping babel, we can get rid of the browserslist section of package.json.  We can also remove all our old webpack scripts, leaving only our lint script.  Now with all the webpack and related cruft gone, it's time to start adding things to create our Snowpack development environment.  We will start with Snowpack itself and a dev server package called servor.
+
 no deps without babel, so running snowpack does nothing, will add workbox later
+
+Right now, I have no non-dev dependencies, so running Snowpack does.....nothing!  
 
 set up npm dev script for servor
 
