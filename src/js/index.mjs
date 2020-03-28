@@ -4,7 +4,7 @@ import links from './links.mjs';
 
 const projectDivs = document.querySelectorAll('.projects div');
 const ldivs = document.querySelectorAll('.contact div');
-const contactDivs = [...ldivs].slice(0, ldivs.length - 1);
+const contactDivs = [...ldivs].slice(0, ldivs.length - 2);
 
 fetch('./src/images/resume.pdf')
 .then(b => {

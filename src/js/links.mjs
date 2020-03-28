@@ -10,14 +10,19 @@ const links = [
     src: './src/images/github.png',
   },
   {
+    link: 'https://stackoverflow.com/users/9996080/james-south?tab=profile',
+    alt: 'go to my stack overflow profile',
+    src: './src/images/so.png',
+  },
+  {
     link: 'https://twitter.com/dsouthbot',
     alt: 'go to my twitter',
     src: './src/images/twit.png',
   },
   {
-    link: 'https://stackoverflow.com/users/9996080/james-south?tab=profile',
-    alt: 'go to my stack overflow profile',
-    src: './src/images/so.png',
+    link: 'https://app.pluralsight.com/profile/jamessouth',
+    alt: 'go to my pluralsight profile',
+    src: './src/images/plural.png',
   },
   {
     link: 'https://dev.to/jamessouth',
