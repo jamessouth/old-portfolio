@@ -1,7 +1,14 @@
 webpack to snowpack
 
 webpack pita compile img src with htmlwpplugin/html loader
+
+There I was struggling with webpack recently and wasn't able to really resolve my issue (src attributes in img tags) satisfactorily (a new html loader has since been released that may help and [webpack 5:last blood](https://github.com/webpack-contrib/html-loader/issues/195) will reportedly fix) so I started thinking about alternatives and remembered something I had heard about on Twitter called Snowpack.  Snowpack is not a bundler for source code.  It takes your dependencies (as in your package.json dependencies) and makes those available as modules, leaving you to develop more or less the old fashioned way.  As Snowpack promises, without bunding on each change, development does move faster (at least, your changes show up right away).  With a set of dev dependencies, you can easily achieve something pretty close to the webpack experience and that is what I want to discuss in this article.
+
+
 remove babel, new features widely supported
+
+One of the biggest 
+
 
 step 1 remove webpack, plugins, babel, webpack config, everyting except dev deps eslint, might use later
 
