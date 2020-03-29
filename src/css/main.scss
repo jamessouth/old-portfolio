@@ -219,35 +219,44 @@ section{
   }
 }
 .arts{
-  display: flex;
-  flex-wrap: wrap;
-  width: 90%;
-  margin: 0 auto;
-  justify-content: space-around;
-  align-items: center;
+  display: grid;
+  grid-template-columns: auto;
+  place-items: center;
+  grid-row-gap: 80px;
+  grid-column-gap: 42px;
+  margin: auto;
+  @media screen and (min-width: 500px){
+    grid-template-columns: repeat(auto-fill, minmax(346px, auto));
+  }
+  @media screen and (min-width: 900px){
+    grid-template-columns: auto auto;
+  }
+  @media screen and (min-width: 1170px){
+    grid-template-columns: auto auto auto;
+  }
+  @media #{$upsize_text}{
+    max-width: 1800px;
+  }
   & > div{
     position: relative;
     width: 300px;
-    margin: 0 3rem 4rem;
-    @media screen and (min-width: 1320px){
-      margin-bottom: 0;
-    }
     @media #{$upsize_text}{
       width: 400px;
-      margin: 0;
     }
   }
   & > div:last-of-type{
-    margin-bottom: 0;
+    grid-column: 1 / -1;
+    @media screen and (min-width: 1170px){
+      grid-column: initial;
+    }
   }
   & > div > a{
     display: block;
     letter-spacing: -1px;
     text-align: center;
-    font-weight: bold;
     font-family: 'Scheherazade', serif;
+    @include fonty(1.7em, bold, 41px);
     @include fontMarg(1.7em, 2.5rem);
-    line-height: 41px;
     &:before,
     &:after{
       display: none;// too wide for iphone 4 width so don't show
@@ -270,10 +279,6 @@ section{
     @media #{$upsize_text}{
       font-size: 2em;
     }
-  }
-  @media #{$upsize_text}{
-    width: 98%;
-    max-width: 1800px;
   }
 }
 .arts > div div{
