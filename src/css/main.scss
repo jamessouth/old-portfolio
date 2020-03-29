@@ -335,33 +335,30 @@ section{
 .apo3{
   object-position: -450px 0%;
 }
-// and (max-width: 1271px)
 .contact{
   display: grid;
   place-items: center;
-  grid-template-columns: 1fr;
+  grid-template-columns: auto;
   grid-row-gap: 70px;
   @media screen and (min-width: 441px){
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: auto auto;
   }
   @media screen and (min-width: 653px){
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, auto);
   }
   @media screen and (min-width: 865px){
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, auto);
+    max-width: 1245px;
+    margin: auto;
   }
-  // @media screen and (min-width: 1272px){
-  //   grid-template-columns: repeat(6, 1fr);
-  //   max-width: 1440px;
-  //   margin: auto;
-  // }
+  @media screen and (min-width: 2000px){
+    grid-template-columns: repeat(9, auto);
+    max-width: 2100px;
+  }
   & > div:last-child{
-    @media screen and (min-width: 441px) and (max-width: 652px), (min-width: 865px){
+    @media screen and (min-width: 441px) and (max-width: 652px), (min-width: 865px) and (max-width: 1999px){
       grid-column: 1 / -1;
     }
-    // @media screen and (min-width: 1272px){
-    //   grid-column: 3 / 5;
-    // }
   }
   & > div{
     border: $bord;
@@ -371,31 +368,18 @@ section{
   background: url('https://projecteuler.net/profile/jamessouth.png') no-repeat center/cover;
   width: 200px;
   height: 60px;
-  // @media screen and (min-width: 650px){
-  //   background: url('https://www.codewars.com/users/jamessouth/badges/large') no-repeat center/cover;
-  //   width: 400px;
-  //   height: 40px;
-  // }
-  & a{
-    height: 100%;
-    display: block;
-    border: 2px solid transparent;
-  }
-  & a:focus,
-  a:hover{
-    outline: none;
-    border: 2px solid #1a2845;
-  }
 }
 #cw{
   background: url('https://www.codewars.com/users/jamessouth/badges/micro') no-repeat center/cover;
   width: 192px;
   height: 32px;
-  @media screen and (min-width: 441px) and (max-width: 652px), (min-width: 865px){
+  @media screen and (min-width: 441px) and (max-width: 652px), (min-width: 865px) and (max-width: 1999px){
     background: url('https://www.codewars.com/users/jamessouth/badges/large') no-repeat center/cover;
     width: 400px;
     height: 40px;
   }
+}
+#pe, #cw{
   & a{
     height: 100%;
     display: block;

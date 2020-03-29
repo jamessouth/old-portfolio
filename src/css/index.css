@@ -434,25 +434,33 @@ section:not(:last-of-type)::after {
 .contact {
   display: grid;
   place-items: center;
-  grid-template-columns: 1fr;
+  grid-template-columns: auto;
   grid-row-gap: 70px;
 }
 @media screen and (min-width: 441px) {
   .contact {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: auto auto;
   }
 }
 @media screen and (min-width: 653px) {
   .contact {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, auto);
   }
 }
 @media screen and (min-width: 865px) {
   .contact {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, auto);
+    max-width: 1245px;
+    margin: auto;
   }
 }
-@media screen and (min-width: 441px) and (max-width: 652px), (min-width: 865px) {
+@media screen and (min-width: 2000px) {
+  .contact {
+    grid-template-columns: repeat(9, auto);
+    max-width: 2100px;
+  }
+}
+@media screen and (min-width: 441px) and (max-width: 652px), (min-width: 865px) and (max-width: 1999px) {
   .contact > div:last-child {
     grid-column: 1/-1;
   }
@@ -466,35 +474,27 @@ section:not(:last-of-type)::after {
   width: 200px;
   height: 60px;
 }
-#pe a {
-  height: 100%;
-  display: block;
-  border: 2px solid transparent;
-}
-#pe a:focus,
-#pe a:hover {
-  outline: none;
-  border: 2px solid #1a2845;
-}
 
 #cw {
   background: url("https://www.codewars.com/users/jamessouth/badges/micro") no-repeat center/cover;
   width: 192px;
   height: 32px;
 }
-@media screen and (min-width: 441px) and (max-width: 652px), (min-width: 865px) {
+@media screen and (min-width: 441px) and (max-width: 652px), (min-width: 865px) and (max-width: 1999px) {
   #cw {
     background: url("https://www.codewars.com/users/jamessouth/badges/large") no-repeat center/cover;
     width: 400px;
     height: 40px;
   }
 }
-#cw a {
+
+#pe a, #cw a {
   height: 100%;
   display: block;
   border: 2px solid transparent;
 }
-#cw a:focus,
+#pe a:focus,
+#pe a:hover, #cw a:focus,
 #cw a:hover {
   outline: none;
   border: 2px solid #1a2845;
