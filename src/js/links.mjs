@@ -10,6 +10,11 @@ const links = [
     src: './src/images/github.png',
   },
   {
+    link: 'https://app.pluralsight.com/profile/jamessouth',
+    alt: 'go to my pluralsight profile',
+    src: './src/images/plural.png',
+  },
+  {
     link: 'https://stackoverflow.com/users/9996080/james-south?tab=profile',
     alt: 'go to my stack overflow profile',
     src: './src/images/so.png',
@@ -20,19 +25,14 @@ const links = [
     src: './src/images/twit.png',
   },
   {
-    link: 'https://app.pluralsight.com/profile/jamessouth',
-    alt: 'go to my pluralsight profile',
-    src: './src/images/plural.png',
+    link: 'https://exercism.io/profiles/jamessouth',
+    alt: 'go to my exercism profile',
+    src: './src/images/exer.png',
   },
   {
     link: 'https://dev.to/jamessouth',
     alt: 'go to my dev community profile',
     src: './src/images/dev.png',
-  },
-  {
-    link: 'https://exercism.io/profiles/jamessouth',
-    alt: 'go to my exercism profile',
-    src: './src/images/exer.png',
   },
 ];
 

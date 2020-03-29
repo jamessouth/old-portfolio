@@ -432,41 +432,21 @@ section:not(:last-of-type)::after {
 }
 
 .contact {
-  display: grid;
-  place-items: center;
-  grid-template-columns: auto;
-  grid-row-gap: 70px;
-}
-@media screen and (min-width: 441px) {
-  .contact {
-    grid-template-columns: auto auto;
-  }
-}
-@media screen and (min-width: 653px) {
-  .contact {
-    grid-template-columns: repeat(3, auto);
-  }
-}
-@media screen and (min-width: 865px) {
-  .contact {
-    grid-template-columns: repeat(4, auto);
-    max-width: 1245px;
-    margin: auto;
-  }
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
 }
 @media screen and (min-width: 2000px) {
   .contact {
-    grid-template-columns: repeat(9, auto);
-    max-width: 2100px;
-  }
-}
-@media screen and (min-width: 441px) and (max-width: 652px), (min-width: 865px) and (max-width: 1999px) {
-  .contact > div:last-child {
-    grid-column: 1/-1;
+    max-width: 2000px;
+    margin: auto;
   }
 }
 .contact > div {
   border: 2px solid transparent;
+  margin: 2em;
 }
 
 #pe {
@@ -480,7 +460,7 @@ section:not(:last-of-type)::after {
   width: 192px;
   height: 32px;
 }
-@media screen and (min-width: 441px) and (max-width: 652px), (min-width: 865px) and (max-width: 1999px) {
+@media screen and (min-width: 800px) {
   #cw {
     background: url("https://www.codewars.com/users/jamessouth/badges/large") no-repeat center/cover;
     width: 400px;
