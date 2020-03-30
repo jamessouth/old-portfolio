@@ -15,8 +15,8 @@ fetch('./src/images/resume.pdf')
 .catch(e => console.log('failed to fetch: ', e));
 
 if (CSS.paintWorklet) {
-  CSS.paintWorklet.addModule('./src/js/BorderPaint_v1.js');
-  CSS.paintWorklet.addModule('./src/js/ButtonBG_v1.js');
+  CSS.paintWorklet.addModule('./src/js/BorderPaint.js');
+  CSS.paintWorklet.addModule('./src/js/ButtonBG.js');
 }
 
 const IOoptions = {
