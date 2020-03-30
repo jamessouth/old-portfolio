@@ -31,8 +31,7 @@ nav{
   height: 100%;
 }
 ul{
-  @include flex(row, space-around, center);
-  flex-wrap: wrap;
+  @include flex(row, space-around, center, wrap);
   height: 100%;
   list-style: none;
 }
@@ -150,13 +149,8 @@ section{
   }
 }
 .projects{
-  display: grid;
-  place-items: center;
-  grid-template-columns: repeat(auto-fill, minmax(288px, 1fr));
-  grid-column-gap: 30px;
-  grid-row-gap: 100px;
+  @include grid(repeat(auto-fill, minmax(288px, 1fr)), 100px, 30px, 0 auto 6rem);
   width: 90%;
-  margin: 0 auto 6rem;
   @media #{$col_gap_expand}{
     grid-column-gap: 50px;
   }
@@ -219,12 +213,7 @@ section{
   }
 }
 .arts{
-  display: grid;
-  grid-template-columns: auto;
-  place-items: center;
-  grid-row-gap: 80px;
-  grid-column-gap: 42px;
-  margin: auto;
+  @include grid(auto, 80px, 42px, auto);
   @media screen and (min-width: 500px){
     grid-template-columns: repeat(auto-fill, minmax(346px, auto));
   }
@@ -292,8 +281,7 @@ section{
   }
 }
 #art_paint_one div{
-  display: flex;
-  flex-wrap: wrap;
+  @include flex($wrap: wrap);
   & a{
     @include wh(150px, 150px);
     &:focus,
@@ -341,8 +329,7 @@ section{
   object-position: -450px 0%;
 }
 .contact{
-  @include flex(row, space-around, center);
-  flex-wrap: wrap;
+  @include flex(row, space-around, center, wrap);
   @media screen and (min-width: 2000px){
     max-width: 2000px;
     margin: auto;

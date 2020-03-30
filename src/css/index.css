@@ -210,10 +210,10 @@ section:not(:last-of-type)::after {
   display: grid;
   place-items: center;
   grid-template-columns: repeat(auto-fill, minmax(288px, 1fr));
-  grid-column-gap: 30px;
   grid-row-gap: 100px;
-  width: 90%;
+  grid-column-gap: 30px;
   margin: 0 auto 6rem;
+  width: 90%;
 }
 @media screen and (min-width: 960px) {
   .projects {
@@ -294,8 +294,8 @@ section:not(:last-of-type)::after {
 
 .arts {
   display: grid;
-  grid-template-columns: auto;
   place-items: center;
+  grid-template-columns: auto;
   grid-row-gap: 80px;
   grid-column-gap: 42px;
   margin: auto;
