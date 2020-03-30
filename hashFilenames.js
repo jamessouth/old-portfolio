@@ -2,16 +2,16 @@ const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 
-async function hashnames(path) {
-    const dir = await fs.promises.opendir(path);
+async function hashnames(inputDir) {
+    const dir = await fs.promises.opendir(inputDir);
     for await (const dirent of dir) {
+        const filename = inputDir + '/' + dirent.name;
         if (dirent.isDirectory() && dirent.name != 'icons') {
-            hashnames(path + '/' + dirent.name).catch(console.error);
+            hashnames(filename).catch(console.error);
         }
         if (dirent.isFile() && !['index.html', 'manifest.webmanifest'].includes(dirent.name)) {
             console.log('file: ', dirent.name);
 
-            const filename = dirent.name;
             const file = fs.createReadStream(filename);
             const {name, ext} = path.parse(filename);
             const hash = crypto.createHash('md4');
@@ -22,7 +22,7 @@ async function hashnames(path) {
                     hash.update(data);
                 } else {
                     dig = hash.digest('hex');
-                    fs.renameSync(filename, name + '.' + dig + ext);
+                    fs.renameSync(filename, inputDir + '/' + name + '.' + dig + ext);
                 }
             });
 
