@@ -1,5 +1,6 @@
 const fs = require('fs');
 const { Transform } = require('stream');
+
 const fixpath = () => {
     return new Transform({
         transform(ch, _, cb) {
@@ -16,3 +17,5 @@ for (const path of process.argv.slice(2)) {
     const newfile = fs.createWriteStream(path.replace(/\d/, ''));
     file.pipe(fixpath()).pipe(newfile);
 }
+
+
