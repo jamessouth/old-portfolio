@@ -6,11 +6,14 @@ async function hashnames(inputDir) {
     const dir = await fs.promises.opendir(inputDir);
     for await (const dirent of dir) {
         const filename = inputDir + '/' + dirent.name;
+        const refname = filename.replace('docs/', '');
         if (dirent.isDirectory() && dirent.name != 'icons') {
             hashnames(filename).catch(console.error);
         }
         if (dirent.isFile() && !['index.html', 'manifest.webmanifest'].includes(dirent.name)) {
-            console.log('file: ', dirent.name);
+
+
+            console.log('file: ', refname);
 
             const file = fs.createReadStream(filename);
             const {name, ext} = path.parse(filename);

@@ -388,41 +388,41 @@ section:not(:last-of-type)::after {
   }
 }
 
-#art_paint_one div {
+#art_one div {
   display: flex;
   flex-wrap: wrap;
 }
-#art_paint_one div a {
+#art_one div a {
   width: 150px;
   height: 150px;
 }
-#art_paint_one div a:focus, #art_paint_one div a:hover {
+#art_one div a:focus, #art_one div a:hover {
   transform: scale(1.3);
 }
-#art_paint_one div a:first-of-type {
+#art_one div a:first-of-type {
   transform-origin: left top;
 }
-#art_paint_one div a:nth-of-type(2) {
+#art_one div a:nth-of-type(2) {
   transform-origin: right top;
 }
-#art_paint_one div a:nth-of-type(3) {
+#art_one div a:nth-of-type(3) {
   transform-origin: left bottom;
 }
-#art_paint_one div a:last-of-type {
+#art_one div a:last-of-type {
   transform-origin: right bottom;
 }
 
-.art_paint_one {
+.art_one {
   object-fit: none;
 }
 
-#art_paint_two div a,
+#art_two div a,
 #sp div a {
   width: 300px;
   height: 300px;
   display: block;
 }
-#art_paint_two div a:focus, #art_paint_two div a:hover,
+#art_two div a:focus, #art_two div a:hover,
 #sp div a:focus,
 #sp div a:hover {
   box-shadow: 0px 12px 20px #1a1aff;
@@ -538,8 +538,8 @@ section:not(:last-of-type)::after {
   bottom: 1px;
   width: 120px;
   height: 120px;
-  -webkit-mask-image: paint(buttonBG);
-  mask-image: paint(buttonBG);
+  -webkit-mask-image: paint(buttonPaint);
+  mask-image: paint(buttonPaint);
 }
 
 .reloaddiv {

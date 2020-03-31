@@ -280,7 +280,7 @@ section{
     margin: auto;
   }
 }
-#art_paint_one div{
+#art_one div{
   @include flex($wrap: wrap);
   & a{
     @include wh(150px, 150px);
@@ -302,10 +302,10 @@ section{
     }
   }
 }
-.art_paint_one{
+.art_one{
   object-fit: none;
 }
-#art_paint_two div,
+#art_two div,
 #sp div{
   & a{
     @include wh(300px, 300px);
@@ -397,8 +397,8 @@ section{
   background-color: $blue;
   @include position($lt: 15px, $bm: 1px);
   @include wh(120px, 120px);
-  -webkit-mask-image: paint(buttonBG);
-  mask-image: paint(buttonBG);
+  -webkit-mask-image: paint(buttonPaint);
+  mask-image: paint(buttonPaint);
 }
 .reloaddiv{
   @include position($rt: 15px, $lt: auto);

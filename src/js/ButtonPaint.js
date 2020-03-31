@@ -1,4 +1,4 @@
-class ButtonBG {
+class ButtonPaint {
   paint(ctx, geom, props) { // eslint-disable-line
     ctx.beginPath();
     ctx.moveTo(55, 5);
@@ -12,4 +12,4 @@ class ButtonBG {
     ctx.stroke();
   }
 }
-registerPaint('buttonBG', ButtonBG); // eslint-disable-line
+registerPaint('buttonPaint', ButtonPaint); // eslint-disable-line

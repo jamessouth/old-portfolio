@@ -16,7 +16,7 @@ fetch('./src/images/resume.pdf')
 
 if (CSS.paintWorklet) {
   CSS.paintWorklet.addModule('./src/js/BorderPaint.js');
-  CSS.paintWorklet.addModule('./src/js/ButtonBG.js');
+  CSS.paintWorklet.addModule('./src/js/ButtonPaint.js');
 }
 
 const IOoptions = {
