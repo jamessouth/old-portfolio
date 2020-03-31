@@ -1,6 +1,9 @@
+// const aaa = require('./aaa.js');
+
 const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
+const fileMap = {};
 
 async function hashnames(inputDir) {
     const dir = await fs.promises.opendir(inputDir);
@@ -13,7 +16,8 @@ async function hashnames(inputDir) {
         if (dirent.isFile() && !['index.html', 'manifest.webmanifest'].includes(dirent.name)) {
 
 
-            console.log('file: ', refname);
+            
+
 
             const file = fs.createReadStream(filename);
             const {name, ext} = path.parse(filename);
@@ -25,12 +29,18 @@ async function hashnames(inputDir) {
                     hash.update(data);
                 } else {
                     dig = hash.digest('hex');
-                    fs.renameSync(filename, inputDir + '/' + name + '.' + dig + ext);
+                    const newname = inputDir + '/' + name + '.' + dig + ext;
+                    // console.log('file: ', refname, newname);
+                    fs.renameSync(filename, newname);
+                    fileMap[refname] = newname;
+                    console.log('map: ', fileMap);
                 }
             });
 
         }
     }
+    
+    // aaa.aaa('helllllllloooooooooooooooooooooooooooooooooooo');
 }
 
 hashnames(process.argv[2]).catch(console.error);
