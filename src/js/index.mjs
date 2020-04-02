@@ -10,7 +10,7 @@ fetch('./src/images/resume.pdf')
 .then(b => {
   const resLink = document.querySelector('li:last-of-type a');
   resLink.href = b.url;
-  resLink.download = 'james_south_resume.pdf';
+  resLink.download = 'james_south_res.pdf';
 })
 .catch(e => console.log('failed to fetch: ', e));
 
