@@ -1,7 +1,7 @@
 const replace = require('replace-in-file');
 
 module.exports = {
-    aaa: async function(list) {
+    fixPaths: async function(list) {
         let results;
         const options = {
             files: [

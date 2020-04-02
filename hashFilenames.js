@@ -1,4 +1,4 @@
-const aaa = require('./aaa.js');
+const post = require('./postProcess.js');
 const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
@@ -48,6 +48,6 @@ async function createLists(dir, list) {
 }
 
 createLists(process.argv[2], [[], []])
-    .then(list => aaa.aaa(list))
+    .then(list => post.fixPaths(list))
     .then(res => console.log('results: ', res))
     .catch(console.error);
