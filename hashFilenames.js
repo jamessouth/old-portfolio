@@ -48,7 +48,6 @@ async function createLists(dir, list) {
 }
 
 createLists(process.argv[2], [[], []])
-// .then(j => console.log('ghghgh: ', j))
     .then(list => aaa.aaa(list))
     .then(res => console.log('results: ', res))
     .catch(console.error);

@@ -4,8 +4,6 @@
   "description": "portfolio",
   "private": true,
   "scripts": {
-    "a": " && node ./fixPaths.js ./docs/index2.html ./docs/js/index2.mjs ./docs/js/links2.mjs ./docs/js/projects2.mjs",
-    "b": "rm ./docs/index2.html ./docs/js/index2.mjs ./docs/js/links2.mjs ./docs/js/projects2.mjs",
     "build:html": "html-minifier --collapse-whitespace --remove-comments ./src/html/index.html -o ./docs/index.html",
     "build:sass": "sass --no-source-map ./src/css/main.scss ./docs/css/index.css && postcss ./docs/css/index.css -r --no-map",
     "build:js": "terser ./src/js/BorderPaint.js -c -m -o ./docs/js/BorderPaint.js && terser ./src/js/ButtonPaint.js -c -m -o ./docs/js/ButtonPaint.js && terser ./src/js/index.mjs -c module -m module -o ./docs/js/index.mjs && terser ./src/js/linkFactory.mjs -c module -m module -o ./docs/js/linkFactory.mjs && terser ./src/js/links.mjs -c module -m module -o ./docs/js/links.mjs && terser ./src/js/panelFactory.mjs -c module -m module -o ./docs/js/panelFactory.mjs && terser ./src/js/projects.mjs -c module -m module -o ./docs/js/projects.mjs",
