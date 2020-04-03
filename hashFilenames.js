@@ -1,7 +1,27 @@
-const post = require('./postProcess.js');
+const replace = require('replace-in-file');
 const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
+
+async function fixPaths(list) {
+  let results;
+  const options = {
+      files: [
+          'docs/index.html',
+          'docs/css/*',
+          'docs/js/*',
+      ],
+      from: [/src\//g, ...list[0]],
+      to: ['', ...list[1]],
+    };
+
+  try {
+      results = await replace(options);
+  } catch (err) {
+      console.error('replacement error: ', err);
+  }
+  return results;
+}
 
 // getFiles function adapted from https://stackoverflow.com/a/45130990
 async function* getFiles(inputDir) {
@@ -48,6 +68,6 @@ async function createLists(dir, list) {
 }
 
 createLists(process.argv[2], [[], []])
-    .then(list => post.fixPaths(list))
+    .then(list => fixPaths(list))
     .then(res => console.log('results: ', res))
     .catch(console.error);
