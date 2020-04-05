@@ -1,7 +1,8 @@
-const replace = require('replace-in-file');
 const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
+const replace = require('replace-in-file');
+const walk = require('walkdir');
 
 // paths in html are fine if src replaced with docs and resolved
 // paths in css are rel
@@ -12,36 +13,37 @@ const path = require('path');
 
 const wait = ms => new Promise((resolve) => setTimeout(resolve, ms));
 
-async function inner(data, directory) {
-  const paths = data.match(/\.\.?\/(src\/)?(\w+\/)?\w+\.(css|m?js|png|jpg|pdf)/g);
+async function inner(data) {
+  const file = data.replace(/src\//, '');
+  const paths = file.match(/\.\.?\/(\w+\/)?\w+\.(css|m?js|png|jpg|pdf)/g);
   if (paths) {
 
     for await (const p of new Set([...paths])) {
       // await wait(1000);
       const {dir, base, ext} = path.parse(p);
-      console.log('p: ', p, dir, base, ext, directory);
+      console.log('p: ', p, dir, base, ext);
       if (['.png', '.jpg', '.pdf'].includes(ext)) {
-        let fileToHash;
-        if (directory != 'docs') {
+        // let fileToHash = ;
+        // if (directory != 'docs') {
 
-          fileToHash = path.resolve(path.join(__dirname, 'docs', directory), p.replace('src', directory));
-        } else {
-          fileToHash = path.resolve(__dirname, p.replace('src', directory));
+        //   fileToHash = path.resolve(path.join(__dirname, 'docs'), p.replace('src'));
+        // } else {
+        //   fileToHash = path.resolve(__dirname, p.replace('src'));
 
-        }
-        console.log('image: ', fileToHash);
-        const newname = await hashFile(fileToHash);
-        console.log('newname: ', newname);
+        // }
+        // console.log('image: ', fileToHash);
+        // const newname = await hashFile(fileToHash);
+        // console.log('newname: ', newname);
 
       } else {
         console.log('file: ', p, dir);
-        if (dir == '.') {
-          console.log('first: ', dir, base);
-          await hash(path.join(__dirname, 'docs', directory, p.replace('src', 'docs')));
-        } else {
-          console.log('2nd: ', dir, base);
-          await hash(path.join(__dirname, p.replace('src', 'docs')));
-        }
+        // if (dir == '.') {
+        //   console.log('first: ', dir, base);
+        //   await hash(path.join(__dirname, 'docs', p.replace('src', 'docs')));
+        // } else {
+          // console.log('2nd: ', dir, base);
+          await hash(p);
+        // }
       }
       
     }
@@ -58,13 +60,18 @@ async function inner(data, directory) {
 
 }
 
+
 async function hash(file) {
   const resolvedFile = path.resolve(file);
   const {dir, base, ext} = path.parse(resolvedFile);
   console.log('hash func resolved file: ', resolvedFile, dir, base, ext);
+
+  const walker = walk(path.dirname(file));
+  walker.on('file', (filename) => console.log('file found: ', filename));
+
   fs.readFile(resolvedFile, 'utf8', async (err, data) => {
     if (err) throw err;
-    await inner(data, dir.match(/\w+$/)[0]);
+    await inner(data);
 
   });
 }
