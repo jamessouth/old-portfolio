@@ -9,7 +9,7 @@ const walk = require('walkdir');
 // index.mjs has both rel to js folder and rel to src
 // links and projs just need src/ removed
 
-
+let tree = [];
 
 const wait = ms => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -76,16 +76,25 @@ async function hash(file) {
 }
 
 async function getFileTree(file) {
+  const dirs = [];
   const tree = await walk.async(path.dirname(file), {
-    filter: (dir, files) => files.filter((file) => !['icons', 'index.html', 'manifest.webmanifest'].includes(file))
+    filter: (dir, files) => {
+      dirs.push(dir);
+      return files.filter((file) => !['icons', 'index.html', 'manifest.webmanifest'].includes(file));
+    }
   });
 
-  return tree;
+  return [file, tree.filter(f => !dirs.includes(f))];
 }
 
+function sepArray([file, arr]) {
+  tree = tree.concat(arr);
+  // console.log('arr: ', tree);
+  return file;
+}
 
-// hash(process.argv[2]);
-getFileTree(process.argv[2]).then(x => console.log('tree: ', x));
+getFileTree(process.argv[2]).then(sepArray).then(f => console.log('fff: ', f, tree));
+// .then(hash);
 
 
 
