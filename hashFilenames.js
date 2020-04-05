@@ -3,42 +3,58 @@ const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 
-function inner(data, direc) {
+
+
+const wait = ms => new Promise((resolve) => setTimeout(resolve, ms));
+
+async function inner(data, directory) {
   const paths = data.match(/\.\.?\/(\w+\/)?\w+\.(css|m?js|png|jpg|pdf)/g);
-  // console.log(`paths for ${file}: `, paths);
-  
-  paths && paths.forEach(async p => {
-    const {dir, base, ext} = path.parse(p);
-    if (['.png', '.jpg', '.pdf'].includes(ext)) {
-      const fileToHash = path.resolve('docs', direc, p);
-      console.log('image: ', fileToHash);
-      await hashFile(fileToHash).then(x => console.log('newname: ', x));
-    } else {
-      console.log('file: ', p, dir, direc);
-      if (dir == '.') {
-        console.log('first: ', direc, base);
-        hash(direc, base);
+  if (paths) {
+
+    for await (const p of new Set([...paths])) {
+      // await wait(1000);
+      const {dir, base, ext} = path.parse(p);
+      console.log('p: ', p, directory, dir);
+      if (['.png', '.jpg', '.pdf'].includes(ext)) {
+        const fileToHash = path.resolve('docs', directory, p);
+        console.log('image: ', fileToHash, path.resolve('docs', p));
+        const newname = await hashFile(fileToHash);
+        console.log('newname: ', newname);
+
       } else {
-        console.log('2nd: ', dir, base);
-        hash(dir, base);
+        console.log('file: ', p, dir, directory);
+        if (dir == '.') {
+          console.log('first: ', directory, base);
+          await hash(directory, base);
+        } else {
+          console.log('2nd: ', dir, base);
+          await hash(dir, base);
+        }
       }
+      
     }
+  }
+  
+
+
+
+
+
+  
+
+  
+
+}
+
+async function hash(directory, file) {
+  const resolvedFile = path.resolve('docs', directory, file);
+  console.log('hash func resolved file: ', resolvedFile);
+  fs.readFile(resolvedFile, 'utf8', async (err, data) => {
+    if (err) throw err;
+    await inner(data, directory);
+
   });
-
 }
-
-function hash(direc, file) {
-  console.log('filepath: ', path.resolve('docs', direc, file));
-  const data = fs.readFileSync(path.resolve('docs', direc, file), {encoding: 'utf8'});
-  
-  
-
-
-  inner(data, direc);
-
-}
-
-
 
 
 hash(process.argv[2], process.argv[3]);
