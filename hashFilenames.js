@@ -66,8 +66,7 @@ async function hash(file) {
   const {dir, base, ext} = path.parse(resolvedFile);
   console.log('hash func resolved file: ', resolvedFile, dir, base, ext);
 
-  const walker = walk(path.dirname(file));
-  walker.on('file', (filename) => console.log('file found: ', filename));
+
 
   fs.readFile(resolvedFile, 'utf8', async (err, data) => {
     if (err) throw err;
@@ -76,8 +75,17 @@ async function hash(file) {
   });
 }
 
+async function getFileTree(file) {
+  const tree = await walk.async(path.dirname(file), {
+    filter: (dir, files) => files.filter((file) => !['icons', 'index.html', 'manifest.webmanifest'].includes(file))
+  });
 
-hash(process.argv[2]);
+  return tree;
+}
+
+
+// hash(process.argv[2]);
+getFileTree(process.argv[2]).then(x => console.log('tree: ', x));
 
 
 
