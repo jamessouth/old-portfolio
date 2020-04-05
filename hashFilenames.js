@@ -3,32 +3,44 @@ const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 
+// paths in html are fine if src replaced with docs and resolved
+// paths in css are rel
+// index.mjs has both rel to js folder and rel to src
+// links and projs just need src/ removed
+
 
 
 const wait = ms => new Promise((resolve) => setTimeout(resolve, ms));
 
 async function inner(data, directory) {
-  const paths = data.match(/\.\.?\/(\w+\/)?\w+\.(css|m?js|png|jpg|pdf)/g);
+  const paths = data.match(/\.\.?\/(src\/)?(\w+\/)?\w+\.(css|m?js|png|jpg|pdf)/g);
   if (paths) {
 
     for await (const p of new Set([...paths])) {
       // await wait(1000);
       const {dir, base, ext} = path.parse(p);
-      console.log('p: ', p, directory, dir);
+      console.log('p: ', p, dir, base, ext, directory);
       if (['.png', '.jpg', '.pdf'].includes(ext)) {
-        const fileToHash = path.resolve('docs', directory, p);
-        console.log('image: ', fileToHash, path.resolve('docs', p));
+        let fileToHash;
+        if (directory != 'docs') {
+
+          fileToHash = path.resolve(path.join(__dirname, 'docs', directory), p.replace('src', directory));
+        } else {
+          fileToHash = path.resolve(__dirname, p.replace('src', directory));
+
+        }
+        console.log('image: ', fileToHash);
         const newname = await hashFile(fileToHash);
         console.log('newname: ', newname);
 
       } else {
-        console.log('file: ', p, dir, directory);
+        console.log('file: ', p, dir);
         if (dir == '.') {
-          console.log('first: ', directory, base);
-          await hash(directory, base);
+          console.log('first: ', dir, base);
+          await hash(path.join(__dirname, 'docs', directory, p.replace('src', 'docs')));
         } else {
           console.log('2nd: ', dir, base);
-          await hash(dir, base);
+          await hash(path.join(__dirname, p.replace('src', 'docs')));
         }
       }
       
@@ -46,18 +58,19 @@ async function inner(data, directory) {
 
 }
 
-async function hash(directory, file) {
-  const resolvedFile = path.resolve('docs', directory, file);
-  console.log('hash func resolved file: ', resolvedFile);
+async function hash(file) {
+  const resolvedFile = path.resolve(file);
+  const {dir, base, ext} = path.parse(resolvedFile);
+  console.log('hash func resolved file: ', resolvedFile, dir, base, ext);
   fs.readFile(resolvedFile, 'utf8', async (err, data) => {
     if (err) throw err;
-    await inner(data, directory);
+    await inner(data, dir.match(/\w+$/)[0]);
 
   });
 }
 
 
-hash(process.argv[2], process.argv[3]);
+hash(process.argv[2]);
 
 
 
@@ -103,23 +116,24 @@ hash(process.argv[2], process.argv[3]);
 // }
 
 async function hashFile(filepath) {
-    const file = fs.createReadStream(filepath);
-    const hash = crypto.createHash('md5');
-    const {dir, name, ext} = path.parse(filepath);
-    return new Promise(res => {
-        file.on('readable', () => {
-            const data = file.read();
-            if (data) {
-                hash.update(data);
-            } else {
-                const dig = hash.digest('hex');
-                const newname = name + '.' + dig + ext;
-                const newpath = path.resolve(dir, newname);
-                fs.renameSync(filepath, newpath);
-                res(newname);
-            }
-        });
-    });
+  wait(1000);
+    // const file = fs.createReadStream(filepath);
+    // const hash = crypto.createHash('md5');
+    // const {dir, name, ext} = path.parse(filepath);
+    // return new Promise(res => {
+    //     file.on('readable', () => {
+    //         const data = file.read();
+    //         if (data) {
+    //             hash.update(data);
+    //         } else {
+    //             const dig = hash.digest('hex');
+    //             const newname = name + '.' + dig + ext;
+    //             const newpath = path.resolve(dir, newname);
+    //             fs.renameSync(filepath, newpath);
+    //             res(newname);
+    //         }
+    //     });
+    // });
 }
 
 // async function createLists(dir, list) {
