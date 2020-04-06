@@ -14,7 +14,7 @@ let tree = [];
 const wait = ms => new Promise((resolve) => setTimeout(resolve, ms));
 
 async function inner(data) {
-  const file = data.replace(/src\//g, '');
+  let file = data.replace(/src\//g, '');
   const paths = file.match(/\.\.?\/(\w+\/)?\w+\.(css|m?js|png|jpg|pdf)/g);
 
   if (paths) {
@@ -28,10 +28,12 @@ async function inner(data) {
       if (['.png', '.jpg', '.pdf'].includes(ext)) {
       
         const newname = await hashFile(match);
-        console.log('newname: ', newname);
+        console.log('newname: ', newname, p);
 
         // replace file names here
         console.log('here replace: ', );
+        file = file.replace(new RegExp(base, 'g'), newname);
+
 
       } else {
         await hash(match);
@@ -41,7 +43,8 @@ async function inner(data) {
       
     }
     // hash file here
-    console.log('here hash: ', file.slice(0,10));
+    console.log('here hash: ', file.slice(0, 20));
+    return file;
 
   }
   
@@ -50,15 +53,17 @@ async function inner(data) {
 
 async function hash(file) {
   const resolvedFile = path.resolve(file);
-  const {dir, base, ext} = path.parse(resolvedFile);
-  console.log('hash func resolved file: ', resolvedFile, dir, base, ext);
+  console.log('hash func resolved file: ', resolvedFile);
 
   fs.readFile(resolvedFile, 'utf8', async (err, data) => {
     if (err) throw err;
-    await inner(data);
-    console.log('hhhhhhhhhhhhhhhhhhh: ', resolvedFile);
+    const newFile = await inner(data);
+    fs.writeFile(resolvedFile, newFile, 'utf8', err => {
+      if (err) throw err;
+    });
+    
   });
-  console.log('fillllllllllllllll: ', file);
+  
 }
 
 async function getFileTree(file) {
