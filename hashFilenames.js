@@ -9,7 +9,7 @@ const walk = require('walkdir');
 // index.mjs has both rel to js folder and rel to src
 // links and projs just need src/ removed
 
-// let tree = [];
+let tree = [];
 
 const wait = ms => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -73,21 +73,12 @@ async function getFileTree(file) {
   return [file, tree.filter(f => !dirs.includes(f))];
 }
 
-async function sepArray([file, arr]) {
-  
-  for await (let f of arr) {
-    const {dir, base, ext} = path.parse(f);
-    if (['.png', '.jpg', '.pdf'].includes(ext)) {
-      f = await hashFile(f);
-      
-    }
-  }
-  
-  return arr;
+function sepArray([file, arr]) {
+  tree = tree.concat(arr);
+  return file;
 }
 
-getFileTree(process.argv[2]).then(sepArray).then(s => console.log('sss: ', s));
-// .then(hash);
+getFileTree(process.argv[2]).then(sepArray).then(hash);
 
 
 
@@ -131,12 +122,12 @@ getFileTree(process.argv[2]).then(sepArray).then(s => console.log('sss: ', s));
 //   }
 // }
 
-async function* hashFile(filepath) {
+async function hashFile(filepath) {
   // wait(1000);
     const file = fs.createReadStream(filepath);
     const hash = crypto.createHash('md5');
     const {dir, name, ext} = path.parse(filepath);
-    yield new Promise(res => {
+    return new Promise(res => {
         file.on('readable', () => {
             const data = file.read();
             if (data) {
@@ -152,11 +143,11 @@ async function* hashFile(filepath) {
     });
 }
 
-// async function hashArr(arr) {
-//   for await (const f of getFiles(dir)) {
-//     list[0].push(f[0]);
-//     list[1].push(f[1]);
-//   }
+// async function createLists(dir, list) {
+//   // for await (const f of getFiles(dir)) {
+//   //   list[0].push(f[0]);
+//   //   list[1].push(f[1]);
+//   // }
 //   return list;
 // }
 
