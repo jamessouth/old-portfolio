@@ -4,10 +4,7 @@ const path = require('path');
 const replace = require('replace-in-file');
 const walk = require('walkdir');
 
-// paths in html are fine if src replaced with docs and resolved
-// paths in css are rel
-// index.mjs has both rel to js folder and rel to src
-// links and projs just need src/ removed
+
 
 let tree = [];
 
@@ -16,10 +13,11 @@ const wait = ms => new Promise((resolve) => setTimeout(resolve, ms));
 async function inner(data) {
   let file = data.replace(/src\//g, '');
   const paths = file.match(/\.\.?\/(\w+\/)?\w+\.(css|m?js|png|jpg|pdf)/g);
-
   if (paths) {
+    const uniquePaths = new Set([...paths]);
+    let pathCount = uniquePaths.size;
     console.log('ppppppppppppp: ', paths);
-    for await (const p of new Set([...paths])) {
+    for await (const p of uniquePaths) {
       // await wait(1000);
       const {dir, base, ext} = path.parse(p);
       console.log('p: ', p, dir, base, ext);
@@ -33,17 +31,17 @@ async function inner(data) {
         // replace file names here
         console.log('here replace: ', );
         file = file.replace(new RegExp(base, 'g'), newname);
-
+        pathCount -= 1;
 
       } else {
         await hash(match);
-        console.log('file: ', p, dir);
+        console.log('file: ', match);
 
       }
       
     }
     // hash file here
-    console.log('here hash: ', file.slice(0, 20));
+    console.log('here hash: ', file.slice(0, 20), pathCount);
     return file;
 
   } else {
@@ -59,12 +57,15 @@ async function hash(file) {
 
   fs.readFile(resolvedFile, 'utf8', async (err, data) => {
     if (err) throw err;
+
     const newFile = await inner(data);
-    fs.writeFile(resolvedFile, newFile, 'utf8', err => {
+// come back with path count store in map
+    fs.writeFile(resolvedFile, newFile, 'utf8', async (err) => {
       if (err) throw err;
+      const newname = resolvedFile.endsWith('html') ? resolvedFile : await hashFile(resolvedFile);
       // hash here
       console.log(': ', );
-      console.log('wwrite: ', resolvedFile);
+      console.log('wwrite: ', newname);
       console.log(': ', );
 
     });
