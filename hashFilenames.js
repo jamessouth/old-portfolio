@@ -4,7 +4,29 @@ const path = require('path');
 const replace = require('replace-in-file');
 const walk = require('walkdir');
 
+async function* gen(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    const {dir, base, ext} = path.parse(arr[i]);
+    console.log('p: ', dir, base, ext);
+    const match = tree.find(e => e.includes(base));
+    if (['.png', '.jpg', '.pdf'].includes(ext)) {
+    
+      const newname = await hashFile(match);
 
+      // replace file names here
+      console.log('here replace: ', newname);
+      yield [base, newname];
+      
+    } else {
+      const newname = await hash(match);
+      yield [base, newname];
+
+
+    }
+
+
+  }
+}
 
 let tree = [];
 
@@ -14,34 +36,17 @@ async function inner(data) {
   let file = data.replace(/src\//g, '');
   const paths = file.match(/\.\.?\/(\w+\/)?\w+\.(css|m?js|png|jpg|pdf)/g);
   if (paths) {
-    const uniquePaths = new Set([...paths]);
-    let pathCount = uniquePaths.size;
+    const uniquePaths = [...new Set([...paths])];
+
     console.log('ppppppppppppp: ', paths);
-    for await (const p of uniquePaths) {
-      // await wait(1000);
-      const {dir, base, ext} = path.parse(p);
-      console.log('p: ', p, dir, base, ext);
-      const match = tree.find(e => e.includes(base));
-      console.log('match: ', match);
-      if (['.png', '.jpg', '.pdf'].includes(ext)) {
+
+    for await (const p of gen(uniquePaths)) {
       
-        const newname = await hashFile(match);
-        console.log('newname: ', newname, p);
-
-        // replace file names here
-        console.log('here replace: ', );
-        file = file.replace(new RegExp(base, 'g'), newname);
-        pathCount -= 1;
-
-      } else {
-        await hash(match);
-        console.log('file: ', match);
-
-      }
+      file = file.replace(new RegExp(p[0], 'g'), p[1]);
       
     }
     // hash file here
-    console.log('here hash: ', file.slice(0, 20), pathCount);
+    console.log('here hash: ', file.slice(0, 20));
     return file;
 
   } else {
@@ -55,22 +60,12 @@ async function hash(file) {
   const resolvedFile = path.resolve(file);
   console.log('hash func resolved file: ', resolvedFile);
 
-  fs.readFile(resolvedFile, 'utf8', async (err, data) => {
-    if (err) throw err;
-
-    const newFile = await inner(data);
-// come back with path count store in map
-    fs.writeFile(resolvedFile, newFile, 'utf8', async (err) => {
-      if (err) throw err;
-      const newname = resolvedFile.endsWith('html') ? resolvedFile : await hashFile(resolvedFile);
-      // hash here
-      console.log(': ', );
-      console.log('wwrite: ', newname);
-      console.log(': ', );
-
-    });
-    
-  });
+  const data = await fs.promises.readFile(resolvedFile, 'utf8');
+  const newFile = await inner(data);
+  await fs.promises.writeFile(resolvedFile, newFile, 'utf8');
+  const newname = resolvedFile.endsWith('html') ? resolvedFile : await hashFile(resolvedFile);
+  
+  return newname;
   
 }
 
