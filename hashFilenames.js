@@ -1,72 +1,45 @@
 const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
-const replace = require('replace-in-file');
 const walk = require('walkdir');
-
-async function* gen(arr) {
-  for (let i = 0; i < arr.length; i++) {
-    const {dir, base, ext} = path.parse(arr[i]);
-    console.log('p: ', dir, base, ext);
-    const match = tree.find(e => e.includes(base));
-    if (['.png', '.jpg', '.pdf'].includes(ext)) {
-    
-      const newname = await hashFile(match);
-
-      // replace file names here
-      console.log('here replace: ', newname);
-      yield [base, newname];
-      
-    } else {
-      const newname = await hash(match);
-      yield [base, newname];
-
-
-    }
-
-
-  }
-}
 
 let tree = [];
 
-const wait = ms => new Promise((resolve) => setTimeout(resolve, ms));
+async function* gen(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    let newname;
+    const {base, ext} = path.parse(arr[i]);
+    const match = tree.find(e => e.includes(base));
+    if (['.png', '.jpg', '.pdf'].includes(ext)) {
+      newname = await hashFile(match);
+    } else {
+      newname = await hash(match);
+    }
+    yield [base, newname];
+  }
+}
 
 async function inner(data) {
   let file = data.replace(/src\//g, '');
   const paths = file.match(/\.\.?\/(\w+\/)?\w+\.(css|m?js|png|jpg|pdf)/g);
   if (paths) {
     const uniquePaths = [...new Set([...paths])];
-
-    console.log('ppppppppppppp: ', paths);
-
     for await (const p of gen(uniquePaths)) {
-      
       file = file.replace(new RegExp(p[0], 'g'), p[1]);
-      
     }
-    // hash file here
-    console.log('here hash: ', file.slice(0, 20));
     return file;
-
   } else {
     return data;
   }
-  
 }
-
 
 async function hash(file) {
   const resolvedFile = path.resolve(file);
-  console.log('hash func resolved file: ', resolvedFile);
-
   const data = await fs.promises.readFile(resolvedFile, 'utf8');
   const newFile = await inner(data);
   await fs.promises.writeFile(resolvedFile, newFile, 'utf8');
   const newname = resolvedFile.endsWith('html') ? resolvedFile : await hashFile(resolvedFile);
-  
   return newname;
-  
 }
 
 async function getFileTree(file) {
@@ -77,7 +50,6 @@ async function getFileTree(file) {
       return files.filter((file) => !['icons', 'index.html', 'manifest.webmanifest'].includes(file));
     }
   });
-
   return [file, tree.filter(f => !dirs.includes(f))];
 }
 
@@ -86,12 +58,12 @@ function sepArray([file, arr]) {
   return file;
 }
 
-getFileTree(process.argv[2]).then(sepArray).then(hash);
-
-
+getFileTree(process.argv[2])
+  .then(sepArray)
+  .then(hash)
+  .catch(e => console.error(e));
 
 async function hashFile(filepath) {
-  // wait(1000);
     const file = fs.createReadStream(filepath);
     const hash = crypto.createHash('md5');
     const {dir, name, ext} = path.parse(filepath);
@@ -110,4 +82,3 @@ async function hashFile(filepath) {
         });
     });
 }
-
