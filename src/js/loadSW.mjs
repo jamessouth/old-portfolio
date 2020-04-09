@@ -1,4 +1,5 @@
-import { Workbox } from 'workbox-window/Workbox.mjs'; // eslint-disable-line
+// import { Workbox } from 'workbox-window/Workbox.mjs'; // eslint-disable-line
+import {Workbox} from 'https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-window.prod.mjs';
 
 let deferredPrompt;
 const main = document.querySelector('main');
@@ -36,27 +37,27 @@ async function handleInstallClick() {
   }
 }
 
-// if ('serviceWorker' in navigator) {
-//   const wb = new Workbox('./service-worker.js');
-//   document.body.insertBefore(installBtn, main);
-//   document.body.insertBefore(installBtnBG, main);
-//   reloadBtn.addEventListener('click', () => {
-//     wb.addEventListener('controlling', () => {
-//       window.location.reload();
-//     });
-//     wb.messageSW({ type: 'SKIP_WAITING' });
-//   });
-//   wb.addEventListener('waiting', () => {
-//     document.body.insertBefore(reloadBtn, main);
-//     document.body.insertBefore(reloadBtnBG, main);
-//     reloadBtn.style.display = 'block';
-//     reloadBtnBG.style.display = 'block';
-//   });
-//   window.addEventListener('beforeinstallprompt', handleInstall);
-//   window.addEventListener('appinstalled', () => {
-//     const hl = document.querySelector('h1');
-//     hl.textContent = 'Thank you!';
-//     setTimeout(() => { hl.textContent = 'James South'; }, 6500);
-//   });
-//   wb.register();
-// }
+if ('serviceWorker' in navigator) {
+  const wb = new Workbox('./service-worker.js');
+  document.body.insertBefore(installBtn, main);
+  document.body.insertBefore(installBtnBG, main);
+  reloadBtn.addEventListener('click', () => {
+    wb.addEventListener('controlling', () => {
+      window.location.reload();
+    });
+    wb.messageSW({ type: 'SKIP_WAITING' });
+  });
+  wb.addEventListener('waiting', () => {
+    document.body.insertBefore(reloadBtn, main);
+    document.body.insertBefore(reloadBtnBG, main);
+    reloadBtn.style.display = 'block';
+    reloadBtnBG.style.display = 'block';
+  });
+  window.addEventListener('beforeinstallprompt', handleInstall);
+  window.addEventListener('appinstalled', () => {
+    const hl = document.querySelector('h1');
+    hl.textContent = 'Thank you!';
+    setTimeout(() => { hl.textContent = 'James South'; }, 6500);
+  });
+  wb.register();
+}

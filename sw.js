@@ -1,3 +1,9 @@
+// import { cleanupOutdatedCaches, precacheAndRoute } from 'workbox-precaching';
+// import { CacheFirst, StaleWhileRevalidate } from 'workbox-strategies';
+// import { registerRoute, setDefaultHandler } from 'workbox-routing';
+// import { setCacheNameDetails } from 'workbox-core';
+// import { ExpirationPlugin } from 'workbox-expiration';
+importScripts('https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js');
 const pref = 'portfolio';
 
 setCacheNameDetails({

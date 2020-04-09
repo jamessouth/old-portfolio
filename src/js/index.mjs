@@ -1,4 +1,4 @@
-// import './loadSW';
+import './loadSW.mjs';
 import projects from './projects.mjs';
 import links from './links.mjs';
 
