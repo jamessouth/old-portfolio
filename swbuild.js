@@ -4,13 +4,11 @@ const opts = {
   globDirectory: './docs',
   swSrc: './sw.js',
   swDest: './service-worker.js',
-  globPatterns: [],
+  globPatterns: ['**/*.css', '*.html', '**/*.?(js|mjs)', 'manifest.webmanifest'],
   dontCacheBustURLsMatching: /\.[0-9a-f]{32}\./,
 };
 
-
-
-
-injectManifest(...opts).then(({count, size}) => {
-  console.log(`Generated ${swDest}, which will precache ${count} files, totaling ${size} bytes.`);
-});
+injectManifest({...opts})
+  .then(({count, size}) => {
+    console.log(`SW saved, which will precache ${count} files, totaling ${size} bytes.`);
+  });
