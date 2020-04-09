@@ -1,32 +1,33 @@
-// import { cleanupOutdatedCaches, precacheAndRoute } from 'workbox-precaching';
-// import { CacheFirst, StaleWhileRevalidate } from 'workbox-strategies';
-// import { registerRoute, setDefaultHandler } from 'workbox-routing';
-// import { setCacheNameDetails } from 'workbox-core';
-// import { ExpirationPlugin } from 'workbox-expiration';
-importScripts('https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js');
+importScripts('/workbox-v5.1.2/workbox-sw.js');
+
+workbox.setConfig({
+  modulePathPrefix: '/workbox-v5.1.2/'
+});
+
 const pref = 'portfolio';
 
-setCacheNameDetails({
+workbox.core.setCacheNameDetails({
   prefix: pref,
   suffix: '',
   precache: pref + '-precache',
-  runtime: '',
+  runtime: pref + '-rt',
   googleAnalytics: 'ga'
 });
 
-precacheAndRoute(self.__WB_MANIFEST);
-cleanupOutdatedCaches();
+workbox.precaching.precacheAndRoute(self.__WB_MANIFEST);
+
+workbox.precaching.cleanupOutdatedCaches();
 
 addEventListener('message', e => {
   if (e.data && e.data.type === 'SKIP_WAITING') self.skipWaiting();
 });
 
-registerRoute(
+workbox.routing.registerRoute(
   /\.(?:js)$/,
-  new CacheFirst({
+  new workbox.strategies.CacheFirst({
     cacheName: `${pref}-js`,
     plugins: [
-      new ExpirationPlugin({
+      new workbox.expiration.ExpirationPlugin({
         maxAgeSeconds: 60 * 60 * 24 * 365,
         purgeOnQuotaError: true,
       }),
@@ -34,12 +35,12 @@ registerRoute(
   })
 );
 
-registerRoute(
+workbox.routing.registerRoute(
   /\.(?:png|pdf|jpe?g|svg|gif)$/,
-  new CacheFirst({
+  new workbox.strategies.CacheFirst({
     cacheName: `${pref}-images`,
     plugins: [
-      new ExpirationPlugin({
+      new workbox.expiration.ExpirationPlugin({
         maxAgeSeconds: 60 * 60 * 24 * 180,
         purgeOnQuotaError: true,
       }),
@@ -47,12 +48,12 @@ registerRoute(
   })
 );
 
-registerRoute(
+workbox.routing.registerRoute(
   /^https:\/\/fonts\.googleapis\.com/,
-  new StaleWhileRevalidate({
+  new workbox.strategies.StaleWhileRevalidate({
     cacheName: `${pref}-google-fonts-css`,
     plugins: [
-      new ExpirationPlugin({
+      new workbox.expiration.ExpirationPlugin({
         maxEntries: 3,
         maxAgeSeconds: 60 * 60 * 24 * 30,
         purgeOnQuotaError: true,
@@ -61,12 +62,12 @@ registerRoute(
   })
 );
 
-registerRoute(
+workbox.routing.registerRoute(
   /^https:\/\/fonts\.gstatic\.com/,
-  new CacheFirst({
+  new workbox.strategies.CacheFirst({
     cacheName: `${pref}-google-fonts`,
     plugins: [
-      new ExpirationPlugin({
+      new workbox.expiration.ExpirationPlugin({
         maxEntries: 3,
         maxAgeSeconds: 60 * 60 * 24 * 365,
         purgeOnQuotaError: true,
@@ -75,11 +76,11 @@ registerRoute(
   })
 );
 
-setDefaultHandler(
-  new StaleWhileRevalidate({
+workbox.routing.setDefaultHandler(
+  new workbox.strategies.StaleWhileRevalidate({
     cacheName: `${pref}-default`,
     plugins: [
-      new ExpirationPlugin({
+      new workbox.expiration.ExpirationPlugin({
         maxAgeSeconds: 60 * 60 * 24 * 365,
         purgeOnQuotaError: true,
       }),
