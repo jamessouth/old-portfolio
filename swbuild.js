@@ -1,3 +1,5 @@
+const fs = require('fs').promises;
+const path = require('path');
 const { copyWorkboxLibraries, injectManifest } = require('workbox-build');
 
 const opts = {
@@ -10,7 +12,16 @@ const opts = {
 };
 
 copyWorkboxLibraries('./docs')
-  .then(s => console.log(`Workbox libraries available in ${s}.`));
+  .then(s => {
+    console.log(`Workbox libraries available in ${s}.`);
+    return s;
+  })
+  .then(async d => {
+    const dir = await fs.opendir(path.resolve('./docs/' + d));
+    for await (const dirent of dir) {
+      console.log('file: ', dirent.name);
+    }
+  });
 
 injectManifest({...opts})
   .then(({count, size}) => {
