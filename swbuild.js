@@ -11,6 +11,16 @@ const opts = {
   dontCacheBustURLsMatching: /\.[0-9a-f]{32}\./,
 };
 
+const pkgs = [
+  'workbox-core',
+  'workbox-expiration',
+  'workbox-precaching',
+  'workbox-routing',
+  'workbox-strategies',
+  'workbox-sw',
+  'workbox-window',
+];
+// /(dev|map)/.test(dirent.name) || 
 copyWorkboxLibraries('./docs')
   .then(s => {
     console.log(`Workbox libraries available in ${s}.`);
@@ -19,7 +29,9 @@ copyWorkboxLibraries('./docs')
   .then(async d => {
     const dir = await fs.opendir(path.resolve('./docs/' + d));
     for await (const dirent of dir) {
-      console.log('file: ', dirent.name);
+      if (!pkgs.some(pk => dirent.name.includes(pk))) {
+        fs.unlink(path.resolve('./docs/' + d + '/' + dirent.name));
+      }
     }
   });
 

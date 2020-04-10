@@ -1,5 +1,4 @@
-// import { Workbox } from 'workbox-window/Workbox.mjs'; // eslint-disable-line
-import {Workbox} from 'https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-window.prod.mjs';
+importScripts('https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-window.prod.mjs');
 
 let deferredPrompt;
 const main = document.querySelector('main');
