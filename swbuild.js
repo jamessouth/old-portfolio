@@ -18,7 +18,6 @@ const pkgs = [
   'workbox-routing',
   'workbox-strategies',
   'workbox-sw',
-  'workbox-window',
 ];
 // /(dev|map)/.test(dirent.name) || 
 copyWorkboxLibraries('./docs')

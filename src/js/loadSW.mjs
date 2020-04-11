@@ -1,4 +1,4 @@
-importScripts('https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-window.prod.mjs');
+import { Workbox } from '../web_modules/workbox-window.js';
 
 let deferredPrompt;
 const main = document.querySelector('main');
