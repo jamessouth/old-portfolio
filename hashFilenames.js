@@ -23,7 +23,7 @@ async function inner(data) {
   let file = data.replace(/src\//g, '');
   const paths = file.match(/\.\.?\/(\w+\/)?[\w-]+\.(css|m?js|png|jpg|pdf)/g);
   if (paths) {
-    const uniquePaths = [...new Set([...paths])];
+    const uniquePaths = [...new Set([...paths.filter(p => !p.includes('service-worker'))])];
     for await (const p of gen(uniquePaths)) {
       file = file.replace(new RegExp(p[0], 'g'), p[1]);
     }
