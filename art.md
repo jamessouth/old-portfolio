@@ -73,6 +73,6 @@ want to consider now adding a bundler
 
 install workbox-window dep, run snowpack
 
-√ snowpack installed: workbox-window. [3.54s]
+√ snowpack installed: workbox-window. [1.07s]
 
 

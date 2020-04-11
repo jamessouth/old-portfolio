@@ -9,7 +9,7 @@ const pref = 'portfolio';
 workbox.core.setCacheNameDetails({
   prefix: pref,
   suffix: '',
-  precache: pref + '-precache',
+  precache: '-precache',
   runtime: pref + '-rt',
   googleAnalytics: 'ga'
 });
