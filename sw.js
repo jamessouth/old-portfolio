@@ -9,7 +9,7 @@ const pref = 'portfolio';
 workbox.core.setCacheNameDetails({
   prefix: pref,
   suffix: '',
-  precache: '-precache',
+  precache: 'precache',
   runtime: pref + '-rt',
   googleAnalytics: 'ga'
 });
@@ -33,6 +33,11 @@ workbox.routing.registerRoute(
       }),
     ],
   })
+);
+
+workbox.routing.registerRoute(
+  /^https:\/\/(www\.)?(codewars|projecteuler)/,
+  new workbox.strategies.NetworkOnly()
 );
 
 workbox.routing.registerRoute(
