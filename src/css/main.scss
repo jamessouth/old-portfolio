@@ -10,7 +10,9 @@ body{
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
-  background: linear-gradient(-65deg, rgba(250, 250, 210, .87) 25%, rgba(210, 210, 255, .88) 51%, rgba(250, 250, 210, .87) 75%), url('../images/cloud.jpg') top/contain repeat-y;// Image constituents by Pixabay user engin akyurt
+  background: linear-gradient(-65deg, rgba(250, 250, 210, .87) 25%, rgba(210, 210, 255, .88) 51%, rgba(250, 250, 210, .87) 75%), url('../images/cloud.jpg') repeat-y;// Image constituents by Pixabay user engin akyurt
+  background-position-y: 0%;
+  background-size: contain;
   @media #{$upsize_text}{
     background-size: cover;
   }
@@ -29,8 +31,7 @@ nav{
   height: 100%;
 }
 ul{
-  @include flex(row, space-around, center);
-  flex-wrap: wrap;
+  @include flex(row, space-around, center, wrap);
   height: 100%;
   list-style: none;
 }
@@ -61,13 +62,6 @@ li{
   & a:hover{
     text-decoration: underline;
   }
-  & button{
-    @include fonty(1em, bold);
-  }
-  & button:focus,
-  & button:hover{
-    @include focus($blue, 2px);
-  }
 }
 #port:target,
 #about:target,
@@ -77,36 +71,6 @@ li{
   @media #{$head_expand}{
     padding-top: 3rem;
   }
-}
-aside{
-  @include position($rt: 2%, $lt: 2%, $tp: 2%, $bm: 2%);
-  display: none;
-  z-index: 19;
-  background-color: #696969;
-  & button{
-    @include wh(35px, 50px);
-    @include fonty(2.5em, $lh: 0);
-    background-color: #f8f8ff;
-    @include position($lt: 2%, $tp: 9%);
-    border: 3px solid transparent;
-  }
-  & button:focus,
-  & button:hover{
-    @include focus(#ff7f50, 5px);
-  }
-  & p,
-  & a{
-    font-family: serif;
-    color: white;
-  }
-  & p{
-    margin-top: 5em;
-    font-size: 24px;
-  }
-}
-object,
-iframe{
-  @include wh(100%, 100%);
 }
 h1{
   margin: 9rem 0 9rem;
@@ -185,13 +149,8 @@ section{
   }
 }
 .projects{
-  display: grid;
-  place-items: center;
-  grid-template-columns: repeat(auto-fill, minmax(288px, 1fr));
-  grid-column-gap: 30px;
-  grid-row-gap: 100px;
+  @include grid(repeat(auto-fill, minmax(288px, 1fr)), 100px, 30px, 0 auto 6rem);
   width: 90%;
-  margin: 0 auto 6rem;
   @media #{$col_gap_expand}{
     grid-column-gap: 50px;
   }
@@ -254,32 +213,39 @@ section{
   }
 }
 .arts{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
+  @include grid(auto, 80px, 42px, auto);
+  @media screen and (min-width: 500px){
+    grid-template-columns: repeat(auto-fill, minmax(346px, auto));
+  }
+  @media screen and (min-width: 900px){
+    grid-template-columns: auto auto;
+  }
+  @media screen and (min-width: 1170px){
+    grid-template-columns: auto auto auto;
+  }
+  @media #{$upsize_text}{
+    max-width: 1800px;
+  }
   & > div{
     position: relative;
     width: 300px;
-    margin-bottom: 4rem;
-    @media #{$col_gap_expand}{
-      margin-bottom: 0;
-    }
     @media #{$upsize_text}{
       width: 400px;
     }
   }
   & > div:last-of-type{
-    margin-bottom: 0;
+    grid-column: 1 / -1;
+    @media screen and (min-width: 1170px){
+      grid-column: initial;
+    }
   }
   & > div > a{
     display: block;
     letter-spacing: -1px;
     text-align: center;
-    font-weight: bold;
     font-family: 'Scheherazade', serif;
+    @include fonty(1.7em, bold, 41px);
     @include fontMarg(1.7em, 2.5rem);
-    line-height: 41px;
     &:before,
     &:after{
       display: none;// too wide for iphone 4 width so don't show
@@ -303,16 +269,8 @@ section{
       font-size: 2em;
     }
   }
-  @media #{$col_gap_expand}{
-    flex-direction: row;
-  }
-  @media #{$upsize_text}{
-    width: 1200px;
-    margin: 0 auto;
-  }
 }
-#art_paint_one div,
-#art_paint_two div{
+.arts > div div{
   @include wh(300px, 300px);
   & a{
     outline: none;
@@ -322,9 +280,8 @@ section{
     margin: auto;
   }
 }
-#art_paint_one div{
-  display: flex;
-  flex-wrap: wrap;
+#art_one div{
+  @include flex($wrap: wrap);
   & a{
     @include wh(150px, 150px);
     &:focus,
@@ -345,11 +302,11 @@ section{
     }
   }
 }
-.art_paint_one{
+.art_one{
   object-fit: none;
-  @include wh(150px, 150px);
 }
-#art_paint_two div{
+#art_two div,
+#sp div{
   & a{
     @include wh(300px, 300px);
     display: block;
@@ -359,23 +316,54 @@ section{
     }
   }
 }
+.apo0{
+  object-position: 0px 0%;
+}
+.apo1{
+  object-position: -150px 0%;
+}
+.apo2{
+  object-position: -300px 0%;
+}
+.apo3{
+  object-position: -450px 0%;
+}
 .contact{
-  @include flex(column, space-between, center);
-  margin: 0 auto;
-  @include wh(100%, 700px);
-  @media #{$head_expand}{
-    flex-wrap: wrap;
-    @include wh(100%, 330px);
-  }
-  @media #{$two_col}{
-    @include wh(100%, 230px);
-  }
-  @media #{$col_gap_expand}{
-    flex-direction: row;
-    @include wh(800px, 150px);
+  @include flex(row, space-around, center, wrap);
+  @media screen and (min-width: 2000px){
+    max-width: 2000px;
+    margin: auto;
   }
   & > div{
     border: $bord;
+    margin: 2em;
+  }
+}
+#pe{
+  background: url('https://projecteuler.net/profile/jamessouth.png') no-repeat center/cover;
+  width: 200px;
+  height: 60px;
+}
+#cw{
+  background: url('https://www.codewars.com/users/jamessouth/badges/micro') no-repeat center/cover;
+  width: 192px;
+  height: 32px;
+  @media screen and (min-width: 800px){
+    background: url('https://www.codewars.com/users/jamessouth/badges/large') no-repeat center/cover;
+    width: 400px;
+    height: 40px;
+  }
+}
+#pe, #cw{
+  & a{
+    height: 100%;
+    display: block;
+    border: 2px solid transparent;
+  }
+  & a:focus,
+  a:hover{
+    outline: none;
+    border: 2px solid #1a2845;
   }
 }
 .installbtn,
@@ -409,8 +397,8 @@ section{
   background-color: $blue;
   @include position($lt: 15px, $bm: 1px);
   @include wh(120px, 120px);
-  -webkit-mask-image: paint(buttonBG);
-  mask-image: paint(buttonBG);
+  -webkit-mask-image: paint(buttonPaint);
+  mask-image: paint(buttonPaint);
 }
 .reloaddiv{
   @include position($rt: 15px, $lt: auto);

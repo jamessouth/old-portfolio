@@ -1,4 +1,4 @@
-const myWorker = new Worker('./worker.js', { type: 'module' });
+// const myWorker = new Worker('./worker.js', { type: 'module' });
 
 function panelMarkupTag(strings, ...anchors) {
   const str = [...anchors].map((anc) => `<a rel="noopener noreferrer">${anc}</a>`).join('\n      ');
@@ -99,7 +99,11 @@ class Panel extends HTMLElement {
     this.anchors[0].setAttribute('aria-label', this.codeAria);
     this.live && this.anchors[1].setAttribute('href', this.live);
     this.liveAria && this.anchors[1].setAttribute('aria-label', this.liveAria);
-    this.img.setAttribute('src', this.src);
+    fetch(this.src)
+    .then(i => {
+      this.img.setAttribute('src', i.url);
+    })
+    .catch(e => console.log('failed to fetch: ', e));
     this.img.setAttribute('alt', this.alt);
     this.ps[0].textContent = this.tech1;
     this.ps[1].textContent = this.tech2;
@@ -126,14 +130,14 @@ class Panel extends HTMLElement {
   }
 }
 
-myWorker.addEventListener('message', (e) => {
-  console.log(e);
-});
+// myWorker.addEventListener('message', (e) => {
+//   console.log(e);
+// });
 
 export default function panelFactory(div, project) {
   const panel = new Panel(project);
   div.appendChild(panel);
-  myWorker.postMessage(div.id);
+  // myWorker.postMessage(div.id);
 }
 
 window.customElements.define('project-panel', Panel);

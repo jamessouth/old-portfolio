@@ -1,12 +1,10 @@
 module.exports = {
     root: true,
-    parser: 'babel-eslint',
     parserOptions: {
-      allowImportExportEverywhere: false,
+      "ecmaVersion": 6,
     },
     env: {
       browser: true,
-      commonjs: true,
       es6: true,
       worker: true,
     },
@@ -17,7 +15,7 @@ module.exports = {
       'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
       "indent": ["error", 2],
       'linebreak-style': ['error', 'windows'],
-      'camelcase': ['error', { allow: [ 'art_paint_one', 'art_paint_two' ] }],
+      'camelcase': ['error', { allow: [ 'art_one', 'art_two' ] }],
       'no-unused-expressions': ['error', { 'allowShortCircuit': true }],
       'quotes': ['error', 'single', { 'allowTemplateLiterals': true }],
     },

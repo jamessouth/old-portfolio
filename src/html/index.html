@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link rel="stylesheet" type="text/css" href="./src/css/index.css">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><%= htmlWebpackPlugin.options.title %></title>
+    <title>James South - Portfolio</title>
     <link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap&text=I" rel="stylesheet">
      <!-- 0123456!ACJMPRSTabcdefghijklmnopqrstuvwxyzé -->
     <link href="https://fonts.googleapis.com/css?family=Cormorant+SC&display=swap&text=%200123456!ACJMPRSTabcdefghijklmnopqrstuvwxyz%C3%A9" rel="stylesheet">
@@ -28,13 +29,10 @@
           <li><a href="#port">Port</a></li>
           <li><a href="#articles">Articles</a></li>
           <li><a href="#cont">Contact</a></li>
-          <li><button>Résumé</button></li>
+          <li><a>Résumé</a></li>
         </ul>
       </nav>
     </header>
-    <aside>
-      <button>x</button>
-    </aside>
     <main>
       <h1>James South</h1>
       <section id="about">
@@ -63,19 +61,37 @@
       <section id="articles">
         <h2>Articles</h2>
         <div class="arts">
-          <div id="art_paint_one">
+          <div id="art_one">
             <a rel="noopener noreferrer" href="https://dev.to/jamessouth/generating-shapes-and-images-with-the-css-paint-houdini-api-29c">Generating Shapes and Images with the CSS Paint (Houdini) API</a>
             <div>
-              <a rel="noopener noreferrer" href="https://jamessouth.github.io/paint-demo/demo1.html"><img width="150" height="150" class="art_paint_one" alt="demo 1"/></a>
-              <a rel="noopener noreferrer" href="https://jamessouth.github.io/paint-demo/demo2.html"><img width="150" height="150" class="art_paint_one" alt="demo 2"/></a>
-              <a rel="noopener noreferrer" href="https://jamessouth.github.io/paint-demo/demo3.html"><img width="150" height="150" class="art_paint_one" alt="demo 3 - chrome only"/></a>
-              <a rel="noopener noreferrer" href="https://jamessouth.github.io/paint-demo/demo4.html"><img width="150" height="150" class="art_paint_one" alt="demo 4"/></a>
+              <a rel="noopener noreferrer" href="https://jamessouth.github.io/paint-demo/demo1.html">
+                <img loading="lazy" src="./src/images/art_one.jpg" width="150" height="150" class="apo0 art_one" alt="demo 1"/>
+              </a>
+              <a rel="noopener noreferrer" href="https://jamessouth.github.io/paint-demo/demo2.html">
+                <img loading="lazy" src="./src/images/art_one.jpg" width="150" height="150" class="apo1 art_one" alt="demo 2"/>
+              </a>
+              <a rel="noopener noreferrer" href="https://jamessouth.github.io/paint-demo/demo3.html">
+                <img loading="lazy" src="./src/images/art_one.jpg" width="150" height="150" class="apo2 art_one" alt="demo 3 - chrome only"/>
+              </a>
+              <a rel="noopener noreferrer" href="https://jamessouth.github.io/paint-demo/demo4.html">
+                <img loading="lazy" src="./src/images/art_one.jpg" width="150" height="150" class="apo3 art_one" alt="demo 4"/>
+              </a>
             </div>
           </div>
-          <div id="art_paint_two">
+          <div id="art_two">
             <a rel="noopener noreferrer" href="https://dev.to/jamessouth/generating-knockout-text-with-the-css-paint-houdini-api-2lac">Generating Knockout Text with the CSS Paint (Houdini) API</a>
             <div>
-              <a rel="noopener noreferrer" href="https://jamessouth.github.io/knockout-demo/"><img width="300" height="300" class="art_paint_two" alt="knockout text demos - chrome only"/></a>
+              <a rel="noopener noreferrer" href="https://jamessouth.github.io/knockout-demo/">
+                <img loading="lazy" src="./src/images/art_two.jpg" width="300" height="300" alt="knockout text demos - chrome only"/>
+              </a>
+            </div>
+          </div>
+          <div id="sp">
+            <a rel="noopener noreferrer" href="#">Placeholder: this article is currently under construction</a>
+            <div>
+              <a rel="noopener noreferrer" href="#">
+                <img loading="lazy" src="./src/images/art_two.jpg" width="300" height="300" alt="knockout text demos - chrome only"/>
+              </a>
             </div>
           </div>
         </div>
@@ -89,8 +105,16 @@
           <div id="3x"></div>
           <div id="4x"></div>
           <div id="5x"></div>
+          <div id="6x"></div>
+          <div id="pe">
+            <a rel="noopener noreferrer" href="https://projecteuler.net"></a>
+          </div>
+          <div id="cw">
+            <a rel="noopener noreferrer" href="https://www.codewars.com/users/jamessouth"></a>
+          </div>
         </div>
       </section>
     </main>
+    <script type="module" src="./src/js/index.mjs"></script>
   </body>
 </html>

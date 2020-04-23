@@ -1,4 +1,4 @@
-import { Workbox } from 'workbox-window/Workbox.mjs'; // eslint-disable-line
+import { Workbox } from '../web_modules/workbox-window.js';
 
 let deferredPrompt;
 const main = document.querySelector('main');

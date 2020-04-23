@@ -27,7 +27,11 @@ class Link extends HTMLElement {
 
   connectedCallback() {
     this.anchor.setAttribute('href', this.link);
-    this.img.setAttribute('src', this.src);
+    fetch(this.src)
+    .then(i => {
+      this.img.setAttribute('src', i.url);
+    })
+    .catch(e => console.log('failed to fetch: ', e));
     this.img.setAttribute('alt', this.alt);
   }
 

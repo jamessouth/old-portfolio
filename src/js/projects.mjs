@@ -1,18 +1,3 @@
-import rando from '../images/rando.jpg';
-import time from '../images/time.jpg';
-import clean from '../images/clean.jpg';
-import tictac from '../images/tictac.jpg';
-import puzz from '../images/puzz.jpg';
-import scrape from '../images/scrape.jpg';
-import twitter from '../images/twitter.jpg';
-import face from '../images/face.jpg';
-import vuelint from '../images/vuelint.jpg';
-import dash from '../images/dash.jpg';
-import emp from '../images/emp.jpg';
-import flickr from '../images/flickr.jpg';
-import port from '../images/port.jpg';
-import wdk from '../images/wdk.jpg';
-
 const projects = [
   {
     title: 'clean tablet',
@@ -21,7 +6,7 @@ const projects = [
     alt: 'names and scores from a game',
     tech1: 'go websockets',
     tech2: 'react heroku',
-    src: clean,
+    src: './src/images/clean.jpg',
     liveAria: 'live site for clean tablet game',
     codeAria: 'code for clean tablet project',
   },
@@ -32,7 +17,7 @@ const projects = [
     live: 'https://jamessouth.github.io/directory/',
     code: 'https://github.com/jamessouth/directory',
     alt: 'employee info cards laid out in a grid',
-    src: emp,
+    src: './src/images/emp.jpg',
     liveAria: 'live site for employee directory project',
     codeAria: 'code for employee directory project',
   },
@@ -43,7 +28,7 @@ const projects = [
     live: 'https://jamessouth.github.io/dashboard/',
     code: 'https://github.com/jamessouth/dashboard',
     alt: 'a doughnut chart',
-    src: dash,
+    src: './src/images/dash.jpg',
     liveAria: 'live site for web app dashboard project',
     codeAria: 'code for web app dashboard project',
   },
@@ -54,7 +39,7 @@ const projects = [
     live: 'https://jamessouth.github.io/fifteen-puzzle-generator/home',
     code: 'https://github.com/jamessouth/fifteen-puzzle-generator',
     alt: 'an unsolved sliding block puzzle',
-    src: puzz,
+    src: './src/images/puzz.jpg',
     liveAria: 'live site for 15 puzzle generator project',
     codeAria: 'code for 15 puzzle generator project',
   },
@@ -64,16 +49,16 @@ const projects = [
     tech2: 'react graphql',
     code: 'https://github.com/jamessouth/timezones',
     alt: 'a graphql query string and response',
-    src: time,
+    src: './src/images/time.jpg',
     codeAria: 'code for timezones project',
   },
   {
     title: 'portfolio',
-    tech1: 'pwa webpack a11y paint',
+    tech1: 'pwa snowpack a11y paint',
     tech2: 'components workers sass',
     code: 'https://github.com/jamessouth/portfolio',
     alt: 'hovering cubes with images of my websites on each side',
-    src: port,
+    src: './src/images/port.jpg',
     codeAria: 'code for portfolio project',
   },
   {
@@ -82,7 +67,7 @@ const projects = [
     code: 'https://github.com/jamessouth/random-quotes',
     alt: 'part of a famous quote',
     tech1: 'javascript',
-    src: rando,
+    src: './src/images/rando.jpg',
     liveAria: 'live site for random quotes project',
     codeAria: 'code for random quotes project',
   },
@@ -92,7 +77,7 @@ const projects = [
     code: 'https://github.com/jamessouth/tic-tac-toe',
     alt: 'a tic tac toe game',
     tech1: 'javascript',
-    src: tictac,
+    src: './src/images/tictac.jpg',
     liveAria: 'live site for tic tac toe project',
     codeAria: 'code for tic tac toe project',
   },
@@ -103,7 +88,7 @@ const projects = [
     live: 'https://www.npmjs.com/package/vue-style-lint',
     code: 'https://github.com/jamessouth/vue-style-lint',
     alt: 'output of a computer terminal',
-    src: vuelint,
+    src: './src/images/vuelint.jpg',
     liveAria: 'live site for vue-style-lint project',
     codeAria: 'code for vue-style-lint project',
   },
@@ -113,7 +98,7 @@ const projects = [
     tech2: 'nativescript',
     code: 'https://github.com/jamessouth/face-scramble',
     alt: 'a 15 puzzle being solved along with moves and elapsed time',
-    src: face,
+    src: './src/images/face.jpg',
     codeAria: 'code for face scramble project',
   },
   {
@@ -122,7 +107,7 @@ const projects = [
     tech2: 'pug es6 ajax',
     code: 'https://github.com/jamessouth/twitter-interface',
     alt: 'twitter sign up and login buttons',
-    src: twitter,
+    src: './src/images/twitter.jpg',
     codeAria: 'code for twitter interface project',
   },
   {
@@ -131,7 +116,7 @@ const projects = [
     alt: 'a stuffed frog',
     tech1: 'node',
     tech2: 'javascript',
-    src: scrape,
+    src: './src/images/scrape.jpg',
     codeAria: 'code for node.js web scraper project',
   },
   {
@@ -141,7 +126,7 @@ const projects = [
     alt: 'a laptop on a desk',
     tech1: 'javascript',
     tech2: 'chrome extension',
-    src: wdk,
+    src: './src/images/wdk.jpg',
     liveAria: 'live site for web dev kit project',
     codeAria: 'code for web dev kit project',
   },
@@ -151,7 +136,7 @@ const projects = [
     tech2: 'ajax',
     code: 'https://github.com/jamessouth/react-flickr-gallery',
     alt: 'a gallery of pictures',
-    src: flickr,
+    src: './src/images/flickr.jpg',
     codeAria: 'code for flickr gallery project',
   },
 ];
