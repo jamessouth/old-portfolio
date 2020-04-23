@@ -5,7 +5,7 @@ const { copyWorkboxLibraries, injectManifest } = require('workbox-build');
 const opts = {
   globDirectory: './docs',
   swSrc: './sw.js',
-  swDest: './docs/service-worker.js',
+  swDest: './service-worker.js',
   globIgnores: ['**/workbox*/*'],
   globPatterns: ['**/*.css', '*.html', '**/*.?(js|mjs)', 'manifest.webmanifest'],
   dontCacheBustURLsMatching: /\.[0-9a-f]{32}\./,
@@ -28,7 +28,7 @@ copyWorkboxLibraries('./docs')
   .then(async d => {
     const dir = await fs.opendir(path.resolve('./docs/' + d));
     for await (const dirent of dir) {
-      if (!pkgs.some(pk => /(dev|map)/.test(dirent.name) || dirent.name.includes(pk))) {
+      if (/(dev|map)/.test(dirent.name) || !pkgs.some(pk => dirent.name.includes(pk))) {
         fs.unlink(path.resolve('./docs/' + d + '/' + dirent.name));
       }
     }
