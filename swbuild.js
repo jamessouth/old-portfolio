@@ -5,7 +5,7 @@ const { copyWorkboxLibraries, injectManifest } = require('workbox-build');
 const opts = {
   globDirectory: './docs',
   swSrc: './sw.js',
-  swDest: './service-worker.js',
+  swDest: './sw2.js',
   globIgnores: ['**/workbox*/*'],
   globPatterns: ['**/*.css', '*.html', '**/*.?(js|mjs)', 'manifest.webmanifest'],
   dontCacheBustURLsMatching: /\.[0-9a-f]{32}\./,
