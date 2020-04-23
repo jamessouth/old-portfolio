@@ -34,11 +34,6 @@ const links = [
     alt: 'go to my dev community profile',
     src: './src/images/dev.png',
   },
-  {
-    link: 'https://exercism.io/profiles/jamessouth',
-    alt: 'go to my exercism profile',
-    src: exer,
-  },
 ];
 
 export default links;
