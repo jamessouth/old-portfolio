@@ -10,7 +10,7 @@
     "clean": "rm -rf ./docs && mkdir docs && cd ./docs && mkdir js && cd ../",
     "prebuild": "npm run clean && cp -r ./src/images ./docs/images && cp ./src/manifest.webmanifest ./docs/manifest.webmanifest && npm run snowpack",
     "build": "npm run build:html && npm run build:sass && npm run build:js",
-    "postbuild": "rm ./docs/web_modules/import-map.json && node ./hashFilenames.js ./docs/index.html && node ./swbuild.js && terser ./sw2.js -c -m -o ./service-worker.js && rm -f ./sw2.js",
+    "postbuild": "rm ./docs/web_modules/import-map.json && node ./hashFilenames.js ./docs/index.html && node ./swbuild.js && terser ./sw2.js -c -m -o ./docs/service-worker.js && rm -f ./sw2.js",
     "dev": "servor . ./src/html/index.html 3000 --reload",
     "lint": "eslint --fix ./src/js && echo 'Linted!'",
     "snowpack": "snowpack --no-source-map && mv ./web_modules ./docs/",
