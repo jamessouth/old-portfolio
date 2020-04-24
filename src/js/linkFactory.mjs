@@ -7,6 +7,7 @@ const htmlTag = `
 <style>
 a{
   display: block;
+  line-height: 0;
   border: 2px solid transparent;
   padding: 4px;
 }
