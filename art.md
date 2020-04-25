@@ -2,41 +2,32 @@ webpack to snowpack
 
 webpack pita compile img src with htmlwpplugin/html loader
 
-There I was struggling with webpack recently and wasn't able to really resolve my issue (src attributes in img tags) satisfactorily (a new html loader has since been released that may help and [webpack 5:last blood](https://github.com/webpack-contrib/html-loader/issues/195) will reportedly fix) so I started thinking about alternatives and remembered something I had heard about on Twitter called Snowpack.  Snowpack is not a bundler for source code.  It takes your dependencies (as in your package.json dependencies) and makes those available as modules, leaving you to develop more or less the old fashioned way.  As Snowpack promises, without bunding on each change, development does move faster (at least, your changes show up right away).  With a set of dev dependencies, you can easily achieve something pretty close to the webpack experience and that is what I want to discuss in this article.
+There I was struggling with webpack recently and wasn't able to really resolve my issue (src attributes in img tags) satisfactorily (a new html loader has since been released that may help and [webpack 5:last blood](https://github.com/webpack-contrib/html-loader/issues/195) will reportedly fix) so I started thinking about alternatives and remembered something I had heard about on Twitter called Snowpack.  Snowpack is not a bundler for source code.  It takes your dependencies (as in your package.json dependencies) and makes those available as modules, leaving you to develop more or less the old fashioned way (eg a hand-written html file loading css via a link tag and js via a script tag).  As Snowpack promises, without bunding on each change, development does move faster (at least, your changes show up right away).  With an additional set of dev dependencies, you can also ultimately achieve something pretty close to the webpack production experience and I want to additionally discuss that in this article.
 
 
 remove babel, new features widely supported
 
-One common part of a webpack build is of course to transpile source code with babel.  I have more than half a dozen babel ecosystem packages...are they still necessary?  Not really.  ES6 is widely supported now and I'm not using any of the latest features like nullish coalescing, plus with Edge based on Chromium now, it now supports several APIs that it didn't before.  
+One common part of a webpack build is of course to transpile source code with babel.  I have more than half a dozen babel ecosystem packages...are they still necessary?  Not really.  ES6 is widely supported now and I'm not using any of the latest features like nullish coalescing, plus with Chromium-based Edge now supports several APIs that it didn't before.  
 
 
 step 1 remove webpack, plugins, babel, webpack config, everyting except dev deps eslint, might use later
 
-So if we're not gonna use babel anymore, we can remove...pretty much every dependency.  All the babel, webpack loaders and plugins, everything except eslint.  Finally, we can (sniff) delete our webpack config.
+So if we're dumping webpack and not using babel anymore, we can remove...pretty much every dependency.  All the babel, webpack loaders and plugins, everything except eslint.  we can also drop the browserslist section and npm scripts (save the lint script) of package.json.  Finally, we can (sniff) delete our webpack config.
 
-remove npm scripts, add snowpack and servor
 
-Next, since we're dropping babel, we can get rid of the browserslist section of package.json.  We can also remove all our old webpack scripts, leaving only our lint script.  Now with all the webpack and related cruft gone, it's time to start adding things to create our Snowpack development environment.  We will start with Snowpack itself and a dev server package called servor.
 
-no deps without babel, so running snowpack does nothing, will add workbox later
+Now with all the webpack and related cruft gone, it's time to start adding tools to create our Snowpack development environment.  We will start with Snowpack itself and a dev server package called servor.  Let's start this project up and see what happens!  Right now, I have no non-dev dependencies, so running Snowpack does.....nothing!  Not unexpected.  We will add workbox later to actually engage Snowpack and return this project to its former PWA glory.
 
-Right now, I have no non-dev dependencies, so running Snowpack does.....nothing!  
+⠼ snowpack installing... 
+× Nothing to install.
 
-set up npm dev script for servor
 
-see what happens...
+set up npm dev script for servor    "dev": "servor . ./src/html/index.html 3000 --reload",
 
-remove htmlwebpackplugin template strings
+And try it again...nothing.  Oops, there are some overlooked htmlwebpackplugin template strings in the html.  Remove those and try again....OK, we're getting somewhere.  The page loads but with no styles, so let's start there!
 
-page loads, no styles
-
-start with styles, no more webpack so install sass
-
-get sass working, now we have styles
-
-set up npm script to watch sass and compile, which is picked up by servor and the change quickly appears in the browser
-
-since we're just migrating from webpack and the site has already been designed, disable sass source maps
+Since we're not webpacking anymore we will need to compile our sass manually so we'll install sass...and now the styles work!  Easy!  Let's set up an npm script to watch our sass files for changes and compile them into a css file, which change will be picked up by servor and the change quickly appears in the browser (note: sometimes a reload was needed)   "sass": "sass --no-source-map --watch ./src/css/main.scss ./src/css/index.css"
+Since we're just migrating from webpack and the site has already been designed, I am disabling sass source maps.
 
 start removing webpack/bundler specific import that won't work in regular js modules
 
@@ -64,8 +55,7 @@ optimize with snowpack
 
 snowpack only handles deps, not src code, but we can use npm for that
 
-⠼ snowpack installing... 
-× Nothing to install.
+
 
 make a simple build script
 
