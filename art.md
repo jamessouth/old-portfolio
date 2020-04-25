@@ -33,9 +33,7 @@ Now on to the JS.  We will start by removing webpack/bundler specific imports th
 
 So the JS is more or less working now, just need to update our imports to add file extensions, fix paths to point to src files rather than the webpack import variable name, replace asset imports with fetch statements, remove webpack chunk dynamic imports, etc.
 
-I also made some structural changes such as displaying the resume from an anchor tag instead of a button that opens a modal, 
-
-since edge is now chromium based get rid of fallbacks, edge only styles and elements
+I also made some structural changes such as displaying the resume from an anchor tag instead of a button that opens a modal, and the original issue that impelled me to try Snowpack in the first place, src attributes in html img tags.  Since edge is now chromium based we can drop the fallbacks, edge only styles that were formerly necessary.
 
 ok now site is ready with contact and article added and grid adjusted, time to add a dep
 
