@@ -29,21 +29,11 @@ And try it again...nothing.  Oops, there are some overlooked htmlwebpackplugin t
 Since we're not webpacking anymore we will need to compile our sass manually so we'll install sass...and now the styles work!  Easy!  Let's set up an npm script to watch our sass files for changes and compile them into a css file, which change will be picked up by servor and the change quickly appears in the browser (note: sometimes a reload was needed)   "sass": "sass --no-source-map --watch ./src/css/main.scss ./src/css/index.css"
 Since we're just migrating from webpack and the site has already been designed, I am disabling sass source maps.
 
-start removing webpack/bundler specific import that won't work in regular js modules
+Now on to the JS.  We will start by removing webpack/bundler specific imports that are not valid JS and won't work anymore, so that's lines like import(/* webpackChunkName: "linkLoader" */ './linkLoader'), import vuelint from '../images/vuelint.jpg', import '../css/main.scss' etc.  We will also change most of our .js files to .mjs files per the js module convention, the exception being the CSS Paint worklet files, and add our former webpack entry point in a script tag in the html.  
 
-first time using js modules due to using bundlers
+So the JS is more or less working now, just need to update our imports to add file extensions, fix paths to point to src files rather than the webpack import variable name, replace asset imports with fetch statements, remove webpack chunk dynamic imports, etc.
 
-add former webpack entry point as script tag in html
-
-reform imports
-
-change resume button to link, get rid of aside
-
-continue with former entry point, fixing paths and loading more and more...
-
-fix projects and links custom elements image fetching
-
-fix articles, remove from IO
+I also made some structural changes such as displaying the resume from an anchor tag instead of a button that opens a modal, 
 
 since edge is now chromium based get rid of fallbacks, edge only styles and elements
 
