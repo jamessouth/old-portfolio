@@ -37,19 +37,16 @@ I also made some structural changes such as displaying the resume from an anchor
 
 At this point the migration is almost complete, but we haven't actually used Snowpack yet so let's add a dependency to our package.json and see what Snowpack does with it.
 
-In this particular project the only dependency is workbox-window for loading service workers, which are kind of tricky to work with in development, but the procedure is the same for whatever dependency your project requires, such as react.  
+In this particular project the only dependency is workbox-window for loading service workers, which can be tricky to work with in development, but the procedure is the same for whatever dependency your project requires, such as react.  
+
+Let's install workbox-window and run snowpack.  Now we get this result in our terminal:  √ snowpack installed: workbox-window. [1.07s].  This will create a web_modules folder with our dependency inside, and we can now reference it in our js, like so: import { Workbox } from '../web_modules/workbox-window.js'. That's it!  When I deploy, I move the web_modules folder into dist with the other production files.  
+
+So that is about it!  Snowpack is a pretty simple way to handle our dependencies and build an application without all the overhead of a bundler.  When you're done and ready to deploy, you might consider adding a bundler to build for production, In another article I will discuss how to put some finishing touches on your Snowpack project to get some other benefits of bundling like minification and filename hashing.  Stay tuned! 
 
 
-
-
-
-
-make a simple build script
 
 want to consider now adding a bundler
 
-install workbox-window dep, run snowpack
 
-√ snowpack installed: workbox-window. [1.07s]
 
 
