@@ -35,13 +35,12 @@ So the JS is more or less working now, just need to update our imports to add fi
 
 I also made some structural changes such as displaying the resume from an anchor tag instead of a button that opens a modal, and the original issue that impelled me to try Snowpack in the first place, src attributes in html img tags.  Since edge is now chromium based we can drop the fallbacks, edge only styles that were formerly necessary.
 
-ok now site is ready with contact and article added and grid adjusted, time to add a dep
+At this point the migration is almost complete, but we haven't actually used Snowpack yet so let's add a dependency to our package.json and see what Snowpack does with it.
 
-add sw with workbox cli
+In this particular project the only dependency is workbox-window for loading service workers, which are kind of tricky to work with in development, but the procedure is the same for whatever dependency your project requires, such as react.  
 
-optimize with snowpack
 
-snowpack only handles deps, not src code, but we can use npm for that
+
 
 
 
