@@ -1,12 +1,25 @@
 const https = require('https');
 const fs = require('fs');
-const file = fs.createWriteStream('./depdata');
+// const file = fs.createWriteStream('./terserdata', {flags: 'a'});
 const { Transform } = require('stream');
 
+const terserDeps = [];
+for (let i = 0; i < 554; i+=36) {
+    getData(i);
 
+}
+async function getData(i) {
+    console.log('iii: ', i);
+    return new Promise(res => {
 
-https.get('https://www.npmjs.com/browse/depended/terser?offset=0', chunks => chunks.pipe(filt()).pipe(filt2()).pipe(filt3()).pipe(file));
-
+        res(https.get(`https://www.npmjs.com/browse/depended/terser?offset=${i}`, chunks =>
+        chunks
+        .pipe(filt())
+        .pipe(filt2())
+        .pipe(filt3())
+        .pipe(process.stdout)));
+    });
+}
 
 
 const filt2 = () => {
@@ -34,7 +47,7 @@ const filt3 = () => {
 
             } else {
 
-                this.push(newstr + "\n")
+                terserDeps.push(newstr)
             }
             cb();
         }
@@ -57,9 +70,3 @@ const filt = () => {
           }
     });
 };
-
-// for (const path of process.argv.slice(2)) {
-//     const file = fs.createReadStream(path);
-//     const newfile = fs.createWriteStream(path.replace(/\d/, ''));
-//     file.pipe(fixpath()).pipe(newfile);
-// }
