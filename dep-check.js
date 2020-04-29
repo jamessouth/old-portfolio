@@ -3,21 +3,29 @@ const fs = require('fs');
 // const file = fs.createWriteStream('./terserdata', {flags: 'a'});
 const { Transform } = require('stream');
 
-const terserDeps = [];
-for (let i = 0; i < 554; i+=36) {
-    getData(i);
 
+async function go(arr) {
+    return new Promise(async res => {
+        for (let i = 0; i < 73; i+=36) {
+            let r = await getData(i, []);
+            arr.push(r);
+        }
+        res(arr);
+    });
 }
-async function getData(i) {
+
+go([]).then(s => console.log('sss: ', s));
+
+async function getData(i, arr) {
     console.log('iii: ', i);
     return new Promise(res => {
-
-        res(https.get(`https://www.npmjs.com/browse/depended/terser?offset=${i}`, chunks =>
-        chunks
-        .pipe(filt())
-        .pipe(filt2())
-        .pipe(filt3())
-        .pipe(process.stdout)));
+        let cnt = 0;
+        https.get(`https://www.npmjs.com/browse/depended/terser?offset=${i}`, chunks =>
+            chunks
+            .pipe(filt())
+            .pipe(filt2())
+            .pipe(filt3(arr, cnt, res)));
+        // res();
     });
 }
 
@@ -37,7 +45,7 @@ const filt2 = () => {
     });
 };
 
-const filt3 = () => {
+const filt3 = (arr, c, r) => {
     return new Transform({
         transform(ch, _, cb) {
             let newstr;
@@ -47,7 +55,12 @@ const filt3 = () => {
 
             } else {
 
-                terserDeps.push(newstr)
+                arr.push(newstr)
+                c++;
+                if (c == 36) {
+                    r(arr);
+                    // console.log('arrrr: ', arr);
+                }
             }
             cb();
         }
