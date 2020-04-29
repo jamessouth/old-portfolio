@@ -1,31 +1,33 @@
 const https = require('https');
-const fs = require('fs');
-// const file = fs.createWriteStream('./terserdata', {flags: 'a'});
 const { Transform } = require('stream');
 
 
-async function go(arr) {
+async function go(arr, pkg) {
     return new Promise(async res => {
         for (let i = 0; i < 73; i+=36) {
-            let r = await getData(i, []);
+            let r = await getData(i, [], pkg);
             arr.push(r);
         }
         res(arr);
     });
 }
 
-go([]).then(s => console.log('sss: ', s));
+go([], 'terser').then(s => {
+    let g = [];
+    for (let a of s) {
+        g.push(...a);
+    }
+    console.log('gggg: ', g.length);
+});
 
-async function getData(i, arr) {
-    console.log('iii: ', i);
+async function getData(i, arr, pkg) {
     return new Promise(res => {
         let cnt = 0;
-        https.get(`https://www.npmjs.com/browse/depended/terser?offset=${i}`, chunks =>
+        https.get(`https://www.npmjs.com/browse/depended/${pkg}?offset=${i}`, chunks =>
             chunks
             .pipe(filt())
             .pipe(filt2())
             .pipe(filt3(arr, cnt, res)));
-        // res();
     });
 }
 
@@ -38,7 +40,6 @@ const filt2 = () => {
             if (/<h3.+h3>/g.test(str)) {
                 newstr = str.match(/<h3.+h3>/g, '');
                 this.push(newstr + "\n")
-                // console.log('mmmmm: ', newstr);
             }
             cb();
         }
@@ -59,7 +60,6 @@ const filt3 = (arr, c, r) => {
                 c++;
                 if (c == 36) {
                     r(arr);
-                    // console.log('arrrr: ', arr);
                 }
             }
             cb();
