@@ -4,7 +4,7 @@ const { Transform } = require('stream');
 
 async function go(arr, pkg) {
     return new Promise(async res => {
-        for (let i = 0; i < 73; i+=36) {
+        for (let i = 0; i < 37; i += 36) {
             let r = await getData(i, [], pkg);
             arr.push(r);
         }
@@ -12,12 +12,15 @@ async function go(arr, pkg) {
     });
 }
 
-go([], 'terser').then(s => {
-    let g = [];
-    for (let a of s) {
-        g.push(...a);
-    }
-    console.log('gggg: ', g.length);
+async function run(arr) {
+    let a = await Promise.all(arr.map(p => go([], p)));
+    return a;
+    // Promise.all([go([], 'terser')])
+}
+
+run(process.argv.slice(2))
+.then(s => {
+    console.log('gggg: ', s);
 });
 
 async function getData(i, arr, pkg) {
@@ -39,6 +42,7 @@ const filt2 = () => {
             const str = ch.toString();
             if (/<h3.+h3>/g.test(str)) {
                 newstr = str.match(/<h3.+h3>/g, '');
+                // console.log('res: ', newstr);
                 this.push(newstr + "\n")
             }
             cb();
@@ -56,14 +60,18 @@ const filt3 = (arr, c, r) => {
 
             } else {
 
-                arr.push(newstr)
-                c++;
-                if (c == 36) {
-                    r(arr);
-                }
+                arr.push(newstr);
+                // c++;
+                // if (c == 36) {
+                // }
             }
             cb();
-        }
+        },
+        flush(cb) {
+            r(arr);
+            
+            cb();
+          }
     });
 };
 
@@ -83,3 +91,30 @@ const filt = () => {
           }
     });
 };
+
+// const wait = value => new Promise(resolve => {
+//     setTimeout(() => resolve(value), 3000);
+//   });
+    
+//   const fetchFoo = () => wait('foo');
+//   const fetchBar = () => wait('bar');
+//   const fetchBaz = () => wait('baz');
+ 
+  
+//   const fetchDataQuickly2 = async time => {
+//     // Also good.
+//     // const fooReady = fetchFoo();
+//     // const barReady = fetchBar();
+//     // const bazReady = fetchBaz();
+  
+//     // const foo = await fooReady;
+//     // const bar = await barReady;
+//     // const baz = await bazReady;
+//     // return { foo, bar, baz, time: Date.now() - time };
+//     return Promise.all([fetchFoo, fetchBar, fetchBaz].map(g => g()));
+//   };
+  
+//   fetchDataQuickly2(Date.now())
+//     .then((x) => {
+//       console.log('fetched quickly:', x);
+//     });
