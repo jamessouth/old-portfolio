@@ -13,24 +13,22 @@ async function go(arr, pkg) {
 }
 
 async function run(arr) {
-    let a = await Promise.all(arr.map(p => go([], p)));
-    return a;
-    // Promise.all([go([], 'terser')])
+    return await Promise.all(arr.map(p => go([], p)));
 }
 
 run(process.argv.slice(2))
+.then(e => e.map(y => y.flat()))
 .then(s => {
     console.log('gggg: ', s);
 });
 
 async function getData(i, arr, pkg) {
     return new Promise(res => {
-        let cnt = 0;
         https.get(`https://www.npmjs.com/browse/depended/${pkg}?offset=${i}`, chunks =>
             chunks
             .pipe(filt())
             .pipe(filt2())
-            .pipe(filt3(arr, cnt, res)));
+            .pipe(filt3(arr, res)));
     });
 }
 
@@ -50,26 +48,18 @@ const filt2 = () => {
     });
 };
 
-const filt3 = (arr, c, r) => {
+const filt3 = (arr, r) => {
     return new Transform({
         transform(ch, _, cb) {
-            let newstr;
             const str = ch.toString();
-            newstr = str.match(/>.+(?=<\/h3)/g, '')[0].slice(1);
-            if (newstr.startsWith("Help")) {
-
-            } else {
-
+            const newstr = str.match(/>.+(?=<\/h3)/g, '')[0].slice(1);
+            if (!newstr.startsWith("Help")) {
                 arr.push(newstr);
-                // c++;
-                // if (c == 36) {
-                // }
             }
             cb();
         },
         flush(cb) {
             r(arr);
-            
             cb();
           }
     });
