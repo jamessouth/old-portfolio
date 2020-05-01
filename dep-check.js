@@ -4,10 +4,13 @@ const { Transform } = require('stream');
 
 async function go(arr, pkg) {
     return new Promise(async res => {
-        for (let i = 0; i < 37; i += 36) {
-            let r = await getData(i, [], pkg);
+        let r;
+        let i = 0;
+        do {
+            r = await getData(i, [], pkg);
             arr.push(r);
-        }
+            i += 36;
+        } while (r.length > 0);
         res(arr);
     });
 }
@@ -19,16 +22,19 @@ async function run(arr) {
 run(process.argv.slice(2))
 .then(e => e.map(y => y.flat()))
 .then(s => {
-    console.log('gggg: ', s);
+    console.log('gggg: ', red(s));
 });
 
 async function getData(i, arr, pkg) {
     return new Promise(res => {
-        https.get(`https://www.npmjs.com/browse/depended/${pkg}?offset=${i}`, chunks =>
+        setTimeout(() => {
+            console.log('fired off: ', pkg, Date.now());
+            https.get(`https://www.npmjs.com/browse/depended/${pkg}?offset=${i}`, chunks =>
             chunks
             .pipe(filt())
             .pipe(filt2())
             .pipe(filt3(arr, res)));
+        }, 3200);
     });
 }
 
@@ -40,7 +46,6 @@ const filt2 = () => {
             const str = ch.toString();
             if (/<h3.+h3>/g.test(str)) {
                 newstr = str.match(/<h3.+h3>/g, '');
-                // console.log('res: ', newstr);
                 this.push(newstr + "\n")
             }
             cb();
@@ -82,29 +87,25 @@ const filt = () => {
     });
 };
 
-// const wait = value => new Promise(resolve => {
-//     setTimeout(() => resolve(value), 3000);
-//   });
-    
-//   const fetchFoo = () => wait('foo');
-//   const fetchBar = () => wait('bar');
-//   const fetchBaz = () => wait('baz');
- 
-  
-//   const fetchDataQuickly2 = async time => {
-//     // Also good.
-//     // const fooReady = fetchFoo();
-//     // const barReady = fetchBar();
-//     // const bazReady = fetchBaz();
-  
-//     // const foo = await fooReady;
-//     // const bar = await barReady;
-//     // const baz = await bazReady;
-//     // return { foo, bar, baz, time: Date.now() - time };
-//     return Promise.all([fetchFoo, fetchBar, fetchBaz].map(g => g()));
-//   };
-  
-//   fetchDataQuickly2(Date.now())
-//     .then((x) => {
-//       console.log('fetched quickly:', x);
-//     });
+function red(arr) {
+    return arr.reduce((acc, cur) => {
+        return acc.filter(e => cur.includes(e));
+    });
+}
+
+// deps common to terser, html-minifier, postcss:
+
+// [
+//     'assetgraph',
+//     'vue-compment',
+//     'vue-compment',
+//     '@adaptcharm/render',
+//     'miniprogram-ci',
+//     'flexi-site-gen',
+//     '@catalyst-elements/dev-utils',
+//     '@astronomersiva/lego',
+//     'gladejs',
+//     '@amoutonbrady/sbg',
+//     '@l1nyanm1ng/react-picture-viewer',
+//     '@cannery/hoist'
+//   ]
