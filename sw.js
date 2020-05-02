@@ -1,7 +1,7 @@
-importScripts('./workbox-v5.1.2/workbox-sw.js');
+importScripts('./workbox-v5.1.3/workbox-sw.js');
 
 workbox.setConfig({
-  modulePathPrefix: './workbox-v5.1.2/'
+  modulePathPrefix: './workbox-v5.1.3/'
 });
 
 const pref = 'portfolio';

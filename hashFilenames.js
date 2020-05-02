@@ -2,7 +2,7 @@ const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 const walk = require('walkdir');
-// Node script that recursively hashes files, updating the paths found in a file with their new hashed filenames, then hashing the file itself
+
 let tree = [];
 
 async function hashFile(filepath) {
