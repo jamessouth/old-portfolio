@@ -3,19 +3,20 @@ title: webpack to Snowpack: a Migration
 published: false
 description: 
 tags: webpack snowpack webdev
+cover_image: https://raw.githubusercontent.com/jamessouth/portfolio/master/cover.png
+canonical_url: https://dev.to/jamessouth/webpack-to-snowpack-a-migration-5ea0
 ---
 Image by <a href="https://pixabay.com/users/Natalia_Kollegova-5226803/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2790656">Наталья Коллегова</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2790656">Pixabay</a>
 
-description: Using JS to draw knockout text backgrounds
-tags: CSS, JavaScript, Paint, Houdini
-cover_image: https://raw.githubusercontent.com/jamessouth/knockout-demo/master/images/title.png
-canonical_url: https://dev.to/jamessouth/generating-knockout-text-with-the-css-paint-houdini-api-2lac
+
+
+
 
 
 
 There I was, struggling with webpack and not able to resolve my issue, when I started thinking about alternatives and remembered something I had seen on Twitter called [Snowpack](https://www.snowpack.dev/).  I read the docs, it sounds neat, let's check it out! 😎 Snowpack is not a bundler for source code.  It takes your dependencies (as in your `package.json` dependencies) and makes those available as JS modules, leaving you free to develop like nature intended (e.g., a hand-written HTML file loading CSS via a link tag and JS via a script tag).  As Snowpack promises, without bundling on each source code change, development cycles faster (at least, your changes show up right away).  When you are ready to deploy you can easily add some other tools/scripts to minify, hash, etc., and build for production just like you did with webpack, as I will also discuss in this article. The subject of this migration is my [portfolio site on GitHub](https://jamessouth.github.io/portfolio/).  Let's begin! 🗻
 
-One common part of a webpack build is of course to transpile source code with Babel.  I have more than half a dozen Babel ecosystem packages...are they still necessary?  Not really.  ES6 is widely supported now and I'm not using any of the latest features like nullish coalescing, plus Chromium-based Edge now supports several APIs that it didn't before.  
+One common part of a webpack build is of course to transpile source code with Babel, and you can still do that with Snowpack.  I have more than half a dozen Babel ecosystem packages...are they still necessary?  Not really.  ES6 is widely supported now and I'm not using any of the latest features like nullish coalescing, plus Chromium-based Edge now supports several APIs that it didn't before.  
 
 
 
