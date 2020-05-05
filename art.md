@@ -2,29 +2,19 @@
 title: webpack to Snowpack: a Migration
 published: false
 description: 
-tags: webpack snowpack webdev
+tags: webpack, snowpack, webdev, hireme
 cover_image: https://raw.githubusercontent.com/jamessouth/portfolio/master/cover.png
 canonical_url: https://dev.to/jamessouth/webpack-to-snowpack-a-migration-5ea0
 ---
-Image by <a href="https://pixabay.com/users/Natalia_Kollegova-5226803/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2790656">Наталья Коллегова</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2790656">Pixabay</a>
-
-
-
-
-
 
 
 There I was, struggling with webpack and not able to resolve my issue, when I started thinking about alternatives and remembered something I had seen on Twitter called [Snowpack](https://www.snowpack.dev/).  I read the docs, it sounds neat, let's check it out! 😎 Snowpack is not a bundler for source code.  It takes your dependencies (as in your `package.json` dependencies) and makes those available as JS modules, leaving you free to develop like nature intended (e.g., a hand-written HTML file loading CSS via a link tag and JS via a script tag).  As Snowpack promises, without bundling on each source code change, development cycles faster (at least, your changes show up right away).  When you are ready to deploy you can easily add some other tools/scripts to minify, hash, etc., and build for production just like you did with webpack, as I will also discuss in this article. The subject of this migration is my [portfolio site on GitHub](https://jamessouth.github.io/portfolio/).  Let's begin! 🗻
 
-One common part of a webpack build is of course to transpile source code with Babel, and you can still do that with Snowpack.  I have more than half a dozen Babel ecosystem packages...are they still necessary?  Not really.  ES6 is widely supported now and I'm not using any of the latest features like nullish coalescing, plus Chromium-based Edge now supports several APIs that it didn't before.  
+One common part of a webpack build is of course to transpile source code with Babel, and you can still do that with Snowpack.  But I think the first thing I'm going to do on this migration is drop it.  I have more than half a dozen Babel ecosystem packages...are they still necessary?  Not really.  ES6 is widely supported now and I'm not using any of the latest features like nullish coalescing, plus Chromium-based Edge now supports several APIs that it didn't before.  Babel gets the 🪓.
 
+So if we're dumping webpack and not using Babel anymore, we can remove...pretty much every (dev) dependency.  All the Babel, webpack loaders and plugins...everything except `eslint`.  Let's keep that.  We can also drop the `browserslist` section and prune the `scripts` (save the lint script) of `package.json`.  Finally, we can (😢) delete our webpack config.💔
 
-
-So if we're dumping webpack and not using Babel anymore, we can remove...pretty much every dependency.  All the Babel, webpack loaders and plugins...everything except `eslint`.  we can also drop the `browserslist` section and prune the `scripts` (save the lint script) of `package.json`.  Finally, we can (😢) delete our webpack config.💔
-
-
-
-Now with all the webpack and related cruft gone, it's time to start adding tools to create our Snowpack development environment.  We will start with Snowpack itself and a dev server package called [servor](https://www.npmjs.com/package/servor).  Let's start this project up and see what happens!  Right now, I have no non-dev dependencies, so running Snowpack does.....nothing!  Not unexpected.  We will add `workbox-window` later to actually engage Snowpack and return this project to its former PWA glory.
+Now with all the webpack cruft gone, it's time to start adding tools to create our Snowpack development environment.  We will start with Snowpack itself and a dev server package called [servor](https://www.npmjs.com/package/servor).  Let's start this project up and see what happens!  Right now, I have no non-dev dependencies, so running Snowpack does.....nothing!  Not unexpected.  We will add `workbox-window` later to actually engage Snowpack and return this project to its former PWA glory.
 ```bash
 ⠼ snowpack installing... 
 × Nothing to install.
@@ -32,14 +22,14 @@ Now with all the webpack and related cruft gone, it's time to start adding tools
 Let's set up npm script for servor:
 `"dev": "servor . ./src/html/index.html 3000 --reload"`
 
-And try it again...nothing.  Oops, there are some overlooked htmlwebpackplugin template strings in the html.  Remove those and try again....OK, we're getting somewhere.  The page loads but with no styles, so let's start there!
+And try it again...nothing.  Oops, there are some overlooked `HtmlWebpackPlugin` template strings in the html.  Remove those and try again....OK, we're getting somewhere.  The page loads but with no styles, so let's start there!
 
-![webpage with styles disabled](https://raw.githubusercontent.com/jamessouth/knockout-demo/master/images/demo2.png)
+![webpage with styles disabled](https://raw.githubusercontent.com/jamessouth/portfolio/master/unstyled.png)
 
-Since we're not webpacking anymore we will need to compile our sass manually so we'll install sass...and now the styles work!  Easy!  Let's set up an npm script to watch our sass files for changes and compile them into a css file, which will be watched by servor and any changes will quickly appear in the browser (note: sometimes a reload was needed):
+Since we're not webpacking anymore we will need to compile our sass manually so we'll install sass...and now the styles work!  Easy!😁  Let's set up an npm script to watch our sass files for changes and compile them into a css file, which will be watched by servor and any changes will quickly appear in the browser (note: sometimes a reload was needed):
+
 `"sass": "sass --no-source-map --watch ./src/css/main.scss ./src/css/index.css"`
-
-Since we're just migrating from webpack and the site has already been designed, I am disabling sass source maps.
+(Since we're just migrating from webpack and the site has already been designed, I am disabling sass source maps.)
 
 Now on to the JS.  We will start by removing webpack/bundler specific imports that are not valid JS and won't work anymore, so that would be lines such as:
 
@@ -63,7 +53,9 @@ Let's install `workbox-window` and run Snowpack.  Now we get this result in our 
 ```
 This will create a web_modules folder with our dependency inside, and we can now reference it in our js, like so: `import { Workbox } from '../web_modules/workbox-window.js'`. That's it!  When I deploy, I move the web_modules folder into dist with the other production files.  
 
-So that's about it!  Snowpack is a pretty simple way to handle dependencies and build an application without all the overhead of a bundler, but you can still add one for production if you need to.  However, for those interested, I'm planning another article (and possibly a small utility to handle everything discussed therein) on how to put some finishing touches on your Snowpack project (or any non-bundled project) to get some other benefits of bundling like minification and filename hashing.  Stay tuned! 
+So that's about it!  Snowpack is a pretty simple way to handle dependencies and build an application without all the overhead of a bundler, but you can still add one for production if you need to.  However, for those interested, I'm planning another article (and possibly a small utility to handle everything discussed therein) on how to put some finishing touches on your Snowpack project (or any non-bundled project) to get some other benefits of bundling like minification and filename hashing.  Stay tuned!
 
+Final note:  dev needs his first job, please help😃
 
+Image by <a href="https://pixabay.com/users/Natalia_Kollegova-5226803/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2790656">Наталья Коллегова</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2790656">Pixabay</a>
 
