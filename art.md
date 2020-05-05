@@ -6,15 +6,13 @@ tags: webpack, snowpack, webdev, hireme
 cover_image: https://raw.githubusercontent.com/jamessouth/portfolio/master/cover.png
 canonical_url: https://dev.to/jamessouth/webpack-to-snowpack-a-migration-5ea0
 ---
+There I was, struggling with webpack and unable to resolve my issue, when I started thinking about alternatives and remembered something I had seen on Twitter called [Snowpack](https://www.snowpack.dev/).  I read the docs, it sounds neat, let's check it out! 😎 Snowpack is not a bundler for source code.  It takes your `package.json` dependencies and makes those available as JS modules, leaving you free to develop like nature intended (e.g., a hand-written HTML file loading CSS via a link tag and JS via a script tag).  As Snowpack promises, without bundling on each source code change, development cycles faster (at least, your changes show up right away).  When you are ready to deploy you can easily add some other tools/scripts to minify, hash, etc., and build for production just like you did with webpack, as I will also discuss in this article. The project we're gonna migrate is my [portfolio site on GitHub](https://jamessouth.github.io/portfolio/).  Let's begin! 🗻
 
-
-There I was, struggling with webpack and not able to resolve my issue, when I started thinking about alternatives and remembered something I had seen on Twitter called [Snowpack](https://www.snowpack.dev/).  I read the docs, it sounds neat, let's check it out! 😎 Snowpack is not a bundler for source code.  It takes your dependencies (as in your `package.json` dependencies) and makes those available as JS modules, leaving you free to develop like nature intended (e.g., a hand-written HTML file loading CSS via a link tag and JS via a script tag).  As Snowpack promises, without bundling on each source code change, development cycles faster (at least, your changes show up right away).  When you are ready to deploy you can easily add some other tools/scripts to minify, hash, etc., and build for production just like you did with webpack, as I will also discuss in this article. The subject of this migration is my [portfolio site on GitHub](https://jamessouth.github.io/portfolio/).  Let's begin! 🗻
-
-One common part of a webpack build is of course to transpile source code with Babel, and you can still do that with Snowpack.  But I think the first thing I'm going to do on this migration is drop it.  I have more than half a dozen Babel ecosystem packages...are they still necessary?  Not really.  ES6 is widely supported now and I'm not using any of the latest features like nullish coalescing, plus Chromium-based Edge now supports several APIs that it didn't before.  Babel gets the 🪓.
+One common part of a webpack build is of course to transpile source code with Babel, and you can still do that with Snowpack.  However, I think the first thing I'm going to do on this migration is drop it.  I have more than half a dozen Babel ecosystem packages...are they still necessary?  Not really.  ES6 is widely supported now and I'm not using any of the latest features like nullish coalescing in this project, plus Chromium-based Edge now supports several APIs that it didn't before.  Babel gets the 🪓.
 
 So if we're dumping webpack and not using Babel anymore, we can remove...pretty much every (dev) dependency.  All the Babel, webpack loaders and plugins...everything except `eslint`.  Let's keep that.  We can also drop the `browserslist` section and prune the `scripts` (save the lint script) of `package.json`.  Finally, we can (😢) delete our webpack config.💔
 
-Now with all the webpack cruft gone, it's time to start adding tools to create our Snowpack development environment.  We will start with Snowpack itself and a dev server package called [servor](https://www.npmjs.com/package/servor).  Let's start this project up and see what happens!  Right now, I have no non-dev dependencies, so running Snowpack does.....nothing!  Not unexpected.  We will add `workbox-window` later to actually engage Snowpack and return this project to its former PWA glory.
+Now with all the webpack cruft gone, it's time to start adding tools to create our Snowpack development environment.  We will start with Snowpack itself and a dev server package called [servor](https://www.npmjs.com/package/servor).  Let's start this project up and see what happens!  Right now, I have no non-dev dependencies, so running Snowpack does.....nothing!  Not unexpected.  We will add `workbox-window` later to actually use Snowpack and return this project to its former PWA glory.
 ```bash
 ⠼ snowpack installing... 
 × Nothing to install.
@@ -22,7 +20,7 @@ Now with all the webpack cruft gone, it's time to start adding tools to create o
 Let's set up npm script for servor:
 `"dev": "servor . ./src/html/index.html 3000 --reload"`
 
-And try it again...nothing.  Oops, there are some overlooked `HtmlWebpackPlugin` template strings in the html.  Remove those and try again....OK, we're getting somewhere.  The page loads but with no styles, so let's start there!
+And try it again...nothing.  Oops, there are some overlooked `HtmlWebpackPlugin` template strings in the html.  Remove those and try again....OK, now we're getting somewhere.  The page loads but with no styles, so let's start there!
 
 ![webpage with styles disabled](https://raw.githubusercontent.com/jamessouth/portfolio/master/unstyled.png)
 
@@ -31,15 +29,28 @@ Since we're not webpacking anymore we will need to compile our sass manually so 
 `"sass": "sass --no-source-map --watch ./src/css/main.scss ./src/css/index.css"`
 (Since we're just migrating from webpack and the site has already been designed, I am disabling sass source maps.)
 
-Now on to the JS.  We will start by removing webpack/bundler specific imports that are not valid JS and won't work anymore, so that would be lines such as:
+Now on to the JS.  We will start by , so that would be lines such as:
 
-`import(/* webpackChunkName: "linkLoader" */ './linkLoader')`
-`import vuelint from '../images/vuelint.jpg'`
-`import '../css/main.scss'`
 
-We will also change most of our `.js` files to `.mjs` files per the JS module convention, the exception being the CSS Paint worklet files, and add our former webpack entry point in a script tag in the html.  
 
-So the JS is more or less working now, just need to update our imports to add file extensions, fix paths to point to src files rather than the webpack import variable name, replace asset imports with fetch statements, remove webpack chunk dynamic imports, etc.
+We will also change most of our `.js` files to `.mjs` files per the [JS module](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules#Aside_%E2%80%94_.mjs_versus_.js) convention, the exceptions being the two CSS Paint worklet files, and add our former webpack entry point in a script tag in the html.
+```html
+<script type="module" src="./src/js/index.mjs"></script>
+```
+
+So the JS is loading now, we just need to:
+
+* update our imports to add file extensions
+  * `import projects from './projects';` 👉 `import projects from './projects.mjs';`
+* fix paths to point to `src/` files rather than the webpack import variable name
+  * `src: wdk` 👉 `src: './src/images/wdk.jpg'`
+* replace asset imports with fetch statements
+  * `import resumePDF from '../images/resume.pdf';` 👉 `fetch('./src/images/resume.pdf')`
+* replace webpack dynamic chunk imports with regular dynamic imports
+  * `import(/* webpackChunkName: "linkFactory" */ './linkFactory')` 👉 `import('./linkFactory.mjs')`
+* remove any other webpack/bundler specific imports
+  * `import '../css/main.scss'` 👉 (moved from JS to HTML)
+* etc.
 
 I also made some structural changes such as displaying the resume from an anchor tag instead of a button that opens a modal, and the original issue that impelled me to try Snowpack in the first place, src attributes in html img tags.  Since Edge is now chromium based we can drop the fallbacks, Edge only styles that were formerly necessary.
 
