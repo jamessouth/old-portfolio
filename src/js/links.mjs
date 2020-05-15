@@ -5,8 +5,8 @@ const links = [
     src: './src/images/email.png',
   },
   {
-    link: 'https://github.com/jamessouth?tab=repositories',
-    alt: 'go to my github repos',
+    link: 'https://github.com/jamessouth',
+    alt: 'go to my github',
     src: './src/images/github.png',
   },
   {
