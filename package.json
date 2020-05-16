@@ -14,7 +14,8 @@
     "dev": "servor . ./src/html/index.html 3000 --reload",
     "lint": "eslint --fix ./src/js && echo 'Linted!'",
     "snowpack": "snowpack --no-source-map && mv ./web_modules ./docs/",
-    "sass": "sass --no-source-map --watch ./src/css/main.scss ./src/css/index.css"
+    "sass": "sass --no-source-map --watch ./src/css:./src/css",
+    "zz": "--style=compressed"
   },
   "snowpack": {
     "installOptions": {

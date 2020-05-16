@@ -1,0 +1,40 @@
+@import 'variables';
+@import 'mixins';
+.contact{
+    @include flex(row, space-around, center, wrap);
+    @media screen and (min-width: 2000px){
+        max-width: 2000px;
+        margin: auto;
+    }
+    & > div{
+        border: $bord;
+        margin: 2em;
+    }
+}
+#pe{
+    background: url('https://projecteuler.net/profile/jamessouth.png') no-repeat center/cover;
+    width: 200px;
+    height: 60px;
+}
+#cw{
+    background: url('https://www.codewars.com/users/jamessouth/badges/micro') no-repeat center/cover;
+    width: 192px;
+    height: 32px;
+    @media screen and (min-width: 800px){
+        background: url('https://www.codewars.com/users/jamessouth/badges/large') no-repeat center/cover;
+        width: 400px;
+        height: 40px;
+    }
+}
+#pe, #cw{
+    & a{
+        height: 100%;
+        display: block;
+        border: 2px solid transparent;
+    }
+    & a:focus,
+    a:hover{
+        outline: none;
+        border: 2px solid #1a2845;
+    }
+}

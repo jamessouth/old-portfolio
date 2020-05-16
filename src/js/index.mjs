@@ -4,6 +4,7 @@ import links from './links.mjs';
 
 const projectDivs = document.querySelectorAll('.projects div');
 const ldivs = document.querySelectorAll('.contact div');
+const sections = document.querySelectorAll('section');
 const contactDivs = [...ldivs].slice(0, ldivs.length - 2);
 
 fetch('./src/images/resume.pdf')
@@ -54,3 +55,15 @@ Promise.all([
       .forEach((el) => observer.observe(el));
   })
   .catch((err) => console.log(err));
+
+const idObserver = new IntersectionObserver((ents, obs) => {
+  ents.filter((entry) => entry.isIntersecting).forEach(({ target }) => {
+    if (target.id == 'cont') {
+      console.log('tg: ', target);
+      import('../css/cont.css');
+    }
+    obs.unobserve(target);
+  });
+}, IOoptions);
+
+sections.forEach(s => idObserver.observe(s));
