@@ -58,10 +58,10 @@ Promise.all([
 
 const idObserver = new IntersectionObserver((ents, obs) => {
   ents.filter((entry) => entry.isIntersecting).forEach(({ target }) => {
-    if (target.id == 'cont') {
-      console.log('tg: ', target);
+    // if (target.id == 'cont') {
+      console.log('tg: ', target.id);
 
-      fetch('./src/css/cont.css')
+      fetch(`./src/css/${target.id}.css`)
         .then(s => {
           const link = document.createElement('link');
           link.href = s.url;
@@ -74,7 +74,7 @@ const idObserver = new IntersectionObserver((ents, obs) => {
 
 
 
-    }
+    // }
     obs.unobserve(target);
   });
 }, IOoptions);
