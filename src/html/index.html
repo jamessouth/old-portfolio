@@ -8,8 +8,6 @@
     <link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap&text=I" rel="stylesheet">
      <!-- 0123456!ACJMPRSTabcdefghijklmnopqrstuvwxyzé -->
     <link href="https://fonts.googleapis.com/css?family=Cormorant+SC&display=swap&text=%200123456!ACJMPRSTabcdefghijklmnopqrstuvwxyz%C3%A9" rel="stylesheet">
-     <!-- ACGHIKPSTacdeghikmnoprstuwx() -->
-    <!-- <link href="https://fonts.googleapis.com/css?family=Scheherazade&display=swap&text=%20ACGHIKPSTacdeghikmnoprstuwx()" rel="stylesheet"> -->
     <link rel="manifest" href="./manifest.webmanifest">
     <meta name="description" content="web dev portfolio of james south">
     <meta name="theme-color" content="#fce07b">
@@ -21,6 +19,14 @@
     <meta name="msapplication-TileColor" content="#2d89ef">
     <meta name="msapplication-TileImage" content="./images/icons/mstile-144x144.png">
     <style>
+      .projects{
+        display: grid;
+        place-items: center;
+        grid-template-columns: repeat(auto-fill, minmax(288px, 1fr));
+        grid-row-gap: 100px;
+        grid-column-gap: 30px;
+        margin: 0 auto 6rem;
+      }
       .contact{
         display: flex;
       }

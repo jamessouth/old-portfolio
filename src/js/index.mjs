@@ -25,6 +25,11 @@ const IOoptions = {
   rootMargin: '0px 0px 420px 0px',
   threshold: 0.1,
 };
+const IOoptions2 = {
+  root: null,
+  rootMargin: '0px 0px 200px 0px',
+  threshold: 0.1,
+};
 
 const IOcallback = function IOcallback(panFact, linkFact) {
   return function innerIOCB(entries, observer) {
@@ -77,6 +82,6 @@ const idObserver = new IntersectionObserver((ents, obs) => {
     // }
     obs.unobserve(target);
   });
-}, IOoptions);
+}, IOoptions2);
 
 sections.forEach(s => idObserver.observe(s));
