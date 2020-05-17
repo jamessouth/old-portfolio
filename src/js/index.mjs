@@ -40,28 +40,34 @@ const IOcallback = function IOcallback(panFact, linkFact) {
   };
 };
 
-Promise.all([
-  import('./panelFactory.mjs'),
-  import('./linkFactory.mjs'),
-])
-  .then(([panFact, linkFact]) => {
-    const observer = new IntersectionObserver(IOcallback(
-      panFact.default,
-      linkFact.default,
-    ), ioOpts(400));
-    [
-      ...projectDivs,
-      ...contactDivs,
-    ]
-      .forEach((el) => observer.observe(el));
-  })
-  .catch((err) => console.log(err));
+
 
 const idObserver = new IntersectionObserver((ents, obs) => {
   ents.filter((entry) => entry.isIntersecting).forEach(({ target }) => {
-    if (CSS.paintWorklet) {
-      CSS.paintWorklet.addModule('./src/js/BorderPaint.js');
-    }
+    // if (target.id == 'port') {
+
+      Promise.all([
+        import('./panelFactory.mjs'),
+        import('./linkFactory.mjs'),
+      ])
+        .then(([panFact, linkFact]) => {
+          const observer = new IntersectionObserver(IOcallback(
+            panFact.default,
+            linkFact.default,
+          ), ioOpts(400));
+          [
+            ...projectDivs,
+            ...contactDivs,
+          ]
+            .forEach((el) => observer.observe(el));
+        })
+        .catch((err) => console.log(err));
+
+
+      if (CSS.paintWorklet) {
+        CSS.paintWorklet.addModule('./src/js/BorderPaint.js');
+      }
+    // }
 
     fetch(`./src/css/${target.id}.css`)
       .then(s => {
