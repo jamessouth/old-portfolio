@@ -19,24 +19,13 @@ if (CSS.paintWorklet) {
   CSS.paintWorklet.addModule('./src/js/ButtonPaint.js');
 }
 
-function ioOpts(num) {
+function ioOpts(dist) {
   return {
     root: null,
-    rootMargin: `0px 0px ${num}px 0px`,
+    rootMargin: `0px 0px ${dist}px 0px`,
     threshold: 0.1,
   };
 }
-
-const IOcallback = function IOcallback(fact, arr) {
-  return function innerIOCB(entries, observer) {
-    entries.filter((entry) => entry.isIntersecting).forEach(({ target, target: { id } }) => {
-      fact(target, arr[parseInt(id, 10)]);
-      observer.unobserve(target);
-    });
-  };
-};
-
-
 
 const idObserver = new IntersectionObserver((ents, obs) => {
   ents.filter((entry) => entry.isIntersecting).forEach(({ target }) => {
@@ -45,10 +34,12 @@ const idObserver = new IntersectionObserver((ents, obs) => {
       
       import('./panelFactory.mjs')
         .then((panFact) => {
-          const observer = new IntersectionObserver(IOcallback(
-            panFact.default,
-            projects,
-          ), ioOpts(400));
+          const observer = new IntersectionObserver((entries, observer) => {
+            entries.filter((ent) => ent.isIntersecting).forEach(({ target, target: { id } }) => {
+              panFact.default(target, projects[id]);
+              observer.unobserve(target);
+            });
+          }, ioOpts(400));
           [...projectDivs].forEach((el) => observer.observe(el));
         })
         .catch((err) => console.log(err));
