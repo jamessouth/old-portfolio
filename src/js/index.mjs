@@ -4,7 +4,7 @@ import links from './links.mjs';
 
 const projectDivs = document.querySelectorAll('.projects div');
 const cdivs = document.querySelectorAll('.contact div');
-const sections = document.querySelectorAll('section');
+const sections = document.querySelectorAll('section:not(#about)');
 const contactDivs = [...cdivs].slice(0, cdivs.length - 2);
 
 fetch('./src/images/resume.pdf')
@@ -63,7 +63,6 @@ Promise.all([
 
 const idObserver = new IntersectionObserver((ents, obs) => {
   ents.filter((entry) => entry.isIntersecting).forEach(({ target }) => {
-    // if (target.id == 'cont') {
       console.log('tg: ', target.id);
 
       fetch(`./src/css/${target.id}.css`)
@@ -77,9 +76,6 @@ const idObserver = new IntersectionObserver((ents, obs) => {
         })
         .catch(e => console.log('failed to fetch: ', e));
 
-
-
-    // }
     obs.unobserve(target);
   });
 }, IOoptions2);
