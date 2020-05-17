@@ -60,11 +60,7 @@ const idObserver = new IntersectionObserver((ents, obs) => {
     } else if (target.id == 'cont') {
       import('./linkFactory.mjs')
         .then((linkFact) => {
-          const observer = new IntersectionObserver(IOcallback(
-            linkFact.default,
-            links,
-          ), ioOpts(500));
-          [...contactDivs].forEach((el) => observer.observe(el));
+          [...contactDivs].forEach((el, i) => linkFact.default(el, links[i]));
         })
         .catch((err) => console.log(err));
     }
