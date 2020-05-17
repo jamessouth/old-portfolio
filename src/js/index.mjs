@@ -16,20 +16,16 @@ fetch('./src/images/resume.pdf')
 .catch(e => console.log('failed to fetch: ', e));
 
 if (CSS.paintWorklet) {
-  CSS.paintWorklet.addModule('./src/js/BorderPaint.js');
   CSS.paintWorklet.addModule('./src/js/ButtonPaint.js');
 }
 
-const IOoptions = {
-  root: null,
-  rootMargin: '0px 0px 420px 0px',
-  threshold: 0.1,
-};
-const IOoptions2 = {
-  root: null,
-  rootMargin: '0px 0px 200px 0px',
-  threshold: 0.1,
-};
+function ioOpts(num) {
+  return {
+    root: null,
+    rootMargin: `0px 0px ${num}px 0px`,
+    threshold: 0.1,
+  };
+}
 
 const IOcallback = function IOcallback(panFact, linkFact) {
   return function innerIOCB(entries, observer) {
@@ -52,7 +48,7 @@ Promise.all([
     const observer = new IntersectionObserver(IOcallback(
       panFact.default,
       linkFact.default,
-    ), IOoptions);
+    ), ioOpts(400));
     [
       ...projectDivs,
       ...contactDivs,
@@ -63,21 +59,23 @@ Promise.all([
 
 const idObserver = new IntersectionObserver((ents, obs) => {
   ents.filter((entry) => entry.isIntersecting).forEach(({ target }) => {
-      console.log('tg: ', target.id);
+    if (CSS.paintWorklet) {
+      CSS.paintWorklet.addModule('./src/js/BorderPaint.js');
+    }
 
-      fetch(`./src/css/${target.id}.css`)
-        .then(s => {
-          const link = document.createElement('link');
-          link.href = s.url;
-          link.rel = 'stylesheet';
-          link.type = 'text/css';
-          document.head.appendChild(link);
-          
-        })
-        .catch(e => console.log('failed to fetch: ', e));
+    fetch(`./src/css/${target.id}.css`)
+      .then(s => {
+        const link = document.createElement('link');
+        link.href = s.url;
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        document.head.appendChild(link);
+        
+      })
+      .catch(e => console.log('failed to fetch: ', e));
 
     obs.unobserve(target);
   });
-}, IOoptions2);
+}, ioOpts(200));
 
 sections.forEach(s => idObserver.observe(s));

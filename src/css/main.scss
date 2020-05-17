@@ -148,7 +148,6 @@ section{
     font-size: 1.75em;
   }
 }
-
 .arts > div,
 #about p{
   & > a{
@@ -167,15 +166,6 @@ section{
     @include focus($blue, 2px);
   }
 }
-
-
-
-
-
-
-
-
-
 .installbtn,
 .reloadbtn{
   display: none;
