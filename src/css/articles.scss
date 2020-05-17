@@ -1,5 +1,6 @@
 @import 'variables';
 @import 'mixins';
+@import url('https://fonts.googleapis.com/css?family=Scheherazade&display=swap&text=%20ACGHIKPSTacdeghikmnoprstuwx()');
 .arts{
     @include grid(auto, 80px, 42px, auto);
     @media screen and (min-width: 500px){
