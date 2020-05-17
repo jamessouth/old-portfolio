@@ -27,14 +27,10 @@ function ioOpts(num) {
   };
 }
 
-const IOcallback = function IOcallback(panFact, linkFact) {
+const IOcallback = function IOcallback(fact, arr) {
   return function innerIOCB(entries, observer) {
     entries.filter((entry) => entry.isIntersecting).forEach(({ target, target: { id } }) => {
-      if (id.includes('x')) {
-        linkFact(target, links[parseInt(id, 10)]);
-      } else {
-        panFact(target, projects[id]);
-      }
+      fact(target, arr[parseInt(id, 10)]);
       observer.unobserve(target);
     });
   };
@@ -44,22 +40,16 @@ const IOcallback = function IOcallback(panFact, linkFact) {
 
 const idObserver = new IntersectionObserver((ents, obs) => {
   ents.filter((entry) => entry.isIntersecting).forEach(({ target }) => {
-    // if (target.id == 'port') {
+    if (target.id == 'port') {
 
-      Promise.all([
-        import('./panelFactory.mjs'),
-        import('./linkFactory.mjs'),
-      ])
-        .then(([panFact, linkFact]) => {
+      
+      import('./panelFactory.mjs')
+        .then((panFact) => {
           const observer = new IntersectionObserver(IOcallback(
             panFact.default,
-            linkFact.default,
+            projects,
           ), ioOpts(400));
-          [
-            ...projectDivs,
-            ...contactDivs,
-          ]
-            .forEach((el) => observer.observe(el));
+          [...projectDivs].forEach((el) => observer.observe(el));
         })
         .catch((err) => console.log(err));
 
@@ -67,7 +57,17 @@ const idObserver = new IntersectionObserver((ents, obs) => {
       if (CSS.paintWorklet) {
         CSS.paintWorklet.addModule('./src/js/BorderPaint.js');
       }
-    // }
+    } else if (target.id == 'cont') {
+      import('./linkFactory.mjs')
+        .then((linkFact) => {
+          const observer = new IntersectionObserver(IOcallback(
+            linkFact.default,
+            links,
+          ), ioOpts(500));
+          [...contactDivs].forEach((el) => observer.observe(el));
+        })
+        .catch((err) => console.log(err));
+    }
 
     fetch(`./src/css/${target.id}.css`)
       .then(s => {
