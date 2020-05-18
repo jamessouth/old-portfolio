@@ -1,6 +1,4 @@
 // import './loadSW.mjs';
-import projects from './projects.mjs';
-import links from './links.mjs';
 
 const projectDivs = document.querySelectorAll('.projects div');
 const cdivs = document.querySelectorAll('.contact div');
@@ -31,12 +29,14 @@ const idObserver = new IntersectionObserver((ents, obs) => {
   ents.filter((entry) => entry.isIntersecting).forEach(({ target }) => {
     if (target.id == 'port') {
 
-      
-      import('./panelFactory.mjs')
-        .then((panFact) => {
+      Promise.all([
+        import('./projects.mjs'),
+        import('./panelFactory.mjs'),
+      ])
+        .then(([projects, panFact]) => {
           const observer = new IntersectionObserver((entries, observer) => {
             entries.filter((ent) => ent.isIntersecting).forEach(({ target, target: { id } }) => {
-              panFact.default(target, projects[id]);
+              panFact.default(target, projects.default[id]);
               observer.unobserve(target);
             });
           }, ioOpts(400));
@@ -49,9 +49,12 @@ const idObserver = new IntersectionObserver((ents, obs) => {
         CSS.paintWorklet.addModule('./src/js/BorderPaint.js');
       }
     } else if (target.id == 'cont') {
-      import('./linkFactory.mjs')
-        .then((linkFact) => {
-          [...contactDivs].forEach((el, i) => linkFact.default(el, links[i]));
+      Promise.all([
+        import('./links.mjs'),
+        import('./linkFactory.mjs'),
+      ])
+        .then(([links, linkFact]) => {
+          [...contactDivs].forEach((el, i) => linkFact.default(el, links.default[i]));
         })
         .catch((err) => console.log(err));
     }
