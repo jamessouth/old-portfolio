@@ -77,15 +77,15 @@ h1{
   position: relative;
   text-align: center;
   font-size: 2em;
-  &::after{
-    content: '';
-    position: absolute;
-    background: url('../images/topdiv.png') center/contain no-repeat;
-    @include wh(80%, 55px);
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: -100px;
-  }
+  // &::after{
+  //   content: '';
+  //   position: absolute;
+  //   background: url('../images/topdiv.png') center/contain no-repeat;
+  //   @include wh(80%, 55px);
+  //   left: 50%;
+  //   transform: translateX(-50%);
+  //   bottom: -100px;
+  // }
   @media #{$two_col}{
     @include fontMarg(2.5em, 11rem);
   }
@@ -95,6 +95,14 @@ h1{
   @media #{$big}{
     @include fontMarg(4em, 14rem);
   }
+}
+.topdiv{
+  object-fit: none;
+  object-position: 50% 0px;
+  width: 80%;
+  display: block;
+  height: 55px;
+  margin: 0 auto 4rem;
 }
 h2{
   text-align: center;
