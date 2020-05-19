@@ -77,15 +77,9 @@ h1{
   position: relative;
   text-align: center;
   font-size: 2em;
-  // &::after{
-  //   content: '';
-  //   position: absolute;
-  //   background: url('../images/topdiv.png') center/contain no-repeat;
-  //   @include wh(80%, 55px);
-  //   left: 50%;
-  //   transform: translateX(-50%);
-  //   bottom: -100px;
-  // }
+  &::after{
+    @include deco(0%, 80%, -100px);
+  }
   @media #{$two_col}{
     @include fontMarg(2.5em, 11rem);
   }
@@ -95,14 +89,6 @@ h1{
   @media #{$big}{
     @include fontMarg(4em, 14rem);
   }
-}
-.topdiv{
-  object-fit: none;
-  object-position: 50% 0px;
-  width: 80%;
-  display: block;
-  height: 55px;
-  margin: 0 auto 4rem;
 }
 h2{
   text-align: center;
@@ -124,13 +110,7 @@ section{
     margin-bottom: 6rem;
   }
   &:not(:last-of-type)::after{
-    content: '';
-    position: absolute;
-    background: url('../images/divider.png') center/contain no-repeat;// Image by Pixabay user GDJ
-    @include wh(50%, 25px);
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: -130px;
+    @include deco(100%, 50%, -130px);
   }
 }
 #about p{

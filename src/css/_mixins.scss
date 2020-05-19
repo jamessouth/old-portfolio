@@ -37,3 +37,15 @@
   outline: none;
   border: $wd solid $col;
 }
+@mixin deco($xoff, $wd, $bot) {
+  content: '';
+  position: absolute;
+  background: url('../images/pngsprite.png');
+  background-position: $xoff;
+  background-size: 200%;
+  background-repeat: no-repeat;
+  @include wh($wd, 55px);
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: $bot;
+}
