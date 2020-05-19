@@ -48,6 +48,20 @@ const idObserver = new IntersectionObserver((ents, obs) => {
       if (CSS.paintWorklet) {
         CSS.paintWorklet.addModule('./src/js/BorderPaint.js');
       }
+    } else if (target.id == 'articles') {
+
+      fetch(`./src/images/jpgsprite.jpg`)
+        .then(i => {
+          const link = document.createElement('link');
+          link.href = s.url;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          document.head.appendChild(link);
+        })
+        .catch(e => console.log('failed to fetch: ', e));
+
+      
+
     } else if (target.id == 'cont') {
       Promise.all([
         import('./links.mjs'),
@@ -66,7 +80,6 @@ const idObserver = new IntersectionObserver((ents, obs) => {
         link.rel = 'stylesheet';
         link.type = 'text/css';
         document.head.appendChild(link);
-        
       })
       .catch(e => console.log('failed to fetch: ', e));
 
