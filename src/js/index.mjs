@@ -48,15 +48,13 @@ const idObserver = new IntersectionObserver((ents, obs) => {
       if (CSS.paintWorklet) {
         CSS.paintWorklet.addModule('./src/js/BorderPaint.js');
       }
+
     } else if (target.id == 'articles') {
 
+      const imgs = document.querySelectorAll('.arts img');
       fetch(`./src/images/jpgsprite.jpg`)
-        .then(i => {
-          const link = document.createElement('link');
-          link.href = s.url;
-          link.rel = 'stylesheet';
-          link.type = 'text/css';
-          document.head.appendChild(link);
+        .then(img => {
+          [...imgs].forEach(i => i.src = img.url);
         })
         .catch(e => console.log('failed to fetch: ', e));
 

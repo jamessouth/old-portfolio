@@ -92,7 +92,7 @@
         }
     }
 }
-.art_one{
+.arts img{
     object-fit: none;
 }
 #art_two div,
@@ -106,15 +106,8 @@
         }
     }
 }
-.apo0{
-    object-position: 0px;
-}
-.apo1{
-    object-position: -150px;
-}
-.apo2{
-    object-position: -300px;
-}
-.apo3{
-    object-position: -450px;
+@each $name, $offset in $offsets {
+    .#{$name} {
+        object-position: $offset;
+    }
 }
