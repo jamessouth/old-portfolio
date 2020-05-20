@@ -52,7 +52,7 @@ const idObserver = new IntersectionObserver((ents, obs) => {
     } else if (target.id == 'articles') {
 
       const imgs = document.querySelectorAll('.arts img');
-      fetch(`./src/images/jpgsprite.jpg`)
+      fetch(`./src/images/articlessprite.jpg`)
         .then(img => {
           [...imgs].forEach(i => i.src = img.url);
         })
@@ -63,11 +63,10 @@ const idObserver = new IntersectionObserver((ents, obs) => {
     } else if (target.id == 'cont') {
       Promise.all([
         fetch('./src/images/contsprite.png'),
-        import('./links.mjs'),
         import('./linkFactory.mjs'),
       ])
-        .then(([sprite, links, linkFact]) => {
-          [...contactDivs].forEach((el, i) => linkFact.default(el, links.default[i], sprite.url));
+        .then(([sprite, linkFact]) => {
+          [...contactDivs].forEach((el, i) => linkFact.default(el, i, sprite.url));
         })
         .catch((err) => console.log(err));
     }
