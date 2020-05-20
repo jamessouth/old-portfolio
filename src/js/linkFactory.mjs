@@ -3,7 +3,7 @@ function htmlGen(offset) {
 
   const htmlTag = `
   <a rel="noopener noreferrer">
-    <img/>
+    <img height="64"/>
   </a>
   <style>
   img{
@@ -28,22 +28,23 @@ function htmlGen(offset) {
 }
 
 class Link extends HTMLElement {
-  constructor({ link, alt, src }) {
+  constructor({ link, alt, src, off, w }) {
     super();
-    Object.assign(this, { link, alt, src });
+    Object.assign(this, { link, alt, src, w });
     const shadowRoot = this.attachShadow({ mode: 'open' });
-    const template = htmlGen();
+    const template = htmlGen(off);
     shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
   connectedCallback() {
-    this.anchor.setAttribute('href', this.link);
     fetch(this.src)
     .then(i => {
       this.img.setAttribute('src', i.url);
     })
     .catch(e => console.log('failed to fetch: ', e));
+    this.anchor.setAttribute('href', this.link);
     this.img.setAttribute('alt', this.alt);
+    this.img.setAttribute('width', this.w);
   }
 
   get anchor() {
