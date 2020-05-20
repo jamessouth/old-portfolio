@@ -1,29 +1,39 @@
-const linkTemplate = document.createElement('template');
+function htmlGen(offset) {
+  const linkTemplate = document.createElement('template');
 
-const htmlTag = `
-<a rel="noopener noreferrer">
-  <img/>
-</a>
-<style>
-a{
-  display: block;
-  line-height: 0;
-  border: 2px solid transparent;
-  padding: 4px;
+  const htmlTag = `
+  <a rel="noopener noreferrer">
+    <img/>
+  </a>
+  <style>
+  img{
+    object-fit: none;
+    object-position: ${offset}px;
+  }
+  a{
+    display: block;
+    line-height: 0;
+    border: 2px solid transparent;
+    padding: 4px;
+  }
+  a:focus,
+  a:hover{
+    outline: none;
+    border: 2px solid #1a2845;
+  `;
+
+  linkTemplate.innerHTML = htmlTag;
+  return linkTemplate;
+
 }
-a:focus,
-a:hover{
-  outline: none;
-  border: 2px solid #1a2845;
-`;
 
 class Link extends HTMLElement {
   constructor({ link, alt, src }) {
     super();
     Object.assign(this, { link, alt, src });
     const shadowRoot = this.attachShadow({ mode: 'open' });
-    linkTemplate.innerHTML = htmlTag;
-    shadowRoot.appendChild(linkTemplate.content.cloneNode(true));
+    const template = htmlGen();
+    shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
   connectedCallback() {
