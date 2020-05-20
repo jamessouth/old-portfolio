@@ -28,21 +28,17 @@ function htmlGen(offset) {
 }
 
 class Link extends HTMLElement {
-  constructor({ link, alt, src, off, w }) {
+  constructor({ link, alt, off, w }, sprite) {
     super();
-    Object.assign(this, { link, alt, src, w });
+    Object.assign(this, { link, alt, w, sprite });
     const shadowRoot = this.attachShadow({ mode: 'open' });
     const template = htmlGen(off);
     shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
   connectedCallback() {
-    fetch(this.src)
-    .then(i => {
-      this.img.setAttribute('src', i.url);
-    })
-    .catch(e => console.log('failed to fetch: ', e));
     this.anchor.setAttribute('href', this.link);
+    this.img.setAttribute('src', this.sprite);
     this.img.setAttribute('alt', this.alt);
     this.img.setAttribute('width', this.w);
   }
@@ -56,8 +52,8 @@ class Link extends HTMLElement {
   }
 }
 
-export default function linkFactory(div, aLink) {
-  const link = new Link(aLink);
+export default function linkFactory(div, aLink, sprite) {
+  const link = new Link(aLink, sprite);
   div.appendChild(link);
 }
 

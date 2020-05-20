@@ -62,11 +62,12 @@ const idObserver = new IntersectionObserver((ents, obs) => {
 
     } else if (target.id == 'cont') {
       Promise.all([
+        fetch('./src/images/contsprite.png'),
         import('./links.mjs'),
         import('./linkFactory.mjs'),
       ])
-        .then(([links, linkFact]) => {
-          [...contactDivs].forEach((el, i) => linkFact.default(el, links.default[i]));
+        .then(([sprite, links, linkFact]) => {
+          [...contactDivs].forEach((el, i) => linkFact.default(el, links.default[i], sprite.url));
         })
         .catch((err) => console.log(err));
     }
