@@ -9,6 +9,7 @@ body{
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
+  background: linear-gradient(-65deg, rgba(250, 250, 210, .87) 25%, rgba(210, 210, 255, .88) 51%, rgba(250, 250, 210, .87) 75%);
 }
 header{
   @include position($tp: 0);
@@ -98,5 +99,28 @@ section{
   margin-bottom: 14rem;
   &:last-of-type{
     margin-bottom: 6rem;
+  }
+}
+#about p{
+  font-family: serif;
+  font-size: 1.5em;
+  margin: auto;
+  width: 90%;
+  &:first-letter{
+      font-family: 'Permanent Marker', cursive;
+      @include fonty(3.2em, bold, 1);
+      margin: 0 .5rem;
+      border: .35rem double black;
+      padding: .15rem 1.15rem 1.15rem .45rem;
+      text-shadow: 4px 6px 1px black;
+      float: left;
+      color: $blue;
+      background-color: $yellow;
+  }
+  @media #{$three_col}{
+      max-width: 1300px;
+  }
+  @media #{$upsize_text}{
+      font-size: 1.75em;
   }
 }
