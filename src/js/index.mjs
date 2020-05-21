@@ -5,16 +5,27 @@ const cdivs = document.querySelectorAll('.contact div');
 const sections = document.querySelectorAll('section:not(#about)');
 const contactDivs = [...cdivs].slice(0, cdivs.length - 2);
 
-// fetch('./src/images/resume.pdf')
-// .then(b => {
-//   const resLink = document.querySelector('li:last-of-type a');
-//   resLink.href = b.url;
-// })
-// .catch(e => console.log('failed to fetch: ', e));
 
-if (CSS.paintWorklet) {
-  CSS.paintWorklet.addModule('./src/js/ButtonPaint.js');
-}
+
+window.onload = () => {
+  Promise.all([
+    fetch('./src/css/about.css'),
+    fetch('./src/images/resume.pdf'),
+  ])
+    .then(([ss, re]) => {
+      document.querySelector('li:last-of-type a').href = re.url;
+      const link = document.createElement('link');
+      link.href = ss.url;
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      document.head.appendChild(link);
+    })
+    .catch(e => console.log('failed to fetch: ', e));
+    
+  if (CSS.paintWorklet) {
+    CSS.paintWorklet.addModule('./src/js/ButtonPaint.js');
+  }
+};
 
 function ioOpts(dist) {
   return {
