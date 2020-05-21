@@ -63,6 +63,15 @@ li{
     text-decoration: underline;
   }
 }
+.newwindow::after{
+  content: '';
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  background: url('data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAAMCAYAAAC5tzfZAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAOwQAADsEBuJF  r7QAAABl0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMC4yMfEgaZUAAACoSURBVChTjY49CgIxEIWzYLHXWfAIniM/jZ2  NYmHjAfYwgqfJDey228pG3xsZCJNBffAlmSRfMqHWKngppWxzzo+U0gJWrJ/gFTh4UMJ8BkdwAnfuE5Hk2S/BHYoUbp3  ktakC2pvBrpNsGuGKefwp4cKBZzHGC2usN5S470o42KugLaMeOEttJdSpFRS950r4ZdKWmFYSgbGSl/YniZX0ZZtO+pePEcIbSqOuBUICUn0AAAAASUVORK5CYII=');
+  background-repeat: no-repeat;
+  margin-left: 2px;
+}
 #port:target,
 #about:target,
 #articles:target,
