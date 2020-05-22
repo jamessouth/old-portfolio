@@ -40,19 +40,16 @@ const idObserver = new IntersectionObserver((ents, obs) => {
     if (target.id == 'port') {
 
       Promise.all([
-        import('./projects.mjs'),
+        fetch('./src/images/portsprite.jpg'),
         import('./panelFactory.mjs'),
       ])
-        .then(([projects, panFact]) => {
-          const observer = new IntersectionObserver((entries, observer) => {
-            entries.filter((ent) => ent.isIntersecting).forEach(({ target, target: { id } }) => {
-              panFact.default(target, projects.default[id]);
-              observer.unobserve(target);
-            });
-          }, ioOpts(400));
-          [...projectDivs].forEach((el) => observer.observe(el));
+        .then(([sprite, panelFact]) => {
+          [...projectDivs].forEach((el, i) => panelFact.default(el, i, sprite.url));
         })
         .catch((err) => console.log(err));
+
+
+
 
 
       if (CSS.paintWorklet) {
