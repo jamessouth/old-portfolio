@@ -128,16 +128,17 @@ const projects = [
   },
 ];
 
-function htmlGen(link, alt, off, w, sprite) {
+function htmlGen(title, tech1, tech2, live, code, alt, liveAria, codeAria, sprite, index) {
   const panelTemplate = document.createElement('template');
 
   const htmlTag = `
-  <h3></h3>
-  <p></p>
-  <p></p>
+  <h3>${title}</h3>
+  <p>${tech1}</p>
+  <p>${tech2}</p>
   <div>
-    <img/>
-    ${str}
+    <img src="${sprite}" alt="${alt}"/>
+    <a rel="noopener noreferrer" href="${code}" aria-label="${codeAria}">code</a>
+    ${live ? `<a rel="noopener noreferrer" href="${live}" aria-label="${liveAria}">live</a>` : ``}
   </div>
   <style>
   a:hover,
@@ -147,6 +148,8 @@ function htmlGen(link, alt, off, w, sprite) {
     color: #e5d7ba;
   }
   img{
+    object-fit: none;
+    object-position: ${index * 240}px;
     width: 100%;
     height: 100%;
     grid-area: top;
@@ -187,6 +190,16 @@ function htmlGen(link, alt, off, w, sprite) {
     width: 288px;
     height: 320px;
   }
+  ${live ? `
+  a:first-of-type{
+    grid-area: lbot;
+  }
+  a:last-of-type{
+    grid-area: rbot;
+  ` : `
+  a{
+    grid-column: 1 / -1;
+  `}
   `;
 
   panelTemplate.innerHTML = htmlTag;
@@ -195,76 +208,17 @@ function htmlGen(link, alt, off, w, sprite) {
 }
 
 
-function panelMarkupTag(, ...anchors) {
-  const str = [...anchors].map((anc) => `<a rel="noopener noreferrer">${anc}</a>`).join('\n      ');
-
-
-}
-
-
-
-
-const oneAnchorStyle = `
-a{
-  grid-column: 1 / -1;
-`;
-
-const twoAnchorsStyle = `
-a:first-of-type{
-  grid-area: lbot;
-}
-a:last-of-type{
-  grid-area: rbot;
-`;
-
 class Panel extends HTMLElement {
   constructor({
-    title, tech1, tech2, live, code, alt, src, liveAria, codeAria,
-  }, no) {
+    title, tech1, tech2, live, code, alt, liveAria, codeAria,
+  }, sprite, index) {
     super();
-    Object.assign(this, {
-      title, tech1, tech2, live, code, alt, src, liveAria, codeAria,
-    }, no);
     const shadowRoot = this.attachShadow({ mode: 'open' });
-    panelTemplate.innerHTML = live ? `${panelMarkupTag`${`code`}${`live`}`}${styleTag}${twoAnchorsStyle}` : `${panelMarkupTag`${`code`}`}${styleTag}${oneAnchorStyle}`;
-    shadowRoot.appendChild(panelTemplate.content.cloneNode(true));
+    const template = htmlGen(title, tech1, tech2, live, code, alt, liveAria, codeAria, sprite, index);
+    shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
-  connectedCallback() {
-    this.h3.textContent = this.title;
-    this.anchors[0].setAttribute('href', this.code);
-    this.anchors[0].setAttribute('aria-label', this.codeAria);
-    this.live && this.anchors[1].setAttribute('href', this.live);
-    this.liveAria && this.anchors[1].setAttribute('aria-label', this.liveAria);
-    fetch(this.src)
-    .then(i => {
-      this.img.setAttribute('src', i.url);
-    })
-    .catch(e => console.log('failed to fetch: ', e));
-    this.img.setAttribute('alt', this.alt);
-    this.ps[0].textContent = this.tech1;
-    this.ps[1].textContent = this.tech2;
-  }
 
-  get anchors() {
-    return this.shadowRoot.querySelectorAll('a');
-  }
-
-  get div() {
-    return this.shadowRoot.querySelector('div');
-  }
-
-  get img() {
-    return this.shadowRoot.querySelector('img');
-  }
-
-  get h3() {
-    return this.shadowRoot.querySelector('h3');
-  }
-
-  get ps() {
-    return this.shadowRoot.querySelectorAll('p');
-  }
 }
 
 // myWorker.addEventListener('message', (e) => {
@@ -272,7 +226,7 @@ class Panel extends HTMLElement {
 // });
 
 export default function panelFactory(div, index, sprite) {
-  const panel = new Panel(projects[index], sprite);
+  const panel = new Panel(projects[index], sprite, index);
   div.appendChild(panel);
   // myWorker.postMessage(div.id);
 }
