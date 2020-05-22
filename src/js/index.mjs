@@ -1,9 +1,9 @@
 // import './loadSW.mjs';
 
-const projectDivs = document.querySelectorAll('.projects div');
+const projectDivs = [...document.querySelectorAll('.projects div')];
 const cdivs = document.querySelectorAll('.contact div');
-const sections = document.querySelectorAll('section:not(#about)');
 const contactDivs = [...cdivs].slice(0, cdivs.length - 2);
+const sections = document.querySelectorAll('section:not(#about)');
 
 
 
@@ -27,36 +27,25 @@ window.onload = () => {
   }
 };
 
-function ioOpts(dist) {
-  return {
-    root: null,
-    rootMargin: `0px 0px ${dist}px 0px`,
-    threshold: 0.1,
-  };
-}
-
 const idObserver = new IntersectionObserver((ents, obs) => {
-  ents.filter((entry) => entry.isIntersecting).forEach(({ target }) => {
-    if (target.id == 'port') {
+  ents.filter((entry) => entry.isIntersecting).forEach(({ target, target: { id } }) => {
+    if (id != 'articles') {
 
       Promise.all([
-        fetch('./src/images/portsprite.jpg'),
-        import('./panelFactory.mjs'),
+        fetch(`./src/images/${id}sprite.${id == `port` ? `jpg` : `png`}`),
+        import(`./${id}Factory.mjs`),
       ])
-        .then(([sprite, panelFact]) => {
-          [...projectDivs].forEach((el, i) => panelFact.default(el, i, sprite.url));
+        .then(([sprite, factory]) => {
+          (() => id == 'port' ? projectDivs : contactDivs)().forEach((el, i) => factory.default(el, i, sprite.url));
         })
         .catch((err) => console.log(err));
-
-
-
 
 
       if (CSS.paintWorklet) {
         CSS.paintWorklet.addModule('./src/js/BorderPaint.js');
       }
 
-    } else if (target.id == 'articles') {
+    } else {
 
       const imgs = document.querySelectorAll('.arts img');
       fetch(`./src/images/articlessprite.jpg`)
@@ -65,20 +54,9 @@ const idObserver = new IntersectionObserver((ents, obs) => {
         })
         .catch(e => console.log('failed to fetch: ', e));
 
-      
-
-    } else if (target.id == 'cont') {
-      Promise.all([
-        fetch('./src/images/contsprite.png'),
-        import('./linkFactory.mjs'),
-      ])
-        .then(([sprite, linkFact]) => {
-          [...contactDivs].forEach((el, i) => linkFact.default(el, i, sprite.url));
-        })
-        .catch((err) => console.log(err));
     }
 
-    fetch(`./src/css/${target.id}.css`)
+    fetch(`./src/css/${id}.css`)
       .then(s => {
         const link = document.createElement('link');
         link.href = s.url;
@@ -90,6 +68,10 @@ const idObserver = new IntersectionObserver((ents, obs) => {
 
     obs.unobserve(target);
   });
-}, ioOpts(200));
+}, {
+  root: null,
+  rootMargin: '0px 0px 240px 0px',
+  threshold: 0.1,
+});
 
 sections.forEach(s => idObserver.observe(s));

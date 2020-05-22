@@ -134,7 +134,7 @@ function htmlGen(title, tech1, tech2, live, code, alt, liveAria, codeAria, sprit
   const htmlTag = `
   <h3>${title}</h3>
   <p>${tech1}</p>
-  <p>${tech2}</p>
+  <p>${tech2 ? tech2 : ''}</p>
   <div>
     <img src="${sprite}" alt="${alt}"/>
     <a rel="noopener noreferrer" href="${code}" aria-label="${codeAria}">code</a>
@@ -225,7 +225,7 @@ class Panel extends HTMLElement {
 //   console.log(e);
 // });
 
-export default function panelFactory(div, index, sprite) {
+export default function portFactory(div, index, sprite) {
   const panel = new Panel(projects[index], sprite, index);
   div.appendChild(panel);
   // myWorker.postMessage(div.id);

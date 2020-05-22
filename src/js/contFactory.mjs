@@ -65,7 +65,7 @@ function htmlGen(link, alt, off, w, sprite) {
   a:hover{
     outline: none;
     border: 2px solid #1a2845;
-  `;
+  }`;
 
   linkTemplate.innerHTML = htmlTag;
   return linkTemplate;
@@ -81,7 +81,7 @@ class Link extends HTMLElement {
   }
 }
 
-export default function linkFactory(div, index, sprite) {
+export default function contFactory(div, index, sprite) {
   const link = new Link(links[index], sprite);
   div.appendChild(link);
 }
