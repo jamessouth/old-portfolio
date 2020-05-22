@@ -148,8 +148,8 @@ function htmlGen(title, tech1, tech2, live, code, alt, liveAria, codeAria, sprit
     color: #e5d7ba;
   }
   img{
-    object-fit: none;
-    object-position: ${index * 240}px;
+    object-fit: cover;
+    object-position: ${index * -288}px;
     width: 100%;
     height: 100%;
     grid-area: top;
