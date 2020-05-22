@@ -196,10 +196,10 @@ function htmlGen(title, tech1, tech2, live, code, alt, liveAria, codeAria, sprit
   }
   a:last-of-type{
     grid-area: rbot;
-  ` : `
+  }` : `
   a{
     grid-column: 1 / -1;
-  `}
+  }`}
   `;
 
   panelTemplate.innerHTML = htmlTag;
