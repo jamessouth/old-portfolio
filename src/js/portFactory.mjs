@@ -128,6 +128,10 @@ const projects = [
   },
 ];
 
+
+// border-bottom: 1px solid #30511d;
+
+
 function htmlGen(title, tech1, tech2, live, code, alt, liveAria, codeAria, sprite, index) {
   const panelTemplate = document.createElement('template');
 
@@ -135,6 +139,7 @@ function htmlGen(title, tech1, tech2, live, code, alt, liveAria, codeAria, sprit
   <h3>${title}</h3>
   <p>${tech1}</p>
   <p>${tech2 ? tech2 : ''}</p>
+  <div></div>
   <div>
     <img src="${sprite}" alt="${alt}"/>
     <a rel="noopener noreferrer" href="${code}" aria-label="${codeAria}">code</a>
@@ -170,10 +175,6 @@ function htmlGen(title, tech1, tech2, live, code, alt, liveAria, codeAria, sprit
     height: 24px;
     font-weight: bold;
   }
-  p:last-of-type{
-    border-bottom: 1px solid #30511d;
-    padding-bottom: .5rem;
-  }
   a{
     width: calc(100% - 2px);
     height: 30px;
@@ -183,7 +184,12 @@ function htmlGen(title, tech1, tech2, live, code, alt, liveAria, codeAria, sprit
     border: 1px solid #30511d;
     font-weight: bold;
   }
-  div{
+  div:first-of-type{
+    width: 100%;
+    height: .5625rem;
+    background: red;
+  }
+  div:last-of-type{
     display: grid;
     grid: "top top" 90% "lbot rbot" 10% / 1fr 1fr;
     justify-items: center;
