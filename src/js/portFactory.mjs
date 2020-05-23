@@ -1,4 +1,4 @@
-// const myWorker = new Worker('./worker.js', { type: 'module' });
+const myWorker = new Worker('./worker.js');
 const projects = [
   {
     title: 'clean tablet',
@@ -221,14 +221,14 @@ class Panel extends HTMLElement {
 
 }
 
-// myWorker.addEventListener('message', (e) => {
-//   console.log(e);
-// });
+myWorker.addEventListener('message', (e) => {
+  console.log(e);
+});
 
 export default function portFactory(div, index, sprite) {
   const panel = new Panel(projects[index], sprite, index);
   div.appendChild(panel);
-  // myWorker.postMessage(div.id);
+  myWorker.postMessage(div.id);
 }
 
 window.customElements.define('project-panel', Panel);
