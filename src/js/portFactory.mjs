@@ -128,10 +128,6 @@ const projects = [
   },
 ];
 
-
-// border-bottom: 1px solid #30511d;
-
-
 function htmlGen(title, tech1, tech2, live, code, alt, liveAria, codeAria, sprite, index) {
   const panelTemplate = document.createElement('template');
 
@@ -187,7 +183,7 @@ function htmlGen(title, tech1, tech2, live, code, alt, liveAria, codeAria, sprit
   div:first-of-type{
     width: 100%;
     height: .5625rem;
-    background: red;
+    background: transparent;
   }
   div:last-of-type{
     display: grid;
@@ -224,17 +220,25 @@ class Panel extends HTMLElement {
     shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
+  get langDiv() {
+    return this.shadowRoot.querySelector('div:first-of-type');
+  }
 
 }
 
+
 myWorker.addEventListener('message', (e) => {
-  console.log(e);
+  // const divs = document.querySelector(`.projects`);
+  let ps = document.querySelectorAll('.projects div');
+  ps[e.data.id].children[0].shadowRoot.children[3].textContent = e.data.num;
+  console.log(ps[e.data.id].children[0].shadowRoot.children[3]);
 });
 
 export default function portFactory(div, index, sprite) {
   const panel = new Panel(projects[index], sprite, index);
   div.appendChild(panel);
   myWorker.postMessage(div.id);
+  
 }
 
 window.customElements.define('project-panel', Panel);
