@@ -1,4 +1,5 @@
 const myWorker = new Worker('./worker.js');
+const panels = document.querySelectorAll('.projects div');
 const projects = [
   {
     title: 'clean tablet',
@@ -227,17 +228,20 @@ class Panel extends HTMLElement {
 }
 
 
+
 myWorker.addEventListener('message', (e) => {
-  // const divs = document.querySelector(`.projects`);
-  let ps = document.querySelectorAll('.projects div');
-  ps[e.data.id].children[0].shadowRoot.children[3].textContent = e.data.num;
-  console.log(ps[e.data.id].children[0].shadowRoot.children[3]);
+  console.log(': ', e.data);
+  panels[e.data.id].children[0].shadowRoot.children[3].textContent = e.data.name;
 });
 
 export default function portFactory(div, index, sprite) {
+  const repoName = projects[index].code.match(/[\w-]+$/)[0];
+  myWorker.postMessage({
+    id: div.id,
+    name: repoName,
+  });
   const panel = new Panel(projects[index], sprite, index);
   div.appendChild(panel);
-  myWorker.postMessage(div.id);
   
 }
 
