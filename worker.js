@@ -17,42 +17,43 @@ const options = {
 
 addEventListener('message', (e) => { // eslint-disable-line
   fetch(`https://api.github.com/repos/jamessouth/${e.data.repoName}/languages`, options)
-  .then(res => res.json())
-  .then(res => {
-    const sum = Object.values(res).reduce((a, b) => a += b);
-    const sorted = Object.entries(res).sort((a, b) => b[1] - a[1]);
-    let ans = 'linear-gradient(to right', tot = 0, title = '';
-    sorted.forEach(([lang, count], i) => {
-      const pct = Math.floor((count/sum) * 100000) / 1000;
-      const color = colors[lang.toLowerCase()];
-      if (i == 0) {
-        ans += `, ${color} ${pct}%`;
-        title += `${lang} ${pct}%, `;
-      } else if (i == sorted.length - 1) {
-        ans += `, ${color} ${tot}%)`;
-        title += `${lang} ${pct}%`;
-      } else {
-        ans += `, ${color} ${tot}% ${pct + tot}%`;
-        title += `${lang} ${pct}%, `;
-      }
-      tot += pct;
-      console.log('ddd: ', lang, count);
-    });
+    .then(res => {
+      console.log('hh: ', res.headers.get('x-auth-token'));
+      return res.json();
+    })
+    .then(res => {
+      const sum = Object.values(res).reduce((a, b) => a += b);
+      const sorted = Object.entries(res).sort((a, b) => b[1] - a[1]);
+      let style = 'linear-gradient(to right';
+      let tot = 0;
+      let title = '';
+      sorted.forEach(([lang, count], i) => {
+        const pct = Math.floor((count/sum) * 100000) / 1000;
+        const color = colors[lang.toLowerCase()];
+        if (i == 0) {
+          if (sorted.length == 1) {
+            style += `, ${color}, ${color})`;
+            title += `${lang} ${pct}%`;
+          } else {
+            style += `, ${color} ${pct}%`;
+            title += `${lang} ${pct}%, `;
+          }
+        } else if (i == sorted.length - 1) {
+          style += `, ${color} ${tot}%)`;
+          title += `${lang} ${pct}%`;
+        } else {
+          style += `, ${color} ${tot}% ${pct + tot}%`;
+          title += `${lang} ${pct}%, `;
+        }
+        tot += pct;
+      });
+      
+      postMessage({
+        style,
+        title,
+        id: e.data.id,
+      });
+    })
+    .catch(e => console.error('eee: ', e));
 
-
-    
-
-    
-    console.log(': ', ans, '\n', title);
-  })
-  .catch(e => console.error('eee: ', e));
-  
-
-
-  // const data = {
-  //   id: e.data.id,
-  //   bar: `linear-gradient(to right, red ${x}%, orange ${x}% ${parseFloat((x+y).toFixed(2), 10)}%, blue ${parseFloat((x+y).toFixed(2), 10)}%)`,
-  //   zip: `${x}, ${x+y}, ${x+z+y}`
-  // }
-  postMessage('data');
 });

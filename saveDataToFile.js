@@ -8,7 +8,7 @@ const options = {
   }
 };
 
-https.get('https://api.github.com/repos/jamessouth/see-through/languages', options, chunks => {
+https.get('https://api.github.com/repos/jamessouth/web-scraper/languages', options, chunks => {
   console.log(': ', chunks.headers);
   chunks.pipe(file);
 });
