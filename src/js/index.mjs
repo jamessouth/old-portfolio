@@ -36,7 +36,7 @@ const idObserver = new IntersectionObserver((ents, obs) => {
         import(`./${id}Factory.mjs`),
       ])
         .then(([sprite, factory]) => {
-          (() => id == 'port' ? projectDivs : contactDivs)().forEach((el, i) => factory.default(el, i, sprite.url));
+          (() => id == 'port' ? projectDivs : contactDivs)().forEach((el, i) => i == 0 && factory.default(el, i, sprite.url));
         })
         .catch((err) => console.log(err));
 

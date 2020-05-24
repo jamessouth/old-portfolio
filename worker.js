@@ -8,9 +8,29 @@ const colors = [
   {"javascript": "#f1e05a"},
 ];
 
+
+
+const options = {
+  headers: {
+    'User-Agent': 'jamessouth',
+    'Accept': 'application/vnd.github.v3+json',
+  }
+};
+
+
+
+
+
+
 addEventListener('message', (e) => { // eslint-disable-line
-
-
+  fetch(`https://api.github.com/repos/jamessouth/${e.data.repoName}/languages`, options)
+  .then(res => res.json())
+  .then(res => {
+    const sum = Object.values(res).reduce((a, b) => a += b);
+    console.log(': ', res, sum);
+  })
+  .catch(e => console.error('eee: ', e));
+  
 
 
   // let a = Math.floor(Math.random()*1000)/10, b = Math.floor(Math.random()*1000)/10, c = Math.floor(Math.random()*1000)/10;

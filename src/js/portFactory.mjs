@@ -239,7 +239,7 @@ export default function portFactory(div, index, sprite) {
   const repoName = projects[index].code.match(/[\w-]+$/)[0];
   myWorker.postMessage({
     id: div.id,
-    name: repoName,
+    repoName,
   });
   const panel = new Panel(projects[index], sprite, index);
   div.appendChild(panel);
