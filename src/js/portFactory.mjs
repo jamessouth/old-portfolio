@@ -231,7 +231,8 @@ class Panel extends HTMLElement {
 
 myWorker.addEventListener('message', (e) => {
   console.log(': ', e.data);
-  panels[e.data.id].children[0].shadowRoot.children[3].textContent = e.data.name;
+  panels[e.data.id].children[0].shadowRoot.children[3].style.background = e.data.bar;
+  panels[e.data.id].children[0].shadowRoot.children[3].setAttribute('title', e.data.zip);
 });
 
 export default function portFactory(div, index, sprite) {
