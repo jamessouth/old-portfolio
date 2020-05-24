@@ -21,17 +21,20 @@ addEventListener('message', (e) => { // eslint-disable-line
   .then(res => {
     const sum = Object.values(res).reduce((a, b) => a += b);
     const sorted = Object.entries(res).sort((a, b) => b[1] - a[1]);
-    let ans = 'linear-gradient(to right', tot = 0;
+    let ans = 'linear-gradient(to right', tot = 0, title = '';
     sorted.forEach(([lang, count], i) => {
       const pct = Math.floor((count/sum) * 100000) / 1000;
+      const color = colors[lang.toLowerCase()];
       if (i == 0) {
-        ans += `, ${colors[lang.toLowerCase()]} ${pct}%`;
+        ans += `, ${color} ${pct}%`;
+        title += `${lang} ${pct}%, `;
       } else if (i == sorted.length - 1) {
-        ans += `, ${colors[lang.toLowerCase()]} ${tot}%`;
+        ans += `, ${color} ${tot}%)`;
+        title += `${lang} ${pct}%`;
       } else {
-        ans += `, ${colors[lang.toLowerCase()]} ${tot}% ${pct + tot}%`;
+        ans += `, ${color} ${tot}% ${pct + tot}%`;
+        title += `${lang} ${pct}%, `;
       }
-      
       tot += pct;
       console.log('ddd: ', lang, count);
     });
@@ -40,7 +43,7 @@ addEventListener('message', (e) => { // eslint-disable-line
     
 
     
-    console.log(': ', ans);
+    console.log(': ', ans, '\n', title);
   })
   .catch(e => console.error('eee: ', e));
   
