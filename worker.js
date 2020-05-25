@@ -22,6 +22,7 @@ addEventListener('message', async (e) => { // eslint-disable-line
   try {
     const res = await fetch(`https://api.github.com/repos/jamessouth/${e.data.repoName}/languages`, options);
     res.headers.forEach((x, y) => resHeaders[y] = x);
+    console.log('kkk: ', reset);
     reset = resHeaders['x-ratelimit-reset'];
     const data = await res.json();
 
@@ -58,24 +59,13 @@ addEventListener('message', async (e) => { // eslint-disable-line
       id: e.data.id,
     });
   } catch (e) {
+    reset = reset ? new Date(parseInt(reset, 10) * 1000).getMinutes() - new Date().getMinutes() : 60;
     postMessage({
       msg: 'Rate limit exceeded',
       reset,
     });
   }
   
-
-  console.log('ssss: ', resHeaders, res.status);
-  if (resHeaders['x-ratelimit-remaining'] > 1) {
-
-
-
-    console.log('ssss: ', resHeaders, res.status);
-  } else {
-
-    console.log(': ', resHeaders);
-  }
-
 
 
 });
