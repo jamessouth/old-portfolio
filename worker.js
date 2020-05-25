@@ -15,45 +15,67 @@ const options = {
   }
 };
 
-addEventListener('message', (e) => { // eslint-disable-line
-  fetch(`https://api.github.com/repos/jamessouth/${e.data.repoName}/languages`, options)
-    .then(res => {
-      res.headers.forEach((x, y) => console.log(y, x));
-      return res.json();
-    })
-    .then(res => {
-      const sum = Object.values(res).reduce((a, b) => a += b);
-      const sorted = Object.entries(res).sort((a, b) => b[1] - a[1]);
-      let style = 'linear-gradient(to right';
-      let tot = 0;
-      let title = '';
-      sorted.forEach(([lang, count], i) => {
-        const pct = Math.floor((count/sum) * 100000) / 1000;
-        const color = colors[lang.toLowerCase()];
-        if (i == 0) {
-          if (sorted.length == 1) {
-            style += `, ${color}, ${color})`;
-            title += `${lang} ${pct}%`;
-          } else {
-            style += `, ${color} ${pct}%`;
-            title += `${lang} ${pct}%, `;
-          }
-        } else if (i == sorted.length - 1) {
-          style += `, ${color} ${tot}%)`;
+let reset;
+
+addEventListener('message', async (e) => { // eslint-disable-line
+  const resHeaders = {};
+  try {
+    const res = await fetch(`https://api.github.com/repos/jamessouth/${e.data.repoName}/languages`, options);
+    res.headers.forEach((x, y) => resHeaders[y] = x);
+    reset = resHeaders['x-ratelimit-reset'];
+    const data = await res.json();
+
+    const sum = Object.values(data).reduce((a, b) => a += b);
+    const sorted = Object.entries(data).sort((a, b) => b[1] - a[1]);
+    let style = 'linear-gradient(to right';
+    let tot = 0;
+    let title = '';
+
+    sorted.forEach(([lang, count], i) => {
+      const pct = Math.floor((count/sum) * 100000) / 1000;
+      const color = colors[lang.toLowerCase()];
+      if (i == 0) {
+        if (sorted.length == 1) {
+          style += `, ${color}, ${color})`;
           title += `${lang} ${pct}%`;
         } else {
-          style += `, ${color} ${tot}% ${pct + tot}%`;
+          style += `, ${color} ${pct}%`;
           title += `${lang} ${pct}%, `;
         }
-        tot += pct;
-      });
-      
-      postMessage({
-        style,
-        title,
-        id: e.data.id,
-      });
-    })
-    .catch(e => console.error('eee: ', e));
+      } else if (i == sorted.length - 1) {
+        style += `, ${color} ${tot}%)`;
+        title += `${lang} ${pct}%`;
+      } else {
+        style += `, ${color} ${tot}% ${pct + tot}%`;
+        title += `${lang} ${pct}%, `;
+      }
+      tot += pct;
+    });
+
+    postMessage({
+      style,
+      title,
+      id: e.data.id,
+    });
+  } catch (e) {
+    postMessage({
+      msg: 'Rate limit exceeded',
+      reset,
+    });
+  }
+  
+
+  console.log('ssss: ', resHeaders, res.status);
+  if (resHeaders['x-ratelimit-remaining'] > 1) {
+
+
+
+    console.log('ssss: ', resHeaders, res.status);
+  } else {
+
+    console.log(': ', resHeaders);
+  }
+
+
 
 });
