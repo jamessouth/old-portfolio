@@ -231,8 +231,10 @@ class Panel extends HTMLElement {
 
 myWorker.addEventListener('message', (e) => {
   if (e.data.msg) {
-    console.log('dddsdsd: ', e.data);
-    alert(e.data.msg + 'please retry in ' + e.data.reset + 'minutes');
+    const port = document.querySelector('#port');
+    const p = document.createElement('p');
+    p.textContent = e.data.msg + ' please retry in ' + e.data.time + ' minutes';
+    port.appendChild(p);
   } else {
     panels[e.data.id].children[0].shadowRoot.children[3].style.background = e.data.style;
     panels[e.data.id].children[0].shadowRoot.children[3].setAttribute('title', e.data.title);

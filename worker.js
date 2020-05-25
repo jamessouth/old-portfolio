@@ -47,6 +47,7 @@ addEventListener('message', async (e) => { // eslint-disable-line
         style += `, ${color} ${tot}%)`;
         title += `${lang} ${pct}%`;
       } else {
+        throw new Error();
         style += `, ${color} ${tot}% ${pct + tot}%`;
         title += `${lang} ${pct}%, `;
       }
@@ -59,10 +60,10 @@ addEventListener('message', async (e) => { // eslint-disable-line
       id: e.data.id,
     });
   } catch (e) {
-    reset = reset ? new Date(parseInt(reset, 10) * 1000).getMinutes() - new Date().getMinutes() : 60;
+    const time = reset ? new Date().getMinutes() - new Date(parseInt(reset, 10) * 1000).getMinutes() : 60;
     postMessage({
-      msg: 'Rate limit exceeded',
-      reset,
+      msg: 'rate limit exceeded',
+      time,
     });
   }
   
