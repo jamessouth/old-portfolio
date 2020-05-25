@@ -18,7 +18,7 @@ const options = {
 addEventListener('message', (e) => { // eslint-disable-line
   fetch(`https://api.github.com/repos/jamessouth/${e.data.repoName}/languages`, options)
     .then(res => {
-      console.log('hh: ', res.headers.get('x-auth-token'));
+      res.headers.forEach((x, y) => console.log(y, x));
       return res.json();
     })
     .then(res => {
