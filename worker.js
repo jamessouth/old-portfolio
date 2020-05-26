@@ -15,15 +15,8 @@ const options = {
   }
 };
 
-let reset;
-
 addEventListener('message', async (e) => { // eslint-disable-line
-  const resHeaders = {};
-  try {
     const res = await fetch(`https://api.github.com/repos/jamessouth/${e.data.repoName}/languages`, options);
-    res.headers.forEach((x, y) => resHeaders[y] = x);
-    console.log('kkk: ', reset);
-    reset = resHeaders['x-ratelimit-reset'];
     const data = await res.json();
 
     const sum = Object.values(data).reduce((a, b) => a += b);
@@ -47,7 +40,6 @@ addEventListener('message', async (e) => { // eslint-disable-line
         style += `, ${color} ${tot}%)`;
         title += `${lang} ${pct}%`;
       } else {
-        throw new Error();
         style += `, ${color} ${tot}% ${pct + tot}%`;
         title += `${lang} ${pct}%, `;
       }
@@ -59,13 +51,7 @@ addEventListener('message', async (e) => { // eslint-disable-line
       title,
       id: e.data.id,
     });
-  } catch (e) {
-    const time = reset ? new Date().getMinutes() - new Date(parseInt(reset, 10) * 1000).getMinutes() : 60;
-    postMessage({
-      msg: 'rate limit exceeded',
-      time,
-    });
-  }
+
   
 
 
