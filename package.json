@@ -1,7 +1,7 @@
 {
   "name": "portfolio",
   "version": "4.0.1",
-  "description": "portfolio",
+  "description": "portfolio of james south",
   "private": true,
   "scripts": {
     "build:html": "html-minifier --collapse-whitespace --remove-comments ./src/html/index.html -o ./docs/index.html",
