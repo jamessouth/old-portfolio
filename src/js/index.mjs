@@ -4,21 +4,23 @@ const projectDivs = [...document.querySelectorAll('.projects div')];
 const cdivs = document.querySelectorAll('.contact div');
 const contactDivs = [...cdivs].slice(0, cdivs.length - 2);
 const sections = document.querySelectorAll('section:not(#about)');
-const harpers = document.querySelector('#about button');
+const harpers = document.querySelector('span + button');
 let showImg = false;
 
 window.onload = () => {
   Promise.all([
     fetch('./src/css/about.css'),
     fetch('./src/images/resume.pdf'),
+    fetch('./src/images/harpers.png'),
   ])
-    .then(([ss, re]) => {
+    .then(([ss, re, ha]) => {
       document.querySelector('li:last-of-type a').href = re.url;
       const link = document.createElement('link');
       link.href = ss.url;
       link.rel = 'stylesheet';
       link.type = 'text/css';
       document.head.appendChild(link);
+      
     })
     .catch(e => console.log('failed to fetch: ', e));
 

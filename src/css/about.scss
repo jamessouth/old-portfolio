@@ -52,7 +52,29 @@ section{
         @include focus($blue, 2px);
     }
 }
-#about button{
+h2 + button{
+    font-family: sans-serif;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 60px;
+    font-size: 3em;
+    width: 40px;
+    cursor: pointer;
+    height: 40px;
+    color: #000000;
+    box-shadow: 0px 0px 4px 1px #000000;
+    line-height: 0px;
+    border-radius: 50%;
+    border: 1px solid #000000;
+    background-color: #fafad2;
+    &:hover,
+    &:focus{
+        background-color: $blue;
+        color: $yellow;
+    }
+}
+span + button{
     border: $bord;
     font-family: inherit;
     background: none;
@@ -77,6 +99,14 @@ time{
 }
 #about span{
     font-size: .9em;
+}
+.harp{
+    background-color: red;
+    font-family: serif;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 110px;
 }
 .installbtn,
 .reloadbtn{
