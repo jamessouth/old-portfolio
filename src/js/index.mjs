@@ -5,8 +5,7 @@ const cdivs = document.querySelectorAll('.contact div');
 const contactDivs = [...cdivs].slice(0, cdivs.length - 2);
 const sections = document.querySelectorAll('section:not(#about)');
 const harpers = document.querySelector('#about button');
-harpers.addEventListener('click', e => console.log('sdf: ', e));
-
+let showImg = false;
 
 window.onload = () => {
   Promise.all([
@@ -22,6 +21,9 @@ window.onload = () => {
       document.head.appendChild(link);
     })
     .catch(e => console.log('failed to fetch: ', e));
+
+  harpers.addEventListener('click', () => showImg = true);
+
     
   if (CSS.paintWorklet) {
     CSS.paintWorklet.addModule('./src/js/ButtonPaint.js');
