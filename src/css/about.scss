@@ -52,6 +52,22 @@ section{
         @include focus($blue, 2px);
     }
 }
+#about button{
+    border: $bord;
+    font-family: inherit;
+    background: none;
+    text-decoration: underline;
+    cursor: pointer;
+    color: $blue;
+    font-size: 1em;
+    &:hover{
+        background-color: $blue;
+        color: $yellow;
+    }
+    &:focus{
+        @include focus($blue, 2px);
+    }
+}
 .installbtn,
 .reloadbtn{
     display: none;
