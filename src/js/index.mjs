@@ -4,7 +4,8 @@ const projectDivs = [...document.querySelectorAll('.projects div')];
 const cdivs = document.querySelectorAll('.contact div');
 const contactDivs = [...cdivs].slice(0, cdivs.length - 2);
 const sections = document.querySelectorAll('section:not(#about)');
-
+const harpers = document.querySelector('#about button');
+harpers.addEventListener('click', e => console.log('sdf: ', e));
 
 
 window.onload = () => {
