@@ -13,7 +13,7 @@ window.onload = () => {
   Promise.all([
     fetch('./src/css/about.css'),
     fetch('./src/images/resume.pdf'),
-    fetch('./src/images/harpers.png'),
+    fetch('./src/images/harpers.jpg'),
   ])
     .then(([ss, re, ha]) => {
       document.querySelector('li:last-of-type a').href = re.url;
