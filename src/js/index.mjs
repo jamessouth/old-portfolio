@@ -27,9 +27,15 @@ window.onload = () => {
     })
     .catch(e => console.log('failed to fetch: ', e));
 
-  harpersOpenBtn.addEventListener('click', () => harp.classList.add('show'));
+  harpersOpenBtn.addEventListener('click', () => {
+    harp.classList.add('show');
+    harpersCloseBtn.focus();
+  });
 
-  harpersCloseBtn.addEventListener('click', () => harp.classList.remove('show'));
+  harpersCloseBtn.addEventListener('click', () => {
+    harp.classList.remove('show');
+    harpersOpenBtn.focus();
+  });
 
 
   if (CSS.paintWorklet) {
