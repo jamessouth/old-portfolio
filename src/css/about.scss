@@ -55,21 +55,26 @@ section{
 #harp{
     display: none;
     position: absolute;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
+    background-color: white;
+    // flex-direction: column;
+    // justify-content: center;
+    // align-items: flex-start;
     overflow-x: scroll;
-    width: 90%;
+    min-height: 80px;
+    width: 92%;
+    box-shadow: 0px -60px 20px 10px #00000073,
+                0px 60px 20px 10px #00000073;
+    bottom: 120px;
     left: 50%;
     transform: translateX(-50%);
 }
 #harp button{
     font-family: sans-serif;
-    // position: absolute;
-    // left: 50%;
+    position: sticky;
+    left: 2%;
     // transform: translateX(-50%);
-    // bottom: 264px;
-    // z-index: 1;
+    top: 8%;
+    z-index: 1;
     font-size: 3em;
     width: 40px;
     cursor: pointer;
@@ -121,7 +126,7 @@ time{
     // bottom: 110px;
 }
 #harp.show{
-    display: flex;
+    display: block;
 }
 .installbtn,
 .reloadbtn{
