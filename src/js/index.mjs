@@ -4,8 +4,10 @@ const projectDivs = [...document.querySelectorAll('.projects div')];
 const cdivs = document.querySelectorAll('.contact div');
 const contactDivs = [...cdivs].slice(0, cdivs.length - 2);
 const sections = document.querySelectorAll('section:not(#about)');
-const harpers = document.querySelector('span + button');
-let showImg = false;
+const harpersOpenBtn = document.querySelector('span + button');
+const harpersCloseBtn = document.querySelector('h2 + button');
+const harpersImg = document.querySelector('#about img');
+// let showImg = false;
 
 window.onload = () => {
   Promise.all([
@@ -20,11 +22,20 @@ window.onload = () => {
       link.rel = 'stylesheet';
       link.type = 'text/css';
       document.head.appendChild(link);
+      harpersImg.src = ha.url;
       
     })
     .catch(e => console.log('failed to fetch: ', e));
 
-  harpers.addEventListener('click', () => showImg = true);
+  harpersOpenBtn.addEventListener('click', () => {
+    harpersImg.classList.add('show');
+    harpersCloseBtn.classList.add('show');
+  });
+
+  harpersCloseBtn.addEventListener('click', () => {
+    harpersImg.classList.remove('show');
+    harpersCloseBtn.classList.remove('show');
+  });
 
     
   if (CSS.paintWorklet) {

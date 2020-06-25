@@ -53,6 +53,7 @@ section{
     }
 }
 h2 + button{
+    display: none;
     font-family: sans-serif;
     position: absolute;
     left: 50%;
@@ -100,13 +101,18 @@ time{
 #about span{
     font-size: .9em;
 }
-.harp{
+#about img{
+    display: none;
     background-color: red;
     font-family: serif;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
     top: 110px;
+}
+button.show,
+#about img.show{
+    display: block;
 }
 .installbtn,
 .reloadbtn{
