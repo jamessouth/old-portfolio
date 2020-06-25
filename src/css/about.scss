@@ -52,13 +52,24 @@ section{
         @include focus($blue, 2px);
     }
 }
-h2 + button{
+#harp{
     display: none;
-    font-family: sans-serif;
     position: absolute;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    overflow-x: scroll;
+    width: 90%;
     left: 50%;
     transform: translateX(-50%);
-    top: 60px;
+}
+#harp button{
+    font-family: sans-serif;
+    // position: absolute;
+    // left: 50%;
+    // transform: translateX(-50%);
+    // bottom: 264px;
+    // z-index: 1;
     font-size: 3em;
     width: 40px;
     cursor: pointer;
@@ -101,18 +112,16 @@ time{
 #about span{
     font-size: .9em;
 }
-#about img{
-    display: none;
-    background-color: red;
+#harp img{
+    // background-color: red;
     font-family: serif;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 110px;
+    // position: absolute;
+    // left: 50%;
+    // transform: translateX(-50%);
+    // bottom: 110px;
 }
-button.show,
-#about img.show{
-    display: block;
+#harp.show{
+    display: flex;
 }
 .installbtn,
 .reloadbtn{

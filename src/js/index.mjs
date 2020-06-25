@@ -5,9 +5,9 @@ const cdivs = document.querySelectorAll('.contact div');
 const contactDivs = [...cdivs].slice(0, cdivs.length - 2);
 const sections = document.querySelectorAll('section:not(#about)');
 const harpersOpenBtn = document.querySelector('span + button');
-const harpersCloseBtn = document.querySelector('h2 + button');
-const harpersImg = document.querySelector('#about img');
-// let showImg = false;
+const harpersCloseBtn = document.querySelector('#harp button');
+const harpersImg = document.querySelector('#harp img');
+const harp = document.querySelector('#harp');
 
 window.onload = () => {
   Promise.all([
@@ -27,17 +27,11 @@ window.onload = () => {
     })
     .catch(e => console.log('failed to fetch: ', e));
 
-  harpersOpenBtn.addEventListener('click', () => {
-    harpersImg.classList.add('show');
-    harpersCloseBtn.classList.add('show');
-  });
+  harpersOpenBtn.addEventListener('click', () => harp.classList.add('show'));
 
-  harpersCloseBtn.addEventListener('click', () => {
-    harpersImg.classList.remove('show');
-    harpersCloseBtn.classList.remove('show');
-  });
+  harpersCloseBtn.addEventListener('click', () => harp.classList.remove('show'));
 
-    
+
   if (CSS.paintWorklet) {
     CSS.paintWorklet.addModule('./src/js/ButtonPaint.js');
   }
