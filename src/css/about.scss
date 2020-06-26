@@ -56,12 +56,10 @@ section{
     display: none;
     position: absolute;
     background-color: white;
-    // flex-direction: column;
-    // justify-content: center;
-    // align-items: flex-start;
     overflow-x: scroll;
     min-height: 80px;
     width: 92%;
+    max-width: 1238px;
     box-shadow: 0px -30px 30px 20px #000000bf,
                 0px 30px 30px 20px #000000bf;
     bottom: 120px;
@@ -75,7 +73,6 @@ section{
     font-family: sans-serif;
     position: sticky;
     left: 2%;
-    // transform: translateX(-50%);
     top: 8%;
     z-index: 1;
     font-size: 3em;
@@ -122,12 +119,7 @@ time{
     font-size: .9em;
 }
 #harp img{
-    // background-color: red;
     font-family: serif;
-    // position: absolute;
-    // left: 50%;
-    // transform: translateX(-50%);
-    // bottom: 110px;
 }
 #harp.show{
     display: block;
