@@ -17,6 +17,9 @@ body{
 h1{
     &::after{
         @include deco(0%, 80%, -100px);
+        @media #{$four_cols}{
+            background-position-y: bottom;
+        }
     }
 }
 section{
