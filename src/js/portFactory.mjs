@@ -229,8 +229,6 @@ class Panel extends HTMLElement {
 
 }
 
-
-
 myWorker.addEventListener('message', (e) => {
     panels[e.data.id].children[0].shadowRoot.children[3].style.background = e.data.style;
     panels[e.data.id].children[0].shadowRoot.children[3].setAttribute('title', e.data.title);

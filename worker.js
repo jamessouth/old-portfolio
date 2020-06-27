@@ -52,7 +52,4 @@ addEventListener('message', async (e) => { // eslint-disable-line
       id: e.data.id,
     });
 
-  
-
-
 });

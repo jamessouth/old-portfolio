@@ -1,4 +1,4 @@
-// import './loadSW.mjs';
+import './loadSW.mjs';
 
 const projectDivs = [...document.querySelectorAll('.projects div')];
 const cdivs = document.querySelectorAll('.contact div');
@@ -23,7 +23,6 @@ window.onload = () => {
       link.type = 'text/css';
       document.head.appendChild(link);
       harpersImg.src = ha.url;
-      
     })
     .catch(e => console.log('failed to fetch: ', e));
 
@@ -37,7 +36,6 @@ window.onload = () => {
     harpersOpenBtn.focus();
   });
 
-
   if (CSS.paintWorklet) {
     CSS.paintWorklet.addModule('./src/js/ButtonPaint.js');
   }
@@ -46,7 +44,6 @@ window.onload = () => {
 const idObserver = new IntersectionObserver((ents, obs) => {
   ents.filter((entry) => entry.isIntersecting).forEach(({ target, target: { id } }) => {
     if (id != 'articles') {
-
       Promise.all([
         fetch(`./src/images/${id}sprite.${id == `port` ? `jpg` : `png`}`),
         import(`./${id}Factory.mjs`),
@@ -55,23 +52,17 @@ const idObserver = new IntersectionObserver((ents, obs) => {
           (() => id == 'port' ? projectDivs : contactDivs)().forEach((el, i) => factory.default(el, i, sprite.url));
         })
         .catch((err) => console.log(err));
-
-
       if (CSS.paintWorklet) {
         CSS.paintWorklet.addModule('./src/js/BorderPaint.js');
       }
-
     } else {
-
       const imgs = document.querySelectorAll('.arts img');
       fetch(`./src/images/articlessprite.jpg`)
         .then(img => {
           [...imgs].forEach(i => i.src = img.url);
         })
         .catch(e => console.log('failed to fetch: ', e));
-
     }
-
     fetch(`./src/css/${id}.css`)
       .then(s => {
         const link = document.createElement('link');
@@ -81,7 +72,6 @@ const idObserver = new IntersectionObserver((ents, obs) => {
         document.head.appendChild(link);
       })
       .catch(e => console.log('failed to fetch: ', e));
-
     obs.unobserve(target);
   });
 }, {
