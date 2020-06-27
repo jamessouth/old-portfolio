@@ -53,6 +53,7 @@ async function updateHashedPaths(data) {
 }
 
 async function makeNewFile(file) {
+  console.log('file: ', file);
   const resolvedFile = path.resolve(file);
   const data = await fs.promises.readFile(resolvedFile, 'utf8');
   const newFile = await updateHashedPaths(data);
