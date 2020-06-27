@@ -1,4 +1,4 @@
-import './loadSW.mjs';
+// import './loadSW.mjs';
 
 const projectDivs = [...document.querySelectorAll('.projects div')];
 const cdivs = document.querySelectorAll('.contact div');
@@ -43,35 +43,57 @@ window.onload = () => {
 
 const idObserver = new IntersectionObserver((ents, obs) => {
   ents.filter((entry) => entry.isIntersecting).forEach(({ target, target: { id } }) => {
-    if (id != 'articles') {
+
+    if (id == 'port') {
       Promise.all([
-        fetch(`./src/images/${id}sprite.${id == `port` ? `jpg` : `png`}`),
-        import(`./${id}Factory.mjs`),
+        fetch('./src/images/portsprite.jpg'),
+        import('./portFactory.mjs'),
+        fetch('./src/css/port.css'),
       ])
-        .then(([sprite, factory]) => {
-          (() => id == 'port' ? projectDivs : contactDivs)().forEach((el, i) => factory.default(el, i, sprite.url));
+        .then(([sprite, factory, styles]) => {
+          projectDivs.forEach((el, i) => factory.default(el, i, sprite.url));
+          const link = document.createElement('link');
+          link.href = styles.url;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          document.head.appendChild(link);
         })
-        .catch((err) => console.log(err));
+        .catch(e => console.log('failed to fetch: ', e));
       if (CSS.paintWorklet) {
         CSS.paintWorklet.addModule('./src/js/BorderPaint.js');
       }
-    } else {
+    } else if (id == 'articles') {
       const imgs = document.querySelectorAll('.arts img');
-      fetch(`./src/images/articlessprite.jpg`)
-        .then(img => {
-          [...imgs].forEach(i => i.src = img.url);
+      Promise.all([
+        fetch(`./src/images/articlessprite.jpg`),
+        fetch('./src/css/articles.css'),
+      ])
+        .then(([sprite, styles]) => {
+          [...imgs].forEach(i => i.src = sprite.url);
+          const link = document.createElement('link');
+          link.href = styles.url;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          document.head.appendChild(link);
+        })
+        .catch(e => console.log('failed to fetch: ', e));
+    } else {
+      Promise.all([
+        fetch('./src/images/contsprite.png'),
+        import('./contFactory.mjs'),
+        fetch('./src/css/cont.css'),
+      ])
+        .then(([sprite, factory, styles]) => {
+          contactDivs.forEach((el, i) => factory.default(el, i, sprite.url));
+          const link = document.createElement('link');
+          link.href = styles.url;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          document.head.appendChild(link);
         })
         .catch(e => console.log('failed to fetch: ', e));
     }
-    fetch(`./src/css/${id}.css`)
-      .then(s => {
-        const link = document.createElement('link');
-        link.href = s.url;
-        link.rel = 'stylesheet';
-        link.type = 'text/css';
-        document.head.appendChild(link);
-      })
-      .catch(e => console.log('failed to fetch: ', e));
+
     obs.unobserve(target);
   });
 }, {
