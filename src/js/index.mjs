@@ -41,6 +41,14 @@ window.onload = () => {
   }
 };
 
+function makeLink({ url }) {
+  const link = document.createElement('link');
+  link.href = url;
+  link.rel = 'stylesheet';
+  link.type = 'text/css';
+  document.head.appendChild(link);
+}
+
 const idObserver = new IntersectionObserver((ents, obs) => {
   ents.filter((entry) => entry.isIntersecting).forEach(({ target, target: { id } }) => {
 
@@ -52,11 +60,7 @@ const idObserver = new IntersectionObserver((ents, obs) => {
       ])
         .then(([sprite, factory, styles]) => {
           projectDivs.forEach((el, i) => factory.default(el, i, sprite.url));
-          const link = document.createElement('link');
-          link.href = styles.url;
-          link.rel = 'stylesheet';
-          link.type = 'text/css';
-          document.head.appendChild(link);
+          makeLink(styles);
         })
         .catch(e => console.log('failed to fetch: ', e));
       if (CSS.paintWorklet) {
@@ -70,11 +74,7 @@ const idObserver = new IntersectionObserver((ents, obs) => {
       ])
         .then(([sprite, styles]) => {
           [...imgs].forEach(i => i.src = sprite.url);
-          const link = document.createElement('link');
-          link.href = styles.url;
-          link.rel = 'stylesheet';
-          link.type = 'text/css';
-          document.head.appendChild(link);
+          makeLink(styles);
         })
         .catch(e => console.log('failed to fetch: ', e));
     } else {
@@ -85,11 +85,7 @@ const idObserver = new IntersectionObserver((ents, obs) => {
       ])
         .then(([sprite, factory, styles]) => {
           contactDivs.forEach((el, i) => factory.default(el, i, sprite.url));
-          const link = document.createElement('link');
-          link.href = styles.url;
-          link.rel = 'stylesheet';
-          link.type = 'text/css';
-          document.head.appendChild(link);
+          makeLink(styles);
         })
         .catch(e => console.log('failed to fetch: ', e));
     }
