@@ -2,21 +2,23 @@
 @import 'mixins';
 .projects{
     width: 90%;
-    @media #{$col_gap_expand}{
-        grid-column-gap: 50px;
-    }
-    @media #{$four_cols}{
-        grid-template-columns: repeat(4, 1fr);
-    }
-    @media #{$six_cols}{
-        grid-template-columns: repeat(6, 1fr);
-    }
-    @media #{$big}{
-        width: 80%;
+    // @media #{$col_gap_expand}{
+    //     grid-column-gap: 50px;
+    //     grid-template-columns: repeat(4, 1fr);
+    // }
+    // @media #{$six_cols}{
+    //     grid-template-columns: repeat(6, 1fr);
+    // }
+    @media screen and (min-width: 2540px){
+        max-width: 2300px;
     }
     & > div{
         @include wh(288px, 435px);
+        margin: 1.7em;
         background-color: transparent;
+        @media #{$four_cols}{
+            margin: 3em;
+        }
     }
     & > div:focus-within{
         outline: none;
@@ -28,20 +30,23 @@
         border-top-width: 0;
         border-right-width: 0;
     }
-    & > div:nth-last-child(2){
-        @media #{$upsize_text}{
-            grid-column: 2 / 3;
-        }
-        @media #{$six_cols}{
-            grid-column: 3 / 4;
-        }
-    }
-    & > div:last-child{
-        @media #{$three_col}{
-            grid-column: 3 / 4;
-        }
-        @media #{$six_cols}{
-            grid-column: 4 / 5;
-        }
-    }
+    // & > div:nth-last-child(2){
+    //     @media #{$upsize_text}{
+    //         grid-column: 2 / 3;
+    //     }
+    //     @media #{$six_cols}{
+    //         grid-column: 3 / 4;
+    //     }
+    // }
+    // & > div:last-child{
+    //     @media #{$two_col}{
+    //         grid-column: 1 / 3;
+    //     }
+    //     @media #{$three_col}{
+    //         grid-column: auto;
+    //     }
+    //     @media #{$col_gap_expand}{
+    //         grid-column: 1 / 5;
+    //     }
+    // }
 }
