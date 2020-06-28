@@ -17,14 +17,19 @@ body{
 h1{
     &::after{
         @include deco(0%, 80%, -100px);
-        @media #{$four_cols}{
-            background-position-y: bottom;
+        @media #{$two_col}{
+            bottom: -120px;
+            max-width: 2560px;
         }
     }
 }
 section{
     &:not(:last-of-type)::after{
         @include deco(100%, 50%, -130px);
+        @media #{$two_col}{
+            bottom: -140px;
+            max-width: 1000px;
+        }
     }
 }
 .newwindow::after{
