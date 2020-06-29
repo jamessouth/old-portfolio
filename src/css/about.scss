@@ -80,10 +80,10 @@ section{
 #harp p{
     font-family: sans-serif;
     position: sticky;
-    left: 28%;
-    top: 8%;
+    text-align: center;
+    top: 13%;
     z-index: 1;
-
+    color: $red;
 }
 #harp button{
     font-family: sans-serif;
@@ -95,7 +95,7 @@ section{
     width: 40px;
     cursor: pointer;
     height: 40px;
-    color: darkred;
+    color: $red;
     box-shadow: 0px 0px 4px 1px #3f3f3f;
     line-height: 0px;
     border-radius: 50%;
@@ -103,7 +103,7 @@ section{
     background-color: white;
     &:hover,
     &:focus{
-        background-color: darkred;
+        background-color: $red;
         color: white;
         outline: none;
     }
