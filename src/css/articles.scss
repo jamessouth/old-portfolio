@@ -42,7 +42,7 @@
             color: #30511d;
             position: absolute;
             font-size: 48px;
-            @media #{$quotes}{
+            @media screen and (min-width: 344px){
                 display: block;
             }
         }

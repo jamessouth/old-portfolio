@@ -4,13 +4,13 @@
 @import url('https://fonts.googleapis.com/css?family=Cormorant+SC&display=swap&text=%200136!.-%7C%3AACJMPRSTabcdefghijklmnopqrstuvwxyz%C3%A9');
 // 0136!.-|:ACJMPRSTabcdefghijklmnopqrstuvwxyzé
 *{
-    font-family: $cor;
+    font-family: 'Cormorant SC', serif;
 }
 body{
     background: linear-gradient(-65deg, rgba(250, 250, 210, .87) 25%, rgba(210, 210, 255, .88) 51%, rgba(250, 250, 210, .87) 75%), url('../images/cloud.jpg') repeat-y;// Image constituents by Pixabay user engin akyurt
     background-position-y: 0%;
     background-size: contain;
-    @media #{$col_gap_expand}{
+    @media screen and (min-width: 960px){
         background-size: cover;
     }
 }
