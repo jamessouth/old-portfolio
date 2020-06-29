@@ -15,14 +15,10 @@ window.onload = () => {
     fetch('./src/images/resume.pdf'),
     fetch('./src/images/harpers.jpg'),
   ])
-    .then(([ss, re, ha]) => {
-      document.querySelector('li:last-of-type a').href = re.url;
-      const link = document.createElement('link');
-      link.href = ss.url;
-      link.rel = 'stylesheet';
-      link.type = 'text/css';
-      document.head.appendChild(link);
-      harpersImg.src = ha.url;
+    .then(([styles, resume, harpers]) => {
+      document.querySelector('li:last-of-type a').href = resume.url;
+      makeLink(styles);
+      harpersImg.src = harpers.url;
     })
     .catch(e => console.log('failed to fetch: ', e));
 

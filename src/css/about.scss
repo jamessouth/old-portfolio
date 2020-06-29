@@ -41,11 +41,11 @@ section{
     background-repeat: no-repeat;
     margin-left: 2px;
 }
-#about p > a{
+#about > p > a{
     font-family: inherit;
 }
 .arts > div,
-#about p{
+#about > p{
     & > a{
         border: $bord;
     }
@@ -76,6 +76,14 @@ section{
     @media screen and (min-width: 1363px) {
         overflow-x: auto;
     }
+}
+#harp p{
+    font-family: sans-serif;
+    position: sticky;
+    left: 28%;
+    top: 8%;
+    z-index: 1;
+
 }
 #harp button{
     font-family: sans-serif;
