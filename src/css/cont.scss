@@ -1,8 +1,7 @@
 @import 'variables';
+@import 'mixins';
 .contact{
-    justify-content: space-around;
-    align-items: center;
-    flex-wrap: wrap;
+    @include flex(row, space-around, center, wrap);
     @media screen and (min-width: 2000px){
         max-width: 2000px;
         margin: auto;

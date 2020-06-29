@@ -9,6 +9,7 @@
         max-width: 1800px;
     }
     & > div{
+        margin: 2.5em;
         position: relative;
         width: 300px;
         @media #{$upsize_text}{

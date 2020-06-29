@@ -13,14 +13,6 @@
   align-items: $align;
   flex-wrap: $wrap;
 }
-@mixin grid($gtc, $grg, $gcg, $mar) {
-  display: grid;
-  place-items: center;
-  grid-template-columns: $gtc;
-  grid-row-gap: $grg;
-  grid-column-gap: $gcg;
-  margin: $mar;
-}
 @mixin position($rt: null, $lt: null, $tp: null, $bm: null) {
   position: fixed;
   right: $rt;
