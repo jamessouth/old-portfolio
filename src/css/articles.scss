@@ -26,7 +26,7 @@
         &:before,
         &:after{
             display: none;// too wide for iphone 4 width so don't show
-            color: #30511d;
+            color: #000000;
             position: absolute;
             font-size: 48px;
             @media screen and (min-width: 344px){
