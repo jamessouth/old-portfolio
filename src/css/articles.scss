@@ -3,16 +3,8 @@
 @import url('https://fonts.googleapis.com/css?family=Scheherazade&display=swap&text=%20%3AACGHIKPSTacdeghiklmnoprstuwxy()');
 // :ACGHIKPSTacdeghiklmnoprstuwxy()
 .arts{
-    @include grid(auto, 80px, 42px, auto);
-    @media screen and (min-width: 500px){
-        grid-template-columns: repeat(auto-fill, minmax(346px, auto));
-    }
-    @media screen and (min-width: 900px){
-        grid-template-columns: auto auto;
-    }
-    @media screen and (min-width: 1170px){
-        grid-template-columns: auto auto auto;
-    }
+    margin: auto;
+    @include flex(row, space-around, center, wrap);
     @media #{$upsize_text}{
         max-width: 1800px;
     }
@@ -21,12 +13,6 @@
         width: 300px;
         @media #{$upsize_text}{
             width: 400px;
-        }
-    }
-    & > div:last-of-type{
-        grid-column: 1 / -1;
-        @media screen and (min-width: 1170px){
-            grid-column: initial;
         }
     }
     & > div > a{
