@@ -7,7 +7,7 @@
     font-family: 'Cormorant SC', serif;
 }
 body{
-    background: linear-gradient(rgba(250, 250, 210, 0.75) 96%, rgba(75, 78, 109, 0.75)), url('../images/cloud.jpg') repeat-y;// Image constituents by Pixabay user engin akyurt
+    background: linear-gradient(rgba(250, 250, 210, 0.75) 96%, rgba(8, 65, 92, 0.75)), url('../images/cloud.jpg') repeat-y;// Image constituents by Pixabay user engin akyurt
     background-position-y: 0%;
     background-size: contain;
     @media screen and (min-width: 960px){
@@ -70,7 +70,7 @@ section{
     max-width: 1238px;
     box-shadow: 0px -30px 30px 20px #000000bf,
                 0px 30px 30px 20px #000000bf;
-    bottom: 120px;
+    bottom: 60px;
     left: 50%;
     transform: translateX(-50%);
     @media screen and (min-width: 1363px) {
@@ -81,7 +81,7 @@ section{
     font-family: sans-serif;
     position: sticky;
     text-align: center;
-    top: 13%;
+    top: 5%;
     z-index: 1;
     color: $blue;
 }
