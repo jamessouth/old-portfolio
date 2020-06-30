@@ -9,7 +9,7 @@ body{
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
-  background: linear-gradient(-65deg, rgba(250, 250, 210, .87) 25%, rgba(210, 210, 255, .88) 51%, rgba(250, 250, 210, .87) 75%);
+  background: linear-gradient(rgba(250, 250, 210, 0.75) 96%, rgba(75, 78, 109, 0.75));
 }
 header{
   @include position($tp: 0);

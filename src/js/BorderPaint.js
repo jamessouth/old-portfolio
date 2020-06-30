@@ -35,7 +35,7 @@ class BorderPaint {
       ctx.moveTo(stPt, 425);
       ctx.lineTo(stPt + opLen, 435);
       ctx.lineWidth = BorderPaint.getNum(10, -2);
-      ctx.strokeStyle = `hsl(${BorderPaint.getNum(71, 35)}deg, ${BorderPaint.getNum(60, -30)}%, ${BorderPaint.getNum(40, -40)}%)`;
+      ctx.strokeStyle = `hsl(${BorderPaint.getNum(41, -317)}deg, ${BorderPaint.getNum(30, -70)}%, ${BorderPaint.getNum(30, -30)}%)`;
       ctx.stroke();
     }
   }
