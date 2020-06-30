@@ -5,8 +5,8 @@ class BorderPaint {
     };
   }
 
-  static getHue() {
-    return Math.floor(Math.random() * 101) + 190;
+  static getNum(range, mod) {
+    return Math.floor(Math.random() * range) - mod;
   }
 
   static getDirectionInRadians() {
@@ -23,10 +23,6 @@ class BorderPaint {
     return opSide * dir;
   }
 
-  static getWidth() {
-    return Math.floor(Math.random() * 10) + 2;
-  }
-
   paint(ctx, geom, props) { // eslint-disable-line
     for (let i = 0; i < 49; i += 1) {
       const dir = BorderPaint.getDirectionInRadians();
@@ -38,8 +34,8 @@ class BorderPaint {
       ctx.beginPath();
       ctx.moveTo(stPt, 425);
       ctx.lineTo(stPt + opLen, 435);
-      ctx.lineWidth = BorderPaint.getWidth();
-      ctx.strokeStyle = `hsl(${BorderPaint.getHue()}deg, 85%, 49%)`;
+      ctx.lineWidth = BorderPaint.getNum(10, -2);
+      ctx.strokeStyle = `hsl(${BorderPaint.getNum(71, 35)}deg, ${BorderPaint.getNum(60, -30)}%, ${BorderPaint.getNum(40, -40)}%)`;
       ctx.stroke();
     }
   }
