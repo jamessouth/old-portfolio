@@ -7,8 +7,8 @@
   "display": "standalone",
   "orientation": "any",
   "start_url": ".",
-  "background_color": "#677d32",
-  "theme_color": "#fce07b",
+  "background_color": "#08415C",
+  "theme_color": "#fafad2",
   "icons": [
       {
           "src": "./images/icons/android-chrome-192x192.png",
