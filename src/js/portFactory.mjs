@@ -1,4 +1,4 @@
-// const myWorker = new Worker('./worker.js');
+const myWorker = new Worker('./worker.js');
 const panels = document.querySelectorAll('.projects div');
 const projects = [
   {
@@ -170,7 +170,6 @@ function htmlGen(title, tech1, tech2, live, code, alt, liveAria, codeAria, sprit
 
 }
 
-
 class Panel extends HTMLElement {
   constructor({
     title, tech1, tech2, live, code, alt, liveAria, codeAria,
@@ -184,23 +183,21 @@ class Panel extends HTMLElement {
   get langDiv() {
     return this.shadowRoot.querySelector('div:first-of-type');
   }
-
 }
 
-// myWorker.addEventListener('message', (e) => {
-//     panels[e.data.id].children[0].shadowRoot.children[3].style.background = e.data.style;
-//     panels[e.data.id].children[0].shadowRoot.children[3].setAttribute('title', e.data.title);
-// });
+myWorker.addEventListener('message', (e) => {
+    panels[e.data.id].children[0].shadowRoot.children[3].style.background = e.data.style;
+    panels[e.data.id].children[0].shadowRoot.children[3].setAttribute('title', e.data.title);
+});
 
 export default function portFactory(div, index, sprite) {
   const repoName = projects[index].code.match(/[\w-]+$/)[0];
-  // myWorker.postMessage({
-  //   id: div.id,
-  //   repoName,
-  // });
+  myWorker.postMessage({
+    id: div.id,
+    repoName,
+  });
   const panel = new Panel(projects[index], sprite, index);
   div.appendChild(panel);
-  
 }
 
 window.customElements.define('project-panel', Panel);

@@ -9,10 +9,6 @@ class BorderPaint {
     return Math.floor(Math.random() * range) - mod;
   }
 
-  static getDirectionInRadians() {
-    return Math.random() * Math.PI;
-  }
-
   static getHypoLength(ang) {
     return 10 / Math.cos(ang); // 10 is the height of the border area
   }
@@ -25,10 +21,13 @@ class BorderPaint {
 
   paint(ctx, geom, props) { // eslint-disable-line
     for (let i = 0; i < 49; i += 1) {
-      const dir = BorderPaint.getDirectionInRadians();
+      const dir = BorderPaint.getNum(Math.PI, 0);
 
-      const opLen = BorderPaint.pipe(BorderPaint.getHypoLength,
-        BorderPaint.getCoord, Math.round)(dir);
+      const opLen = BorderPaint.pipe(
+        BorderPaint.getHypoLength,
+        BorderPaint.getCoord,
+        Math.round
+      )(dir);
 
       const stPt = i * 6;
       ctx.beginPath();

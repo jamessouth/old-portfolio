@@ -1,4 +1,4 @@
-// import './loadSW.mjs';
+import './loadSW.mjs';
 
 const projectDivs = [...document.querySelectorAll('.projects div')];
 const cdivs = document.querySelectorAll('.contact div');

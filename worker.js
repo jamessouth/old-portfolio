@@ -51,5 +51,4 @@ addEventListener('message', async (e) => { // eslint-disable-line
       title,
       id: e.data.id,
     });
-
 });
