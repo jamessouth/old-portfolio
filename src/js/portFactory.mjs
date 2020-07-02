@@ -106,8 +106,8 @@ function htmlGen(title, tech1, tech2, live, code, alt, liveAria, codeAria, sprit
   a:hover,
   a:focus{
     outline: none;
-    background-color: #1a2845;
-    color: #e5d7ba;
+    background-color: #08415C;
+    color: #fafad2;
   }
   img{
     object-fit: cover;

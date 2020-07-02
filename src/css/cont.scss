@@ -30,11 +30,11 @@
     & a{
         height: 100%;
         display: block;
-        border: 2px solid transparent;
+        border: $bord;
     }
     & a:focus,
     a:hover{
         outline: none;
-        border: 2px solid #1a2845;
+        border: 2px solid $blue;
     }
 }

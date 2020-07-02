@@ -81,5 +81,3 @@ getFileTree(process.argv[2])
   .then(sepArray)
   .then(makeNewFile)
   .catch((e) => console.error(e));
-
-// note: see terser mangling object properties and html minifier on style tags

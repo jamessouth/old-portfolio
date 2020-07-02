@@ -64,7 +64,7 @@ function htmlGen(link, alt, off, w, sprite) {
   a:focus,
   a:hover{
     outline: none;
-    border: 2px solid #1a2845;
+    border: 2px solid #08415C;
   }`;
 
   linkTemplate.innerHTML = htmlTag;
