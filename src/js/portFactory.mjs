@@ -191,7 +191,7 @@ myWorker.addEventListener('message', (e) => {
 });
 
 export default function portFactory(div, index, sprite) {
-  const repoName = projects[index].code.match(/[\w-]+$/)[0];
+  const repoName = projects[index]._code.match(/[\w-]+$/)[0];
   myWorker.postMessage({
     id: div.id,
     repoName,
