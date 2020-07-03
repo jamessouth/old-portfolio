@@ -6,10 +6,15 @@
   box-sizing: border-box;
 }
 body{
+  background: linear-gradient(rgba(250, 250, 210, .6) 96%, rgba(8, 65, 92, .75)), url('../images/cloud.jpg') repeat-y;
+  background-position-y: 0%;
+  background-size: contain;
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
-  background: linear-gradient(rgba(250, 250, 210, 0.59) 96%, rgba(8, 65, 92, 0.75));
+  @media screen and (min-width: 960px){
+      background-size: cover;
+  }
 }
 header{
   @include position($tp: 0);
