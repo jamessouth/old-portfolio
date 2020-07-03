@@ -3,7 +3,6 @@
 .projects{
     @include flex(row, space-around, center, wrap);
     width: 90%;
-    margin: 0 auto 6rem;
     @media screen and (min-width: 2540px){
         max-width: 2300px;
     }
