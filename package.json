@@ -1,6 +1,6 @@
 {
   "name": "portfolio",
-  "version": "4.0.1",
+  "version": "4.1.0",
   "description": "portfolio of james south",
   "private": true,
   "scripts": {
@@ -11,16 +11,11 @@
     "prebuild": "npm run clean && cp -r ./src/images ./docs/images && cp ./src/manifest.webmanifest ./docs/manifest.webmanifest && npm run snowpack",
     "build": "npm run build:html && npm run build:sass && npm run build:js",
     "postbuild": "rm ./docs/web_modules/import-map.json && node ./hashFilenames.js ./docs/index.html && node ./swbuild.js && terser ./sw2.js -c -m -o ./docs/service-worker.js && rm -f ./sw2.js",
-    "dev": "servor . ./src/html/index.html 3000 --reload",
+    "dev": "snowpack dev --fallback ./src/html/index.html --port 3000",
     "lint": "eslint --fix ./src/js && echo 'Linted!'",
     "snowpack": "snowpack --no-source-map && mv ./web_modules ./docs/",
     "sass": "sass --no-source-map --watch ./src/css:./src/css",
     "zz": "--style=compressed 139 470"
-  },
-  "snowpack": {
-    "installOptions": {
-      "optimize": true
-    }
   },
   "repository": {
     "type": "git",
@@ -34,15 +29,14 @@
   "homepage": "https://github.com/jamessouth/portfolio#readme",
   "devDependencies": {
     "cssnano": "^4.1.10",
-    "eslint": "^6.8.0",
-    "eslint-config-airbnb-base": "^14.1.0",
-    "eslint-plugin-import": "^2.20.2",
+    "eslint": "^7.4.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0",
     "html-minifier": "^4.0.0",
     "postcss-cli": "^7.1.1",
-    "sass": "^1.26.5",
-    "servor": "^3.2.0",
-    "snowpack": "^1.7.1",
-    "terser": "^4.6.13",
+    "sass": "^1.26.10",
+    "snowpack": "^2.6.4",
+    "terser": "^4.8.0",
     "walkdir": "^0.4.1",
     "workbox-build": "^5.1.3"
   },
