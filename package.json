@@ -7,15 +7,36 @@
     "build:html": "html-minifier --collapse-whitespace --remove-comments ./src/html/index.html -o ./docs/index.html",
     "build:sass": "sass --no-source-map ./src/css:./docs/css && postcss ./docs/css -r --no-map",
     "build:js": "terser ./src/js/BorderPaint.js -c -m toplevel -o ./docs/js/BorderPaint.js && terser ./src/js/ButtonPaint.js -c -m toplevel -o ./docs/js/ButtonPaint.js && terser ./src/js/index.mjs -c -m --module -o ./docs/js/index.mjs && terser ./src/js/contFactory.mjs -c -m --module -o ./docs/js/contFactory.mjs && terser ./src/js/loadSW.mjs -c -m --module -o ./docs/js/loadSW.mjs && terser ./src/js/portFactory.mjs -c -m --module -o ./docs/js/portFactory.mjs && terser ./worker.js -c -m toplevel -o ./docs/worker.js",
-    "clean": "rm -rf ./docs && mkdir docs && cd ./docs && mkdir js && cd ../",
-    "prebuild": "npm run clean && cp -r ./src/images ./docs/images && cp ./src/manifest.webmanifest ./docs/manifest.webmanifest && npm run snowpack",
+    "clean": "rm -rf ./docs && mkdir docs && snowpack build && cd ./docs && mkdir js && cd ../",
+    "prebuild": "npm run clean && cp -r ./src/images ./docs/images && cp ./src/manifest.webmanifest ./docs/manifest.webmanifest",
     "build": "npm run build:html && npm run build:sass && npm run build:js",
-    "postbuild": "rm ./docs/web_modules/import-map.json && node ./hashFilenames.js ./docs/index.html && node ./swbuild.js && terser ./sw2.js -c -m -o ./docs/service-worker.js && rm -f ./sw2.js",
+    "postbuild": "rm -f ./docs/web_modules/import-map.json && node ./hashFilenames.js ./docs/index.html && node ./swbuild.js && terser ./sw2.js -c -m -o ./docs/service-worker.js && rm -f ./sw2.js",
     "dev": "snowpack dev --fallback ./src/html/index.html --port 3000",
     "lint": "eslint --fix ./src/js && echo 'Linted!'",
-    "snowpack": "snowpack --no-source-map && mv ./web_modules ./docs/",
     "sass": "sass --no-source-map --watch ./src/css:./src/css",
     "zz": "--style=compressed 139 470"
+  },
+  "snowpack": {
+    "install": ["workbox-window"],
+    "exclude": ["**/*"],
+    "devOptions": {
+      "bundle": false,
+      "hmr": false,
+      "open": "none",
+      "out": "docs"
+    },
+    "installOptions": {
+      "sourceMap": false,
+      "optimize": false,
+      "dest": "./docs/web_modules"
+    },
+    "buildOptions": {
+      "clean": false
+    },
+    "scripts": {
+      "build:.mjs,.js,.jsx,.ts,.tsx": "",
+      "mount:*": "mount . --to /"
+    }
   },
   "repository": {
     "type": "git",
