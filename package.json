@@ -1,6 +1,6 @@
 {
   "name": "portfolio",
-  "version": "4.1.0",
+  "version": "4.1.1",
   "description": "portfolio of james south",
   "private": true,
   "scripts": {
@@ -17,8 +17,12 @@
     "zz": "--style=compressed 139 470"
   },
   "snowpack": {
-    "install": ["workbox-window"],
-    "exclude": ["**/*"],
+    "install": [
+      "workbox-window"
+    ],
+    "exclude": [
+      "**/*"
+    ],
     "devOptions": {
       "bundle": false,
       "hmr": false,
@@ -50,14 +54,14 @@
   "homepage": "https://github.com/jamessouth/portfolio#readme",
   "devDependencies": {
     "cssnano": "^4.1.10",
-    "eslint": "^7.4.0",
+    "eslint": "^7.7.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.22.0",
     "html-minifier": "^4.0.0",
     "postcss-cli": "^7.1.1",
     "sass": "^1.26.10",
     "snowpack": "^2.6.4",
-    "terser": "^4.8.0",
+    "terser": "^5.1.0",
     "walkdir": "^0.4.1",
     "workbox-build": "^5.1.3"
   },
