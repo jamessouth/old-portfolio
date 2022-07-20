@@ -61,7 +61,7 @@
     "postcss-cli": "^7.1.1",
     "sass": "^1.26.10",
     "snowpack": "^2.6.4",
-    "terser": "^5.1.0",
+    "terser": "^5.14.2",
     "walkdir": "^0.4.1",
     "workbox-build": "^5.1.3"
   },
